@@ -1,0 +1,70 @@
+{
+  "project_info": {
+    "project_number": "622698835869",
+    "project_id": "digital-station-918b8",
+    "storage_bucket": "digital-station-918b8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622698835869:android:6ef07d3e58a503f5adc974",
+        "android_client_info": {
+          "package_name": "com.digital.station"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622698835869-a3sv73d412i2qtftpemdso9tv2b8sln6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.digital.station",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "622698835869-c8mqnsj158q8a6e88a4hc013ge35bag4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.digital.station",
+            "certificate_hash": "931799d802d345bc21d8a9166732aedadc2f4e4f"
+          }
+        },
+        {
+          "client_id": "622698835869-lu7faq2ho1vtnm3nbolj2j28phhpgg92.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.digital.station",
+            "certificate_hash": "654b7174ff6253752843782880886444a579ce71"
+          }
+        },
+        {
+          "client_id": "622698835869-eorn5pi3nktjtp85boacif3nc5t2eod2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2aIAgtna3ABDaJGGVQs-5p8DwjGKZiWE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622698835869-ecduk1lkalo0jshusr6lh12c65gpdonf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "622698835869-1i47ngqjfud96usjeo88tno0vo38c3p5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.digital.station"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
