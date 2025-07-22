@@ -18,6 +18,7 @@ class ClientAuthorizationGroup {
       'https://digitalstation.ezxdemo.com/api/v1';
   static Map<String, String> headers = {
     'Authorization': 'Bearer [auth_token]',
+    'Accept-Language': 'en',
   };
   static LoginApiCall loginApiCall = LoginApiCall();
   static SignUpApiCall signUpApiCall = SignUpApiCall();
@@ -51,6 +52,7 @@ class LoginApiCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       body: ffApiRequestBody,
@@ -96,6 +98,7 @@ class SignUpApiCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       body: ffApiRequestBody,
@@ -124,6 +127,7 @@ class GetCountryCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       returnBody: true,
@@ -163,6 +167,7 @@ class VerifyOtpCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       body: ffApiRequestBody,
@@ -192,6 +197,7 @@ class ForgotPasswordCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       returnBody: true,
@@ -222,6 +228,7 @@ class ResetPasswordCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       bodyType: BodyType.JSON,
@@ -254,6 +261,7 @@ class ResendOTPCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       body: ffApiRequestBody,
@@ -279,6 +287,7 @@ class ClientHomePageGroup {
       'https://digitalstation.ezxdemo.com/api/v1';
   static Map<String, String> headers = {
     'Authorization': 'Bearer [auth_token]',
+    'Accept-Language': 'en',
   };
   static PopularServiceCall popularServiceCall = PopularServiceCall();
   static RecentServicesCall recentServicesCall = RecentServicesCall();
@@ -309,6 +318,7 @@ class PopularServiceCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       returnBody: true,
@@ -343,6 +353,7 @@ class RecentServicesCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {
         'paginate': paginate,
@@ -378,6 +389,7 @@ class CategoryCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       returnBody: true,
@@ -412,6 +424,7 @@ class OrderCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {
         'paginate': paginate,
@@ -451,6 +464,7 @@ class SubCategoryCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {
         'category_id': categoryId,
@@ -489,6 +503,7 @@ class ServiceDetailCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       returnBody: true,
@@ -547,6 +562,7 @@ class NotificationCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {
         'order_by[created_at]': orderBy,
@@ -581,6 +597,7 @@ class ClientProfileCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       returnBody: true,
@@ -613,6 +630,7 @@ class ServiceApiCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       returnBody: true,
@@ -650,6 +668,7 @@ class CreateOrderCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {
         'service_id': serviceId,
@@ -683,6 +702,7 @@ class SavedServicesCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       returnBody: true,
@@ -716,6 +736,7 @@ class AddToFavouriteCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       returnBody: true,
@@ -742,6 +763,7 @@ class GetSliderAPICall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       returnBody: true,
@@ -771,6 +793,7 @@ class FreelancerAuthorizationGroup {
       'https://digitalstation.ezxdemo.com/api/v1/';
   static Map<String, String> headers = {
     'Authorization': 'Bearer [auth_token]',
+    'Accept-Language': 'en',
   };
   static FreelancerLoginCall freelancerLoginCall = FreelancerLoginCall();
   static FreelancerRegistrationCall freelancerRegistrationCall =
@@ -811,6 +834,7 @@ class FreelancerLoginCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       body: ffApiRequestBody,
@@ -856,6 +880,7 @@ class FreelancerRegistrationCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       body: ffApiRequestBody,
@@ -884,6 +909,7 @@ class LanguageCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       returnBody: true,
@@ -916,6 +942,7 @@ class SkillsCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       returnBody: true,
@@ -949,6 +976,7 @@ class AvatarCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {
         'avatar': avatar,
@@ -985,6 +1013,7 @@ class PersonalInfoUpdateCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       body: ffApiRequestBody,
@@ -1013,6 +1042,7 @@ class AllLanguageCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       returnBody: true,
@@ -1050,6 +1080,7 @@ class AddLanguageCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       body: ffApiRequestBody,
@@ -1085,6 +1116,7 @@ class AddSkillCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       body: ffApiRequestBody,
@@ -1113,6 +1145,7 @@ class LevelCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       returnBody: true,
@@ -1140,14 +1173,20 @@ class OccupationCall {
       authToken: authToken,
     );
 
+    final ffApiRequestBody = '''
+{
+  "category_id": "${escapeStringForJson(categoryId)}"
+}''';
     return ApiManager.instance.makeApiCall(
       callName: 'Occupation',
       apiUrl: '${baseUrl}occupations',
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
+      body: ffApiRequestBody,
       bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
@@ -1173,6 +1212,7 @@ class GetOccupationCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       returnBody: true,
@@ -1202,6 +1242,7 @@ class FreelancerHomePageGroup {
       'https://digitalstation.ezxdemo.com/api/v1/';
   static Map<String, String> headers = {
     'Authorization': 'Bearer [auth_token]',
+    'Accept-Language': 'en',
   };
   static OrderAPICall orderAPICall = OrderAPICall();
   static AddPortfolioCall addPortfolioCall = AddPortfolioCall();
@@ -1230,6 +1271,7 @@ class OrderAPICall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {
         'paginate': paginate,
@@ -1268,6 +1310,7 @@ class AddPortfolioCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {
         'title': title,
@@ -1301,6 +1344,7 @@ class AddFAQCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {
         'service_id': serviceId,
@@ -1343,6 +1387,7 @@ class AddPackagesCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {
         'title': title,
@@ -1386,6 +1431,7 @@ class AddServicesCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {
         'title': title,
@@ -1422,6 +1468,7 @@ class MyServicesCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {
         'paginate': paginate,
@@ -1458,6 +1505,7 @@ class PortfolioCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       returnBody: true,
@@ -1491,6 +1539,7 @@ class GetPlanCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       returnBody: true,
@@ -1524,6 +1573,7 @@ class GetFAQCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
       },
       params: {},
       returnBody: true,

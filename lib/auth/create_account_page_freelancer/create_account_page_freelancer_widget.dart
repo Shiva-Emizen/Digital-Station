@@ -91,8 +91,8 @@ class _CreateAccountPageFreelancerWidgetState
                               color: Color(0xFF252525),
                               size: 18.0,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
+                            onPressed: () async {
+                              context.safePop();
                             },
                           ),
                           Padding(
@@ -934,7 +934,7 @@ class _CreateAccountPageFreelancerWidgetState
                                                     (_model.apiResultoe5
                                                             ?.jsonBody ??
                                                         ''),
-                                                    r'''$.data.verification_code''',
+                                                    r'''$.message''',
                                                   ).toString(),
                                                   style: TextStyle(
                                                     color: Colors.white,

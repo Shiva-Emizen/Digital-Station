@@ -148,93 +148,93 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'g0hx8vrw': {
       'en': 'DS Categories',
-      'ar': '',
+      'ar': 'فئات DS',
     },
     'jvoomwde': {
       'en': 'View all',
-      'ar': '',
+      'ar': 'عرض الكل',
     },
     'laukp26z': {
       'en': 'Popular Services',
-      'ar': '',
+      'ar': 'الخدمات الشعبية',
     },
     'd2skxp94': {
       'en': 'View all',
-      'ar': '',
+      'ar': 'عرض الكل',
     },
     'wn65sjss': {
       'en': 'Recently viewed',
-      'ar': '',
+      'ar': 'تمت مشاهدته مؤخرًا',
     },
     'tv53vz82': {
       'en': 'View all',
-      'ar': '',
+      'ar': 'عرض الكل',
     },
     'en144zqw': {
       'en': 'Welcome Back',
-      'ar': '',
+      'ar': 'مرحبًا بعودتك',
     },
     'r14e9dby': {
       'en': 'Search',
-      'ar': '',
+      'ar': 'يبحث',
     },
     'r1nsrtq9': {
       'en': 'Welcome Back',
-      'ar': '',
+      'ar': 'مرحبًا بعودتك',
     },
     '1v3zwolj': {
       'en': 'Completed Jobs',
-      'ar': '',
+      'ar': 'الوظائف المكتملة',
     },
     'n2zd2q7c': {
       'en': 'My Orders',
-      'ar': '',
+      'ar': 'طلبياتي',
     },
     'oj79jx8w': {
       'en': 'Services',
-      'ar': '',
+      'ar': 'خدمات',
     },
     '2pfc6jye': {
       'en': 'Wallet',
-      'ar': '',
+      'ar': 'محفظة',
     },
     'hwc5ij42': {
       'en': 'My Portfolio',
-      'ar': '',
+      'ar': 'محفظتي',
     },
     '30wdqf6m': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // SplashPage
   {
     'tp4w00df': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // UserSelectionPage
   {
     '095vvy2b': {
       'en': 'Freelancer',
-      'ar': '',
+      'ar': 'عامل مستقل',
     },
     'd6mumpva': {
       'en': 'Need Service',
-      'ar': '',
+      'ar': 'بحاجة إلى خدمة',
     },
     'su6dwttg': {
       'en': 'Already Member',
-      'ar': '',
+      'ar': 'عضو بالفعل',
     },
     'c6klibw9': {
       'en': 'Sign In',
-      'ar': '',
+      'ar': 'تسجيل الدخول',
     },
     'q0t3qyqd': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // CreateAccountPage
@@ -341,7 +341,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'sm090agd': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // SelectPlanPage
@@ -368,7 +368,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '7k3luuk1': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // TermsConditionPage
@@ -392,7 +392,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'w6nfkglo': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // AccountPage
@@ -506,7 +506,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '4vq0jetk': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // CategoryPage
@@ -528,7 +528,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'lbql1xc1': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // OrderPage
@@ -643,7 +643,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'y0odn8ku': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // OrdersPage
@@ -691,7 +691,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '0wea1umc': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // SavedPage
@@ -702,7 +702,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'cxjv4jfn': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // ServicePage
@@ -713,7 +713,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'rrneey99': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // ProfilePage
@@ -748,7 +748,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'a0arz4l7': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // CompleteProfilePage
@@ -816,7 +816,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'bonfv1h2': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // SubscriptionPage
@@ -827,7 +827,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '7b0fb6g0': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // CreateOrder
@@ -882,7 +882,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '8bw7o5ox': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // PersonalInformationPage
@@ -953,7 +953,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '3hj2a0ra': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // WorkInformationPage
@@ -982,17 +982,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Add ',
       'ar': '',
     },
-    'l27relo4': {
+    'ejvzc84j': {
       'en': 'Previous',
       'ar': '',
     },
-    'jkkc6dga': {
+    'vdylu3at': {
       'en': 'Next',
       'ar': '',
     },
     'fszbtwp8': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // SelectSubscriptionPage
@@ -1047,7 +1047,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'yfeqs76c': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // FreeLancerHomePage
@@ -1086,7 +1086,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '0wlpo2mg': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // FreelancerOrderPage
@@ -1257,7 +1257,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'c4datdny': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // PortfolioPage
@@ -1276,7 +1276,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'awz5ifzo': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // MyPortFolioPage
@@ -1307,7 +1307,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'l37pql5v': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // WalletPage
@@ -1358,7 +1358,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'li20lc9o': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // PaymentPage
@@ -1401,7 +1401,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '2ea3i2gb': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // MessagePage
@@ -1484,7 +1484,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'gee630rm': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // NotificationPage
@@ -1499,7 +1499,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'r0ipfd4u': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // MyServicePage
@@ -1518,7 +1518,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'qwlizj8k': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // AddNewService
@@ -1589,7 +1589,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '7dp8uvqe': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // AddNewServiceNextPage
@@ -1616,7 +1616,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '5mht4pzu': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // PublishServicePage
@@ -1643,7 +1643,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'zu822whk': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // ServiceSuccessFullyPublishPage
@@ -1658,7 +1658,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '7naad9l0': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // AddPakagePage
@@ -1789,7 +1789,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'gp0p4kfv': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // AddFaqPage
@@ -1836,7 +1836,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'v6kmf5gd': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // OtpPage
@@ -1863,7 +1863,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'lc77utt1': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // ForgotPasswordPage
@@ -1906,7 +1906,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'bkkm6vsr': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // ResetPasswordPage
@@ -1961,7 +1961,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'iygatnk5': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // ServiceDetailPage
@@ -2016,7 +2016,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'q1zypqos': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // ViewAllPage
@@ -2027,7 +2027,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'lha79rto': {
       'en': 'Home',
-      'ar': '',
+      'ar': 'بيت',
     },
   },
   // CreateAccountPageFreelancer
@@ -2374,7 +2374,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // AddOccupation
   {
     '3c86ffm9': {
-      'en': 'Add Skill',
+      'en': 'Add Occupation',
       'ar': '',
     },
     'v9bpdw5w': {

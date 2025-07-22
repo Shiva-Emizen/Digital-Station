@@ -86,7 +86,7 @@ class _AddOccupationWidgetState extends State<AddOccupationWidget> {
                           children: [
                             Text(
                               FFLocalizations.of(context).getText(
-                                '3c86ffm9' /* Add Skill */,
+                                '3c86ffm9' /* Add Occupation */,
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .headlineSmall
@@ -354,7 +354,7 @@ class _AddOccupationWidgetState extends State<AddOccupationWidget> {
                                             .showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              'Please select category',
+                                              'Please select a category',
                                               style: TextStyle(
                                                 color: Colors.white,
                                               ),
