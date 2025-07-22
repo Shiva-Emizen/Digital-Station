@@ -90,8 +90,8 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                               color: Color(0xFF252525),
                               size: 18.0,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
+                            onPressed: () async {
+                              context.safePop();
                             },
                           ),
                           Padding(
@@ -938,7 +938,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                                     (_model.apiResultphp
                                                             ?.jsonBody ??
                                                         ''),
-                                                    r'''$.data.verification_code''',
+                                                    r'''$.message''',
                                                   ).toString(),
                                                   style: TextStyle(
                                                     color: Colors.white,

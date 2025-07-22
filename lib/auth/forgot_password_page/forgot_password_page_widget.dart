@@ -74,7 +74,7 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                           size: 18.0,
                         ),
                         onPressed: () async {
-                          context.safePop();
+                          context.pop();
                         },
                       ),
                       Padding(
