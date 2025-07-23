@@ -293,68 +293,73 @@ class _AddLanguageWidgetState extends State<AddLanguageWidget> {
                                   child: FFButtonWidget(
                                     onPressed: () async {
                                       if (_model.formKey.currentState == null ||
-                                          !_model.formKey.currentState!
-                                              .validate()) {
+                                          !_model.formKey.currentState!.validate()) {
+                                        print('❌ Form validation failed.');
                                         return;
                                       }
+
                                       if (_model.dropDownValue == null) {
+                                        print('❌ Language not selected.');
                                         return;
                                       }
+
+                                      final authToken = FFAppState().apitoken;
+                                      final languageId = _model.dropDownValue;
+
+                                      // 🚀 Print request details
+                                      print('🚀 API Request');
+                                      print('➤ URL: https://digitalstation.ezxdemo.com/api/v1/languages');
+                                      print('➤ Method: POST');
+                                      print('➤ Headers:');
+                                      print('   Content-Type: application/json');
+                                      print('   Authorization: Bearer $authToken');
+                                      print('➤ Body:');
+                                      print('   { "language_id": "$languageId" }');
+                                      print('📨 Response Headers: ${_model.apiResultzgb?.headers}');
+
+
+                                      // 🛰️ Perform API Call
                                       _model.apiResultzgb =
-                                          await FreelancerAuthorizationGroup
-                                              .addLanguageCall
-                                              .call(
-                                        languageId: _model.dropDownValue,
-                                        authToken: FFAppState().apitoken,
+                                      await FreelancerAuthorizationGroup.addLanguageCall.call(
+                                        languageId: languageId,
+                                        authToken: authToken, // passed into {{authToken}} header
                                       );
 
-                                      if ((_model.apiResultzgb?.succeeded ??
-                                          true)) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              getJsonField(
-                                                (_model.apiResultzgb
-                                                        ?.jsonBody ??
-                                                    ''),
-                                                r'''$.message''',
-                                              ).toString(),
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                            duration:
-                                                Duration(milliseconds: 4000),
-                                            backgroundColor: Color(0xFF6E2A87),
+                                      // 📡 Log status code
+                                      final statusCode = _model.apiResultzgb?.statusCode;
+                                      print('📡 Status Code: $statusCode');
+
+                                      // 📦 Log full response
+                                      final jsonResponse = _model.apiResultzgb?.jsonBody;
+                                      print('📦 Response Body: $jsonResponse');
+
+                                      // 🧾 Extract and show message
+                                      final message = getJsonField(
+                                        (jsonResponse ?? ''),
+                                        r'''$.message''',
+                                      ).toString();
+
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            message.isNotEmpty ? message : 'Something went wrong',
+                                            style: TextStyle(color: Colors.white),
                                           ),
-                                        );
+                                          duration: Duration(milliseconds: 4000),
+                                          backgroundColor: Color(0xFF6E2A87),
+                                        ),
+                                      );
+
+                                      // ✅ On success
+                                      if ((_model.apiResultzgb?.succeeded ?? false)) {
                                         Navigator.pop(context);
-                                      } else {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              getJsonField(
-                                                (_model.apiResultzgb
-                                                        ?.jsonBody ??
-                                                    ''),
-                                                r'''$.message''',
-                                              ).toString(),
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                            duration:
-                                                Duration(milliseconds: 4000),
-                                            backgroundColor: Color(0xFF6E2A87),
-                                          ),
-                                        );
                                       }
 
                                       safeSetState(() {});
-                                    },
-                                    text: FFLocalizations.of(context).getText(
+                                    }
+
+                                    ,
+                                      text: FFLocalizations.of(context).getText(
                                       'ebgmgui5' /* Add */,
                                     ),
                                     options: FFButtonOptions(
