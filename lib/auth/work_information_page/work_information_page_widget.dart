@@ -116,7 +116,7 @@ class _WorkInformationPageWidgetState extends State<WorkInformationPageWidget> {
                                   ),
                                   Text(
                                     FFLocalizations.of(context).getText(
-                                      'iznm262a' /* Add your information */,
+                                      '2pyrak34' /* Add your information */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium

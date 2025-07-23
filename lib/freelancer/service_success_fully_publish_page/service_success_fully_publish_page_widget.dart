@@ -87,7 +87,7 @@ class _ServiceSuccessFullyPublishPageWidgetState
                 alignment: AlignmentDirectional(0.0, -1.0),
                 child: Text(
                   FFLocalizations.of(context).getText(
-                    '4brrqo3c' /* Add New Service */,
+                    'rmjsgzu2' /* Add New Service */,
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily: 'primaryFont',

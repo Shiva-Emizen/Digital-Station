@@ -40,6 +40,10 @@ class FFAppState extends ChangeNotifier {
               .toList() ??
           _features;
     });
+    await _safeInitAsync(() async {
+      _appLanguage =
+          await secureStorage.getString('ff_appLanguage') ?? _appLanguage;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -114,6 +118,17 @@ class FFAppState extends ChangeNotifier {
     features.insert(index, value);
     secureStorage.setStringList(
         'ff_features', _features.map((x) => x.serialize()).toList());
+  }
+
+  String _appLanguage = 'en';
+  String get appLanguage => _appLanguage;
+  set appLanguage(String value) {
+    _appLanguage = value;
+    secureStorage.setString('ff_appLanguage', value);
+  }
+
+  void deleteAppLanguage() {
+    secureStorage.delete(key: 'ff_appLanguage');
   }
 }
 

@@ -99,7 +99,7 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                         children: [
                           Text(
                             FFLocalizations.of(context).getText(
-                              'pzv2w4wp' /* Add New Service */,
+                              't82yv7zn' /* Add New Service */,
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
@@ -191,7 +191,7 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                                 );
                               },
                               text: FFLocalizations.of(context).getText(
-                                'debibr52' /* Add  */,
+                                '3pgkkoml' /* Add  */,
                               ),
                               options: FFButtonOptions(
                                 height: 32.0,
@@ -422,7 +422,7 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                               alignment: AlignmentDirectional(0.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
-                                  'du2m6dql' /* Previous */,
+                                  'l2zsjs3p' /* Previous */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium

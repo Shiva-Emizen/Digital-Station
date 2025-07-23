@@ -232,7 +232,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Sign In',
       'ar': 'تسجيل الدخول',
     },
-    'q0t3qyqd': {
+    'aqxncej6': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -339,7 +339,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },
-    'sm090agd': {
+    'rbngtqfe': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -366,7 +366,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Sign up',
       'ar': '',
     },
-    '7k3luuk1': {
+    'scnuetl5': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -390,7 +390,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Accept',
       'ar': '',
     },
-    'w6nfkglo': {
+    'o1tmsca1': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -504,7 +504,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Arabic',
       'ar': '',
     },
-    '4vq0jetk': {
+    'duclo05m': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -526,7 +526,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // SubCategory
   {
-    'lbql1xc1': {
+    'vzmfmvwu': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -641,7 +641,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Confirm',
       'ar': '',
     },
-    'y0odn8ku': {
+    'vrh7lwfi': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -689,7 +689,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
           'Excellent question! We suggest you either register for a RANDOM.ORG account or make a donation to Concern. In case you don\'t know them, Concern is a charity that helps poor people in the third world achieve self-sustainable improvements in their lifestyles. We recommend them because we agree with their mission statement (which they unfortunately removed as per January 2010 Excellent question! We suggest you either register for a RANDOM.ORG account or make a donation to Concern. In case you don\'t know them, Concern is a charity that helps poor people in the third world achieve self-sustainable improvements in their lifestyles. We recommend them because we agree with their mission statement (which they unfortunately removed as per January 2010 Excellent question! We suggest you either register for a RANDOM.ORG account or make a donation to Concern. In case you don\'t know them, Concern is a charity that helps poor people in the third world achieve self-sustainable improvements in their lifestyles. We recommend them because we agree with their mission statement (which they unfortunately as per January 2010',
       'ar': '',
     },
-    '0wea1umc': {
+    'a71qy4ym': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -700,7 +700,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Saved',
       'ar': '',
     },
-    'cxjv4jfn': {
+    'hzebo4rp': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -711,7 +711,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Services',
       'ar': '',
     },
-    'rrneey99': {
+    'mxlstnp4': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -746,7 +746,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '15 order',
       'ar': '',
     },
-    'a0arz4l7': {
+    'ctb6lsnb': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -814,7 +814,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Portfolio',
       'ar': '',
     },
-    'bonfv1h2': {
+    'ubyra8kx': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -825,7 +825,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Page Title',
       'ar': '',
     },
-    '7b0fb6g0': {
+    'bylg1lz1': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -880,7 +880,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Order',
       'ar': '',
     },
-    '8bw7o5ox': {
+    'gf355o8v': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -939,7 +939,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Display name is required',
       'ar': '',
     },
-    '22ij1m3k': {
+    'p9nxfoko': {
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },
@@ -951,7 +951,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },
-    '3hj2a0ra': {
+    '922a83cj': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -962,7 +962,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Work Information',
       'ar': '',
     },
-    'iznm262a': {
+    '2pyrak34': {
       'en': 'Add your information',
       'ar': '',
     },
@@ -990,7 +990,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Next',
       'ar': '',
     },
-    'fszbtwp8': {
+    'quvaz6rb': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -1001,7 +1001,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Work Information',
       'ar': '',
     },
-    '983mmdo5': {
+    '8rf1klnp': {
       'en': 'Add your information',
       'ar': '',
     },
@@ -1045,7 +1045,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Sign up',
       'ar': '',
     },
-    'yfeqs76c': {
+    'miny23is': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -1084,14 +1084,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'My Orders',
       'ar': '',
     },
-    '0wlpo2mg': {
+    'ab6f4gb0': {
       'en': 'Home',
       'ar': 'بيت',
     },
   },
   // FreelancerOrderPage
   {
-    '915u6vv1': {
+    'bbm4iosr': {
       'en': 'Orders',
       'ar': '',
     },
@@ -1255,7 +1255,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Request Edit',
       'ar': '',
     },
-    'c4datdny': {
+    '15a9zaz1': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -1274,7 +1274,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '1',
       'ar': '',
     },
-    'awz5ifzo': {
+    '3mhalfjc': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -1305,7 +1305,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },
-    'l37pql5v': {
+    'ddnlenv4': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -1356,7 +1356,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '\$ 150',
       'ar': '',
     },
-    'li20lc9o': {
+    'mmnvlcwo': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -1399,14 +1399,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Enter your Paypal Email',
       'ar': '',
     },
-    '2ea3i2gb': {
+    'ziahxc1a': {
       'en': 'Home',
       'ar': 'بيت',
     },
   },
   // MessagePage
   {
-    'mzqgetoz': {
+    'p3ysce2u': {
       'en': 'Orders',
       'ar': '',
     },
@@ -1482,7 +1482,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '5 Min',
       'ar': '',
     },
-    'gee630rm': {
+    'dpvfkx7d': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -1497,7 +1497,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Notifications',
       'ar': '',
     },
-    'r0ipfd4u': {
+    'qjty8m09': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -1516,7 +1516,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Search',
       'ar': '',
     },
-    'qwlizj8k': {
+    '9oda4pf9': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -1575,7 +1575,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Service title is required',
       'ar': '',
     },
-    'hlnn1fib': {
+    'u479tsr1': {
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },
@@ -1587,7 +1587,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },
-    '7dp8uvqe': {
+    'mg6mysuy': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -1602,7 +1602,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Packages',
       'ar': '',
     },
-    'ktkrn1g7': {
+    'swyjkk5a': {
       'en': 'Add ',
       'ar': '',
     },
@@ -1614,14 +1614,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Next',
       'ar': '',
     },
-    '5mht4pzu': {
+    'xnj00atc': {
       'en': 'Home',
       'ar': 'بيت',
     },
   },
   // PublishServicePage
   {
-    'pzv2w4wp': {
+    't82yv7zn': {
       'en': 'Add New Service',
       'ar': '',
     },
@@ -1629,11 +1629,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Faqs',
       'ar': '',
     },
-    'debibr52': {
+    '3pgkkoml': {
       'en': 'Add ',
       'ar': '',
     },
-    'du2m6dql': {
+    'l2zsjs3p': {
       'en': 'Previous',
       'ar': '',
     },
@@ -1641,7 +1641,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Publish',
       'ar': '',
     },
-    'zu822whk': {
+    '1vm56igl': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -1652,11 +1652,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Manage Services',
       'ar': '',
     },
-    '4brrqo3c': {
+    'rmjsgzu2': {
       'en': 'Add New Service',
       'ar': '',
     },
-    '7naad9l0': {
+    'wgkz7o54': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -1699,7 +1699,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Delivery time',
       'ar': '',
     },
-    'w27t791k': {
+    '2vnbowro': {
       'en': 'Search...',
       'ar': '',
     },
@@ -1731,15 +1731,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Revisions',
       'ar': '',
     },
-    '56zoudiv': {
+    'h3xk225m': {
       'en': 'Other features',
       'ar': '',
     },
-    '6clyp9ic': {
+    'ewp4j5xd': {
       'en': 'Add ',
       'ar': '',
     },
-    'khr6z0bz': {
+    'udniuwoz': {
       'en': 'Previous',
       'ar': '',
     },
@@ -1751,7 +1751,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Pakage title is required',
       'ar': '',
     },
-    'nuorqyb5': {
+    'a6t3eqe8': {
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },
@@ -1759,7 +1759,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Description is required',
       'ar': '',
     },
-    'kosh6f9l': {
+    'ug2xjfok': {
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },
@@ -1783,11 +1783,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Revisions is required',
       'ar': '',
     },
-    'p9nxfoko': {
+    '22ij1m3k': {
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },
-    'gp0p4kfv': {
+    'fi8pcpi1': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -1814,7 +1814,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Question is required',
       'ar': '',
     },
-    'e8nwcbb0': {
+    '7tgw3pjr': {
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },
@@ -1822,7 +1822,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Answer is required',
       'ar': '',
     },
-    'fqlkg3m8': {
+    'c8xx5wad': {
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },
@@ -1834,7 +1834,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Add',
       'ar': '',
     },
-    'v6kmf5gd': {
+    'g2xo5t3a': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -1861,7 +1861,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'OTP code is required',
       'ar': '',
     },
-    'lc77utt1': {
+    'cqi4co4s': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -1888,7 +1888,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please enter valid email',
       'ar': '',
     },
-    'kubwudlf': {
+    's7xuni2n': {
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },
@@ -1900,11 +1900,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please enter valid name',
       'ar': '',
     },
-    '8th9nc6m': {
+    'r5w2ujjq': {
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },
-    'bkkm6vsr': {
+    'gl5bkvo1': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -1915,7 +1915,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Reset Password',
       'ar': '',
     },
-    'znndw9q5': {
+    'joiqqjxt': {
       'en': 'Email',
       'ar': '',
     },
@@ -1935,31 +1935,31 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Submit',
       'ar': '',
     },
-    '9onipqg6': {
+    'pty0i358': {
       'en': 'Email is required',
       'ar': '',
     },
-    't4uqkzqb': {
+    'kexlilah': {
       'en': 'Please enter valid email',
       'ar': '',
     },
-    '0yyoqjy5': {
+    '8oj4bdfq': {
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },
-    'z9uj9u6h': {
+    'wx8ysslr': {
       'en': 'Password is required',
       'ar': '',
     },
-    'eo94lqp2': {
+    'tvjxolen': {
       'en': 'Please enter valid name',
       'ar': '',
     },
-    'il85rm94': {
+    '9aquw371': {
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },
-    'iygatnk5': {
+    'fl6jdyte': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -2014,7 +2014,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'View all',
       'ar': '',
     },
-    'q1zypqos': {
+    'o7slffdg': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -2025,7 +2025,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Popular Services',
       'ar': '',
     },
-    'lha79rto': {
+    '8mgsphb4': {
       'en': 'Home',
       'ar': 'بيت',
     },
@@ -2366,7 +2366,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'This field is required',
       'ar': '',
     },
-    '18orq3sg': {
+    'bnb8u5ws': {
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },
@@ -2424,7 +2424,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Thid field can\'t be empty',
       'ar': '',
     },
-    'k6cgi9bs': {
+    'obdwtdf1': {
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },

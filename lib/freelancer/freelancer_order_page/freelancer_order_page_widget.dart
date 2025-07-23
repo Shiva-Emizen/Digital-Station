@@ -90,7 +90,7 @@ class _FreelancerOrderPageWidgetState extends State<FreelancerOrderPageWidget> {
                                   children: [
                                     Text(
                                       FFLocalizations.of(context).getText(
-                                        '915u6vv1' /* Orders */,
+                                        'bbm4iosr' /* Orders */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium

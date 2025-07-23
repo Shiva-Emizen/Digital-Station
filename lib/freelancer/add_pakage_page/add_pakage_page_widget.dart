@@ -1022,7 +1022,7 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                                         10.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       FFLocalizations.of(context).getText(
-                                        '56zoudiv' /* Other features */,
+                                        'h3xk225m' /* Other features */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -1041,7 +1041,7 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                                   print('Button pressed ...');
                                 },
                                 text: FFLocalizations.of(context).getText(
-                                  '6clyp9ic' /* Add  */,
+                                  'ewp4j5xd' /* Add  */,
                                 ),
                                 options: FFButtonOptions(
                                   height: 32.0,
@@ -1180,7 +1180,7 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                                     alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Text(
                                       FFLocalizations.of(context).getText(
-                                        'khr6z0bz' /* Previous */,
+                                        'udniuwoz' /* Previous */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium

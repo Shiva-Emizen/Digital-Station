@@ -15,13 +15,13 @@ class ResetPasswordPageModel extends FlutterFlowModel<ResetPasswordPageWidget> {
   String? _emailTextControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        '9onipqg6' /* Email is required */,
+        'pty0i358' /* Email is required */,
       );
     }
 
     if (!RegExp(kTextValidatorEmailRegex).hasMatch(val)) {
       return FFLocalizations.of(context).getText(
-        't4uqkzqb' /* Please enter valid email */,
+        'kexlilah' /* Please enter valid email */,
       );
     }
     return null;
