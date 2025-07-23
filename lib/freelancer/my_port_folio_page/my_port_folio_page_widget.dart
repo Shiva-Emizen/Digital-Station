@@ -495,30 +495,14 @@ class _MyPortFolioPageWidgetState extends State<MyPortFolioPageWidget> {
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 13.0, 13.0, 0.0),
-                                              child: InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  safeSetState(() {
-                                                    _model.isDataUploading_uploadDataEx6 =
-                                                        false;
-                                                    _model.uploadedLocalFiles_uploadDataEx6 =
-                                                        [];
-                                                  });
-                                                },
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  child: Image.asset(
-                                                    'assets/images/Group_1597881529.png',
-                                                    width: 27.0,
-                                                    height: 27.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/Group_1597881529.png',
+                                                  width: 27.0,
+                                                  height: 27.0,
+                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
                                             ),

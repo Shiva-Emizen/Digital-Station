@@ -185,7 +185,7 @@ class _AddNewServiceNextPageWidgetState
                                 );
                               },
                               text: FFLocalizations.of(context).getText(
-                                'ktkrn1g7' /* Add  */,
+                                'swyjkk5a' /* Add  */,
                               ),
                               options: FFButtonOptions(
                                 height: 32.0,

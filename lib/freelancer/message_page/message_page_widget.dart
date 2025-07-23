@@ -77,7 +77,7 @@ class _MessagePageWidgetState extends State<MessagePageWidget> {
                         children: [
                           Text(
                             FFLocalizations.of(context).getText(
-                              'mzqgetoz' /* Orders */,
+                              'p3ysce2u' /* Orders */,
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium

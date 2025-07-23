@@ -163,7 +163,7 @@ class _ResetPasswordPageWidgetState extends State<ResetPasswordPageWidget> {
                                         .fontStyle,
                                   ),
                               hintText: FFLocalizations.of(context).getText(
-                                'znndw9q5' /* Email */,
+                                'joiqqjxt' /* Email */,
                               ),
                               hintStyle: FlutterFlowTheme.of(context)
                                   .labelMedium

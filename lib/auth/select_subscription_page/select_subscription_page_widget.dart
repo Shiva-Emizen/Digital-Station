@@ -96,7 +96,7 @@ class _SelectSubscriptionPageWidgetState
                               ),
                               Text(
                                 FFLocalizations.of(context).getText(
-                                  '983mmdo5' /* Add your information */,
+                                  '8rf1klnp' /* Add your information */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
