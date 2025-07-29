@@ -4,35 +4,33 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_data.dart';
-import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'personal_information_page_model.dart';
-export 'personal_information_page_model.dart';
+import 'edit_personal_information_page_model.dart';
+export 'edit_personal_information_page_model.dart';
 
-class PersonalInformationPageWidget extends StatefulWidget {
-  const PersonalInformationPageWidget({super.key});
+class EditPersonalInformationPageWidget extends StatefulWidget {
+  const EditPersonalInformationPageWidget({super.key});
 
-  static String routeName = 'PersonalInformationPage';
-  static String routePath = '/personalInformationPage';
+  static String routeName = 'EditPersonalInformationPage';
+  static String routePath = '/editPersonalInformationPage';
 
   @override
-  State<PersonalInformationPageWidget> createState() =>
-      _PersonalInformationPageWidgetState();
+  State<EditPersonalInformationPageWidget> createState() =>
+      _EditPersonalInformationPageWidgetState();
 }
 
-class _PersonalInformationPageWidgetState
-    extends State<PersonalInformationPageWidget> {
-  late PersonalInformationPageModel _model;
+class _EditPersonalInformationPageWidgetState
+    extends State<EditPersonalInformationPageWidget> {
+  late EditPersonalInformationPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => PersonalInformationPageModel());
+    _model = createModel(context, () => EditPersonalInformationPageModel());
 
     _model.nameTextController ??= TextEditingController();
     _model.nameFocusNode ??= FocusNode();
@@ -98,7 +96,7 @@ class _PersonalInformationPageWidgetState
                               children: [
                                 Text(
                                   FFLocalizations.of(context).getText(
-                                    '21fk5zky' /* Personal Information */,
+                                    '8ze6n1ap' /* Personal Information */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -112,7 +110,7 @@ class _PersonalInformationPageWidgetState
                                 ),
                                 Text(
                                   FFLocalizations.of(context).getText(
-                                    'p5mu6rv3' /* Add your information */,
+                                    'sukbzy34' /* Add your information */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -180,7 +178,7 @@ class _PersonalInformationPageWidgetState
                                         10.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       FFLocalizations.of(context).getText(
-                                        'tve717on' /* Profile picture */,
+                                        'afdo04rz' /* Profile picture */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -202,111 +200,7 @@ class _PersonalInformationPageWidgetState
                                       focusColor: Colors.transparent,
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        final selectedMedia =
-                                            await selectMediaWithSourceBottomSheet(
-                                          context: context,
-                                          allowPhoto: true,
-                                        );
-                                        if (selectedMedia != null &&
-                                            selectedMedia.every((m) =>
-                                                validateFileFormat(
-                                                    m.storagePath, context))) {
-                                          safeSetState(() => _model
-                                                  .isDataUploading_uploadDataByk =
-                                              true);
-                                          var selectedUploadedFiles =
-                                              <FFUploadedFile>[];
-
-                                          try {
-                                            selectedUploadedFiles =
-                                                selectedMedia
-                                                    .map((m) => FFUploadedFile(
-                                                          name: m.storagePath
-                                                              .split('/')
-                                                              .last,
-                                                          bytes: m.bytes,
-                                                          height: m.dimensions
-                                                              ?.height,
-                                                          width: m.dimensions
-                                                              ?.width,
-                                                          blurHash: m.blurHash,
-                                                        ))
-                                                    .toList();
-                                          } finally {
-                                            _model.isDataUploading_uploadDataByk =
-                                                false;
-                                          }
-                                          if (selectedUploadedFiles.length ==
-                                              selectedMedia.length) {
-                                            safeSetState(() {
-                                              _model.uploadedLocalFile_uploadDataByk =
-                                                  selectedUploadedFiles.first;
-                                            });
-                                          } else {
-                                            safeSetState(() {});
-                                            return;
-                                          }
-                                        }
-
-                                        _model.apiResultxpj =
-                                            await FreelancerAuthorizationGroup
-                                                .avatarCall
-                                                .call(
-                                          avatar: _model
-                                              .uploadedLocalFile_uploadDataByk,
-                                          authToken: FFAppState().apitoken,
-                                        );
-
-                                        if ((_model.apiResultxpj?.succeeded ??
-                                            true)) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                getJsonField(
-                                                  (_model.apiResultxpj
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                  r'''$.message''',
-                                                ).toString(),
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                              duration:
-                                                  Duration(milliseconds: 4000),
-                                              backgroundColor:
-                                                  Color(0xFF6E2A87),
-                                            ),
-                                          );
-                                          _model.isAvatar = true;
-                                          safeSetState(() {});
-                                        } else {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                getJsonField(
-                                                  (_model.apiResultxpj
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                  r'''$.message''',
-                                                ).toString(),
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                              duration:
-                                                  Duration(milliseconds: 4000),
-                                              backgroundColor:
-                                                  Color(0xFF6E2A87),
-                                            ),
-                                          );
-                                        }
-
-                                        safeSetState(() {});
-                                      },
+                                      onTap: () async {},
                                       child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(50.0),
@@ -324,110 +218,7 @@ class _PersonalInformationPageWidgetState
                                       focusColor: Colors.transparent,
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        final selectedMedia =
-                                            await selectMediaWithSourceBottomSheet(
-                                          context: context,
-                                          allowPhoto: true,
-                                        );
-                                        if (selectedMedia != null &&
-                                            selectedMedia.every((m) =>
-                                                validateFileFormat(
-                                                    m.storagePath, context))) {
-                                          safeSetState(() => _model
-                                                  .isDataUploading_uploadedMedia =
-                                              true);
-                                          var selectedUploadedFiles =
-                                              <FFUploadedFile>[];
-
-                                          try {
-                                            selectedUploadedFiles =
-                                                selectedMedia
-                                                    .map((m) => FFUploadedFile(
-                                                          name: m.storagePath
-                                                              .split('/')
-                                                              .last,
-                                                          bytes: m.bytes,
-                                                          height: m.dimensions
-                                                              ?.height,
-                                                          width: m.dimensions
-                                                              ?.width,
-                                                          blurHash: m.blurHash,
-                                                        ))
-                                                    .toList();
-                                          } finally {
-                                            _model.isDataUploading_uploadedMedia =
-                                                false;
-                                          }
-                                          if (selectedUploadedFiles.length ==
-                                              selectedMedia.length) {
-                                            safeSetState(() {
-                                              _model.uploadedLocalFile_uploadedMedia =
-                                                  selectedUploadedFiles.first;
-                                            });
-                                          } else {
-                                            safeSetState(() {});
-                                            return;
-                                          }
-                                        }
-
-                                        _model.apiResultklx =
-                                            await FreelancerAuthorizationGroup
-                                                .avatarCall
-                                                .call(
-                                          avatar: _model
-                                              .uploadedLocalFile_uploadedMedia,
-                                        );
-
-                                        if ((_model.apiResultklx?.succeeded ??
-                                            true)) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                getJsonField(
-                                                  (_model.apiResultklx
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                  r'''$.message''',
-                                                ).toString(),
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                              duration:
-                                                  Duration(milliseconds: 4000),
-                                              backgroundColor:
-                                                  Color(0xFF6E2A87),
-                                            ),
-                                          );
-                                          _model.isAvatar = true;
-                                          safeSetState(() {});
-                                        } else {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                getJsonField(
-                                                  (_model.apiResultklx
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                  r'''$.message''',
-                                                ).toString(),
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                              duration:
-                                                  Duration(milliseconds: 4000),
-                                              backgroundColor:
-                                                  Color(0xFF6E2A87),
-                                            ),
-                                          );
-                                        }
-
-                                        safeSetState(() {});
-                                      },
+                                      onTap: () async {},
                                       child: Container(
                                         width: 110.0,
                                         height: 110.0,
@@ -436,11 +227,7 @@ class _PersonalInformationPageWidgetState
                                           shape: BoxShape.circle,
                                         ),
                                         child: Image.network(
-                                          getJsonField(
-                                            (_model.apiResultxpj?.jsonBody ??
-                                                ''),
-                                            r'''$.data.avatar.url''',
-                                          ).toString(),
+                                          '',
                                           fit: BoxFit.cover,
                                           errorBuilder:
                                               (context, error, stackTrace) =>
@@ -476,7 +263,7 @@ class _PersonalInformationPageWidgetState
                                     10.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
-                                    'hyj7ox3c' /* Display name */,
+                                    '0deb4xsd' /* Display name */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -521,7 +308,7 @@ class _PersonalInformationPageWidgetState
                                         .fontStyle,
                                   ),
                               hintText: FFLocalizations.of(context).getText(
-                                'epkkxq88' /* Display name */,
+                                '3ms2im7u' /* Display name */,
                               ),
                               hintStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
@@ -616,7 +403,7 @@ class _PersonalInformationPageWidgetState
                                     10.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
-                                    'wpd8a4cc' /* About you */,
+                                    'py5dicbt' /* About you */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -661,7 +448,7 @@ class _PersonalInformationPageWidgetState
                                         .fontStyle,
                                   ),
                               hintText: FFLocalizations.of(context).getText(
-                                'nhslwbs8' /* Description */,
+                                '5hwdqe3t' /* Description */,
                               ),
                               hintStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
@@ -761,7 +548,7 @@ class _PersonalInformationPageWidgetState
                                         10.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       FFLocalizations.of(context).getText(
-                                        '0fq4hqji' /* Languages */,
+                                        'ts0fi3sh' /* Languages */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -800,7 +587,7 @@ class _PersonalInformationPageWidgetState
                                   ).then((value) => safeSetState(() {}));
                                 },
                                 text: FFLocalizations.of(context).getText(
-                                  'arni46o3' /* Add  */,
+                                  'uwilqv0f' /* Add  */,
                                 ),
                                 options: FFButtonOptions(
                                   height: 32.0,
@@ -940,7 +727,7 @@ class _PersonalInformationPageWidgetState
                                       alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Text(
                                         FFLocalizations.of(context).getText(
-                                          'f4guxcs9' /* Previous */,
+                                          '8qatp6cj' /* Previous */,
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
@@ -974,73 +761,9 @@ class _PersonalInformationPageWidgetState
                                     shape: BoxShape.rectangle,
                                   ),
                                   child: FFButtonWidget(
-                                    onPressed: () async {
-                                      if (_model.formKey.currentState == null ||
-                                          !_model.formKey.currentState!
-                                              .validate()) {
-                                        return;
-                                      }
-                                      _model.apiResulttl8 =
-                                          await FreelancerAuthorizationGroup
-                                              .personalInfoUpdateCall
-                                              .call(
-                                        nickname:
-                                            _model.nameTextController.text,
-                                        about: _model.aboutTextController.text,
-                                        authToken: FFAppState().apitoken,
-                                      );
-
-                                      if ((_model.apiResulttl8?.succeeded ??
-                                          true)) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              getJsonField(
-                                                (_model.apiResultklx
-                                                        ?.jsonBody ??
-                                                    ''),
-                                                r'''$.message''',
-                                              ).toString(),
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                            duration:
-                                                Duration(milliseconds: 4000),
-                                            backgroundColor: Color(0xFF6E2A87),
-                                          ),
-                                        );
-
-                                        context.pushNamed(
-                                            WorkInformationPageWidget
-                                                .routeName);
-                                      } else {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              getJsonField(
-                                                (_model.apiResultklx
-                                                        ?.jsonBody ??
-                                                    ''),
-                                                r'''$.message''',
-                                              ).toString(),
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                            duration:
-                                                Duration(milliseconds: 4000),
-                                            backgroundColor: Color(0xFF6E2A87),
-                                          ),
-                                        );
-                                      }
-
-                                      safeSetState(() {});
-                                    },
+                                    onPressed: () async {},
                                     text: FFLocalizations.of(context).getText(
-                                      'dgou2zb1' /* Next */,
+                                      'htb4unik' /* Next */,
                                     ),
                                     options: FFButtonOptions(
                                       height: 40.0,

@@ -316,6 +316,7 @@ class ClientHomePageGroup {
   static SavedServicesCall savedServicesCall = SavedServicesCall();
   static AddToFavouriteCall addToFavouriteCall = AddToFavouriteCall();
   static GetSliderAPICall getSliderAPICall = GetSliderAPICall();
+  static AllServiceCall allServiceCall = AllServiceCall();
 }
 
 class PopularServiceCall {
@@ -816,6 +817,39 @@ class GetSliderAPICall {
   }
 
   List? sliderList(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+        true,
+      ) as List?;
+}
+
+class AllServiceCall {
+  Future<ApiCallResponse> call({
+    String? authToken = '',
+  }) async {
+    final baseUrl = ClientHomePageGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'AllService',
+      apiUrl: '${baseUrl}/user/all-services',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List? serviceList(dynamic response) => getJsonField(
         response,
         r'''$.data''',
         true,

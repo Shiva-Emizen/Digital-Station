@@ -2294,6 +2294,88 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
   },
+  // EditPersonalInformationPage
+  {
+    '8ze6n1ap': {
+      'en': 'Personal Information',
+      'ar': '',
+    },
+    'sukbzy34': {
+      'en': 'Add your information',
+      'ar': '',
+    },
+    'afdo04rz': {
+      'en': 'Profile picture',
+      'ar': '',
+    },
+    '0deb4xsd': {
+      'en': 'Display name',
+      'ar': '',
+    },
+    '3ms2im7u': {
+      'en': 'Display name',
+      'ar': '',
+    },
+    'py5dicbt': {
+      'en': 'About you',
+      'ar': '',
+    },
+    '5hwdqe3t': {
+      'en': 'Description',
+      'ar': '',
+    },
+    'ts0fi3sh': {
+      'en': 'Languages',
+      'ar': '',
+    },
+    'uwilqv0f': {
+      'en': 'Add ',
+      'ar': '',
+    },
+    '8qatp6cj': {
+      'en': 'Previous',
+      'ar': '',
+    },
+    'htb4unik': {
+      'en': 'Next',
+      'ar': '',
+    },
+    'tmvdqm0p': {
+      'en': 'Display name is required',
+      'ar': '',
+    },
+    'd5qazuwc': {
+      'en': 'Display name is required',
+      'ar': '',
+    },
+    'dhsy3kqc': {
+      'en': 'Please choose an option from the dropdown',
+      'ar': '',
+    },
+    'yyncnx5n': {
+      'en': 'Description is required',
+      'ar': '',
+    },
+    'y02gj5eg': {
+      'en': 'Please choose an option from the dropdown',
+      'ar': '',
+    },
+    'jbgxzba3': {
+      'en': 'Home',
+      'ar': 'بيت',
+    },
+  },
+  // AllService
+  {
+    'm5jh7qoa': {
+      'en': 'Services',
+      'ar': '',
+    },
+    'lymwzj3p': {
+      'en': 'Services',
+      'ar': 'بيت',
+    },
+  },
   // Logout
   {
     '3zn7uzpj': {

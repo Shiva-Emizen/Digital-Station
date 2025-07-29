@@ -81,3 +81,6 @@ export '/auth/otp_page_freelancer/otp_page_freelancer_widget.dart'
     show OtpPageFreelancerWidget;
 export '/dashboard/home_page_copy/home_page_copy_widget.dart'
     show HomePageCopyWidget;
+export '/auth/edit_personal_information_page/edit_personal_information_page_widget.dart'
+    show EditPersonalInformationPageWidget;
+export '/dashboard/all_service/all_service_widget.dart' show AllServiceWidget;

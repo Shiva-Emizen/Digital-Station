@@ -156,9 +156,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: OrderPageWidget.routeName,
           path: OrderPageWidget.routePath,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'OrderPage')
-              : OrderPageWidget(),
+          builder: (context, params) => OrderPageWidget(),
         ),
         FFRoute(
           name: RequestEditPageWidget.routeName,
@@ -203,7 +201,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: CreateOrderWidget.routeName,
           path: CreateOrderWidget.routePath,
-          builder: (context, params) => CreateOrderWidget(),
+          builder: (context, params) => CreateOrderWidget(
+            serviceId: params.getParam(
+              'serviceId',
+              ParamType.String,
+            ),
+            packageId: params.getParam(
+              'packageId',
+              ParamType.String,
+            ),
+            price: params.getParam(
+              'price',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: PersonalInformationPageWidget.routeName,
@@ -349,7 +360,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: ServiceDetailPageWidget.routeName,
           path: ServiceDetailPageWidget.routePath,
-          builder: (context, params) => ServiceDetailPageWidget(),
+          builder: (context, params) => ServiceDetailPageWidget(
+            serviceId: params.getParam(
+              'serviceId',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: ViewAllPageWidget.routeName,
@@ -386,7 +402,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             builder: (context, params) => NavBarPage(
                   initialPage: '',
                   page: HomePageCopyWidget(),
-                ))
+                )),
+        FFRoute(
+          name: EditPersonalInformationPageWidget.routeName,
+          path: EditPersonalInformationPageWidget.routePath,
+          builder: (context, params) => EditPersonalInformationPageWidget(),
+        ),
+        FFRoute(
+          name: AllServiceWidget.routeName,
+          path: AllServiceWidget.routePath,
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'AllService')
+              : AllServiceWidget(),
+        )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 

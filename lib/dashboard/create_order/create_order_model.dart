@@ -8,6 +8,8 @@ class CreateOrderModel extends FlutterFlowModel<CreateOrderWidget> {
 
   FFUploadedFile? selectedPath;
 
+  bool extraPay = false;
+
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
@@ -33,6 +35,8 @@ class CreateOrderModel extends FlutterFlowModel<CreateOrderWidget> {
   bool? switchValue;
   // Stores action output result for [Backend Call - API (CreateOrder)] action in Button widget.
   ApiCallResponse? orderCreatedResponse;
+  // Stores action output result for [Braintree Payment] action in Button widget.
+  String? transactionId;
 
   @override
   void initState(BuildContext context) {

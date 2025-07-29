@@ -159,7 +159,7 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'HomePage': HomePageWidget(),
-      'OrderPage': OrderPageWidget(),
+      'AllService': AllServiceWidget(),
       'CategoryPage': CategoryPageWidget(),
       'AccountPage': AccountPageWidget(),
     };
@@ -194,9 +194,9 @@ class _NavBarPageState extends State<NavBarPage> {
             iconSize: 24.0,
           ),
           GButton(
-            icon: Icons.grid_view_outlined,
+            icon: Icons.grid_view_rounded,
             text: FFLocalizations.of(context).getText(
-              'eo8rqs7e' /* Order */,
+              'lymwzj3p' /* Services */,
             ),
             iconSize: 24.0,
           ),

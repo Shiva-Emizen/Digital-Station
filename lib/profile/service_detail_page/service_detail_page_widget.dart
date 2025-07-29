@@ -15,7 +15,12 @@ import 'service_detail_page_model.dart';
 export 'service_detail_page_model.dart';
 
 class ServiceDetailPageWidget extends StatefulWidget {
-  const ServiceDetailPageWidget({super.key});
+  const ServiceDetailPageWidget({
+    super.key,
+    this.serviceId,
+  });
+
+  final String? serviceId;
 
   static String routeName = 'ServiceDetailPage';
   static String routePath = '/serviceDetailPage';
@@ -38,15 +43,18 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.detailsResponse = await ClientHomePageGroup.serviceDetailCall.call(
-        subCategoryId: '2',
+        subCategoryId: widget.serviceId,
         authToken: FFAppState().apitoken,
       );
 
-      if ((_model.detailsResponse?.succeeded ?? true)) {
+      await Future.delayed(
+        Duration(
+          milliseconds: 2000,
+        ),
+      );
+      if (!(_model.detailsResponse?.succeeded ?? true)) {
         return;
       }
-
-      return;
     });
   }
 
@@ -312,7 +320,7 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                               BorderRadius.circular(12.0),
                                           child: Container(
                                             width: 120.0,
-                                            height: 70.0,
+                                            height: 80.0,
                                             decoration: BoxDecoration(
                                               color: getJsonField(
                                                         _model.selectedPackage,
@@ -660,8 +668,29 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                   ),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      context
-                                          .pushNamed(HomePageWidget.routeName);
+                                      context.pushNamed(
+                                        CreateOrderWidget.routeName,
+                                        queryParameters: {
+                                          'serviceId': serializeParam(
+                                            widget.serviceId,
+                                            ParamType.String,
+                                          ),
+                                          'packageId': serializeParam(
+                                            getJsonField(
+                                              _model.selectedPackage,
+                                              r'''$.id''',
+                                            ).toString(),
+                                            ParamType.String,
+                                          ),
+                                          'price': serializeParam(
+                                            getJsonField(
+                                              _model.selectedPackage,
+                                              r'''$.price''',
+                                            ).toString(),
+                                            ParamType.String,
+                                          ),
+                                        }.withoutNulls,
+                                      );
                                     },
                                     text: FFLocalizations.of(context).getText(
                                       'a0l4dtf9' /* Continue */,
@@ -976,7 +1005,7 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                 return Container(
                                   width: double.infinity,
                                   decoration: BoxDecoration(
-                                    color: Color(0xFFF1F4F8),
+                                    color: Color(0x00F1F4F8),
                                     borderRadius: BorderRadius.circular(0.0),
                                   ),
                                   child: ExpandableNotifier(
@@ -986,11 +1015,11 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                       collapsed: Container(
                                         width: double.infinity,
                                         decoration: BoxDecoration(
-                                          color: Color(0xFFF1F4F8),
+                                          color: Color(0x00F1F4F8),
                                           borderRadius:
                                               BorderRadius.circular(0.0),
                                           border: Border.all(
-                                            color: Colors.white,
+                                            color: Color(0x00FFFFFF),
                                           ),
                                         ),
                                         child: Row(

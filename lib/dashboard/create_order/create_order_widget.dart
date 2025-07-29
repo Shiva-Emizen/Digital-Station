@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/braintree/payment_manager.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -11,7 +12,16 @@ import 'create_order_model.dart';
 export 'create_order_model.dart';
 
 class CreateOrderWidget extends StatefulWidget {
-  const CreateOrderWidget({super.key});
+  const CreateOrderWidget({
+    super.key,
+    this.serviceId,
+    this.packageId,
+    this.price,
+  });
+
+  final String? serviceId;
+  final String? packageId;
+  final String? price;
 
   static String routeName = 'CreateOrder';
   static String routePath = '/createOrder';
@@ -288,25 +298,39 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                             ),
                           ),
                         ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              20.0, 5.0, 20.0, 0.0),
+                          child: Text(
+                            FFLocalizations.of(context).getText(
+                              '5dbmolkm' /* Select zip,image,pdf or ms.wor... */,
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'primaryFont',
+                                  color: Color(0xFF898989),
+                                  fontSize: 12.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                          ),
+                        ),
                         if ((_model.uploadedLocalFile_uploadDataY0u.bytes
-                                    ?.isEmpty ??
-                                true))
+                                    ?.isNotEmpty ??
+                                false))
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                20.0, 5.0, 20.0, 0.0),
-                            child: Text(
-                              FFLocalizations.of(context).getText(
-                                '5dbmolkm' /* Select zip,image,pdf or ms.wor... */,
+                                20.0, 10.0, 20.0, 0.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.memory(
+                                _model.uploadedLocalFile_uploadDataY0u.bytes ??
+                                    Uint8List.fromList([]),
+                                width: 80.0,
+                                height: 80.0,
+                                fit: BoxFit.cover,
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'primaryFont',
-                                    color: Color(0xFF898989),
-                                    fontSize: 12.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.normal,
-                                  ),
                             ),
                           ),
                         Row(
@@ -405,6 +429,13 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                               onChanged: (newValue) async {
                                 safeSetState(
                                     () => _model.switchValue = newValue);
+                                if (newValue) {
+                                  _model.extraPay = true;
+                                  safeSetState(() {});
+                                } else {
+                                  _model.extraPay = false;
+                                  safeSetState(() {});
+                                }
                               },
                               activeColor: Color(0xFF53B175),
                               activeTrackColor: Colors.white,
@@ -507,11 +538,15 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                                             await ClientHomePageGroup
                                                 .createOrderCall
                                                 .call(
-                                          serviceId: '2',
-                                          packageId: '',
-                                          description: '',
+                                          serviceId: widget.serviceId,
+                                          packageId: widget.packageId,
+                                          description:
+                                              _model.textController.text,
                                           attachments: _model.selectedPath,
-                                          expressDelivery: '',
+                                          expressDelivery:
+                                              _model.extraPay == true
+                                                  ? '1'
+                                                  : '0',
                                           authToken: FFAppState().apitoken,
                                         );
 
@@ -541,6 +576,60 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                                                       .secondary,
                                             ),
                                           );
+                                          final transacAmount = getJsonField(
+                                            (_model.orderCreatedResponse
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$.data.total''',
+                                          );
+                                          final transacDisplayName =
+                                              'transaction';
+                                          if (kIsWeb) {
+                                            showSnackbar(context,
+                                                'Payments not yet supported on web.');
+                                            return;
+                                          }
+
+                                          final dropInRequest =
+                                              BraintreeDropInRequest(
+                                            cardEnabled: true,
+                                            clientToken: braintreeClientToken(),
+                                            collectDeviceData: true,
+                                            paypalRequest:
+                                                BraintreePayPalRequest(
+                                              amount: transacAmount.toString(),
+                                              currencyCode: 'USD',
+                                              displayName: transacDisplayName,
+                                            ),
+                                          );
+                                          final dropInResult =
+                                              await BraintreeDropIn.start(
+                                                  dropInRequest);
+                                          if (dropInResult == null) {
+                                            return;
+                                          }
+                                          showSnackbar(
+                                            context,
+                                            'Processing payment...',
+                                            duration: 10,
+                                            loading: true,
+                                          );
+                                          final paymentResponse =
+                                              await processBraintreePayment(
+                                            transacAmount,
+                                            dropInResult
+                                                .paymentMethodNonce.nonce,
+                                            dropInResult.deviceData,
+                                          );
+                                          if (paymentResponse.errorMessage !=
+                                              null) {
+                                            showSnackbar(context,
+                                                'Error: ${paymentResponse.errorMessage}');
+                                            return;
+                                          }
+                                          showSnackbar(context, 'Success!');
+                                          _model.transactionId =
+                                              paymentResponse.transactionId!;
                                         } else {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
