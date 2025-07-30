@@ -191,7 +191,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: CompleteProfilePageWidget.routeName,
           path: CompleteProfilePageWidget.routePath,
-          builder: (context, params) => CompleteProfilePageWidget(),
+          builder: (context, params) => CompleteProfilePageWidget(
+            userId: params.getParam(
+              'userId',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: SubscriptionPageWidget.routeName,

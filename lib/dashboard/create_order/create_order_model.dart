@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'create_order_widget.dart' show CreateOrderWidget;
 import 'package:flutter/material.dart';
 
@@ -17,16 +18,6 @@ class CreateOrderModel extends FlutterFlowModel<CreateOrderWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
-  String? _textControllerValidator(BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return FFLocalizations.of(context).getText(
-        'lhygjie0' /* Please add description here */,
-      );
-    }
-
-    return null;
-  }
-
   bool isDataUploading_uploadDataY0u = false;
   FFUploadedFile uploadedLocalFile_uploadDataY0u =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -39,9 +30,7 @@ class CreateOrderModel extends FlutterFlowModel<CreateOrderWidget> {
   String? transactionId;
 
   @override
-  void initState(BuildContext context) {
-    textControllerValidator = _textControllerValidator;
-  }
+  void initState(BuildContext context) {}
 
   @override
   void dispose() {

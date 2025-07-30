@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -69,11 +70,70 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
           top: true,
           child: Stack(
             children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional(0.0, -1.0),
+                      child: FlutterFlowIconButton(
+                        borderRadius: 8.0,
+                        buttonSize: 36.0,
+                        fillColor: Colors.white,
+                        icon: Icon(
+                          Icons.arrow_back_ios_new,
+                          color: Color(0xFF252525),
+                          size: 18.0,
+                        ),
+                        onPressed: () async {
+                          context.safePop();
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 20.0, 0.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            FFLocalizations.of(context).getText(
+                              'azd6g7om' /* Order */,
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'primaryFont',
+                                  color: Color(0xFF252525),
+                                  fontSize: 16.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(0.0, -1.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Form(
                 key: _model.formKey,
                 autovalidateMode: AutovalidateMode.disabled,
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 20.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -84,7 +144,7 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                               20.0, 36.0, 20.0, 0.0),
                           child: Text(
                             FFLocalizations.of(context).getText(
-                              'tvd1kn7w' /* Add description */,
+                              'yf2rwd6p' /* Add description */,
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
@@ -99,103 +159,87 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 10.0, 20.0, 0.0),
-                          child: Container(
-                            width: double.infinity,
-                            height: 132.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: TextFormField(
-                              controller: _model.textController,
-                              focusNode: _model.textFieldFocusNode,
-                              autofocus: false,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                isDense: true,
-                                labelStyle: FlutterFlowTheme.of(context)
-                                    .labelMedium
-                                    .override(
-                                      font: GoogleFonts.inter(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .labelMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium
-                                            .fontStyle,
-                                      ),
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .fontStyle,
-                                    ),
-                                hintStyle: FlutterFlowTheme.of(context)
-                                    .labelMedium
-                                    .override(
-                                      font: GoogleFonts.inter(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .labelMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium
-                                            .fontStyle,
-                                      ),
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .fontStyle,
-                                    ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).error,
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).error,
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                filled: true,
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
+                          child: TextFormField(
+                            controller: _model.textController,
+                            focusNode: _model.textFieldFocusNode,
+                            autofocus: false,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              isDense: true,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
                                   .override(
                                     font: GoogleFonts.inter(
                                       fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
+                                          .labelMedium
                                           .fontWeight,
                                       fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
+                                          .labelMedium
                                           .fontStyle,
                                     ),
                                     letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontStyle,
+                                  ),
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontStyle,
+                                  ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  font: GoogleFonts.inter(
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .fontWeight,
@@ -203,12 +247,19 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                                         .bodyMedium
                                         .fontStyle,
                                   ),
-                              maxLines: null,
-                              cursorColor:
-                                  FlutterFlowTheme.of(context).primaryText,
-                              validator: _model.textControllerValidator
-                                  .asValidator(context),
-                            ),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                            maxLines: 4,
+                            cursorColor:
+                                FlutterFlowTheme.of(context).primaryText,
+                            validator: _model.textControllerValidator
+                                .asValidator(context),
                           ),
                         ),
                         Padding(
@@ -216,7 +267,7 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                               20.0, 14.0, 20.0, 0.0),
                           child: Text(
                             FFLocalizations.of(context).getText(
-                              'yepsy9vw' /* Attach Files */,
+                              '515lewtl' /* Attach Files */,
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
@@ -233,7 +284,7 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                               20.0, 5.0, 20.0, 0.0),
                           child: Text(
                             FFLocalizations.of(context).getText(
-                              '6enxy1vj' /* Select zip,image,pdf or ms.wor... */,
+                              'bjis3h3t' /* Select zip,image,pdf or ms.wor... */,
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
@@ -303,7 +354,7 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                               20.0, 5.0, 20.0, 0.0),
                           child: Text(
                             FFLocalizations.of(context).getText(
-                              '5dbmolkm' /* Select zip,image,pdf or ms.wor... */,
+                              'yzr722uo' /* Select zip,image,pdf or ms.wor... */,
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
@@ -369,7 +420,7 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                                                   10.0, 0.0, 20.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
-                                              'tga6spm8' /* Express Delivery */,
+                                              'f5yj3pex' /* Express Delivery */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
@@ -393,7 +444,7 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                                     children: [
                                       Text(
                                         FFLocalizations.of(context).getText(
-                                          'fi47lxcq' /* This Option Will add Extra  */,
+                                          'e076xs5m' /* This Option Will add Extra  */,
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
@@ -407,7 +458,7 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                                       ),
                                       Text(
                                         FFLocalizations.of(context).getText(
-                                          '0mm0f1dw' /*  $20 */,
+                                          'd3dq8wss' /*  $20 */,
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
@@ -468,7 +519,7 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                                         context.safePop();
                                       },
                                       text: FFLocalizations.of(context).getText(
-                                        'vcqhksxc' /* Cancel */,
+                                        '5oc4qkeu' /* Cancel */,
                                       ),
                                       options: FFButtonOptions(
                                         height: 40.0,
@@ -630,6 +681,9 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                                           showSnackbar(context, 'Success!');
                                           _model.transactionId =
                                               paymentResponse.transactionId!;
+
+                                          context.pushNamed(
+                                              HomePageWidget.routeName);
                                         } else {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
@@ -659,7 +713,7 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                                         safeSetState(() {});
                                       },
                                       text: FFLocalizations.of(context).getText(
-                                        'gl17jklm' /* Confirm */,
+                                        'tfdg6m2u' /* Confirm */,
                                       ),
                                       options: FFButtonOptions(
                                         height: 40.0,
@@ -707,65 +761,6 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                       ],
                     ),
                   ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Align(
-                      alignment: AlignmentDirectional(0.0, -1.0),
-                      child: FlutterFlowIconButton(
-                        borderRadius: 8.0,
-                        buttonSize: 36.0,
-                        fillColor: Colors.white,
-                        icon: Icon(
-                          Icons.arrow_back_ios_new,
-                          color: Color(0xFF252525),
-                          size: 18.0,
-                        ),
-                        onPressed: () async {
-                          context.safePop();
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 20.0, 0.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            FFLocalizations.of(context).getText(
-                              'azd6g7om' /* Order */,
-                            ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'primaryFont',
-                                  color: Color(0xFF252525),
-                                  fontSize: 16.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(0.0, -1.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
               ),
             ],

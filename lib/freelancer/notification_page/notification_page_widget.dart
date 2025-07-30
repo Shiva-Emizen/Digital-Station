@@ -94,8 +94,11 @@ class _NotificationPageWidgetState extends State<NotificationPageWidget> {
                                         [];
                                 if (notificationList.isEmpty) {
                                   return Center(
-                                    child: NoDataFoundWidget(
-                                      title: 'No notifications to show',
+                                    child: Container(
+                                      height: 600.0,
+                                      child: NoDataFoundWidget(
+                                        title: 'No notifications to show',
+                                      ),
                                     ),
                                   );
                                 }

@@ -152,8 +152,21 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context
-                              .pushNamed(CompleteProfilePageWidget.routeName);
+                          context.pushNamed(
+                            CompleteProfilePageWidget.routeName,
+                            queryParameters: {
+                              'userId': serializeParam(
+                                getJsonField(
+                                  ClientHomePageGroup.serviceDetailCall
+                                      .serviceDetail(
+                                    (_model.detailsResponse?.jsonBody ?? ''),
+                                  ),
+                                  r'''$.user_id''',
+                                ).toString(),
+                                ParamType.String,
+                              ),
+                            }.withoutNulls,
+                          );
                         },
                         child: Container(
                           width: double.infinity,
@@ -591,29 +604,46 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                   ),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      context.pushNamed(
-                                        CreateOrderWidget.routeName,
-                                        queryParameters: {
-                                          'serviceId': serializeParam(
-                                            widget.serviceId,
-                                            ParamType.String,
+                                      if (_model.selectedPackage != null) {
+                                        context.pushNamed(
+                                          CreateOrderWidget.routeName,
+                                          queryParameters: {
+                                            'serviceId': serializeParam(
+                                              widget.serviceId,
+                                              ParamType.String,
+                                            ),
+                                            'packageId': serializeParam(
+                                              getJsonField(
+                                                _model.selectedPackage,
+                                                r'''$.id''',
+                                              ).toString(),
+                                              ParamType.String,
+                                            ),
+                                            'price': serializeParam(
+                                              getJsonField(
+                                                _model.selectedPackage,
+                                                r'''$.price''',
+                                              ).toString(),
+                                              ParamType.String,
+                                            ),
+                                          }.withoutNulls,
+                                        );
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Please select package',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor: Color(0xFF6E2A87),
                                           ),
-                                          'packageId': serializeParam(
-                                            getJsonField(
-                                              _model.selectedPackage,
-                                              r'''$.id''',
-                                            ).toString(),
-                                            ParamType.String,
-                                          ),
-                                          'price': serializeParam(
-                                            getJsonField(
-                                              _model.selectedPackage,
-                                              r'''$.price''',
-                                            ).toString(),
-                                            ParamType.String,
-                                          ),
-                                        }.withoutNulls,
-                                      );
+                                        );
+                                      }
                                     },
                                     text: FFLocalizations.of(context).getText(
                                       'a0l4dtf9' /* Continue */,
