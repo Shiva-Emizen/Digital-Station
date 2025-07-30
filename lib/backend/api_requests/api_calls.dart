@@ -303,6 +303,7 @@ class ClientHomePageGroup {
   static AddToFavouriteCall addToFavouriteCall = AddToFavouriteCall();
   static GetSliderAPICall getSliderAPICall = GetSliderAPICall();
   static AllServiceCall allServiceCall = AllServiceCall();
+  static FreelancerProfileCall freelancerProfileCall = FreelancerProfileCall();
 }
 
 class PopularServiceCall {
@@ -814,6 +815,39 @@ class AllServiceCall {
         r'''$.data''',
         true,
       ) as List?;
+}
+
+class FreelancerProfileCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = ClientHomePageGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'FreelancerProfile',
+      apiUrl: '${baseUrl}/user/freelancer/${userId}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  dynamic freelancerProfile(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
 }
 
 /// End ClientHomePage Group Code

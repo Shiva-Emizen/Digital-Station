@@ -718,32 +718,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // ProfilePage
   {
-    '2iog8n90': {
-      'en': 'Ahmed Edrress',
-      'ar': '',
-    },
     'zy2vi3ia': {
       'en': 'From',
-      'ar': '',
-    },
-    'mw78703t': {
-      'en': 'Egypt (6:55 PM)',
       'ar': '',
     },
     '9sal953k': {
       'en': 'Member Since',
       'ar': '',
     },
-    '9kvrcubk': {
-      'en': 'October 2022',
-      'ar': '',
-    },
     'u879ajl7': {
       'en': 'Completed  Orders',
-      'ar': '',
-    },
-    '2ic77963': {
-      'en': '15 order',
       'ar': '',
     },
     'ctb6lsnb': {
@@ -753,14 +737,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // CompleteProfilePage
   {
-    'cb42qkzz': {
-      'en': 'Ahmed Edrress',
-      'ar': '',
-    },
-    '7bojfco7': {
-      'en': 'UI/WordPress Developer',
-      'ar': '',
-    },
     'ffmzhimt': {
       'en': 'About',
       'ar': '',
@@ -769,41 +745,20 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Info',
       'ar': '',
     },
-    'eobzqxk1': {
-      'en':
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
-      'ar': '',
-    },
     'bsrugfxc': {
       'en': 'From',
-      'ar': '',
-    },
-    '99bogtmw': {
-      'en': 'Egypt (6:55 PM)',
       'ar': '',
     },
     'cg2j1g4f': {
       'en': 'Member Since',
       'ar': '',
     },
-    'nxtnsrx3': {
-      'en': 'October 2022',
-      'ar': '',
-    },
     'al4kie96': {
       'en': 'Languages',
       'ar': '',
     },
-    'qy1ovg7j': {
-      'en': 'Arabic  -  English',
-      'ar': '',
-    },
     '68obyc7g': {
       'en': 'Skills',
-      'ar': '',
-    },
-    '92le0mui': {
-      'en': 'Web design  -  WordPress design',
       'ar': '',
     },
     'lgwrxg77': {
@@ -812,6 +767,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'u3iz83tr': {
       'en': 'Portfolio',
+      'ar': '',
+    },
+    '5mhwux04': {
+      'en': '1',
       'ar': '',
     },
     'ubyra8kx': {
@@ -832,52 +791,52 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // CreateOrder
   {
-    'tvd1kn7w': {
+    'azd6g7om': {
+      'en': 'Order',
+      'ar': '',
+    },
+    'yf2rwd6p': {
       'en': 'Add description',
       'ar': '',
     },
-    'yepsy9vw': {
+    '515lewtl': {
       'en': 'Attach Files',
       'ar': '',
     },
-    '6enxy1vj': {
+    'bjis3h3t': {
       'en': 'Select zip,image,pdf or ms.word',
       'ar': '',
     },
-    '5dbmolkm': {
+    'yzr722uo': {
       'en': 'Select zip,image,pdf or ms.word',
       'ar': '',
     },
-    'tga6spm8': {
+    'f5yj3pex': {
       'en': 'Express Delivery',
       'ar': '',
     },
-    'fi47lxcq': {
+    'e076xs5m': {
       'en': 'This Option Will add Extra ',
       'ar': '',
     },
-    '0mm0f1dw': {
+    'd3dq8wss': {
       'en': ' \$20',
       'ar': '',
     },
-    'vcqhksxc': {
+    '5oc4qkeu': {
       'en': 'Cancel',
       'ar': '',
     },
-    'gl17jklm': {
+    'tfdg6m2u': {
       'en': 'Confirm',
       'ar': '',
     },
-    'lhygjie0': {
+    '6n3fgy1a': {
       'en': 'Please add description here',
       'ar': '',
     },
-    'htvpt7ca': {
+    'c31puyou': {
       'en': 'Please choose an option from the dropdown',
-      'ar': '',
-    },
-    'azd6g7om': {
-      'en': 'Order',
       'ar': '',
     },
     'gf355o8v': {

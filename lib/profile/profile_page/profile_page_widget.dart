@@ -1,7 +1,10 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'profile_page_model.dart';
 export 'profile_page_model.dart';
 
@@ -24,6 +27,19 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ProfilePageModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.apiResultoen = await ClientHomePageGroup.clientProfileCall.call(
+        authToken: FFAppState().apitoken,
+      );
+
+      if ((_model.apiResultoen?.succeeded ?? true)) {
+        return;
+      }
+
+      return;
+    });
   }
 
   @override
@@ -35,6 +51,8 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -80,8 +98,11 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                             children: [
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(50.0),
-                                child: Image.asset(
-                                  'assets/images/icon_1_copy2.png',
+                                child: Image.network(
+                                  getJsonField(
+                                    (_model.apiResultoen?.jsonBody ?? ''),
+                                    r'''$.data.avatar''',
+                                  ).toString(),
                                   width: 90.0,
                                   height: 90.0,
                                   fit: BoxFit.cover,
@@ -91,8 +112,12 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 14.0, 0.0, 0.0),
                                 child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    '2iog8n90' /* Ahmed Edrress */,
+                                  valueOrDefault<String>(
+                                    getJsonField(
+                                      (_model.apiResultoen?.jsonBody ?? ''),
+                                      r'''$.data.name''',
+                                    )?.toString(),
+                                    'N/A',
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -161,8 +186,12 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 10.0, 0.0, 0.0),
                                     child: Text(
-                                      FFLocalizations.of(context).getText(
-                                        'mw78703t' /* Egypt (6:55 PM) */,
+                                      valueOrDefault<String>(
+                                        getJsonField(
+                                          (_model.apiResultoen?.jsonBody ?? ''),
+                                          r'''$.data.country''',
+                                        )?.toString(),
+                                        'N/A',
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -221,8 +250,12 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 10.0, 0.0, 0.0),
                                     child: Text(
-                                      FFLocalizations.of(context).getText(
-                                        '9kvrcubk' /* October 2022 */,
+                                      valueOrDefault<String>(
+                                        getJsonField(
+                                          (_model.apiResultoen?.jsonBody ?? ''),
+                                          r'''$.data.created_at''',
+                                        )?.toString(),
+                                        'N/A',
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -281,8 +314,12 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 10.0, 0.0, 0.0),
                                     child: Text(
-                                      FFLocalizations.of(context).getText(
-                                        '2ic77963' /* 15 order */,
+                                      valueOrDefault<String>(
+                                        getJsonField(
+                                          (_model.apiResultoen?.jsonBody ?? ''),
+                                          r'''$.data.completed_jobs''',
+                                        )?.toString(),
+                                        'N/A',
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium

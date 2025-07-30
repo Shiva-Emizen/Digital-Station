@@ -1,14 +1,25 @@
+import '/backend/api_requests/api_calls.dart';
+import '/components/no_data_found_widget.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'complete_profile_page_model.dart';
 export 'complete_profile_page_model.dart';
 
 class CompleteProfilePageWidget extends StatefulWidget {
-  const CompleteProfilePageWidget({super.key});
+  const CompleteProfilePageWidget({
+    super.key,
+    this.userId,
+  });
+
+  final String? userId;
 
   static String routeName = 'CompleteProfilePage';
   static String routePath = '/completeProfilePage';
@@ -29,6 +40,21 @@ class _CompleteProfilePageWidgetState extends State<CompleteProfilePageWidget>
     super.initState();
     _model = createModel(context, () => CompleteProfilePageModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.freelancerResponse =
+          await ClientHomePageGroup.freelancerProfileCall.call(
+        userId: widget.userId,
+        authToken: FFAppState().apitoken,
+      );
+
+      if ((_model.freelancerResponse?.succeeded ?? true)) {
+        return;
+      }
+
+      return;
+    });
+
     _model.tabBarController = TabController(
       vsync: this,
       length: 3,
@@ -45,6 +71,8 @@ class _CompleteProfilePageWidgetState extends State<CompleteProfilePageWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -89,8 +117,18 @@ class _CompleteProfilePageWidgetState extends State<CompleteProfilePageWidget>
                             children: [
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(50.0),
-                                child: Image.asset(
-                                  'assets/images/icon_1_copy2.png',
+                                child: Image.network(
+                                  valueOrDefault<String>(
+                                    getJsonField(
+                                      ClientHomePageGroup.freelancerProfileCall
+                                          .freelancerProfile(
+                                        (_model.freelancerResponse?.jsonBody ??
+                                            ''),
+                                      ),
+                                      r'''$.avatar''',
+                                    )?.toString(),
+                                    'https://digitalstation.ezxdemo.com/storage/3/01J368C5WP2Y13A7Y1SVV0CXSF.png',
+                                  ),
                                   width: 90.0,
                                   height: 90.0,
                                   fit: BoxFit.cover,
@@ -100,8 +138,16 @@ class _CompleteProfilePageWidgetState extends State<CompleteProfilePageWidget>
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 14.0, 0.0, 0.0),
                                 child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'cb42qkzz' /* Ahmed Edrress */,
+                                  valueOrDefault<String>(
+                                    getJsonField(
+                                      ClientHomePageGroup.freelancerProfileCall
+                                          .freelancerProfile(
+                                        (_model.freelancerResponse?.jsonBody ??
+                                            ''),
+                                      ),
+                                      r'''$.name''',
+                                    )?.toString(),
+                                    'N/A',
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -118,8 +164,16 @@ class _CompleteProfilePageWidgetState extends State<CompleteProfilePageWidget>
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 4.0, 0.0, 0.0),
                                 child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    '7bojfco7' /* UI/WordPress Developer */,
+                                  valueOrDefault<String>(
+                                    getJsonField(
+                                      ClientHomePageGroup.freelancerProfileCall
+                                          .freelancerProfile(
+                                        (_model.freelancerResponse?.jsonBody ??
+                                            ''),
+                                      ),
+                                      r'''$.job_title''',
+                                    )?.toString(),
+                                    'N/A',
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -239,8 +293,18 @@ class _CompleteProfilePageWidgetState extends State<CompleteProfilePageWidget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 10.0, 0.0, 6.0),
                                   child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'eobzqxk1' /* Lorem Ipsum is simply dummy te... */,
+                                    valueOrDefault<String>(
+                                      getJsonField(
+                                        ClientHomePageGroup
+                                            .freelancerProfileCall
+                                            .freelancerProfile(
+                                          (_model.freelancerResponse
+                                                  ?.jsonBody ??
+                                              ''),
+                                        ),
+                                        r'''$.about''',
+                                      )?.toString(),
+                                      'N/A',
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -302,9 +366,18 @@ class _CompleteProfilePageWidgetState extends State<CompleteProfilePageWidget>
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  '99bogtmw' /* Egypt (6:55 PM) */,
+                                                valueOrDefault<String>(
+                                                  getJsonField(
+                                                    ClientHomePageGroup
+                                                        .freelancerProfileCall
+                                                        .freelancerProfile(
+                                                      (_model.freelancerResponse
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                    ),
+                                                    r'''$.country''',
+                                                  )?.toString(),
+                                                  'N/A',
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -371,9 +444,18 @@ class _CompleteProfilePageWidgetState extends State<CompleteProfilePageWidget>
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'nxtnsrx3' /* October 2022 */,
+                                                valueOrDefault<String>(
+                                                  getJsonField(
+                                                    ClientHomePageGroup
+                                                        .freelancerProfileCall
+                                                        .freelancerProfile(
+                                                      (_model.freelancerResponse
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                    ),
+                                                    r'''$.created_at''',
+                                                  )?.toString(),
+                                                  'N/A',
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -425,8 +507,18 @@ class _CompleteProfilePageWidgetState extends State<CompleteProfilePageWidget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 10.0, 0.0, 10.0),
                                   child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'qy1ovg7j' /* Arabic  -  English */,
+                                    valueOrDefault<String>(
+                                      getJsonField(
+                                        ClientHomePageGroup
+                                            .freelancerProfileCall
+                                            .freelancerProfile(
+                                          (_model.freelancerResponse
+                                                  ?.jsonBody ??
+                                              ''),
+                                        ),
+                                        r'''$.language''',
+                                      )?.toString(),
+                                      'N/A',
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -465,33 +557,782 @@ class _CompleteProfilePageWidgetState extends State<CompleteProfilePageWidget>
                                             .fontStyle,
                                       ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 10.0, 0.0, 10.0),
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      '92le0mui' /* Web design  -  WordPress desig... */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'primaryFont',
-                                          color: Colors.black,
-                                          fontSize: 15.0,
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
+                                Builder(
+                                  builder: (context) {
+                                    final skillList = getJsonField(
+                                      ClientHomePageGroup.freelancerProfileCall
+                                          .freelancerProfile(
+                                        (_model.freelancerResponse?.jsonBody ??
+                                            ''),
+                                      ),
+                                      r'''$.skills''',
+                                    ).toList();
+
+                                    return ListView.separated(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: skillList.length,
+                                      separatorBuilder: (_, __) =>
+                                          SizedBox(height: 6.0),
+                                      itemBuilder: (context, skillListIndex) {
+                                        final skillListItem =
+                                            skillList[skillListIndex];
+                                        return Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 10.0, 0.0, 10.0),
+                                          child: Text(
+                                            getJsonField(
+                                              skillListItem,
+                                              r'''$.title''',
+                                            ).toString(),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'primaryFont',
+                                                  color: Colors.black,
+                                                  fontSize: 15.0,
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
                                 ),
                               ],
                             ),
                           ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [],
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 10.0, 0.0, 0.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                FutureBuilder<ApiCallResponse>(
+                                  future: (_model.apiRequestCompleter ??=
+                                          Completer<ApiCallResponse>()
+                                            ..complete(ClientHomePageGroup
+                                                .freelancerProfileCall
+                                                .call(
+                                              userId: widget.userId,
+                                              authToken: FFAppState().apitoken,
+                                            )))
+                                      .future,
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              Color(0xFF6E2A87),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    final listViewFreelancerProfileResponse =
+                                        snapshot.data!;
+
+                                    return Builder(
+                                      builder: (context) {
+                                        final serviceList = getJsonField(
+                                          ClientHomePageGroup
+                                              .freelancerProfileCall
+                                              .freelancerProfile(
+                                            listViewFreelancerProfileResponse
+                                                .jsonBody,
+                                          ),
+                                          r'''$.service''',
+                                        ).toList();
+
+                                        return RefreshIndicator(
+                                          color: Color(0xFF6E2A87),
+                                          onRefresh: () async {
+                                            safeSetState(() => _model
+                                                .apiRequestCompleter = null);
+                                            await _model
+                                                .waitForApiRequestCompleted();
+                                          },
+                                          child: ListView.builder(
+                                            padding: EdgeInsets.zero,
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.vertical,
+                                            itemCount: serviceList.length,
+                                            itemBuilder:
+                                                (context, serviceListIndex) {
+                                              final serviceListItem =
+                                                  serviceList[serviceListIndex];
+                                              return InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  context.pushNamed(
+                                                    ServiceDetailPageWidget
+                                                        .routeName,
+                                                    queryParameters: {
+                                                      'serviceId':
+                                                          serializeParam(
+                                                        getJsonField(
+                                                          serviceListItem,
+                                                          r'''$.id''',
+                                                        ).toString(),
+                                                        ParamType.String,
+                                                      ),
+                                                    }.withoutNulls,
+                                                  );
+                                                },
+                                                child: Container(
+                                                  width: double.infinity,
+                                                  height: 125.0,
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryBackground,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16.0),
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                        child: Image.network(
+                                                          getJsonField(
+                                                            serviceListItem,
+                                                            r'''$.gallery.url''',
+                                                          ).toString(),
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                      Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        16.0,
+                                                                        16.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                ClipRRect(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    'assets/images/user-01.png',
+                                                                    width: 13.0,
+                                                                    height:
+                                                                        13.0,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          2.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                  child: Text(
+                                                                    getJsonField(
+                                                                      serviceListItem,
+                                                                      r'''$.username''',
+                                                                    ).toString(),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'primaryFont',
+                                                                          color:
+                                                                              Color(0xFF898989),
+                                                                          fontSize:
+                                                                              10.0,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            width: MediaQuery
+                                                                        .sizeOf(
+                                                                            context)
+                                                                    .width *
+                                                                0.46,
+                                                            decoration:
+                                                                BoxDecoration(),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          16.0,
+                                                                          16.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              child: Text(
+                                                                getJsonField(
+                                                                  serviceListItem,
+                                                                  r'''$.description''',
+                                                                ).toString(),
+                                                                maxLines: 2,
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'primaryFont',
+                                                                      fontSize:
+                                                                          13.0,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        16.0,
+                                                                        22.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            child:
+                                                                SingleChildScrollView(
+                                                              scrollDirection:
+                                                                  Axis.horizontal,
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            2.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child: Text(
+                                                                      'Start From \$${getJsonField(
+                                                                        serviceListItem,
+                                                                        r'''$.start_from''',
+                                                                      ).toString()}',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'primaryFont',
+                                                                            color:
+                                                                                Color(0xFF898989),
+                                                                            fontSize:
+                                                                                10.0,
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                          ),
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            60.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .start,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Icon(
+                                                                          Icons
+                                                                              .star,
+                                                                          color:
+                                                                              Color(0xFFFFCF26),
+                                                                          size:
+                                                                              16.0,
+                                                                        ),
+                                                                        Text(
+                                                                          getJsonField(
+                                                                            serviceListItem,
+                                                                            r'''$.average_reviews''',
+                                                                          ).toString(),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .override(
+                                                                                fontFamily: 'primaryFont',
+                                                                                fontSize: 12.0,
+                                                                                letterSpacing: 0.0,
+                                                                              ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    10.0,
+                                                                    0.0),
+                                                        child: Stack(
+                                                          children: [
+                                                            if (getJsonField(
+                                                              serviceListItem,
+                                                              r'''$.isSaved''',
+                                                            ))
+                                                              Align(
+                                                                alignment:
+                                                                    AlignmentDirectional(
+                                                                        0.0,
+                                                                        -1.0),
+                                                                child: Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          10.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                  child:
+                                                                      InkWell(
+                                                                    splashColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    highlightColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    onTap:
+                                                                        () async {
+                                                                      _model.apiResultp7f = await ClientHomePageGroup
+                                                                          .addToFavouriteCall
+                                                                          .call(
+                                                                        id: getJsonField(
+                                                                          serviceListItem,
+                                                                          r'''$.id''',
+                                                                        ).toString(),
+                                                                        authToken:
+                                                                            FFAppState().apitoken,
+                                                                      );
+
+                                                                      if ((_model
+                                                                              .apiResultp7f
+                                                                              ?.succeeded ??
+                                                                          true)) {
+                                                                        ScaffoldMessenger.of(context)
+                                                                            .showSnackBar(
+                                                                          SnackBar(
+                                                                            content:
+                                                                                Text(
+                                                                              'Add to favourite successfully',
+                                                                              style: TextStyle(
+                                                                                color: Colors.white,
+                                                                              ),
+                                                                            ),
+                                                                            duration:
+                                                                                Duration(milliseconds: 4000),
+                                                                            backgroundColor:
+                                                                                Color(0xFF6E2A87),
+                                                                          ),
+                                                                        );
+                                                                        safeSetState(() =>
+                                                                            _model.apiRequestCompleter =
+                                                                                null);
+                                                                        await _model
+                                                                            .waitForApiRequestCompleted();
+                                                                      } else {
+                                                                        ScaffoldMessenger.of(context)
+                                                                            .showSnackBar(
+                                                                          SnackBar(
+                                                                            content:
+                                                                                Text(
+                                                                              'Something went wrong',
+                                                                              style: TextStyle(
+                                                                                color: Colors.white,
+                                                                              ),
+                                                                            ),
+                                                                            duration:
+                                                                                Duration(milliseconds: 4000),
+                                                                            backgroundColor:
+                                                                                Color(0xFF6E2A87),
+                                                                          ),
+                                                                        );
+                                                                      }
+
+                                                                      safeSetState(
+                                                                          () {});
+                                                                    },
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .bookmark,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
+                                                                      size:
+                                                                          24.0,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            if (getJsonField(
+                                                              serviceListItem,
+                                                              r'''$.isSaved''',
+                                                            ))
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            10.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                child: InkWell(
+                                                                  splashColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  focusColor: Colors
+                                                                      .transparent,
+                                                                  hoverColor: Colors
+                                                                      .transparent,
+                                                                  highlightColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  onTap:
+                                                                      () async {
+                                                                    _model.apiResultd05 =
+                                                                        await ClientHomePageGroup
+                                                                            .addToFavouriteCall
+                                                                            .call(
+                                                                      id: getJsonField(
+                                                                        serviceListItem,
+                                                                        r'''$.id''',
+                                                                      ).toString(),
+                                                                      authToken:
+                                                                          FFAppState()
+                                                                              .apitoken,
+                                                                    );
+
+                                                                    if ((_model
+                                                                            .apiResultd05
+                                                                            ?.succeeded ??
+                                                                        true)) {
+                                                                      ScaffoldMessenger.of(
+                                                                              context)
+                                                                          .showSnackBar(
+                                                                        SnackBar(
+                                                                          content:
+                                                                              Text(
+                                                                            'Add to favourite successfully',
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: Colors.white,
+                                                                            ),
+                                                                          ),
+                                                                          duration:
+                                                                              Duration(milliseconds: 4000),
+                                                                          backgroundColor:
+                                                                              Color(0xFF6E2A87),
+                                                                        ),
+                                                                      );
+                                                                      safeSetState(() =>
+                                                                          _model.apiRequestCompleter =
+                                                                              null);
+                                                                    } else {
+                                                                      ScaffoldMessenger.of(
+                                                                              context)
+                                                                          .showSnackBar(
+                                                                        SnackBar(
+                                                                          content:
+                                                                              Text(
+                                                                            'Something went wrong',
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: Colors.white,
+                                                                            ),
+                                                                          ),
+                                                                          duration:
+                                                                              Duration(milliseconds: 4000),
+                                                                          backgroundColor:
+                                                                              Color(0xFF6E2A87),
+                                                                        ),
+                                                                      );
+                                                                    }
+
+                                                                    safeSetState(
+                                                                        () {});
+                                                                  },
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .bookmark_border,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryText,
+                                                                    size: 24.0,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [],
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 10.0, 0.0, 0.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      20.0, 0.0, 20.0, 0.0),
+                                  child: Builder(
+                                    builder: (context) {
+                                      final portfolioLast = getJsonField(
+                                        ClientHomePageGroup
+                                            .freelancerProfileCall
+                                            .freelancerProfile(
+                                          (_model.freelancerResponse
+                                                  ?.jsonBody ??
+                                              ''),
+                                        ),
+                                        r'''$.portfolio''',
+                                      ).toList();
+                                      if (portfolioLast.isEmpty) {
+                                        return NoDataFoundWidget(
+                                          title: 'No data found',
+                                        );
+                                      }
+
+                                      return RefreshIndicator(
+                                        color: Color(0xFF6E2A87),
+                                        onRefresh: () async {
+                                          safeSetState(() => _model
+                                              .apiRequestCompleter = null);
+                                          await _model
+                                              .waitForApiRequestCompleted();
+                                        },
+                                        child: GridView.builder(
+                                          padding: EdgeInsets.fromLTRB(
+                                            0,
+                                            0,
+                                            0,
+                                            10.0,
+                                          ),
+                                          gridDelegate:
+                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            crossAxisSpacing: 10.0,
+                                            mainAxisSpacing: 10.0,
+                                            childAspectRatio: 1.0,
+                                          ),
+                                          primary: false,
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.vertical,
+                                          itemCount: portfolioLast.length,
+                                          itemBuilder:
+                                              (context, portfolioLastIndex) {
+                                            final portfolioLastItem =
+                                                portfolioLast[
+                                                    portfolioLastIndex];
+                                            return Container(
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                                shape: BoxShape.rectangle,
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsets.all(6.0),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      child: Image.network(
+                                                        valueOrDefault<String>(
+                                                          getJsonField(
+                                                            portfolioLastItem,
+                                                            r'''$.gallery[0].url''',
+                                                          )?.toString(),
+                                                          'https://digitalstation.ezxdemo.com/storage/3/01J368C5WP2Y13A7Y1SVV0CXSF.png',
+                                                        ),
+                                                        width: 155.0,
+                                                        height: 110.0,
+                                                        fit: BoxFit.fill,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  10.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Text(
+                                                        valueOrDefault<String>(
+                                                          getJsonField(
+                                                            portfolioLastItem,
+                                                            r'''$.title''',
+                                                          )?.toString(),
+                                                          'N/A',
+                                                        ),
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'primaryFont',
+                                                              color: Color(
+                                                                  0xFF454545),
+                                                              fontSize: 12.0,
+                                                              letterSpacing:
+                                                                  0.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      0.0),
+                                                          child: Image.asset(
+                                                            'assets/images/Icon_(Stroke)_(17).png',
+                                                            width: 11.0,
+                                                            height: 11.0,
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      4.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: Text(
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                              '5mhwux04' /* 1 */,
+                                                            ),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'primaryFont',
+                                                                  fontSize:
+                                                                      12.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
