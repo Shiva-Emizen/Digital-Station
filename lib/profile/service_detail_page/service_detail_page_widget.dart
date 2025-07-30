@@ -295,178 +295,101 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                             ?.toList() ??
                                         [];
 
-                                return SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: List.generate(packageList.length,
-                                        (packageListIndex) {
-                                      final packageListItem =
-                                          packageList[packageListIndex];
-                                      return InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          _model.selectedPackage =
-                                              packageListItem;
-                                          safeSetState(() {});
-                                        },
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
-                                          child: Container(
-                                            width: 120.0,
-                                            height: 80.0,
-                                            decoration: BoxDecoration(
-                                              color: getJsonField(
-                                                        _model.selectedPackage,
-                                                        r'''$.id''',
-                                                      ) ==
-                                                      getJsonField(
-                                                        packageListItem,
-                                                        r'''$.id''',
-                                                      )
-                                                  ? Color(0xFF6E2A87)
-                                                  : Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(12.0),
-                                              border: Border.all(
-                                                color: Color(0xFFD0B7EC),
-                                              ),
-                                            ),
-                                            child: Align(
-                                              alignment: AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        20.0, 10.0, 20.0, 10.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              0.0, 0.0),
+                                return
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      children: List.generate(packageList.length, (packageListIndex) {
+                                        final packageListItem = packageList[packageListIndex];
+                                        final isSelected = getJsonField(_model.selectedPackage, r'''$.id''') ==
+                                            getJsonField(packageListItem, r'''$.id''');
+
+                                        return Padding(
+                                          padding: const EdgeInsets.only(right: 6.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              _model.selectedPackage = packageListItem;
+                                              safeSetState(() {});
+                                            },
+                                            child: LayoutBuilder(
+                                              builder: (context, constraints) {
+                                                double screenWidth = MediaQuery.of(context).size.width;
+                                                double itemWidth = screenWidth * 0.3; // Responsive width (30%)
+
+                                                return ClipRRect(
+                                                  borderRadius: BorderRadius.circular(12.0),
+                                                  child: Container(
+                                                    width: itemWidth,
+                                                    height: 80.0,
+                                                    decoration: BoxDecoration(
+                                                      color: isSelected ? Color(0xFF6E2A87) : Colors.white,
+                                                      borderRadius: BorderRadius.circular(12.0),
+                                                      border: Border.all(
+                                                        color: Color(0xFFD0B7EC),
+                                                      ),
+                                                    ),
+                                                    child: Center(
                                                       child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    20.0,
-                                                                    0.0,
-                                                                    20.0,
-                                                                    0.0),
-                                                        child: Text(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            getJsonField(
-                                                              packageListItem,
-                                                              r'''$.price''',
-                                                            )?.toString(),
-                                                            'N/A',
-                                                          ),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                font:
-                                                                    GoogleFonts
-                                                                        .rubik(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontStyle: FlutterFlowTheme.of(
-                                                                          context)
+                                                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                                        child: Column(
+                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                          children: [
+                                                            Text(
+                                                              valueOrDefault<String>(
+                                                                getJsonField(packageListItem, r'''$.price''')
+                                                                    ?.toString(),
+                                                                'N/A',
+                                                              ),
+                                                              style: FlutterFlowTheme.of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                font: GoogleFonts.rubik(
+                                                                  fontWeight: FontWeight.bold,
+                                                                  fontStyle: FlutterFlowTheme.of(context)
                                                                       .bodyMedium
                                                                       .fontStyle,
                                                                 ),
-                                                                color: getJsonField(
-                                                                          _model
-                                                                              .selectedPackage,
-                                                                          r'''$.id''',
-                                                                        ) ==
-                                                                        getJsonField(
-                                                                          packageListItem,
-                                                                          r'''$.id''',
-                                                                        )
+                                                                color: isSelected
                                                                     ? Colors.white
                                                                     : Color(0xFF181818),
                                                                 fontSize: 16.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontStyle,
                                                               ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              0.0, 0.0),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    20.0,
-                                                                    0.0,
-                                                                    20.0,
-                                                                    0.0),
-                                                        child: Text(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            getJsonField(
-                                                              packageListItem,
-                                                              r'''$.price''',
-                                                            )?.toString(),
-                                                            'N/A',
-                                                          ),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'primaryFont',
-                                                                color: getJsonField(
-                                                                          _model
-                                                                              .selectedPackage,
-                                                                          r'''$.id''',
-                                                                        ) ==
-                                                                        getJsonField(
-                                                                          packageListItem,
-                                                                          r'''$.id''',
-                                                                        )
+                                                            ),
+                                                            SizedBox(height: 4),
+                                                            Text(
+                                                              valueOrDefault<String>(
+                                                                getJsonField(packageListItem, r'''$.title''')
+                                                                    ?.toString(),
+                                                                'N/A',
+                                                              ),
+                                                              style: FlutterFlowTheme.of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                fontFamily: 'primaryFont',
+                                                                color: isSelected
                                                                     ? Colors.white
                                                                     : Color(0xFF181818),
                                                                 fontSize: 13.0,
-                                                                letterSpacing:
-                                                                    0.0,
                                                               ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
                                                     ),
-                                                  ],
-                                                ),
-                                              ),
+                                                  ),
+                                                );
+                                              },
                                             ),
                                           ),
-                                        ),
-                                      );
-                                    }).divide(SizedBox(width: 6.0)),
-                                  ),
-                                );
+                                        );
+                                      }),
+                                    ),
+                                  );
+
                               },
                             ),
                           ),
