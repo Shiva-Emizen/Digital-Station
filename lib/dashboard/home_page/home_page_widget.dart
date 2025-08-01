@@ -535,7 +535,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         future: ClientHomePageGroup
                                             .popularServiceCall
                                             .call(
-                                          authToken: 'jjh',
+                                          authToken: FFAppState().apitoken,
                                         ),
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.

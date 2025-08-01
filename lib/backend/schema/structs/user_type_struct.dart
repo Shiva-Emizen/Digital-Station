@@ -1,14 +1,17 @@
 // ignore_for_file: unnecessary_getters_setters
 
-import '/backend/schema/util/schema_util.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'index.dart';
+import '/backend/schema/util/firestore_util.dart';
+
 import '/flutter_flow/flutter_flow_util.dart';
 
-class UserTypeStruct extends BaseStruct {
+class UserTypeStruct extends FFFirebaseStruct {
   UserTypeStruct({
     String? userType,
-  }) : _userType = userType;
+    FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
+  })  : _userType = userType,
+        super(firestoreUtilData);
 
   // "userType" field.
   String? _userType;
@@ -59,7 +62,79 @@ class UserTypeStruct extends BaseStruct {
 
 UserTypeStruct createUserTypeStruct({
   String? userType,
+  Map<String, dynamic> fieldValues = const {},
+  bool clearUnsetFields = true,
+  bool create = false,
+  bool delete = false,
 }) =>
     UserTypeStruct(
       userType: userType,
+      firestoreUtilData: FirestoreUtilData(
+        clearUnsetFields: clearUnsetFields,
+        create: create,
+        delete: delete,
+        fieldValues: fieldValues,
+      ),
     );
+
+UserTypeStruct? updateUserTypeStruct(
+  UserTypeStruct? userTypeStruct, {
+  bool clearUnsetFields = true,
+  bool create = false,
+}) =>
+    userTypeStruct
+      ?..firestoreUtilData = FirestoreUtilData(
+        clearUnsetFields: clearUnsetFields,
+        create: create,
+      );
+
+void addUserTypeStructData(
+  Map<String, dynamic> firestoreData,
+  UserTypeStruct? userTypeStruct,
+  String fieldName, [
+  bool forFieldValue = false,
+]) {
+  firestoreData.remove(fieldName);
+  if (userTypeStruct == null) {
+    return;
+  }
+  if (userTypeStruct.firestoreUtilData.delete) {
+    firestoreData[fieldName] = FieldValue.delete();
+    return;
+  }
+  final clearFields =
+      !forFieldValue && userTypeStruct.firestoreUtilData.clearUnsetFields;
+  if (clearFields) {
+    firestoreData[fieldName] = <String, dynamic>{};
+  }
+  final userTypeStructData =
+      getUserTypeFirestoreData(userTypeStruct, forFieldValue);
+  final nestedData =
+      userTypeStructData.map((k, v) => MapEntry('$fieldName.$k', v));
+
+  final mergeFields = userTypeStruct.firestoreUtilData.create || clearFields;
+  firestoreData
+      .addAll(mergeFields ? mergeNestedFields(nestedData) : nestedData);
+}
+
+Map<String, dynamic> getUserTypeFirestoreData(
+  UserTypeStruct? userTypeStruct, [
+  bool forFieldValue = false,
+]) {
+  if (userTypeStruct == null) {
+    return {};
+  }
+  final firestoreData = mapToFirestore(userTypeStruct.toMap());
+
+  // Add any Firestore field values
+  userTypeStruct.firestoreUtilData.fieldValues
+      .forEach((k, v) => firestoreData[k] = v);
+
+  return forFieldValue ? mergeNestedFields(firestoreData) : firestoreData;
+}
+
+List<Map<String, dynamic>> getUserTypeListFirestoreData(
+  List<UserTypeStruct>? userTypeStructs,
+) =>
+    userTypeStructs?.map((e) => getUserTypeFirestoreData(e, true)).toList() ??
+    [];

@@ -357,10 +357,7 @@ class RecentServicesCall {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
       },
-      params: {
-        'paginate': paginate,
-        'page': page,
-      },
+      params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: true,
@@ -786,6 +783,7 @@ class GetSliderAPICall {
 
 class AllServiceCall {
   Future<ApiCallResponse> call({
+    String? search = '',
     String? authToken = '',
   }) async {
     final baseUrl = ClientHomePageGroup.getBaseUrl(
@@ -800,7 +798,9 @@ class AllServiceCall {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
       },
-      params: {},
+      params: {
+        'search': search,
+      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -1679,6 +1679,9 @@ class ApiPagingParams {
 }
 
 String _toEncodable(dynamic item) {
+  if (item is DocumentReference) {
+    return item.path;
+  }
   return item;
 }
 

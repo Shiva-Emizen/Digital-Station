@@ -13,12 +13,19 @@ class AllServiceModel extends FlutterFlowModel<AllServiceWidget> {
   Completer<ApiCallResponse>? apiRequestCompleter;
   // Stores action output result for [Backend Call - API (AddToFavourite)] action in Icon widget.
   ApiCallResponse? apiResultd05;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController;
+  String? Function(BuildContext, String?)? textControllerValidator;
 
   @override
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {}
+  void dispose() {
+    textFieldFocusNode?.dispose();
+    textController?.dispose();
+  }
 
   /// Additional helper methods.
   Future waitForApiRequestCompleted({
