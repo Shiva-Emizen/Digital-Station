@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 
 import '/auth/base_auth_user_provider.dart';
@@ -419,6 +419,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'AllService')
               : AllServiceWidget(),
+        ),
+        FFRoute(
+          name: ChatPageWidget.routeName,
+          path: ChatPageWidget.routePath,
+          builder: (context, params) => ChatPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -537,6 +542,7 @@ class FFParameters {
     String paramName,
     ParamType type, {
     bool isList = false,
+    List<String>? collectionNamePath,
     StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
@@ -555,6 +561,7 @@ class FFParameters {
       param,
       type,
       isList,
+      collectionNamePath: collectionNamePath,
       structBuilder: structBuilder,
     );
   }

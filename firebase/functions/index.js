@@ -87,3 +87,7 @@ function userFacingMessage(error) {
     ? error.message
     : "An error occurred, developers have been alerted";
 }
+exports.onUserDeleted = functions.auth.user().onDelete(async (user) => {
+  let firestore = admin.firestore();
+  let userRef = firestore.doc("users/" + user.uid);
+});

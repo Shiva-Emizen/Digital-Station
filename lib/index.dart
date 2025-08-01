@@ -84,3 +84,4 @@ export '/dashboard/home_page_copy/home_page_copy_widget.dart'
 export '/auth/edit_personal_information_page/edit_personal_information_page_widget.dart'
     show EditPersonalInformationPageWidget;
 export '/dashboard/all_service/all_service_widget.dart' show AllServiceWidget;
+export '/dashboard/chat_page/chat_page_widget.dart' show ChatPageWidget;

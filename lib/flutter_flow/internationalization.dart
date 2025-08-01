@@ -2330,9 +2330,24 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Services',
       'ar': '',
     },
+    'yf4ct3f0': {
+      'en': 'Search',
+      'ar': 'يبحث',
+    },
     'lymwzj3p': {
       'en': 'Services',
       'ar': 'بيت',
+    },
+  },
+  // ChatPage
+  {
+    's338evod': {
+      'en': 'Page Title',
+      'ar': '',
+    },
+    '7dotb8wz': {
+      'en': 'Home',
+      'ar': '',
     },
   },
   // Logout
