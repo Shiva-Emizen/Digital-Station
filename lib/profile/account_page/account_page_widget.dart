@@ -1044,65 +1044,74 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                 ),
                               ),
                             ),
-                            Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      20.0, 0.0, 20.0, 0.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(0.0),
-                                            child: Image.asset(
-                                              'assets/images/Icon_(Stroke)_(2).png',
-                                              width: 22.0,
-                                              height: 22.0,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    20.0, 0.0, 0.0, 0.0),
-                                            child: Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                '8yt6ozs8' /* My Profile */,
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed(ProfilePageWidget.routeName);
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20.0, 0.0, 20.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(0.0),
+                                              child: Image.asset(
+                                                'assets/images/Icon_(Stroke)_(2).png',
+                                                width: 22.0,
+                                                height: 22.0,
+                                                fit: BoxFit.cover,
                                               ),
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'primaryFont',
-                                                    fontSize: 15.0,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.arrow_forward_ios,
-                                        color: Color(0xFF181725),
-                                        size: 24.0,
-                                      ),
-                                    ],
+                                            Padding(
+                                              padding:
+                                                  EdgeInsetsDirectional.fromSTEB(
+                                                      20.0, 0.0, 0.0, 0.0),
+                                              child: Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  '8yt6ozs8' /* My Profile */,
+                                                ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      fontFamily: 'primaryFont',
+                                                      fontSize: 15.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Icon(
+                                          Icons.arrow_forward_ios,
+                                          color: Color(0xFF181725),
+                                          size: 24.0,
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Divider(
-                                  thickness: 1.0,
-                                  color: Color(0xFFE2E2E2),
-                                ),
-                              ].divide(SizedBox(height: 10.0)),
+                                  Divider(
+                                    thickness: 1.0,
+                                    color: Color(0xFFE2E2E2),
+                                  ),
+                                ].divide(SizedBox(height: 10.0)),
+                              ),
                             ),
                             InkWell(
                               splashColor: Colors.transparent,

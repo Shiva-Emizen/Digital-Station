@@ -375,10 +375,6 @@ class RecentServicesCall {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      params: {
-        'paginate': paginate,
-        'page': page,
-      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: true,
