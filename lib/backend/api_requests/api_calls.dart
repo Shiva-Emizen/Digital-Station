@@ -304,6 +304,8 @@ class ClientHomePageGroup {
   static GetSliderAPICall getSliderAPICall = GetSliderAPICall();
   static AllServiceCall allServiceCall = AllServiceCall();
   static FreelancerProfileCall freelancerProfileCall = FreelancerProfileCall();
+  static ChangeOrderCall changeOrderCall = ChangeOrderCall();
+  static UpdateOrderCall updateOrderCall = UpdateOrderCall();
 }
 
 class PopularServiceCall {
@@ -850,6 +852,68 @@ class FreelancerProfileCall {
       );
 }
 
+class ChangeOrderCall {
+  Future<ApiCallResponse> call({
+    String? orderId = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = ClientHomePageGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'ChangeOrder',
+      apiUrl: '${baseUrl}/user/complete-order/${orderId}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class UpdateOrderCall {
+  Future<ApiCallResponse> call({
+    String? orderId = '',
+    String? description = '',
+    FFUploadedFile? attachments,
+    String? authToken = '',
+  }) async {
+    final baseUrl = ClientHomePageGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'UpdateOrder',
+      apiUrl: '${baseUrl}/user/orders/${orderId}?_method=PUT',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
+      },
+      params: {
+        'attachments[]': attachments,
+        'description': description,
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 /// End ClientHomePage Group Code
 
 /// Start FreelancerAuthorization Group Code
@@ -1321,6 +1385,7 @@ class FreelancerHomePageGroup {
   static PortfolioCall portfolioCall = PortfolioCall();
   static GetPlanCall getPlanCall = GetPlanCall();
   static GetFAQCall getFAQCall = GetFAQCall();
+  static ChangeStatusCall changeStatusCall = ChangeStatusCall();
 }
 
 class OrderAPICall {
@@ -1658,6 +1723,36 @@ class GetFAQCall {
         r'''$.data''',
         true,
       ) as List?;
+}
+
+class ChangeStatusCall {
+  Future<ApiCallResponse> call({
+    String? orderId = '',
+    String? serviceId = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = FreelancerHomePageGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'ChangeStatus',
+      apiUrl:
+          '${baseUrl}freelancer/orders/change-status/${orderId}/${serviceId}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
 }
 
 /// End FreelancerHomePage Group Code

@@ -1,10 +1,12 @@
 import '/backend/api_requests/api_calls.dart';
-import '/backend/schema/structs/index.dart';
+import '/backend/backend.dart';
 import '/components/no_data_found_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -128,12 +130,16 @@ class _OrderPageWidgetState extends State<OrderPageWidget> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               FutureBuilder<ApiCallResponse>(
-                                future:
-                                    FreelancerHomePageGroup.orderAPICall.call(
-                                  authToken: FFAppState().apitoken,
-                                  paginate: '10',
-                                  statuses: '5',
-                                ),
+                                future: (_model.apiRequestCompleter1 ??=
+                                        Completer<ApiCallResponse>()
+                                          ..complete(FreelancerHomePageGroup
+                                              .orderAPICall
+                                              .call(
+                                            authToken: FFAppState().apitoken,
+                                            paginate: '10',
+                                            statuses: '5',
+                                          )))
+                                    .future,
                                 builder: (context, snapshot) {
                                   // Customize what your widget looks like when it's loading.
                                   if (!snapshot.hasData) {
@@ -608,33 +614,452 @@ class _OrderPageWidgetState extends State<OrderPageWidget> {
                                                                   context)
                                                               .alternate,
                                                     ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  7.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          FFButtonWidget(
-                                                            onPressed: () {
-                                                              print(
-                                                                  'Button pressed ...');
+                                                    if (UserTypeStruct(
+                                                          userType:
+                                                              getJsonField(
+                                                            freelancerOrderListItem,
+                                                            r'''$.status_id''',
+                                                          ).toString(),
+                                                        ) ==
+                                                        UserTypeStruct(
+                                                          userType: '1',
+                                                        ))
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    7.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            FFButtonWidget(
+                                                              onPressed:
+                                                                  () async {
+                                                                _model.apiResultn5n =
+                                                                    await FreelancerHomePageGroup
+                                                                        .changeStatusCall
+                                                                        .call(
+                                                                  authToken:
+                                                                      FFAppState()
+                                                                          .apitoken,
+                                                                  orderId:
+                                                                      getJsonField(
+                                                                    freelancerOrderListItem,
+                                                                    r'''$.id''',
+                                                                  ).toString(),
+                                                                  serviceId:
+                                                                      '2',
+                                                                );
+
+                                                                if ((_model
+                                                                        .apiResultn5n
+                                                                        ?.succeeded ??
+                                                                    true)) {
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                          Text(
+                                                                        getJsonField(
+                                                                          (_model.apiResultn5n?.jsonBody ??
+                                                                              ''),
+                                                                          r'''$.message''',
+                                                                        ).toString(),
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryText,
+                                                                        ),
+                                                                      ),
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              4000),
+                                                                      backgroundColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .secondary,
+                                                                    ),
+                                                                  );
+                                                                  safeSetState(() =>
+                                                                      _model.apiRequestCompleter1 =
+                                                                          null);
+
+                                                                  await ChatsRecord
+                                                                      .collection
+                                                                      .doc()
+                                                                      .set({
+                                                                    ...createChatsRecordData(
+                                                                      chatId:
+                                                                          '${getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.user.id''',
+                                                                      ).toString()}-${getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.service.user_id''',
+                                                                      ).toString()}',
+                                                                      lastMessage:
+                                                                          'Hello',
+                                                                      serviceId:
+                                                                          getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.service.id''',
+                                                                      ).toString(),
+                                                                      userId:
+                                                                          getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.user.id''',
+                                                                      ).toString(),
+                                                                      lastUpdate:
+                                                                          getCurrentTimestamp,
+                                                                      clientName:
+                                                                          getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.service.username''',
+                                                                      ).toString(),
+                                                                      email:
+                                                                          getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.user.email''',
+                                                                      ).toString(),
+                                                                      displayName:
+                                                                          getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.user.name''',
+                                                                      ).toString(),
+                                                                      uid: '',
+                                                                    ),
+                                                                    ...mapToFirestore(
+                                                                      {
+                                                                        'timeStamp':
+                                                                            FieldValue.serverTimestamp(),
+                                                                      },
+                                                                    ),
+                                                                  });
+                                                                } else {
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                          Text(
+                                                                        getJsonField(
+                                                                          (_model.apiResultn5n?.jsonBody ??
+                                                                              ''),
+                                                                          r'''$.message''',
+                                                                        ).toString(),
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryText,
+                                                                        ),
+                                                                      ),
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              4000),
+                                                                      backgroundColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .secondary,
+                                                                    ),
+                                                                  );
+                                                                }
+
+                                                                safeSetState(
+                                                                    () {});
+                                                              },
+                                                              text: FFLocalizations
+                                                                      .of(context)
+                                                                  .getText(
+                                                                '15h32y6f' /* Accept */,
+                                                              ),
+                                                              options:
+                                                                  FFButtonOptions(
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        51.0,
+                                                                        6.0,
+                                                                        51.0,
+                                                                        6.0),
+                                                                iconPadding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                color: Color(
+                                                                    0xFF63CE8A),
+                                                                textStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'primaryFont',
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          14.0,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                elevation: 0.0,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8.0),
+                                                              ),
+                                                            ),
+                                                            FFButtonWidget(
+                                                              onPressed:
+                                                                  () async {
+                                                                _model.apiResultmhn =
+                                                                    await FreelancerHomePageGroup
+                                                                        .changeStatusCall
+                                                                        .call(
+                                                                  orderId:
+                                                                      getJsonField(
+                                                                    freelancerOrderListItem,
+                                                                    r'''$.id''',
+                                                                  ).toString(),
+                                                                  authToken:
+                                                                      FFAppState()
+                                                                          .apitoken,
+                                                                  serviceId:
+                                                                      '6',
+                                                                );
+
+                                                                if ((_model
+                                                                        .apiResultmhn
+                                                                        ?.succeeded ??
+                                                                    true)) {
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                          Text(
+                                                                        getJsonField(
+                                                                          (_model.apiResultn5n?.jsonBody ??
+                                                                              ''),
+                                                                          r'''$.message''',
+                                                                        ).toString(),
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryText,
+                                                                        ),
+                                                                      ),
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              4000),
+                                                                      backgroundColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .secondary,
+                                                                    ),
+                                                                  );
+                                                                  safeSetState(() =>
+                                                                      _model.apiRequestCompleter1 =
+                                                                          null);
+                                                                } else {
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                          Text(
+                                                                        getJsonField(
+                                                                          (_model.apiResultn5n?.jsonBody ??
+                                                                              ''),
+                                                                          r'''$.message''',
+                                                                        ).toString(),
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryText,
+                                                                        ),
+                                                                      ),
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              4000),
+                                                                      backgroundColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .secondary,
+                                                                    ),
+                                                                  );
+                                                                }
+
+                                                                safeSetState(
+                                                                    () {});
+                                                              },
+                                                              text: FFLocalizations
+                                                                      .of(context)
+                                                                  .getText(
+                                                                'iv9a4fzl' /* Decline */,
+                                                              ),
+                                                              options:
+                                                                  FFButtonOptions(
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        34.0,
+                                                                        6.0,
+                                                                        46.0,
+                                                                        6.0),
+                                                                iconPadding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                color: Color(
+                                                                    0xFFFF2C20),
+                                                                textStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'primaryFont',
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          14.0,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                elevation: 0.0,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8.0),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    if (UserTypeStruct(
+                                                          userType:
+                                                              getJsonField(
+                                                            freelancerOrderListItem,
+                                                            r'''$.status_id''',
+                                                          ).toString(),
+                                                        ) ==
+                                                        UserTypeStruct(
+                                                          userType: '2',
+                                                        ))
+                                                      Align(
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                0.0, 0.0),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      4.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: FFButtonWidget(
+                                                            onPressed:
+                                                                () async {
+                                                              _model.apiResultgth =
+                                                                  await FreelancerHomePageGroup
+                                                                      .changeStatusCall
+                                                                      .call(
+                                                                orderId:
+                                                                    getJsonField(
+                                                                  freelancerOrderListItem,
+                                                                  r'''$.id''',
+                                                                ).toString(),
+                                                                serviceId: '3',
+                                                                authToken:
+                                                                    FFAppState()
+                                                                        .apitoken,
+                                                              );
+
+                                                              if ((_model
+                                                                      .apiResultgth
+                                                                      ?.succeeded ??
+                                                                  true)) {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      getJsonField(
+                                                                        (_model.apiResultgth?.jsonBody ??
+                                                                            ''),
+                                                                        r'''$.message''',
+                                                                      ).toString(),
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                    ),
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            4000),
+                                                                    backgroundColor:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .secondary,
+                                                                  ),
+                                                                );
+                                                                safeSetState(() =>
+                                                                    _model.apiRequestCompleter1 =
+                                                                        null);
+                                                              } else {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      getJsonField(
+                                                                        (_model.apiResultgth?.jsonBody ??
+                                                                            ''),
+                                                                        r'''$.message''',
+                                                                      ).toString(),
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                    ),
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            4000),
+                                                                    backgroundColor:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .secondary,
+                                                                  ),
+                                                                );
+                                                              }
+
+                                                              safeSetState(
+                                                                  () {});
                                                             },
                                                             text: FFLocalizations
                                                                     .of(context)
                                                                 .getText(
-                                                              '15h32y6f' /* Accept */,
+                                                              '3uwl1crr' /* Processing */,
                                                             ),
                                                             options:
                                                                 FFButtonOptions(
+                                                              width: double
+                                                                  .infinity,
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
@@ -671,27 +1096,129 @@ class _OrderPageWidgetState extends State<OrderPageWidget> {
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
-                                                                          8.0),
+                                                                          14.0),
                                                             ),
                                                           ),
-                                                          FFButtonWidget(
-                                                            onPressed: () {
-                                                              print(
-                                                                  'Button pressed ...');
+                                                        ),
+                                                      ),
+                                                    if (UserTypeStruct(
+                                                          userType:
+                                                              getJsonField(
+                                                            freelancerOrderListItem,
+                                                            r'''$.status_id''',
+                                                          ).toString(),
+                                                        ) ==
+                                                        UserTypeStruct(
+                                                          userType: '3',
+                                                        ))
+                                                      Align(
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                0.0, 0.0),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      4.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: FFButtonWidget(
+                                                            onPressed:
+                                                                () async {
+                                                              _model.apiResultj13 =
+                                                                  await FreelancerHomePageGroup
+                                                                      .changeStatusCall
+                                                                      .call(
+                                                                orderId:
+                                                                    getJsonField(
+                                                                  freelancerOrderListItem,
+                                                                  r'''$.id''',
+                                                                ).toString(),
+                                                                serviceId: '8',
+                                                                authToken:
+                                                                    FFAppState()
+                                                                        .apitoken,
+                                                              );
+
+                                                              if ((_model
+                                                                      .apiResultj13
+                                                                      ?.succeeded ??
+                                                                  true)) {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      getJsonField(
+                                                                        (_model.apiResultj13?.jsonBody ??
+                                                                            ''),
+                                                                        r'''$.message''',
+                                                                      ).toString(),
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                    ),
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            4000),
+                                                                    backgroundColor:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .secondary,
+                                                                  ),
+                                                                );
+                                                                safeSetState(() =>
+                                                                    _model.apiRequestCompleter1 =
+                                                                        null);
+                                                              } else {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      getJsonField(
+                                                                        (_model.apiResultj13?.jsonBody ??
+                                                                            ''),
+                                                                        r'''$.message''',
+                                                                      ).toString(),
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                    ),
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            4000),
+                                                                    backgroundColor:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .secondary,
+                                                                  ),
+                                                                );
+                                                              }
+
+                                                              safeSetState(
+                                                                  () {});
                                                             },
                                                             text: FFLocalizations
                                                                     .of(context)
                                                                 .getText(
-                                                              'iv9a4fzl' /* Decline */,
+                                                              'uuap0ujt' /* Mark as Done */,
                                                             ),
                                                             options:
                                                                 FFButtonOptions(
+                                                              width: double
+                                                                  .infinity,
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          34.0,
+                                                                          51.0,
                                                                           6.0,
-                                                                          46.0,
+                                                                          51.0,
                                                                           6.0),
                                                               iconPadding:
                                                                   EdgeInsetsDirectional
@@ -701,7 +1228,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget> {
                                                                           0.0,
                                                                           0.0),
                                                               color: Color(
-                                                                  0xFFFF2C20),
+                                                                  0xFF63CE8A),
                                                               textStyle:
                                                                   FlutterFlowTheme.of(
                                                                           context)
@@ -722,12 +1249,164 @@ class _OrderPageWidgetState extends State<OrderPageWidget> {
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
-                                                                          8.0),
+                                                                          14.0),
                                                             ),
                                                           ),
-                                                        ],
+                                                        ),
                                                       ),
-                                                    ),
+                                                    if (UserTypeStruct(
+                                                          userType:
+                                                              getJsonField(
+                                                            freelancerOrderListItem,
+                                                            r'''$.status_id''',
+                                                          ).toString(),
+                                                        ) ==
+                                                        UserTypeStruct(
+                                                          userType: '7',
+                                                        ))
+                                                      Align(
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                0.0, 0.0),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      4.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: FFButtonWidget(
+                                                            onPressed:
+                                                                () async {
+                                                              _model.apiResult3ts =
+                                                                  await FreelancerHomePageGroup
+                                                                      .changeStatusCall
+                                                                      .call(
+                                                                orderId:
+                                                                    getJsonField(
+                                                                  freelancerOrderListItem,
+                                                                  r'''$.id''',
+                                                                ).toString(),
+                                                                serviceId: '8',
+                                                                authToken:
+                                                                    FFAppState()
+                                                                        .apitoken,
+                                                              );
+
+                                                              if ((_model
+                                                                      .apiResult3ts
+                                                                      ?.succeeded ??
+                                                                  true)) {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      getJsonField(
+                                                                        (_model.apiResult3ts?.jsonBody ??
+                                                                            ''),
+                                                                        r'''$.message''',
+                                                                      ).toString(),
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                    ),
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            4000),
+                                                                    backgroundColor:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .secondary,
+                                                                  ),
+                                                                );
+                                                                safeSetState(() =>
+                                                                    _model.apiRequestCompleter1 =
+                                                                        null);
+                                                              } else {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      getJsonField(
+                                                                        (_model.apiResult3ts?.jsonBody ??
+                                                                            ''),
+                                                                        r'''$.message''',
+                                                                      ).toString(),
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                    ),
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            4000),
+                                                                    backgroundColor:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .secondary,
+                                                                  ),
+                                                                );
+                                                              }
+
+                                                              safeSetState(
+                                                                  () {});
+                                                            },
+                                                            text: FFLocalizations
+                                                                    .of(context)
+                                                                .getText(
+                                                              'qfeu2ogi' /* Accept Edit Request */,
+                                                            ),
+                                                            options:
+                                                                FFButtonOptions(
+                                                              width: double
+                                                                  .infinity,
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          51.0,
+                                                                          6.0,
+                                                                          51.0,
+                                                                          6.0),
+                                                              iconPadding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              color: Color(
+                                                                  0xFF63CE8A),
+                                                              textStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'primaryFont',
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                      ),
+                                                              elevation: 0.0,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          14.0),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
                                                   ],
                                                 ),
                                               ),
@@ -828,9 +1507,14 @@ class _OrderPageWidgetState extends State<OrderPageWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 FutureBuilder<ApiCallResponse>(
-                                  future: ClientHomePageGroup.orderCall.call(
-                                    authToken: FFAppState().apitoken,
-                                  ),
+                                  future: (_model.apiRequestCompleter2 ??=
+                                          Completer<ApiCallResponse>()
+                                            ..complete(ClientHomePageGroup
+                                                .orderCall
+                                                .call(
+                                              authToken: FFAppState().apitoken,
+                                            )))
+                                      .future,
                                   builder: (context, snapshot) {
                                     // Customize what your widget looks like when it's loading.
                                     if (!snapshot.hasData) {
@@ -1620,100 +2304,123 @@ class _OrderPageWidgetState extends State<OrderPageWidget> {
                                                               ),
                                                         ),
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    7.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceEvenly,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            FFButtonWidget(
-                                                              onPressed: () {
-                                                                print(
-                                                                    'Button pressed ...');
-                                                              },
-                                                              text: FFLocalizations
-                                                                      .of(context)
-                                                                  .getText(
-                                                                '8dqb1kh1' /* Complete */,
-                                                              ),
-                                                              options:
-                                                                  FFButtonOptions(
-                                                                padding: EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        40.0,
-                                                                        6.0,
-                                                                        40.0,
-                                                                        6.0),
-                                                                iconPadding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                color: Color(
-                                                                    0xFF63CE8A),
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'primaryFont',
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          14.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                                elevation: 0.0,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          10.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              child:
-                                                                  FFButtonWidget(
-                                                                onPressed: () {
-                                                                  print(
-                                                                      'Button pressed ...');
+                                                      if (UserTypeStruct(
+                                                            userType:
+                                                                getJsonField(
+                                                              orderListItem,
+                                                              r'''$.status_id''',
+                                                            ).toString(),
+                                                          ) ==
+                                                          UserTypeStruct(
+                                                            userType: '8',
+                                                          ))
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      7.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceEvenly,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              FFButtonWidget(
+                                                                onPressed:
+                                                                    () async {
+                                                                  _model.apiResulthtk =
+                                                                      await ClientHomePageGroup
+                                                                          .changeOrderCall
+                                                                          .call(
+                                                                    orderId:
+                                                                        getJsonField(
+                                                                      orderListItem,
+                                                                      r'''$.id''',
+                                                                    ).toString(),
+                                                                    authToken:
+                                                                        FFAppState()
+                                                                            .apitoken,
+                                                                  );
+
+                                                                  if ((_model
+                                                                          .apiResulthtk
+                                                                          ?.succeeded ??
+                                                                      true)) {
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          getJsonField(
+                                                                            (_model.apiResulthtk?.jsonBody ??
+                                                                                ''),
+                                                                            r'''$.message''',
+                                                                          ).toString(),
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primaryText,
+                                                                          ),
+                                                                        ),
+                                                                        duration:
+                                                                            Duration(milliseconds: 4000),
+                                                                        backgroundColor:
+                                                                            FlutterFlowTheme.of(context).secondary,
+                                                                      ),
+                                                                    );
+                                                                    safeSetState(() =>
+                                                                        _model.apiRequestCompleter2 =
+                                                                            null);
+                                                                  } else {
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          getJsonField(
+                                                                            (_model.apiResulthtk?.jsonBody ??
+                                                                                ''),
+                                                                            r'''$.message''',
+                                                                          ).toString(),
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primaryText,
+                                                                          ),
+                                                                        ),
+                                                                        duration:
+                                                                            Duration(milliseconds: 4000),
+                                                                        backgroundColor:
+                                                                            FlutterFlowTheme.of(context).secondary,
+                                                                      ),
+                                                                    );
+                                                                  }
+
+                                                                  safeSetState(
+                                                                      () {});
                                                                 },
                                                                 text: FFLocalizations.of(
                                                                         context)
                                                                     .getText(
-                                                                  '4an3t9my' /* Request Edit */,
+                                                                  '8dqb1kh1' /* Complete */,
                                                                 ),
                                                                 options:
                                                                     FFButtonOptions(
                                                                   padding: EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          24.0,
+                                                                          40.0,
                                                                           6.0,
-                                                                          24.0,
+                                                                          40.0,
                                                                           6.0),
                                                                   iconPadding: EdgeInsetsDirectional
                                                                       .fromSTEB(
@@ -1722,7 +2429,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget> {
                                                                           0.0,
                                                                           0.0),
                                                                   color: Color(
-                                                                      0xFF898989),
+                                                                      0xFF63CE8A),
                                                                   textStyle: FlutterFlowTheme.of(
                                                                           context)
                                                                       .titleSmall
@@ -1746,10 +2453,83 @@ class _OrderPageWidgetState extends State<OrderPageWidget> {
                                                                               8.0),
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ],
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            10.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                child:
+                                                                    FFButtonWidget(
+                                                                  onPressed:
+                                                                      () async {
+                                                                    context
+                                                                        .pushNamed(
+                                                                      RequestEditPageWidget
+                                                                          .routeName,
+                                                                      queryParameters:
+                                                                          {
+                                                                        'orderId':
+                                                                            serializeParam(
+                                                                          getJsonField(
+                                                                            orderListItem,
+                                                                            r'''$.id''',
+                                                                          ).toString(),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                      }.withoutNulls,
+                                                                    );
+                                                                  },
+                                                                  text: FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    '4an3t9my' /* Request Edit */,
+                                                                  ),
+                                                                  options:
+                                                                      FFButtonOptions(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            24.0,
+                                                                            6.0,
+                                                                            24.0,
+                                                                            6.0),
+                                                                    iconPadding:
+                                                                        EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    color: Color(
+                                                                        0xFF898989),
+                                                                    textStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleSmall
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'primaryFont',
+                                                                          color:
+                                                                              Colors.white,
+                                                                          fontSize:
+                                                                              14.0,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                        ),
+                                                                    elevation:
+                                                                        0.0,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            8.0),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ),
                                                     ],
                                                   ),
                                                 ),

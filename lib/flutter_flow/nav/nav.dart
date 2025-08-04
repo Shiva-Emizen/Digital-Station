@@ -159,7 +159,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: RequestEditPageWidget.routeName,
           path: RequestEditPageWidget.routePath,
-          builder: (context, params) => RequestEditPageWidget(),
+          builder: (context, params) => RequestEditPageWidget(
+            orderId: params.getParam(
+              'orderId',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: OrdersPageWidget.routeName,

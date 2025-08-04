@@ -561,6 +561,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Decline',
       'ar': '',
     },
+    '3uwl1crr': {
+      'en': 'Processing',
+      'ar': '',
+    },
+    'uuap0ujt': {
+      'en': 'Mark as Done',
+      'ar': '',
+    },
+    'qfeu2ogi': {
+      'en': 'Accept Edit Request',
+      'ar': '',
+    },
     'e1q1c0w2': {
       'en': 'Orders',
       'ar': '',
@@ -633,11 +645,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Select zip,image,pdf or ms.word',
       'ar': '',
     },
-    'h74nnnmm': {
+    'ofp4oaer': {
       'en': 'Cancel',
       'ar': '',
     },
-    'p7749cw0': {
+    '7vabf0mc': {
       'en': 'Confirm',
       'ar': '',
     },
