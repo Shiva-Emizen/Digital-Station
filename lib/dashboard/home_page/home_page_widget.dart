@@ -214,7 +214,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                               fit: BoxFit.cover,
                                                               errorBuilder: (context, error, stackTrace) {
                                                                 return Image.asset(
-                                                                  'assets/images/placeholder.png',
+                                                                  'assets/images/app_launcher_icon.png',
                                                                   width: double.infinity,
                                                                   height: 146.0,
                                                                   fit: BoxFit.cover,
@@ -346,7 +346,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                         fit: BoxFit.fill,
                                                         errorBuilder: (context, error, stackTrace) {
                                                           return Image.asset(
-                                                            'assets/images/placeholder.png',
+                                                            'assets/images/app_launcher_icon.png',
                                                             width: 70.0,
                                                             height: 70.0,
                                                             fit: BoxFit.fill,

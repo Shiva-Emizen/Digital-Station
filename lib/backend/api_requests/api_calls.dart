@@ -822,7 +822,7 @@ class GetSliderAPICall {
 
 class AllServiceCall {
   Future<ApiCallResponse> call({
-    String? authToken = '',
+    String? authToken = '', required String ?search,
   }) async {
     final baseUrl = ClientHomePageGroup.getBaseUrl(
       authToken: authToken,
@@ -836,7 +836,9 @@ class AllServiceCall {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
       },
-      params: {},
+      params: {
+        'search': search??"",
+      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
