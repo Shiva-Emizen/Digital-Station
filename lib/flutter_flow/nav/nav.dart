@@ -135,9 +135,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: CategoryPageWidget.routeName,
           path: CategoryPageWidget.routePath,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'CategoryPage')
-              : CategoryPageWidget(),
+          builder: (context, params) => CategoryPageWidget(),
         ),
         FFRoute(
           name: SubCategoryWidget.routeName,
@@ -161,7 +159,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: RequestEditPageWidget.routeName,
           path: RequestEditPageWidget.routePath,
-          builder: (context, params) => RequestEditPageWidget(),
+          builder: (context, params) => RequestEditPageWidget(
+            orderId: params.getParam(
+              'orderId',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: OrdersPageWidget.routeName,
@@ -269,10 +272,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => PaymentPageWidget(),
         ),
         FFRoute(
-          name: MessagePageWidget.routeName,
-          path: MessagePageWidget.routePath,
-          builder: (context, params) => MessagePageWidget(),
-        ),
+            name: MessagePageWidget.routeName,
+            path: MessagePageWidget.routePath,
+            builder: (context, params) => params.isEmpty
+                ? NavBarPage(initialPage: 'MessagePage')
+                : NavBarPage(
+                    initialPage: 'MessagePage',
+                    page: MessagePageWidget(),
+                  )),
         FFRoute(
           name: NotificationPageWidget.routeName,
           path: NotificationPageWidget.routePath,
@@ -419,11 +426,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'AllService')
               : AllServiceWidget(),
-        ),
-        FFRoute(
-          name: ChatPageWidget.routeName,
-          path: ChatPageWidget.routePath,
-          builder: (context, params) => ChatPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
