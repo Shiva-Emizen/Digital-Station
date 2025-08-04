@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
+import '/components/no_data_found_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -149,6 +150,14 @@ class _MessagePageWidgetState extends State<MessagePageWidget> {
                         }
                         List<ChatsRecord> listViewChatsRecordList =
                             snapshot.data!;
+                        if (listViewChatsRecordList.isEmpty) {
+                          return Container(
+                            height: 600.0,
+                            child: NoDataFoundWidget(
+                              title: 'No new Chat',
+                            ),
+                          );
+                        }
 
                         return ListView.separated(
                           padding: EdgeInsets.zero,
