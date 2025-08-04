@@ -1366,19 +1366,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // MessagePage
   {
     'p3ysce2u': {
-      'en': 'Orders',
-      'ar': '',
-    },
-    '7yck75dc': {
-      'en': 'Mohamed Hamed',
-      'ar': '',
-    },
-    'f6uwppji': {
-      'en': 'Lorem Ipsum is simply... ',
-      'ar': '',
-    },
-    'z7oago5q': {
-      'en': '5 Min',
+      'en': 'Messages',
       'ar': '',
     },
     'lmldn563': {
@@ -1442,7 +1430,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'dpvfkx7d': {
-      'en': 'Home',
+      'en': 'Chats',
       'ar': 'بيت',
     },
   },
@@ -2337,17 +2325,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'lymwzj3p': {
       'en': 'Services',
       'ar': 'بيت',
-    },
-  },
-  // ChatPage
-  {
-    's338evod': {
-      'en': 'Page Title',
-      'ar': '',
-    },
-    '7dotb8wz': {
-      'en': 'Home',
-      'ar': '',
     },
   },
   // Logout

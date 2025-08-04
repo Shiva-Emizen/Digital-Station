@@ -75,10 +75,10 @@ class ChatsRecord extends FirestoreRecord {
   String get phoneNumber => _phoneNumber ?? '';
   bool hasPhoneNumber() => _phoneNumber != null;
 
-  // "clientAvatar" field.
-  String? _clientAvatar;
-  String get clientAvatar => _clientAvatar ?? '';
-  bool hasClientAvatar() => _clientAvatar != null;
+  // "imageURL" field.
+  String? _imageURL;
+  String get imageURL => _imageURL ?? '';
+  bool hasImageURL() => _imageURL != null;
 
   void _initializeFields() {
     _chatId = snapshotData['chat_id'] as String?;
@@ -93,7 +93,7 @@ class ChatsRecord extends FirestoreRecord {
     _uid = snapshotData['uid'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['PhoneNumber'] as String?;
-    _clientAvatar = snapshotData['clientAvatar'] as String?;
+    _imageURL = snapshotData['imageURL'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -142,7 +142,7 @@ Map<String, dynamic> createChatsRecordData({
   String? uid,
   DateTime? createdTime,
   String? phoneNumber,
-  String? clientAvatar,
+  String? imageURL,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -158,7 +158,7 @@ Map<String, dynamic> createChatsRecordData({
       'uid': uid,
       'created_time': createdTime,
       'PhoneNumber': phoneNumber,
-      'clientAvatar': clientAvatar,
+      'imageURL': imageURL,
     }.withoutNulls,
   );
 
@@ -182,7 +182,7 @@ class ChatsRecordDocumentEquality implements Equality<ChatsRecord> {
         e1?.uid == e2?.uid &&
         e1?.createdTime == e2?.createdTime &&
         e1?.phoneNumber == e2?.phoneNumber &&
-        e1?.clientAvatar == e2?.clientAvatar;
+        e1?.imageURL == e2?.imageURL;
   }
 
   @override
@@ -199,7 +199,7 @@ class ChatsRecordDocumentEquality implements Equality<ChatsRecord> {
         e?.uid,
         e?.createdTime,
         e?.phoneNumber,
-        e?.clientAvatar
+        e?.imageURL
       ]);
 
   @override

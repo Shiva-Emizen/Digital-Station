@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/components/no_data_found_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -906,16 +907,142 @@ class _OrderPageWidgetState extends State<OrderPageWidget> {
                                                             MainAxisAlignment
                                                                 .spaceBetween,
                                                         children: [
-                                                          ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8.0),
-                                                            child: Image.asset(
-                                                              'assets/images/Project_Statue_(1).png',
-                                                              width: 90.0,
-                                                              height: 23.0,
-                                                              fit: BoxFit.cover,
+                                                          Container(
+                                                            width: 80.0,
+                                                            height: 22.0,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: Color(
+                                                                  0xFF51C4F9),
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  blurRadius:
+                                                                      0.0,
+                                                                  color: Color(
+                                                                      0xFF419DC7),
+                                                                  offset:
+                                                                      Offset(
+                                                                    -7.0,
+                                                                    0.0,
+                                                                  ),
+                                                                )
+                                                              ],
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          18.0),
+                                                            ),
+                                                            child: Align(
+                                                              alignment:
+                                                                  AlignmentDirectional(
+                                                                      0.0, 0.0),
+                                                              child: Text(
+                                                                () {
+                                                                  if (UserTypeStruct(
+                                                                        userType:
+                                                                            getJsonField(
+                                                                          orderListItem,
+                                                                          r'''$.status''',
+                                                                        ).toString(),
+                                                                      ) ==
+                                                                      UserTypeStruct(
+                                                                        userType:
+                                                                            'inProgress',
+                                                                      )) {
+                                                                    return 'Processing';
+                                                                  } else if (UserTypeStruct(
+                                                                        userType:
+                                                                            getJsonField(
+                                                                          orderListItem,
+                                                                          r'''$.status''',
+                                                                        ).toString(),
+                                                                      ) ==
+                                                                      UserTypeStruct(
+                                                                        userType:
+                                                                            'accepted',
+                                                                      )) {
+                                                                    return 'Accepted';
+                                                                  } else if (UserTypeStruct(
+                                                                        userType:
+                                                                            getJsonField(
+                                                                          orderListItem,
+                                                                          r'''$.status''',
+                                                                        ).toString(),
+                                                                      ) ==
+                                                                      UserTypeStruct(
+                                                                        userType:
+                                                                            'completed',
+                                                                      )) {
+                                                                    return 'Completed';
+                                                                  } else if (UserTypeStruct(
+                                                                        userType:
+                                                                            getJsonField(
+                                                                          orderListItem,
+                                                                          r'''$.status''',
+                                                                        ).toString(),
+                                                                      ) ==
+                                                                      UserTypeStruct(
+                                                                        userType:
+                                                                            'new',
+                                                                      )) {
+                                                                    return 'New';
+                                                                  } else if (UserTypeStruct(
+                                                                        userType:
+                                                                            getJsonField(
+                                                                          orderListItem,
+                                                                          r'''$.status''',
+                                                                        ).toString(),
+                                                                      ) ==
+                                                                      UserTypeStruct(
+                                                                        userType:
+                                                                            'refused',
+                                                                      )) {
+                                                                    return 'Declined';
+                                                                  } else if (UserTypeStruct(
+                                                                        userType:
+                                                                            getJsonField(
+                                                                          orderListItem,
+                                                                          r'''$.status''',
+                                                                        ).toString(),
+                                                                      ) ==
+                                                                      UserTypeStruct(
+                                                                        userType:
+                                                                            'canceled',
+                                                                      )) {
+                                                                    return 'cancelled';
+                                                                  } else if (UserTypeStruct(
+                                                                        userType:
+                                                                            getJsonField(
+                                                                          orderListItem,
+                                                                          r'''$.status''',
+                                                                        ).toString(),
+                                                                      ) ==
+                                                                      UserTypeStruct(
+                                                                        userType:
+                                                                            'inReview',
+                                                                      )) {
+                                                                    return 'inReview';
+                                                                  } else {
+                                                                    return 'Edited';
+                                                                  }
+                                                                }(),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'primaryFont',
+                                                                      color: Color(
+                                                                          0xFF454545),
+                                                                      fontSize:
+                                                                          10.0,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                              ),
                                                             ),
                                                           ),
                                                           Icon(

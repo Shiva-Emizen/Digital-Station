@@ -169,7 +169,7 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'HomePage': HomePageWidget(),
       'AllService': AllServiceWidget(),
-      'CategoryPage': CategoryPageWidget(),
+      'MessagePage': MessagePageWidget(),
       'AccountPage': AccountPageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -210,9 +210,9 @@ class _NavBarPageState extends State<NavBarPage> {
             iconSize: 24.0,
           ),
           GButton(
-            icon: Icons.search,
+            icon: Icons.wechat_sharp,
             text: FFLocalizations.of(context).getText(
-              't3ktiofk' /* Search */,
+              'dpvfkx7d' /* Chats */,
             ),
             iconSize: 24.0,
           ),
