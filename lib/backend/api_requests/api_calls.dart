@@ -50,11 +50,9 @@ class LoginApiCall {
       callName: 'LoginApi',
       apiUrl: '${baseUrl}/login/client',
       callType: ApiCallType.POST,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -98,11 +96,9 @@ class SignUpApiCall {
       callName: 'SignUpApi',
       apiUrl: '${baseUrl}/register/client',
       callType: ApiCallType.POST,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -129,11 +125,9 @@ class GetCountryCall {
       callName: 'getCountry',
       apiUrl: '${baseUrl}/countries',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -171,11 +165,9 @@ class VerifyOtpCall {
       callName: 'VerifyOtp',
       apiUrl: '${baseUrl}/verify-email',
       callType: ApiCallType.POST,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -203,11 +195,9 @@ class ForgotPasswordCall {
       callName: 'ForgotPassword',
       apiUrl: '${baseUrl}/password/code',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -236,11 +226,9 @@ class ResetPasswordCall {
       callName: 'ResetPassword',
       apiUrl: '${baseUrl}/password/reset',
       callType: ApiCallType.POST,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       bodyType: BodyType.JSON,
@@ -271,11 +259,9 @@ class ResendOTPCall {
       callName: 'ResendOTP',
       apiUrl: '${baseUrl}/resend-code',
       callType: ApiCallType.POST,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -334,11 +320,9 @@ class PopularServiceCall {
       callName: 'PopularService',
       apiUrl: '${baseUrl}/user/popular-services',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -371,12 +355,11 @@ class RecentServicesCall {
       callName: 'RecentServices',
       apiUrl: '${baseUrl}/user/recent-views-services',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
+      params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: true,
@@ -405,11 +388,9 @@ class CategoryCall {
       callName: 'Category',
       apiUrl: '${baseUrl}/categories',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -442,11 +423,9 @@ class OrderCall {
       callName: 'Order',
       apiUrl: '${baseUrl}/user/orders',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {
         'paginate': paginate,
@@ -484,11 +463,9 @@ class SubCategoryCall {
       callName: 'SubCategory',
       apiUrl: '${baseUrl}/sub-categories',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {
         'category_id': categoryId,
@@ -525,11 +502,9 @@ class ServiceDetailCall {
       callName: 'serviceDetail',
       apiUrl: '${baseUrl}/user/service/${subCategoryId}',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -586,11 +561,9 @@ class NotificationCall {
       callName: 'notification',
       apiUrl: '${baseUrl}/notifications',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {
         'order_by[created_at]': orderBy,
@@ -623,11 +596,9 @@ class ClientProfileCall {
       callName: 'clientProfile',
       apiUrl: '${baseUrl}/user-details',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -658,11 +629,9 @@ class ServiceApiCall {
       callName: 'serviceApi',
       apiUrl: '${baseUrl}/service/category/${categoryId}',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -698,11 +667,9 @@ class CreateOrderCall {
       callName: 'CreateOrder',
       apiUrl: '${baseUrl}/user/orders',
       callType: ApiCallType.POST,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {
         'service_id': serviceId,
@@ -734,11 +701,9 @@ class SavedServicesCall {
       callName: 'savedServices',
       apiUrl: '${baseUrl}/user/favourite-services',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -770,11 +735,9 @@ class AddToFavouriteCall {
       callName: 'AddToFavourite',
       apiUrl: '${baseUrl}/user/add-to-favourite/${id}',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -799,11 +762,9 @@ class GetSliderAPICall {
       callName: 'GetSliderAPI',
       apiUrl: '${baseUrl}/sliders',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -824,7 +785,8 @@ class GetSliderAPICall {
 
 class AllServiceCall {
   Future<ApiCallResponse> call({
-    String? authToken = '', required String ?search,
+    String? search = '',
+    String? authToken = '',
   }) async {
     final baseUrl = ClientHomePageGroup.getBaseUrl(
       authToken: authToken,
@@ -839,7 +801,7 @@ class AllServiceCall {
         'Accept-Language': 'en',
       },
       params: {
-        'search': search??"",
+        'search': search,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -1002,11 +964,9 @@ class FreelancerLoginCall {
       callName: 'FreelancerLogin',
       apiUrl: '${baseUrl}login',
       callType: ApiCallType.POST,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -1050,11 +1010,9 @@ class FreelancerRegistrationCall {
       callName: 'FreelancerRegistration',
       apiUrl: '${baseUrl}register',
       callType: ApiCallType.POST,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -1081,11 +1039,9 @@ class LanguageCall {
       callName: 'Language',
       apiUrl: '${baseUrl}languages',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -1116,11 +1072,9 @@ class SkillsCall {
       callName: 'Skills',
       apiUrl: '${baseUrl}skill',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -1152,11 +1106,9 @@ class AvatarCall {
       callName: 'Avatar',
       apiUrl: '${baseUrl}edit-avatar',
       callType: ApiCallType.POST,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {
         'avatar': avatar,
@@ -1191,11 +1143,9 @@ class PersonalInfoUpdateCall {
       callName: 'PersonalInfoUpdate',
       apiUrl: '${baseUrl}user-about-nick-name',
       callType: ApiCallType.POST,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -1222,11 +1172,9 @@ class AllLanguageCall {
       callName: 'AllLanguage',
       apiUrl: '${baseUrl}all-languages',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -1265,8 +1213,6 @@ class AddLanguageCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -1303,8 +1249,6 @@ class AddSkillCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -1334,8 +1278,6 @@ class LevelCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -1371,11 +1313,9 @@ class OccupationCall {
       callName: 'Occupation',
       apiUrl: '${baseUrl}occupations',
       callType: ApiCallType.POST,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -1402,11 +1342,9 @@ class GetOccupationCall {
       callName: 'GetOccupation',
       apiUrl: '${baseUrl}occupations',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -1464,11 +1402,9 @@ class OrderAPICall {
       callName: 'OrderAPI',
       apiUrl: '${baseUrl}freelancer/orders',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {
         'paginate': paginate,
@@ -1505,11 +1441,9 @@ class AddPortfolioCall {
       callName: 'AddPortfolio',
       apiUrl: '${baseUrl}portfolio',
       callType: ApiCallType.POST,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {
         'title': title,
@@ -1541,11 +1475,9 @@ class AddFAQCall {
       callName: 'AddFAQ',
       apiUrl: '${baseUrl}faqs',
       callType: ApiCallType.POST,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {
         'service_id': serviceId,
@@ -1586,11 +1518,9 @@ class AddPackagesCall {
       callName: 'AddPackages',
       apiUrl: '${baseUrl}packages',
       callType: ApiCallType.POST,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {
         'title': title,
@@ -1632,11 +1562,9 @@ class AddServicesCall {
       callName: 'AddServices',
       apiUrl: '${baseUrl}services',
       callType: ApiCallType.POST,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {
         'title': title,
@@ -1671,11 +1599,9 @@ class MyServicesCall {
       callName: 'MyServices',
       apiUrl: '${baseUrl}services',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {
         'paginate': paginate,
@@ -1710,11 +1636,9 @@ class PortfolioCall {
       callName: 'Portfolio',
       apiUrl: '${baseUrl}portfolio',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -1746,11 +1670,9 @@ class GetPlanCall {
       callName: 'GetPlan',
       apiUrl: '${baseUrl}get-packages/${serviceId}',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -1782,11 +1704,9 @@ class GetFAQCall {
       callName: 'GetFAQ',
       apiUrl: '${baseUrl}get-faqs/${serviceId}',
       callType: ApiCallType.GET,
-       headers: {
+      headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -1854,6 +1774,9 @@ class ApiPagingParams {
 }
 
 String _toEncodable(dynamic item) {
+  if (item is DocumentReference) {
+    return item.path;
+  }
   return item;
 }
 

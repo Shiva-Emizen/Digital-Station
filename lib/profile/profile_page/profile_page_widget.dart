@@ -18,31 +18,28 @@ class ProfilePageWidget extends StatefulWidget {
   State<ProfilePageWidget> createState() => _ProfilePageWidgetState();
 }
 
-
 class _ProfilePageWidgetState extends State<ProfilePageWidget> {
   late ProfilePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  bool _isApiCalled = false;
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => ProfilePageModel());
-  }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (!_isApiCalled) {
-      _isApiCalled = true;
-      SchedulerBinding.instance.addPostFrameCallback((_) async {
-        _model.apiResultoen = await ClientHomePageGroup.clientProfileCall.call(
-          authToken: FFAppState().apitoken,
-        );
-        setState(() {}); // Refresh UI after API call
-      });
-    }
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.apiResultoen = await ClientHomePageGroup.clientProfileCall.call(
+        authToken: FFAppState().apitoken,
+      );
+
+      if ((_model.apiResultoen?.succeeded ?? true)) {
+        return;
+      }
+
+      return;
+    });
   }
 
   @override
@@ -55,22 +52,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
-    if (_model.apiResultoen == null) {
-      return Scaffold(
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: Center(
-          child: SizedBox(
-            width: 50.0,
-            height: 50.0,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(
-                Color(0xFF6E2A87),
-              ),
-            ),
-          ),
-        ),
-      );
-    }
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -117,26 +99,13 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(50.0),
                                 child: Image.network(
-                                  (getJsonField(
+                                  getJsonField(
                                     (_model.apiResultoen?.jsonBody ?? ''),
                                     r'''$.data.avatar''',
-                                  )?.toString() ?? '').isNotEmpty
-                                      ? getJsonField(
-                                    (_model.apiResultoen?.jsonBody ?? ''),
-                                    r'''$.data.avatar''',
-                                  ).toString()
-                                      : 'https://via.placeholder.com/90', // fallback URL if empty
+                                  ).toString(),
                                   width: 90.0,
                                   height: 90.0,
                                   fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Image.asset(
-                                      'assets/images/app_launcher_icon.png', // your default asset image
-                                      width: 90.0,
-                                      height: 90.0,
-                                      fit: BoxFit.cover,
-                                    );
-                                  },
                                 ),
                               ),
                               Padding(
