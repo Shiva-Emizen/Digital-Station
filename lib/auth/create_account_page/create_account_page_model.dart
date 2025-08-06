@@ -61,6 +61,11 @@ class CreateAccountPageModel extends FlutterFlowModel<CreateAccountPageWidget> {
       );
     }
 
+    if (!RegExp('^[a-zA-Z ]+\$').hasMatch(val)) {
+      return FFLocalizations.of(context).getText(
+        'rvr9qidk' /* Only alphabetic characters (A–... */,
+      );
+    }
     return null;
   }
 

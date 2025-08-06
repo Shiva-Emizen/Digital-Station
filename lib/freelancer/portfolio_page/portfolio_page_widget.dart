@@ -47,8 +47,8 @@ class _PortfolioPageWidgetState extends State<PortfolioPageWidget> {
         FocusScope.of(context).unfocus();
         FocusManager.instance.primaryFocus?.unfocus();
       },
-      child: WillPopScope(
-        onWillPop: () async => false,
+      child: PopScope(
+        canPop: false,
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -313,6 +313,9 @@ class _PortfolioPageWidgetState extends State<PortfolioPageWidget> {
                                                   r'''$.title''',
                                                 )?.toString(),
                                                 'N/A',
+                                              ).maybeHandleOverflow(
+                                                maxChars: 10,
+                                                replacement: '…',
                                               ),
                                               style: FlutterFlowTheme.of(
                                                       context)

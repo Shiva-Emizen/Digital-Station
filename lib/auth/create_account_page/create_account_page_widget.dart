@@ -478,7 +478,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                           ),
                                       hintText:
                                           FFLocalizations.of(context).getText(
-                                        'g4qro8d4' /* Select... */,
+                                        'g4qro8d4' /* Select Country */,
                                       ),
                                       icon: Icon(
                                         Icons.keyboard_arrow_down_rounded,
