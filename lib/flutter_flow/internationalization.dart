@@ -609,8 +609,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'You can accept or ask for',
       'ar': '',
     },
-    'x5pxuwke': {
-      'en': ' 2 more edits',
+    'vumtf8ch': {
+      'en': ' more edits',
       'ar': '',
     },
     'itnv7aly': {
@@ -807,10 +807,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // CreateOrder
   {
-    'azd6g7om': {
-      'en': 'Order',
-      'ar': '',
-    },
     'yf2rwd6p': {
       'en': 'Add description',
       'ar': '',
@@ -853,6 +849,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'c31puyou': {
       'en': 'Please choose an option from the dropdown',
+      'ar': '',
+    },
+    'mr3cqan3': {
+      'en': 'Order',
       'ar': '',
     },
     'gf355o8v': {
@@ -1536,6 +1536,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '0bi7vxyy': {
       'en': 'Service title is required',
+      'ar': '',
+    },
+    '5m2hvgoa': {
+      'en': 'Only alphabetic characters (A–Z, a–z) are allowed.',
       'ar': '',
     },
     'u479tsr1': {
@@ -2345,6 +2349,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'lymwzj3p': {
       'en': 'Services',
       'ar': 'بيت',
+    },
+  },
+  // ViewFilePage
+  {
+    's338evod': {
+      'en': 'Gallery',
+      'ar': '',
+    },
+    '7dotb8wz': {
+      'en': 'Home',
+      'ar': '',
     },
   },
   // Logout

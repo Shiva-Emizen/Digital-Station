@@ -21,6 +21,11 @@ class AddNewServiceModel extends FlutterFlowModel<AddNewServiceWidget> {
       );
     }
 
+    if (!RegExp('^[a-zA-Z ]+\$').hasMatch(val)) {
+      return FFLocalizations.of(context).getText(
+        '5m2hvgoa' /* Only alphabetic characters (A–... */,
+      );
+    }
     return null;
   }
 

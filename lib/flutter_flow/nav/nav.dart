@@ -426,6 +426,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'AllService')
               : AllServiceWidget(),
+        ),
+        FFRoute(
+          name: ViewFilePageWidget.routeName,
+          path: ViewFilePageWidget.routePath,
+          builder: (context, params) => ViewFilePageWidget(
+            galleryList: params.getParam<dynamic>(
+              'galleryList',
+              ParamType.JSON,
+              isList: true,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
