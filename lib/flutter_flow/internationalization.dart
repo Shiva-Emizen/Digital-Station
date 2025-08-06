@@ -606,7 +606,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'tqj86eqw': {
-      'en': 'You can accept or ask for',
+      'en': 'You can accept or ask for ',
       'ar': '',
     },
     'vumtf8ch': {

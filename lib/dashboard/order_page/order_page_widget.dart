@@ -1906,8 +1906,44 @@ class _OrderPageWidgetState extends State<OrderPageWidget> {
                                                                     .override(
                                                                       fontFamily:
                                                                           'primaryFont',
-                                                                      color: Color(
-                                                                          0xFF454545),
+                                                                      color:
+                                                                          () {
+                                                                        if (UserTypeStruct(
+                                                                              userType: getJsonField(
+                                                                                orderListItem,
+                                                                                r'''$.status_id''',
+                                                                              ).toString(),
+                                                                            ) ==
+                                                                            UserTypeStruct(
+                                                                              userType: '1',
+                                                                            )) {
+                                                                          return Color(
+                                                                              0xFF0F0D0D);
+                                                                        } else if ((UserTypeStruct(
+                                                                                  userType: getJsonField(
+                                                                                    orderListItem,
+                                                                                    r'''$.status_id''',
+                                                                                  ).toString(),
+                                                                                ) ==
+                                                                                UserTypeStruct(
+                                                                                  userType: '4',
+                                                                                )) ||
+                                                                            (UserTypeStruct(
+                                                                                  userType: getJsonField(
+                                                                                    orderListItem,
+                                                                                    r'''$.status_id''',
+                                                                                  ).toString(),
+                                                                                ) ==
+                                                                                UserTypeStruct(
+                                                                                  userType: '6',
+                                                                                ))) {
+                                                                          return Colors
+                                                                              .white;
+                                                                        } else {
+                                                                          return Color(
+                                                                              0xFF0F0D0D);
+                                                                        }
+                                                                      }(),
                                                                       fontSize:
                                                                           10.0,
                                                                       letterSpacing:
@@ -2314,61 +2350,71 @@ class _OrderPageWidgetState extends State<OrderPageWidget> {
                                                               MainAxisAlignment
                                                                   .spaceBetween,
                                                           children: [
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              0.0),
-                                                                  child: Image
-                                                                      .asset(
-                                                                    'assets/images/Icon_(Stroke)_(13).png',
-                                                                    width: 15.0,
-                                                                    height:
-                                                                        19.0,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          6.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child: Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'tz3u1ioc' /* Job Done Successfully */,
+                                                            if (UserTypeStruct(
+                                                                  userType:
+                                                                      getJsonField(
+                                                                    orderListItem,
+                                                                    r'''$.status_id''',
+                                                                  ).toString(),
+                                                                ) ==
+                                                                UserTypeStruct(
+                                                                  userType: '4',
+                                                                ))
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  ClipRRect(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            0.0),
+                                                                    child: Image
+                                                                        .asset(
+                                                                      'assets/images/Icon_(Stroke)_(13).png',
+                                                                      width:
+                                                                          15.0,
+                                                                      height:
+                                                                          19.0,
+                                                                      fit: BoxFit
+                                                                          .cover,
                                                                     ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'primaryFont',
-                                                                          color:
-                                                                              Color(0xFF454545),
-                                                                          fontSize:
-                                                                              10.0,
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                        ),
                                                                   ),
-                                                                ),
-                                                              ],
-                                                            ),
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            6.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child: Text(
+                                                                      FFLocalizations.of(
+                                                                              context)
+                                                                          .getText(
+                                                                        'tz3u1ioc' /* Job Done Successfully */,
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'primaryFont',
+                                                                            color:
+                                                                                Color(0xFF454545),
+                                                                            fontSize:
+                                                                                10.0,
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                          ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
                                                             FFButtonWidget(
                                                               onPressed:
                                                                   () async {
@@ -2444,7 +2490,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget> {
                                                             FFLocalizations.of(
                                                                     context)
                                                                 .getText(
-                                                              'tqj86eqw' /* You can accept or ask for */,
+                                                              'tqj86eqw' /* You can accept or ask for  */,
                                                             ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
