@@ -45,6 +45,12 @@ class FFAppState extends ChangeNotifier {
       _appLanguage =
           await secureStorage.getString('ff_appLanguage') ?? _appLanguage;
     });
+    await _safeInitAsync(() async {
+      _email = await secureStorage.getString('ff_email') ?? _email;
+    });
+    await _safeInitAsync(() async {
+      _password = await secureStorage.getString('ff_password') ?? _password;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -130,6 +136,28 @@ class FFAppState extends ChangeNotifier {
 
   void deleteAppLanguage() {
     secureStorage.delete(key: 'ff_appLanguage');
+  }
+
+  String _email = '';
+  String get email => _email;
+  set email(String value) {
+    _email = value;
+    secureStorage.setString('ff_email', value);
+  }
+
+  void deleteEmail() {
+    secureStorage.delete(key: 'ff_email');
+  }
+
+  String _password = '';
+  String get password => _password;
+  set password(String value) {
+    _password = value;
+    secureStorage.setString('ff_password', value);
+  }
+
+  void deletePassword() {
+    secureStorage.delete(key: 'ff_password');
   }
 }
 

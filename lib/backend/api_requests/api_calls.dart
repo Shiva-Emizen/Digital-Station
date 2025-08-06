@@ -27,6 +27,7 @@ class ClientAuthorizationGroup {
   static ForgotPasswordCall forgotPasswordCall = ForgotPasswordCall();
   static ResetPasswordCall resetPasswordCall = ResetPasswordCall();
   static ResendOTPCall resendOTPCall = ResendOTPCall();
+  static LoginWithSocialCall loginWithSocialCall = LoginWithSocialCall();
 }
 
 class LoginApiCall {
@@ -258,6 +259,46 @@ class ResendOTPCall {
     return ApiManager.instance.makeApiCall(
       callName: 'ResendOTP',
       apiUrl: '${baseUrl}/resend-code',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class LoginWithSocialCall {
+  Future<ApiCallResponse> call({
+    String? providerName = '',
+    String? email = '',
+    String? name = '',
+    String? fcmToken = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = ClientAuthorizationGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "provider_name": "${escapeStringForJson(providerName)}",
+  "email": "${escapeStringForJson(email)}",
+  "name": "${escapeStringForJson(name)}",
+  "fcm_token": "${escapeStringForJson(fcmToken)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'LoginWithSocial',
+      apiUrl: '${baseUrl}/login-with-social',
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',

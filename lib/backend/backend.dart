@@ -31,7 +31,6 @@ Future<int> queryUsersRecordCount({
       limit: limit,
     );
 
-
 Stream<List<UsersRecord>> queryUsersRecord({
   Query Function(Query)? queryBuilder,
   int limit = -1,

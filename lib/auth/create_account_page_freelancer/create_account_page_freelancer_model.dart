@@ -63,6 +63,11 @@ class CreateAccountPageFreelancerModel
       );
     }
 
+    if (!RegExp('^[a-zA-Z ]+\$').hasMatch(val)) {
+      return FFLocalizations.of(context).getText(
+        'npu8tw0v' /* Only alphabetic characters (A–... */,
+      );
+    }
     return null;
   }
 

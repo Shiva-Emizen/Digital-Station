@@ -260,7 +260,7 @@ class _CreateAccountPageFreelancerWidgetState
                                         EdgeInsetsDirectional.fromSTEB(
                                             16.0, 20.0, 16.0, 20.0),
                                     suffixIcon: Icon(
-                                      Icons.email_outlined,
+                                      Icons.person_outlined,
                                     ),
                                   ),
                                   style: FlutterFlowTheme.of(context)
@@ -477,7 +477,7 @@ class _CreateAccountPageFreelancerWidgetState
                                           ),
                                       hintText:
                                           FFLocalizations.of(context).getText(
-                                        'yl93y76x' /* Select... */,
+                                        'yl93y76x' /* Select Country */,
                                       ),
                                       icon: Icon(
                                         Icons.keyboard_arrow_down_rounded,

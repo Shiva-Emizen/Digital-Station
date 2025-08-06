@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'login_page_freelancer_model.dart';
 export 'login_page_freelancer_model.dart';
 
@@ -32,10 +33,12 @@ class _LoginPageFreelancerWidgetState extends State<LoginPageFreelancerWidget> {
     super.initState();
     _model = createModel(context, () => LoginPageFreelancerModel());
 
-    _model.emailTextController ??= TextEditingController();
+    _model.emailTextController ??=
+        TextEditingController(text: FFAppState().email);
     _model.emailFocusNode ??= FocusNode();
 
-    _model.nameTextController ??= TextEditingController();
+    _model.nameTextController ??=
+        TextEditingController(text: FFAppState().password);
     _model.nameFocusNode ??= FocusNode();
   }
 
@@ -48,6 +51,8 @@ class _LoginPageFreelancerWidgetState extends State<LoginPageFreelancerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -371,10 +376,30 @@ class _LoginPageFreelancerWidgetState extends State<LoginPageFreelancerWidget> {
                                     FlutterFlowTheme.of(context).alternate,
                               ),
                               child: Checkbox(
-                                value: _model.checkboxValue ??= true,
+                                value: _model.checkboxValue ??=
+                                    _model.rememberMe,
                                 onChanged: (newValue) async {
                                   safeSetState(
                                       () => _model.checkboxValue = newValue!);
+                                  if (newValue!) {
+                                    _model.rememberMe = true;
+                                    safeSetState(() {});
+                                    FFAppState().email =
+                                        _model.emailTextController.text;
+                                    FFAppState().password =
+                                        _model.nameTextController.text;
+                                    safeSetState(() {});
+                                  } else {
+                                    _model.rememberMe = false;
+                                    safeSetState(() {});
+                                    FFAppState().deleteEmail();
+                                    FFAppState().email = '';
+
+                                    FFAppState().deletePassword();
+                                    FFAppState().password = '';
+
+                                    safeSetState(() {});
+                                  }
                                 },
                                 side: (FlutterFlowTheme.of(context).alternate !=
                                         null)
@@ -553,41 +578,209 @@ class _LoginPageFreelancerWidgetState extends State<LoginPageFreelancerWidget> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  borderRadius: BorderRadius.circular(16.0),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      64.0, 10.0, 64.0, 10.0),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: Image.asset(
-                                      'assets/images/da8vka6-59497488-2a0d-4992-9341-e72e0589b0c6.png',
-                                      width: 35.0,
-                                      height: 44.0,
-                                      fit: BoxFit.contain,
+                              if (isiOS)
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    _model.isLoading = true;
+                                    safeSetState(() {});
+                                    GoRouter.of(context).prepareAuthEvent();
+                                    final user = await authManager
+                                        .signInWithApple(context);
+                                    if (user == null) {
+                                      return;
+                                    }
+                                    _model.apiResult1rsApple =
+                                        await ClientAuthorizationGroup
+                                            .loginWithSocialCall
+                                            .call(
+                                      providerName: 'Google',
+                                      email: currentUserEmail,
+                                      name: currentUserDisplayName,
+                                      fcmToken: _model.fcmToken,
+                                    );
+
+                                    if ((_model.apiResult1rsApple?.succeeded ??
+                                        true)) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            getJsonField(
+                                              (_model.apiResult1rsApple
+                                                      ?.jsonBody ??
+                                                  ''),
+                                              r'''$.message''',
+                                            ).toString(),
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          duration:
+                                              Duration(milliseconds: 4000),
+                                          backgroundColor: Color(0xFF6E2A87),
+                                        ),
+                                      );
+                                      FFAppState().apitoken = getJsonField(
+                                        (_model.apiResult1rsApple?.jsonBody ??
+                                            ''),
+                                        r'''$.data.token''',
+                                      ).toString();
+                                      FFAppState().userType = UserTypeStruct(
+                                                userType: getJsonField(
+                                                  (_model.apiResult1rsApple
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                  r'''$.data.type''',
+                                                ).toString(),
+                                              ) ==
+                                              UserTypeStruct(
+                                                userType: 'user',
+                                              )
+                                          ? '0'
+                                          : '1';
+                                      safeSetState(() {});
+
+                                      context.pushNamedAuth(
+                                          HomePageWidget.routeName,
+                                          context.mounted);
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            getJsonField(
+                                              (_model.apiResult1rsApple
+                                                      ?.jsonBody ??
+                                                  ''),
+                                              r'''$.message''',
+                                            ).toString(),
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          duration:
+                                              Duration(milliseconds: 4000),
+                                          backgroundColor: Color(0xFF6E2A87),
+                                        ),
+                                      );
+                                      _model.isLoading = false;
+                                      safeSetState(() {});
+                                    }
+
+                                    safeSetState(() {});
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      borderRadius: BorderRadius.circular(16.0),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          64.0, 10.0, 64.0, 10.0),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        child: Image.asset(
+                                          'assets/images/da8vka6-59497488-2a0d-4992-9341-e72e0589b0c6.png',
+                                          width: 35.0,
+                                          height: 44.0,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
                               InkWell(
                                 splashColor: Colors.transparent,
                                 focusColor: Colors.transparent,
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  _model.isLoading = true;
+                                  safeSetState(() {});
                                   GoRouter.of(context).prepareAuthEvent();
                                   final user = await authManager
                                       .signInWithGoogle(context);
                                   if (user == null) {
                                     return;
                                   }
+                                  _model.apiResult1rs =
+                                      await ClientAuthorizationGroup
+                                          .loginWithSocialCall
+                                          .call(
+                                    providerName: 'Google',
+                                    email: currentUserEmail,
+                                    name: currentUserDisplayName,
+                                    fcmToken: _model.fcmToken,
+                                  );
 
-                                  context.goNamedAuth(HomePageWidget.routeName,
-                                      context.mounted);
+                                  if ((_model.apiResult1rs?.succeeded ??
+                                      true)) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          getJsonField(
+                                            (_model.apiResult1rs?.jsonBody ??
+                                                ''),
+                                            r'''$.message''',
+                                          ).toString(),
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor: Color(0xFF6E2A87),
+                                      ),
+                                    );
+                                    FFAppState().apitoken = getJsonField(
+                                      (_model.apiResult1rs?.jsonBody ?? ''),
+                                      r'''$.data.token''',
+                                    ).toString();
+                                    FFAppState().userType = UserTypeStruct(
+                                              userType: getJsonField(
+                                                (_model.apiResult1rs
+                                                        ?.jsonBody ??
+                                                    ''),
+                                                r'''$.data.type''',
+                                              ).toString(),
+                                            ) ==
+                                            UserTypeStruct(
+                                              userType: 'user',
+                                            )
+                                        ? '0'
+                                        : '1';
+                                    safeSetState(() {});
+
+                                    context.pushNamedAuth(
+                                        HomePageWidget.routeName,
+                                        context.mounted);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          getJsonField(
+                                            (_model.apiResult1rs?.jsonBody ??
+                                                ''),
+                                            r'''$.message''',
+                                          ).toString(),
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor: Color(0xFF6E2A87),
+                                      ),
+                                    );
+                                    _model.isLoading = false;
+                                    safeSetState(() {});
+                                  }
+
+                                  safeSetState(() {});
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(

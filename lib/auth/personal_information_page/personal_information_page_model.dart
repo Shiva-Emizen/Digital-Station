@@ -39,7 +39,7 @@ class PersonalInformationPageModel
 
     if (!RegExp('^[a-zA-Z ]+\$').hasMatch(val)) {
       return FFLocalizations.of(context).getText(
-        'ww3ig3zz' /* Display name is required */,
+        'ww3ig3zz' /* Only alphabetic characters (A–... */,
       );
     }
     return null;

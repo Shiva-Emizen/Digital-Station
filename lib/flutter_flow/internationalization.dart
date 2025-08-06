@@ -256,7 +256,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'g4qro8d4': {
-      'en': 'Select...',
+      'en': 'Select Country',
       'ar': '',
     },
     'wvt4rsa9': {
@@ -313,6 +313,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '2sx7txdl': {
       'en': 'Job Title is required',
+      'ar': '',
+    },
+    'rvr9qidk': {
+      'en': 'Only alphabetic characters (A–Z, a–z) are allowed.',
       'ar': '',
     },
     '18x6vxzn': {
@@ -858,14 +862,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // PersonalInformationPage
   {
-    '21fk5zky': {
-      'en': 'Personal Information',
-      'ar': '',
-    },
-    'p5mu6rv3': {
-      'en': 'Add your information',
-      'ar': '',
-    },
     'tve717on': {
       'en': 'Profile picture',
       'ar': '',
@@ -907,7 +903,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'ww3ig3zz': {
-      'en': 'Display name is required',
+      'en': 'Only alphabetic characters (A–Z, a–z) are allowed.',
       'ar': '',
     },
     'p9nxfoko': {
@@ -920,6 +916,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'w1v3v46l': {
       'en': 'Please choose an option from the dropdown',
+      'ar': '',
+    },
+    '201d5dta': {
+      'en': 'Personal Information',
+      'ar': '',
+    },
+    '1hcefwo6': {
+      'en': 'Add your information',
       'ar': '',
     },
     '922a83cj': {
@@ -2008,7 +2012,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'yl93y76x': {
-      'en': 'Select...',
+      'en': 'Select Country',
       'ar': '',
     },
     'h8g757fs': {
@@ -2065,6 +2069,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'wyh44ppl': {
       'en': 'Job Title is required',
+      'ar': '',
+    },
+    'npu8tw0v': {
+      'en': 'Only alphabetic characters (A–Z, a–z) are allowed.',
       'ar': '',
     },
     'ebd5rsyv': {

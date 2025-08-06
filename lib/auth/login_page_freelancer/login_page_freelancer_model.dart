@@ -6,6 +6,14 @@ import 'package:flutter/material.dart';
 
 class LoginPageFreelancerModel
     extends FlutterFlowModel<LoginPageFreelancerWidget> {
+  ///  Local state fields for this page.
+
+  bool rememberMe = false;
+
+  String fcmToken = 'test';
+
+  bool isLoading = false;
+
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
@@ -47,6 +55,10 @@ class LoginPageFreelancerModel
   bool? checkboxValue;
   // Stores action output result for [Backend Call - API (FreelancerLogin)] action in Button widget.
   ApiCallResponse? loginResponse;
+  // Stores action output result for [Backend Call - API (LoginWithSocial)] action in Container widget.
+  ApiCallResponse? apiResult1rsApple;
+  // Stores action output result for [Backend Call - API (LoginWithSocial)] action in Container widget.
+  ApiCallResponse? apiResult1rs;
 
   @override
   void initState(BuildContext context) {
