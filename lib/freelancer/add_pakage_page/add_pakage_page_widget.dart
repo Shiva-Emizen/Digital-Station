@@ -988,6 +988,13 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                                         .bodyMedium
                                         .fontStyle,
                                   ),
+                              maxLength: 2,
+                              buildCounter: (context,
+                                      {required currentLength,
+                                      required isFocused,
+                                      maxLength}) =>
+                                  null,
+                              keyboardType: TextInputType.number,
                               cursorColor:
                                   FlutterFlowTheme.of(context).primaryText,
                               validator: _model.revisionTextControllerValidator
@@ -1188,29 +1195,38 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 56.0,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFE7E7E7),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    shape: BoxShape.rectangle,
-                                  ),
-                                  child: Align(
-                                    alignment: AlignmentDirectional(0.0, 0.0),
-                                    child: Text(
-                                      FFLocalizations.of(context).getText(
-                                        'udniuwoz' /* Previous */,
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.safePop();
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 56.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFE7E7E7),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      shape: BoxShape.rectangle,
+                                    ),
+                                    child: Align(
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          'udniuwoz' /* Previous */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'primaryFont',
+                                              color: Color(0xFF6E2A87),
+                                              fontSize: 16.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                       ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'primaryFont',
-                                            color: Color(0xFF6E2A87),
-                                            fontSize: 16.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                          ),
                                     ),
                                   ),
                                 ),
