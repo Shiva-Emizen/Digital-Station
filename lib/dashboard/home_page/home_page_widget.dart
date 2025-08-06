@@ -320,57 +320,82 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: List.generate(popularList.length, (popularListIndex) {
-                                            final popularListItem = popularList[popularListIndex];
-                                            return Container(
-                                              width: 160.0,
-                                              height: 188.0,
-                                              margin: EdgeInsets.only(right: 10.0),
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.circular(16.0),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional.fromSTEB(30.0, 25.0, 30.0, 25.0),
-                                                child: Column(
-                                                  mainAxisSize: MainAxisSize.max,
-                                                  children: [
-                                                    ClipRRect(
-                                                      borderRadius: BorderRadius.circular(8.0),
-                                                      child: Image.network(
-                                                        getJsonField(
-                                                          popularListItem,
-                                                          r'''$.image.url''',
-                                                        ).toString(),
-                                                        width: 70.0,
-                                                        height: 70.0,
-                                                        fit: BoxFit.fill,
-                                                        errorBuilder: (context, error, stackTrace) {
-                                                          return Image.asset(
-                                                            'assets/images/app_launcher_icon.png',
-                                                            width: 70.0,
-                                                            height: 70.0,
-                                                            fit: BoxFit.fill,
-                                                          );
-                                                        },
-                                                      ),
+                                            final categoryListItem = popularList[popularListIndex];
+                                            return InkWell(
+                                              onTap: (){
+
+                                                context.pushNamed(
+                                                  SubCategoryWidget.routeName,
+                                                  queryParameters: {
+                                                    'categoryName': serializeParam(
+                                                      getJsonField(
+                                                        categoryListItem,
+                                                        r'''$.name''',
+                                                      ).toString(),
+                                                      ParamType.String,
                                                     ),
-                                                    Text(
-                                                      valueOrDefault<String>(
-                                                        getJsonField(
-                                                          popularListItem,
-                                                          r'''$.name''',
-                                                        )?.toString(),
-                                                        'N/A',
-                                                      ),
-                                                      textAlign: TextAlign.center,
-                                                      maxLines: 2,
-                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                        fontFamily: 'primaryFont',
-                                                        letterSpacing: 0.0,
-                                                        fontWeight: FontWeight.bold,
-                                                      ),
+                                                    'categoryId': serializeParam(
+                                                      getJsonField(
+                                                        categoryListItem,
+                                                        r'''$.id''',
+                                                      ).toString(),
+                                                      ParamType.String,
                                                     ),
-                                                  ].divide(SizedBox(height: 14.0)),
+                                                  }.withoutNulls,
+                                                );
+
+                                              },
+                                              child: Container(
+                                                width: 160.0,
+                                                height: 188.0,
+                                                margin: EdgeInsets.only(right: 10.0),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.circular(16.0),
+                                                ),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional.fromSTEB(30.0, 25.0, 30.0, 25.0),
+                                                  child: Column(
+                                                    mainAxisSize: MainAxisSize.max,
+                                                    children: [
+                                                      ClipRRect(
+                                                        borderRadius: BorderRadius.circular(8.0),
+                                                        child: Image.network(
+                                                          getJsonField(
+                                                            categoryListItem,
+                                                            r'''$.image.url''',
+                                                          ).toString(),
+                                                          width: 70.0,
+                                                          height: 70.0,
+                                                          fit: BoxFit.fill,
+                                                          errorBuilder: (context, error, stackTrace) {
+                                                            return Image.asset(
+                                                              'assets/images/app_launcher_icon.png',
+                                                              width: 70.0,
+                                                              height: 70.0,
+                                                              fit: BoxFit.fill,
+                                                            );
+                                                          },
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        valueOrDefault<String>(
+                                                          getJsonField(
+                                                            categoryListItem,
+                                                            r'''$.name''',
+                                                          )?.toString(),
+                                                          'N/A',
+                                                        ),
+                                                        textAlign: TextAlign.center,
+                                                        maxLines: 2,
+                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                          fontFamily: 'primaryFont',
+                                                          letterSpacing: 0.0,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ].divide(SizedBox(height: 14.0)),
+                                                  ),
                                                 ),
                                               ),
                                             );
