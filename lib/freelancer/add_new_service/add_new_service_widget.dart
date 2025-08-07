@@ -906,65 +906,90 @@ class _AddNewServiceWidgetState extends State<AddNewServiceWidget> {
                                         if (_model.dropDownValue1 == null) {
                                           return;
                                         }
-                                        _model.apiResultaro =
-                                            await FreelancerHomePageGroup
-                                                .addServicesCall
-                                                .call(
-                                          title:
-                                              _model.titleTextController.text,
-                                          description: _model
-                                              .descriptionTextController.text,
-                                          galleryList: _model
-                                              .uploadedLocalFiles_uploadDataKyc,
-                                          categoryId: _model.dropDownValue1,
-                                          authToken: FFAppState().apitoken,
-                                          categories: _model.dropDownValue2,
-                                        );
+                                        if (_model
+                                            .uploadedLocalFiles_uploadDataKyc
+                                            .isNotEmpty) {
+                                          _model.apiResultaro =
+                                              await FreelancerHomePageGroup
+                                                  .addServicesCall
+                                                  .call(
+                                            title:
+                                                _model.titleTextController.text,
+                                            description: _model
+                                                .descriptionTextController.text,
+                                            galleryList: _model
+                                                .uploadedLocalFiles_uploadDataKyc,
+                                            categoryId: _model.dropDownValue1,
+                                            authToken: FFAppState().apitoken,
+                                            categories: _model.dropDownValue2,
+                                          );
 
-                                        if ((_model.apiResultaro?.succeeded ??
-                                            true)) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                getJsonField(
-                                                  (_model.apiResultaro
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                  r'''$.message''',
-                                                ).toString(),
-                                                style: TextStyle(
-                                                  color: Colors.white,
+                                          if ((_model.apiResultaro?.succeeded ??
+                                              true)) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  getJsonField(
+                                                    (_model.apiResultaro
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                    r'''$.message''',
+                                                  ).toString(),
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                  ),
                                                 ),
+                                                duration: Duration(
+                                                    milliseconds: 4000),
+                                                backgroundColor:
+                                                    Color(0xFF6E2A87),
                                               ),
-                                              duration:
-                                                  Duration(milliseconds: 4000),
-                                              backgroundColor:
-                                                  Color(0xFF6E2A87),
-                                            ),
-                                          );
+                                            );
 
-                                          context.pushNamed(
-                                            AddNewServiceNextPageWidget
-                                                .routeName,
-                                            queryParameters: {
-                                              'serviceId': serializeParam(
-                                                getJsonField(
-                                                  (_model.apiResultaro
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                  r'''$.data.id''',
-                                                ).toString(),
-                                                ParamType.String,
+                                            context.pushNamed(
+                                              AddNewServiceNextPageWidget
+                                                  .routeName,
+                                              queryParameters: {
+                                                'serviceId': serializeParam(
+                                                  getJsonField(
+                                                    (_model.apiResultaro
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                    r'''$.data.id''',
+                                                  ).toString(),
+                                                  ParamType.String,
+                                                ),
+                                              }.withoutNulls,
+                                            );
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  getJsonField(
+                                                    (_model.apiResultaro
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                    r'''$.message''',
+                                                  ).toString(),
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                duration: Duration(
+                                                    milliseconds: 4000),
+                                                backgroundColor:
+                                                    Color(0xFF6E2A87),
                                               ),
-                                            }.withoutNulls,
-                                          );
+                                            );
+                                          }
                                         } else {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
                                             SnackBar(
                                               content: Text(
-                                                _model.dropDownValue1!,
+                                                'Please select a file',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                 ),
