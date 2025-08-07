@@ -924,7 +924,7 @@ class _PersonalInformationPageWidgetState
                                               SnackBar(
                                                 content: Text(
                                                   getJsonField(
-                                                    (_model.apiResultklx
+                                                    (_model.apiResulttl8
                                                             ?.jsonBody ??
                                                         ''),
                                                     r'''$.message''',
@@ -949,7 +949,7 @@ class _PersonalInformationPageWidgetState
                                               SnackBar(
                                                 content: Text(
                                                   getJsonField(
-                                                    (_model.apiResultklx
+                                                    (_model.apiResulttl8
                                                             ?.jsonBody ??
                                                         ''),
                                                     r'''$.message''',
