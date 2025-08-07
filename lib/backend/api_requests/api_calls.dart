@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
-import 'api_manager.dart';
+import 'package:ff_commons/api_requests/api_manager.dart';
 
-export 'api_manager.dart' show ApiCallResponse;
+
+export 'package:ff_commons/api_requests/api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
@@ -19,6 +20,7 @@ class ClientAuthorizationGroup {
   static Map<String, String> headers = {
     'Authorization': 'Bearer [auth_token]',
     'Accept-Language': 'en',
+    'Accept': 'application/json',
   };
   static LoginApiCall loginApiCall = LoginApiCall();
   static SignUpApiCall signUpApiCall = SignUpApiCall();
@@ -337,6 +339,7 @@ class ClientHomePageGroup {
   static Map<String, String> headers = {
     'Authorization': 'Bearer [auth_token]',
     'Accept-Language': 'en',
+    'Accept': 'application/json',
   };
   static PopularServiceCall popularServiceCall = PopularServiceCall();
   static RecentServicesCall recentServicesCall = RecentServicesCall();
@@ -575,31 +578,26 @@ class ServiceDetailCall {
         response,
         r'''$.data''',
       );
-
   List? categoryList(dynamic response) => getJsonField(
         response,
         r'''$.data.categories''',
         true,
       ) as List?;
-
   List? galleryList(dynamic response) => getJsonField(
         response,
         r'''$.data.gallery''',
         true,
       ) as List?;
-
   List? portFolioList(dynamic response) => getJsonField(
         response,
         r'''$.data.portfolio''',
         true,
       ) as List?;
-
   List? faqList(dynamic response) => getJsonField(
         response,
         r'''$.data.faqs''',
         true,
       ) as List?;
-
   List? packageList(dynamic response) => getJsonField(
         response,
         r'''$.data.packages''',
@@ -997,6 +995,7 @@ class FreelancerAuthorizationGroup {
   static Map<String, String> headers = {
     'Authorization': 'Bearer [auth_token]',
     'Accept-Language': 'en',
+    'Accept': 'application/json',
   };
   static FreelancerLoginCall freelancerLoginCall = FreelancerLoginCall();
   static FreelancerRegistrationCall freelancerRegistrationCall =
@@ -1215,27 +1214,15 @@ class PersonalInfoUpdateCall {
   "nickname": "${escapeStringForJson(nickname)}",
   "about": "${escapeStringForJson(about)}"
 }''';
-
-    final headers = {
-      'Authorization': 'Bearer $authToken',
-      'Accept-Language': 'en',
-    };
-
-    final apiUrl = '${baseUrl}user-about-nick-name';
-
-    // 📌 Print API Request
-    print('--- API Request ---');
-    print('URL: $apiUrl');
-    print('Method: POST');
-    print('Headers: $headers');
-    print('Body: $ffApiRequestBody');
-    print('-------------------');
-
-    final response = await ApiManager.instance.makeApiCall(
+    return ApiManager.instance.makeApiCall(
       callName: 'PersonalInfoUpdate',
-      apiUrl: apiUrl,
+      apiUrl: '${baseUrl}user-about-nick-name',
       callType: ApiCallType.POST,
-      headers: headers,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
+        'Accept': 'application/json',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -1246,16 +1233,6 @@ class PersonalInfoUpdateCall {
       isStreamingApi: false,
       alwaysAllowBody: false,
     );
-
-    // 📌 Print API Response
-    print('--- API Response ---');
-    print('Status: ${response.statusCode}');
-    print('Succeeded: ${response.succeeded}');
-    print('Body: ${response.jsonBody}');
-    print('Raw Body: ${response.bodyText}');
-    print('--------------------');
-
-    return response;
   }
 }
 
@@ -1480,6 +1457,7 @@ class FreelancerHomePageGroup {
   static Map<String, String> headers = {
     'Authorization': 'Bearer [auth_token]',
     'Accept-Language': 'en',
+    'Accept': 'application/json',
   };
   static OrderAPICall orderAPICall = OrderAPICall();
   static AddPortfolioCall addPortfolioCall = AddPortfolioCall();
@@ -1871,22 +1849,6 @@ class ChangeStatusCall {
 }
 
 /// End FreelancerHomePage Group Code
-
-class ApiPagingParams {
-  int nextPageNumber = 0;
-  int numItems = 0;
-  dynamic lastResponse;
-
-  ApiPagingParams({
-    required this.nextPageNumber,
-    required this.numItems,
-    required this.lastResponse,
-  });
-
-  @override
-  String toString() =>
-      'PagingParams(nextPageNumber: $nextPageNumber, numItems: $numItems, lastResponse: $lastResponse,)';
-}
 
 String _toEncodable(dynamic item) {
   if (item is DocumentReference) {

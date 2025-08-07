@@ -1671,15 +1671,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'rgnwpi5y': {
-      'en': '1',
+      'en': 'Option 1',
       'ar': '',
     },
     'uft629wj': {
-      'en': '2',
+      'en': 'Option 2',
       'ar': '',
     },
     'wg4tjjhh': {
-      'en': '3',
+      'en': 'Option 3',
       'ar': '',
     },
     '8tr993gw': {
@@ -1984,10 +1984,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'o7slffdg': {
       'en': 'Home',
       'ar': 'بيت',
-    },
-    'o7slffff': {
-      'en': 'Recommended Services',
-      'ar': 'الخدمات الموصى بها',
     },
   },
   // ViewAllPage

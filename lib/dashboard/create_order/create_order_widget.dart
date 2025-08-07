@@ -1,11 +1,11 @@
 import '/backend/api_requests/api_calls.dart';
-import '/backend/braintree/payment_manager.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
-import '/index.dart';
+import 'package:paypal_integration_marketplace_library_9mtra1/custom_code/actions/index.dart'
+    as paypal_integration_marketplace_library_9mtra1_actions;
+import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -568,63 +568,28 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                                                       .secondary,
                                             ),
                                           );
-                                          final transacAmount = getJsonField(
-                                            (_model.orderCreatedResponse
-                                                    ?.jsonBody ??
-                                                ''),
-                                            r'''$.data.total''',
-                                          );
-                                          final transacDisplayName =
-                                              'transaction';
-                                          if (kIsWeb) {
-                                            showSnackbar(context,
-                                                'Payments not yet supported on web.');
-                                            return;
-                                          }
-
-                                          final dropInRequest =
-                                              BraintreeDropInRequest(
-                                            cardEnabled: true,
-                                            clientToken: braintreeClientToken(),
-                                            collectDeviceData: true,
-                                            paypalRequest:
-                                                BraintreePayPalRequest(
-                                              amount: transacAmount.toString(),
-                                              currencyCode: 'USD',
-                                              displayName: transacDisplayName,
-                                            ),
-                                          );
-                                          final dropInResult =
-                                              await BraintreeDropIn.start(
-                                                  dropInRequest);
-                                          if (dropInResult == null) {
-                                            return;
-                                          }
-                                          showSnackbar(
+                                          await paypal_integration_marketplace_library_9mtra1_actions
+                                              .paypalPay(
                                             context,
-                                            'Processing payment...',
-                                            duration: 10,
-                                            loading: true,
+                                            'AQzOQFUCXTbmGocpHXvBm8ZsZxR-ODRn9bSrCdQsKs9fgzOJe07-eYsPUKN7BmWCw8Vt3izzvG6BmJIx ',
+                                            'EPSYJsR227guAVsnR3HZDE-CKI0WaecqRYfuvwXNP5YOf1yUVAtzTlgeqZS4d9rwGErZQog6fA1eHtnB ',
+                                            getJsonField(
+                                              (_model.orderCreatedResponse
+                                                      ?.jsonBody ??
+                                                  ''),
+                                              r'''$.data.total''',
+                                            ),
+                                            'USD',
+                                            _model.textController.text,
+                                            '',
+                                            _model.amountDetails,
+                                            _model.productList.toList(),
+                                            _model.amountDetails,
+                                            true,
+                                            (data) async {},
+                                            (params) async {},
+                                            (message) async {},
                                           );
-                                          final paymentResponse =
-                                              await processBraintreePayment(
-                                            transacAmount,
-                                            dropInResult
-                                                .paymentMethodNonce.nonce,
-                                            dropInResult.deviceData,
-                                          );
-                                          if (paymentResponse.errorMessage !=
-                                              null) {
-                                            showSnackbar(context,
-                                                'Error: ${paymentResponse.errorMessage}');
-                                            return;
-                                          }
-                                          showSnackbar(context, 'Success!');
-                                          _model.transactionId =
-                                              paymentResponse.transactionId!;
-
-                                          context.pushNamed(
-                                              HomePageWidget.routeName);
                                         } else {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(

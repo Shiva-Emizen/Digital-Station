@@ -2,11 +2,11 @@ import '/backend/api_requests/api_calls.dart';
 import '/components/add_title_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/index.dart';
+import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -83,7 +83,7 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 20, 20.0, 20),
+                        EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -626,27 +626,15 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                             controller: _model.dropDownValueController ??=
                                 FormFieldController<String>(null),
                             options: [
-                              // FFLocalizations.of(context).getText(
-                              //   'rgnwpi5y' /* Option 1 */,
-                              // ),
-                              // FFLocalizations.of(context).getText(
-                              //   'uft629wj' /* Option 2 */,
-                              // ),
-                              // FFLocalizations.of(context).getText(
-                              //   'wg4tjjhh' /* Option 3 */,
-                              // )
-                              "1",
-                              "2",
-                              "3",
-                              "4",
-                              "5",
-                              "6",
-                              "7",
-                              "8",
-                              "9",
-                              "10",
-                              "11",
-                              "12",
+                              FFLocalizations.of(context).getText(
+                                'rgnwpi5y' /* Option 1 */,
+                              ),
+                              FFLocalizations.of(context).getText(
+                                'uft629wj' /* Option 2 */,
+                              ),
+                              FFLocalizations.of(context).getText(
+                                'wg4tjjhh' /* Option 3 */,
+                              )
                             ],
                             onChanged: (val) =>
                                 safeSetState(() => _model.dropDownValue = val),
@@ -1269,80 +1257,97 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                                     shape: BoxShape.rectangle,
                                   ),
                                   child: FFButtonWidget(
-                                      onPressed: () async {
-                                        if (_model.formKey.currentState == null || !_model.formKey.currentState!.validate()) {
-                                          return;
-                                        }
-
-                                        if (_model.dropDownValue == null) {
-                                          return;
-                                        }
-
-                                        final featuresList = FFAppState()
+                                    onPressed: () async {
+                                      if (_model.formKey.currentState == null ||
+                                          !_model.formKey.currentState!
+                                              .validate()) {
+                                        return;
+                                      }
+                                      if (_model.dropDownValue == null) {
+                                        return;
+                                      }
+                                      _model.apiResultlvw =
+                                          await FreelancerHomePageGroup
+                                              .addPackagesCall
+                                              .call(
+                                        title: _model.titleTextController.text,
+                                        description: _model
+                                            .descriptionTextController.text,
+                                        price: _model.priceTextController.text,
+                                        deliveryTime: _model.dropDownValue,
+                                        expressDeliverEnable:
+                                            _model.expDelivery,
+                                        expressDeliveryAmount:
+                                            _model.amountTextController.text,
+                                        numberOfRevisions:
+                                            _model.revisionTextController.text,
+                                        authToken: FFAppState().apitoken,
+                                        serviceId: widget.id,
+                                        featuresJson: FFAppState()
                                             .features
-                                            .map((e) => getJsonField(e.toMap(), r'''$.title''').toString())
-                                            .toList();
+                                            .map((e) => getJsonField(
+                                                  e.toMap(),
+                                                  r'''$.title''',
+                                                ))
+                                            .toList(),
+                                      );
 
-                                        // ✅ Log request data individually
-                                        print('📤 API Request:');
-                                        print('Title: ${_model.titleTextController.text}');
-                                        print('Description: ${_model.descriptionTextController.text}');
-                                        print('Price: ${_model.priceTextController.text}');
-                                        print('Delivery Time: ${_model.dropDownValue}');
-                                        print('Express Delivery Enabled: ${_model.expDelivery}');
-                                        print('Express Delivery Amount: ${_model.amountTextController.text}');
-                                        print('Number of Revisions: ${_model.revisionTextController.text}');
-                                        print('Auth Token: ${FFAppState().apitoken}');
-                                        print('Service ID: ${widget.id}');
-                                        print('Features JSON: $featuresList');
-
-                                        _model.apiResultlvw = await FreelancerHomePageGroup.addPackagesCall.call(
-                                          title: _model.titleTextController.text,
-                                          description: _model.descriptionTextController.text,
-                                          price: _model.priceTextController.text,
-                                          deliveryTime: _model.dropDownValue,
-                                          expressDeliverEnable: _model.expDelivery,
-                                          expressDeliveryAmount: _model.amountTextController.text,
-                                          numberOfRevisions: _model.revisionTextController.text,
-                                          authToken: FFAppState().apitoken,
-                                          serviceId: widget.id,
-                                          featuresJson: featuresList,
-                                        );
-
-                                        print('📥 API Response: ${_model.apiResultlvw?.jsonBody}');
-                                        print('📥 API Response: ${_model.apiResultlvw?.bodyText}');
-                                        print('📥 API Response: ${_model.apiResultlvw?.statusCode}');
-
-                                        final responseMessage = getJsonField(
-                                          (_model.apiResultlvw?.jsonBody ?? ''),
-                                          r'''$.message''',
-                                        ).toString();
-
-                                        ScaffoldMessenger.of(context).showSnackBar(
+                                      if ((_model.apiResultlvw?.succeeded ??
+                                          true)) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              responseMessage,
-                                              style: TextStyle(color: Colors.white),
+                                              getJsonField(
+                                                (_model.apiResultlvw
+                                                        ?.jsonBody ??
+                                                    ''),
+                                                r'''$.message''',
+                                              ).toString(),
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
                                             ),
-                                            duration: Duration(milliseconds: 4000),
+                                            duration:
+                                                Duration(milliseconds: 4000),
                                             backgroundColor: Color(0xFF6E2A87),
                                           ),
                                         );
 
-                                        if ((_model.apiResultlvw?.succeeded ?? true)) {
-                                          context.pushNamed(
-                                            AddNewServiceNextPageWidget.routeName,
-                                            queryParameters: {
-                                              'serviceId': serializeParam(widget.id, ParamType.String),
-                                            }.withoutNulls,
-                                          );
-                                        }
+                                        context.pushNamed(
+                                          AddNewServiceNextPageWidget.routeName,
+                                          queryParameters: {
+                                            'serviceId': serializeParam(
+                                              widget.id,
+                                              ParamType.String,
+                                            ),
+                                          }.withoutNulls,
+                                        );
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              getJsonField(
+                                                (_model.apiResultlvw
+                                                        ?.jsonBody ??
+                                                    ''),
+                                                r'''$.message''',
+                                              ).toString(),
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor: Color(0xFF6E2A87),
+                                          ),
+                                        );
+                                      }
 
-                                        safeSetState(() {});
-                                      },
-
-
-                                      text: FFLocalizations.of(context).getText(
+                                      safeSetState(() {});
+                                    },
+                                    text: FFLocalizations.of(context).getText(
                                       '6nfv7i1i' /* Add */,
                                     ),
                                     options: FFButtonOptions(

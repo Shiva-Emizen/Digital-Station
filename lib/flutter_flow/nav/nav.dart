@@ -11,6 +11,8 @@ import '/main.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 import '/index.dart';
+import 'package:paypal_integration_marketplace_library_9mtra1/index.dart'
+    as $paypal_integration_marketplace_library_9mtra1;
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -72,374 +74,391 @@ class AppStateNotifier extends ChangeNotifier {
   }
 }
 
-GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
-      initialLocation: '/',
-      debugLogDiagnostics: true,
-      refreshListenable: appStateNotifier,
-      navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? NavBarPage() : SplashPageWidget(),
-      routes: [
-        FFRoute(
-          name: '_initialize',
-          path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? NavBarPage() : SplashPageWidget(),
-        ),
-        FFRoute(
-            name: HomePageWidget.routeName,
-            path: HomePageWidget.routePath,
-            builder: (context, params) => params.isEmpty
-                ? NavBarPage(initialPage: 'HomePage')
-                : NavBarPage(
-                    initialPage: 'HomePage',
-                    page: HomePageWidget(),
-                  )),
-        FFRoute(
-          name: SplashPageWidget.routeName,
-          path: SplashPageWidget.routePath,
-          builder: (context, params) => SplashPageWidget(),
-        ),
-        FFRoute(
-          name: UserSelectionPageWidget.routeName,
-          path: UserSelectionPageWidget.routePath,
-          builder: (context, params) => UserSelectionPageWidget(),
-        ),
-        FFRoute(
-          name: CreateAccountPageWidget.routeName,
-          path: CreateAccountPageWidget.routePath,
-          builder: (context, params) => CreateAccountPageWidget(),
-        ),
-        FFRoute(
-          name: SelectPlanPageWidget.routeName,
-          path: SelectPlanPageWidget.routePath,
-          builder: (context, params) => SelectPlanPageWidget(),
-        ),
-        FFRoute(
-          name: TermsConditionPageWidget.routeName,
-          path: TermsConditionPageWidget.routePath,
-          builder: (context, params) => TermsConditionPageWidget(),
-        ),
-        FFRoute(
-          name: AccountPageWidget.routeName,
-          path: AccountPageWidget.routePath,
+GoRouter createRouter(AppStateNotifier appStateNotifier) {
+  $paypal_integration_marketplace_library_9mtra1.initializeRoutes(
+    homePageWidgetName:
+        'paypal_integration_marketplace_library_9mtra1.HomePage',
+    homePageWidgetPath:
+        '/homePage_paypal-integration-marketplace-library-9mtra1',
+  );
+
+  return GoRouter(
+    initialLocation: '/',
+    debugLogDiagnostics: true,
+    refreshListenable: appStateNotifier,
+    navigatorKey: appNavigatorKey,
+    errorBuilder: (context, state) =>
+        appStateNotifier.loggedIn ? NavBarPage() : SplashPageWidget(),
+    routes: [
+      FFRoute(
+        name: '_initialize',
+        path: '/',
+        builder: (context, _) =>
+            appStateNotifier.loggedIn ? NavBarPage() : SplashPageWidget(),
+      ),
+      FFRoute(
+          name: HomePageWidget.routeName,
+          path: HomePageWidget.routePath,
           builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'AccountPage')
-              : AccountPageWidget(),
-        ),
-        FFRoute(
-          name: LanguagePageWidget.routeName,
-          path: LanguagePageWidget.routePath,
-          builder: (context, params) => LanguagePageWidget(),
-        ),
-        FFRoute(
-          name: CategoryPageWidget.routeName,
-          path: CategoryPageWidget.routePath,
-          builder: (context, params) => CategoryPageWidget(),
-        ),
-        FFRoute(
-          name: SubCategoryWidget.routeName,
-          path: SubCategoryWidget.routePath,
-          builder: (context, params) => SubCategoryWidget(
-            categoryName: params.getParam(
-              'categoryName',
-              ParamType.String,
-            ),
-            categoryId: params.getParam(
-              'categoryId',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: OrderPageWidget.routeName,
-          path: OrderPageWidget.routePath,
-          builder: (context, params) => OrderPageWidget(),
-        ),
-        FFRoute(
-          name: RequestEditPageWidget.routeName,
-          path: RequestEditPageWidget.routePath,
-          builder: (context, params) => RequestEditPageWidget(
-            orderId: params.getParam(
-              'orderId',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: OrdersPageWidget.routeName,
-          path: OrdersPageWidget.routePath,
-          builder: (context, params) => OrdersPageWidget(),
-        ),
-        FFRoute(
-          name: SavedPageWidget.routeName,
-          path: SavedPageWidget.routePath,
-          builder: (context, params) => SavedPageWidget(),
-        ),
-        FFRoute(
-          name: ServicePageWidget.routeName,
-          path: ServicePageWidget.routePath,
-          builder: (context, params) => ServicePageWidget(
-            categoryId: params.getParam(
-              'categoryId',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: ProfilePageWidget.routeName,
-          path: ProfilePageWidget.routePath,
-          builder: (context, params) => ProfilePageWidget(),
-        ),
-        FFRoute(
-          name: CompleteProfilePageWidget.routeName,
-          path: CompleteProfilePageWidget.routePath,
-          builder: (context, params) => CompleteProfilePageWidget(
-            userId: params.getParam(
-              'userId',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: SubscriptionPageWidget.routeName,
-          path: SubscriptionPageWidget.routePath,
-          builder: (context, params) => SubscriptionPageWidget(),
-        ),
-        FFRoute(
-          name: CreateOrderWidget.routeName,
-          path: CreateOrderWidget.routePath,
-          builder: (context, params) => CreateOrderWidget(
-            serviceId: params.getParam(
-              'serviceId',
-              ParamType.String,
-            ),
-            packageId: params.getParam(
-              'packageId',
-              ParamType.String,
-            ),
-            price: params.getParam(
-              'price',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: PersonalInformationPageWidget.routeName,
-          path: PersonalInformationPageWidget.routePath,
-          builder: (context, params) => PersonalInformationPageWidget(),
-        ),
-        FFRoute(
-          name: WorkInformationPageWidget.routeName,
-          path: WorkInformationPageWidget.routePath,
-          builder: (context, params) => WorkInformationPageWidget(),
-        ),
-        FFRoute(
-          name: SelectSubscriptionPageWidget.routeName,
-          path: SelectSubscriptionPageWidget.routePath,
-          builder: (context, params) => SelectSubscriptionPageWidget(),
-        ),
-        FFRoute(
-            name: FreeLancerHomePageWidget.routeName,
-            path: FreeLancerHomePageWidget.routePath,
-            builder: (context, params) => NavBarPage(
-                  initialPage: '',
-                  page: FreeLancerHomePageWidget(),
+              ? NavBarPage(initialPage: 'HomePage')
+              : NavBarPage(
+                  initialPage: 'HomePage',
+                  page: HomePageWidget(),
                 )),
-        FFRoute(
-          name: FreelancerOrderPageWidget.routeName,
-          path: FreelancerOrderPageWidget.routePath,
-          builder: (context, params) => FreelancerOrderPageWidget(),
-        ),
-        FFRoute(
-          name: PortfolioPageWidget.routeName,
-          path: PortfolioPageWidget.routePath,
-          builder: (context, params) => PortfolioPageWidget(),
-        ),
-        FFRoute(
-          name: MyPortFolioPageWidget.routeName,
-          path: MyPortFolioPageWidget.routePath,
-          builder: (context, params) => MyPortFolioPageWidget(),
-        ),
-        FFRoute(
-          name: WalletPageWidget.routeName,
-          path: WalletPageWidget.routePath,
-          builder: (context, params) => WalletPageWidget(),
-        ),
-        FFRoute(
-          name: PaymentPageWidget.routeName,
-          path: PaymentPageWidget.routePath,
-          builder: (context, params) => PaymentPageWidget(),
-        ),
-        FFRoute(
-            name: MessagePageWidget.routeName,
-            path: MessagePageWidget.routePath,
-            builder: (context, params) => params.isEmpty
-                ? NavBarPage(initialPage: 'MessagePage')
-                : NavBarPage(
-                    initialPage: 'MessagePage',
-                    page: MessagePageWidget(),
-                  )),
-        FFRoute(
-          name: NotificationPageWidget.routeName,
-          path: NotificationPageWidget.routePath,
-          builder: (context, params) => NotificationPageWidget(),
-        ),
-        FFRoute(
-          name: MyServicePageWidget.routeName,
-          path: MyServicePageWidget.routePath,
-          builder: (context, params) => MyServicePageWidget(),
-        ),
-        FFRoute(
-          name: AddNewServiceWidget.routeName,
-          path: AddNewServiceWidget.routePath,
-          builder: (context, params) => AddNewServiceWidget(),
-        ),
-        FFRoute(
-          name: AddNewServiceNextPageWidget.routeName,
-          path: AddNewServiceNextPageWidget.routePath,
-          builder: (context, params) => AddNewServiceNextPageWidget(
-            serviceId: params.getParam(
-              'serviceId',
-              ParamType.String,
-            ),
+      FFRoute(
+        name: SplashPageWidget.routeName,
+        path: SplashPageWidget.routePath,
+        builder: (context, params) => SplashPageWidget(),
+      ),
+      FFRoute(
+        name: UserSelectionPageWidget.routeName,
+        path: UserSelectionPageWidget.routePath,
+        builder: (context, params) => UserSelectionPageWidget(),
+      ),
+      FFRoute(
+        name: CreateAccountPageWidget.routeName,
+        path: CreateAccountPageWidget.routePath,
+        builder: (context, params) => CreateAccountPageWidget(),
+      ),
+      FFRoute(
+        name: SelectPlanPageWidget.routeName,
+        path: SelectPlanPageWidget.routePath,
+        builder: (context, params) => SelectPlanPageWidget(),
+      ),
+      FFRoute(
+        name: TermsConditionPageWidget.routeName,
+        path: TermsConditionPageWidget.routePath,
+        builder: (context, params) => TermsConditionPageWidget(),
+      ),
+      FFRoute(
+        name: AccountPageWidget.routeName,
+        path: AccountPageWidget.routePath,
+        builder: (context, params) => params.isEmpty
+            ? NavBarPage(initialPage: 'AccountPage')
+            : AccountPageWidget(),
+      ),
+      FFRoute(
+        name: LanguagePageWidget.routeName,
+        path: LanguagePageWidget.routePath,
+        builder: (context, params) => LanguagePageWidget(),
+      ),
+      FFRoute(
+        name: CategoryPageWidget.routeName,
+        path: CategoryPageWidget.routePath,
+        builder: (context, params) => CategoryPageWidget(),
+      ),
+      FFRoute(
+        name: SubCategoryWidget.routeName,
+        path: SubCategoryWidget.routePath,
+        builder: (context, params) => SubCategoryWidget(
+          categoryName: params.getParam(
+            'categoryName',
+            ParamType.String,
+          ),
+          categoryId: params.getParam(
+            'categoryId',
+            ParamType.String,
           ),
         ),
-        FFRoute(
-          name: PublishServicePageWidget.routeName,
-          path: PublishServicePageWidget.routePath,
-          builder: (context, params) => PublishServicePageWidget(
-            serviceId: params.getParam(
-              'serviceId',
-              ParamType.String,
-            ),
+      ),
+      FFRoute(
+        name: OrderPageWidget.routeName,
+        path: OrderPageWidget.routePath,
+        builder: (context, params) => OrderPageWidget(),
+      ),
+      FFRoute(
+        name: RequestEditPageWidget.routeName,
+        path: RequestEditPageWidget.routePath,
+        builder: (context, params) => RequestEditPageWidget(
+          orderId: params.getParam(
+            'orderId',
+            ParamType.String,
           ),
         ),
-        FFRoute(
-          name: ServiceSuccessFullyPublishPageWidget.routeName,
-          path: ServiceSuccessFullyPublishPageWidget.routePath,
-          builder: (context, params) => ServiceSuccessFullyPublishPageWidget(),
-        ),
-        FFRoute(
-          name: AddPakagePageWidget.routeName,
-          path: AddPakagePageWidget.routePath,
-          builder: (context, params) => AddPakagePageWidget(
-            id: params.getParam(
-              'id',
-              ParamType.String,
-            ),
+      ),
+      FFRoute(
+        name: OrdersPageWidget.routeName,
+        path: OrdersPageWidget.routePath,
+        builder: (context, params) => OrdersPageWidget(),
+      ),
+      FFRoute(
+        name: SavedPageWidget.routeName,
+        path: SavedPageWidget.routePath,
+        builder: (context, params) => SavedPageWidget(),
+      ),
+      FFRoute(
+        name: ServicePageWidget.routeName,
+        path: ServicePageWidget.routePath,
+        builder: (context, params) => ServicePageWidget(
+          categoryId: params.getParam(
+            'categoryId',
+            ParamType.String,
           ),
         ),
-        FFRoute(
-          name: AddFaqPageWidget.routeName,
-          path: AddFaqPageWidget.routePath,
-          builder: (context, params) => AddFaqPageWidget(
-            serviceId: params.getParam(
-              'serviceId',
-              ParamType.String,
-            ),
+      ),
+      FFRoute(
+        name: ProfilePageWidget.routeName,
+        path: ProfilePageWidget.routePath,
+        builder: (context, params) => ProfilePageWidget(),
+      ),
+      FFRoute(
+        name: CompleteProfilePageWidget.routeName,
+        path: CompleteProfilePageWidget.routePath,
+        builder: (context, params) => CompleteProfilePageWidget(
+          userId: params.getParam(
+            'userId',
+            ParamType.String,
           ),
         ),
-        FFRoute(
-          name: OtpPageWidget.routeName,
-          path: OtpPageWidget.routePath,
-          builder: (context, params) => OtpPageWidget(
-            otp: params.getParam(
-              'otp',
-              ParamType.int,
-            ),
-            email: params.getParam(
-              'email',
-              ParamType.String,
-            ),
+      ),
+      FFRoute(
+        name: SubscriptionPageWidget.routeName,
+        path: SubscriptionPageWidget.routePath,
+        builder: (context, params) => SubscriptionPageWidget(),
+      ),
+      FFRoute(
+        name: CreateOrderWidget.routeName,
+        path: CreateOrderWidget.routePath,
+        builder: (context, params) => CreateOrderWidget(
+          serviceId: params.getParam(
+            'serviceId',
+            ParamType.String,
+          ),
+          packageId: params.getParam(
+            'packageId',
+            ParamType.String,
+          ),
+          price: params.getParam(
+            'price',
+            ParamType.String,
           ),
         ),
-        FFRoute(
-          name: ForgotPasswordPageWidget.routeName,
-          path: ForgotPasswordPageWidget.routePath,
-          builder: (context, params) => ForgotPasswordPageWidget(),
-        ),
-        FFRoute(
-          name: ResetPasswordPageWidget.routeName,
-          path: ResetPasswordPageWidget.routePath,
-          builder: (context, params) => ResetPasswordPageWidget(
-            email: params.getParam(
-              'email',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: ServiceDetailPageWidget.routeName,
-          path: ServiceDetailPageWidget.routePath,
-          builder: (context, params) => ServiceDetailPageWidget(
-            serviceId: params.getParam(
-              'serviceId',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: ViewAllPageWidget.routeName,
-          path: ViewAllPageWidget.routePath,
-          builder: (context, params) => ViewAllPageWidget(),
-        ),
-        FFRoute(
-          name: CreateAccountPageFreelancerWidget.routeName,
-          path: CreateAccountPageFreelancerWidget.routePath,
-          builder: (context, params) => CreateAccountPageFreelancerWidget(),
-        ),
-        FFRoute(
-          name: LoginPageFreelancerWidget.routeName,
-          path: LoginPageFreelancerWidget.routePath,
-          builder: (context, params) => LoginPageFreelancerWidget(),
-        ),
-        FFRoute(
-          name: OtpPageFreelancerWidget.routeName,
-          path: OtpPageFreelancerWidget.routePath,
-          builder: (context, params) => OtpPageFreelancerWidget(
-            otp: params.getParam(
-              'otp',
-              ParamType.int,
-            ),
-            email: params.getParam(
-              'email',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
-            name: HomePageCopyWidget.routeName,
-            path: HomePageCopyWidget.routePath,
-            builder: (context, params) => NavBarPage(
-                  initialPage: '',
-                  page: HomePageCopyWidget(),
-                )),
-        FFRoute(
-          name: EditPersonalInformationPageWidget.routeName,
-          path: EditPersonalInformationPageWidget.routePath,
-          builder: (context, params) => EditPersonalInformationPageWidget(),
-        ),
-        FFRoute(
-          name: AllServiceWidget.routeName,
-          path: AllServiceWidget.routePath,
+      ),
+      FFRoute(
+        name: PersonalInformationPageWidget.routeName,
+        path: PersonalInformationPageWidget.routePath,
+        builder: (context, params) => PersonalInformationPageWidget(),
+      ),
+      FFRoute(
+        name: WorkInformationPageWidget.routeName,
+        path: WorkInformationPageWidget.routePath,
+        builder: (context, params) => WorkInformationPageWidget(),
+      ),
+      FFRoute(
+        name: SelectSubscriptionPageWidget.routeName,
+        path: SelectSubscriptionPageWidget.routePath,
+        builder: (context, params) => SelectSubscriptionPageWidget(),
+      ),
+      FFRoute(
+          name: FreeLancerHomePageWidget.routeName,
+          path: FreeLancerHomePageWidget.routePath,
+          builder: (context, params) => NavBarPage(
+                initialPage: '',
+                page: FreeLancerHomePageWidget(),
+              )),
+      FFRoute(
+        name: FreelancerOrderPageWidget.routeName,
+        path: FreelancerOrderPageWidget.routePath,
+        builder: (context, params) => FreelancerOrderPageWidget(),
+      ),
+      FFRoute(
+        name: PortfolioPageWidget.routeName,
+        path: PortfolioPageWidget.routePath,
+        builder: (context, params) => PortfolioPageWidget(),
+      ),
+      FFRoute(
+        name: MyPortFolioPageWidget.routeName,
+        path: MyPortFolioPageWidget.routePath,
+        builder: (context, params) => MyPortFolioPageWidget(),
+      ),
+      FFRoute(
+        name: WalletPageWidget.routeName,
+        path: WalletPageWidget.routePath,
+        builder: (context, params) => WalletPageWidget(),
+      ),
+      FFRoute(
+        name: PaymentPageWidget.routeName,
+        path: PaymentPageWidget.routePath,
+        builder: (context, params) => PaymentPageWidget(),
+      ),
+      FFRoute(
+          name: MessagePageWidget.routeName,
+          path: MessagePageWidget.routePath,
           builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'AllService')
-              : AllServiceWidget(),
-        ),
-        FFRoute(
-          name: ViewFilePageWidget.routeName,
-          path: ViewFilePageWidget.routePath,
-          builder: (context, params) => ViewFilePageWidget(
-            galleryList: params.getParam<dynamic>(
-              'galleryList',
-              ParamType.JSON,
-              isList: true,
-            ),
+              ? NavBarPage(initialPage: 'MessagePage')
+              : NavBarPage(
+                  initialPage: 'MessagePage',
+                  page: MessagePageWidget(),
+                )),
+      FFRoute(
+        name: NotificationPageWidget.routeName,
+        path: NotificationPageWidget.routePath,
+        builder: (context, params) => NotificationPageWidget(),
+      ),
+      FFRoute(
+        name: MyServicePageWidget.routeName,
+        path: MyServicePageWidget.routePath,
+        builder: (context, params) => MyServicePageWidget(),
+      ),
+      FFRoute(
+        name: AddNewServiceWidget.routeName,
+        path: AddNewServiceWidget.routePath,
+        builder: (context, params) => AddNewServiceWidget(),
+      ),
+      FFRoute(
+        name: AddNewServiceNextPageWidget.routeName,
+        path: AddNewServiceNextPageWidget.routePath,
+        builder: (context, params) => AddNewServiceNextPageWidget(
+          serviceId: params.getParam(
+            'serviceId',
+            ParamType.String,
           ),
-        )
-      ].map((r) => r.toRoute(appStateNotifier)).toList(),
-    );
+        ),
+      ),
+      FFRoute(
+        name: PublishServicePageWidget.routeName,
+        path: PublishServicePageWidget.routePath,
+        builder: (context, params) => PublishServicePageWidget(
+          serviceId: params.getParam(
+            'serviceId',
+            ParamType.String,
+          ),
+        ),
+      ),
+      FFRoute(
+        name: ServiceSuccessFullyPublishPageWidget.routeName,
+        path: ServiceSuccessFullyPublishPageWidget.routePath,
+        builder: (context, params) => ServiceSuccessFullyPublishPageWidget(),
+      ),
+      FFRoute(
+        name: AddPakagePageWidget.routeName,
+        path: AddPakagePageWidget.routePath,
+        builder: (context, params) => AddPakagePageWidget(
+          id: params.getParam(
+            'id',
+            ParamType.String,
+          ),
+        ),
+      ),
+      FFRoute(
+        name: AddFaqPageWidget.routeName,
+        path: AddFaqPageWidget.routePath,
+        builder: (context, params) => AddFaqPageWidget(
+          serviceId: params.getParam(
+            'serviceId',
+            ParamType.String,
+          ),
+        ),
+      ),
+      FFRoute(
+        name: OtpPageWidget.routeName,
+        path: OtpPageWidget.routePath,
+        builder: (context, params) => OtpPageWidget(
+          otp: params.getParam(
+            'otp',
+            ParamType.int,
+          ),
+          email: params.getParam(
+            'email',
+            ParamType.String,
+          ),
+        ),
+      ),
+      FFRoute(
+        name: ForgotPasswordPageWidget.routeName,
+        path: ForgotPasswordPageWidget.routePath,
+        builder: (context, params) => ForgotPasswordPageWidget(),
+      ),
+      FFRoute(
+        name: ResetPasswordPageWidget.routeName,
+        path: ResetPasswordPageWidget.routePath,
+        builder: (context, params) => ResetPasswordPageWidget(
+          email: params.getParam(
+            'email',
+            ParamType.String,
+          ),
+        ),
+      ),
+      FFRoute(
+        name: ServiceDetailPageWidget.routeName,
+        path: ServiceDetailPageWidget.routePath,
+        builder: (context, params) => ServiceDetailPageWidget(
+          serviceId: params.getParam(
+            'serviceId',
+            ParamType.String,
+          ),
+        ),
+      ),
+      FFRoute(
+        name: ViewAllPageWidget.routeName,
+        path: ViewAllPageWidget.routePath,
+        builder: (context, params) => ViewAllPageWidget(),
+      ),
+      FFRoute(
+        name: CreateAccountPageFreelancerWidget.routeName,
+        path: CreateAccountPageFreelancerWidget.routePath,
+        builder: (context, params) => CreateAccountPageFreelancerWidget(),
+      ),
+      FFRoute(
+        name: LoginPageFreelancerWidget.routeName,
+        path: LoginPageFreelancerWidget.routePath,
+        builder: (context, params) => LoginPageFreelancerWidget(),
+      ),
+      FFRoute(
+        name: OtpPageFreelancerWidget.routeName,
+        path: OtpPageFreelancerWidget.routePath,
+        builder: (context, params) => OtpPageFreelancerWidget(
+          otp: params.getParam(
+            'otp',
+            ParamType.int,
+          ),
+          email: params.getParam(
+            'email',
+            ParamType.String,
+          ),
+        ),
+      ),
+      FFRoute(
+          name: HomePageCopyWidget.routeName,
+          path: HomePageCopyWidget.routePath,
+          builder: (context, params) => NavBarPage(
+                initialPage: '',
+                page: HomePageCopyWidget(),
+              )),
+      FFRoute(
+        name: EditPersonalInformationPageWidget.routeName,
+        path: EditPersonalInformationPageWidget.routePath,
+        builder: (context, params) => EditPersonalInformationPageWidget(),
+      ),
+      FFRoute(
+        name: AllServiceWidget.routeName,
+        path: AllServiceWidget.routePath,
+        builder: (context, params) => params.isEmpty
+            ? NavBarPage(initialPage: 'AllService')
+            : AllServiceWidget(),
+      ),
+      FFRoute(
+        name: ViewFilePageWidget.routeName,
+        path: ViewFilePageWidget.routePath,
+        builder: (context, params) => ViewFilePageWidget(
+          galleryList: params.getParam<dynamic>(
+            'galleryList',
+            ParamType.JSON,
+            isList: true,
+          ),
+        ),
+      ),
+      FFRoute(
+        name: $paypal_integration_marketplace_library_9mtra1
+            .HomePageWidget.routeName,
+        path: $paypal_integration_marketplace_library_9mtra1
+            .HomePageWidget.routePath,
+        builder: (context, params) =>
+            $paypal_integration_marketplace_library_9mtra1.HomePageWidget(),
+      )
+    ].map((r) => r.toRoute(appStateNotifier)).toList(),
+  );
+}
 
 extension NavParamExtensions on Map<String, String?> {
   Map<String, String> get withoutNulls => Map.fromEntries(

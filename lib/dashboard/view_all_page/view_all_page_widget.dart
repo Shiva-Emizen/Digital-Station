@@ -1,8 +1,7 @@
-import '../../profile/service_detail_page/service_detail_page_widget.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'view_all_page_model.dart';
@@ -181,309 +180,292 @@ class _ViewAllPageWidgetState extends State<ViewAllPageWidget> {
                                     itemBuilder: (context, serviceListIndex) {
                                       final serviceListItem =
                                           serviceList[serviceListIndex];
-                                      return
-                                        InkWell(
-                                          onTap: (){
-                                            context.pushNamed(
-                                              ServiceDetailPageWidget.routeName,
-                                              queryParameters: {
-                                                'serviceId': serializeParam(
-                                                  getJsonField(
-                                                    serviceListItem,
-                                                    r'''$.id''',
-                                                  ).toString(),
-                                                  ParamType.String,
-                                                ),
-                                              }.withoutNulls,
-                                            );
-                                          },
-                                          child: Material(
-                                          color: Colors.transparent,
-                                          elevation: 2.0,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12.0),
-                                          ),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(12.0),
+                                      return Material(
+                                        color: Colors.transparent,
+                                        elevation: 2.0,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                          child: Container(
+                                            width: 126.0,
+                                            height: 160.0,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                            ),
                                             child: Container(
-                                              width: 126.0,
-                                              height: 160.0,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(12.0),
-                                              ),
-                                              child: Container(
-                                                width: double.infinity,
-                                                child: Stack(
-                                                  children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.0),
-                                                      child: Image.network(
-                                                        valueOrDefault<String>(
-                                                          getJsonField(
-                                                            serviceListItem,
-                                                            r'''$.gallery[0].url''',
-                                                          )?.toString(),
-                                                          'https://placebear.com/250/250',
-                                                        ),
-                                                        width: double.infinity,
-                                                        height: 70.0,
-                                                        fit: BoxFit.fill,
+                                              width: double.infinity,
+                                              child: Stack(
+                                                children: [
+                                                  ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                    child: Image.network(
+                                                      valueOrDefault<String>(
+                                                        getJsonField(
+                                                          serviceListItem,
+                                                          r'''$.gallery[0].url''',
+                                                        )?.toString(),
+                                                        'https://placebear.com/250/250',
                                                       ),
+                                                      width: double.infinity,
+                                                      height: 70.0,
+                                                      fit: BoxFit.fill,
                                                     ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(0.0, 80.0,
-                                                                  0.0, 10.0),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        6.0,
-                                                                        0.0,
-                                                                        6.0,
-                                                                        0.0),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .min,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .start,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    ClipRRect(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              8.0),
-                                                                      child: Image
-                                                                          .asset(
-                                                                        'assets/images/Icon_(Stroke).png',
-                                                                        width:
-                                                                            10.0,
-                                                                        height:
-                                                                            10.0,
-                                                                        fit: BoxFit
-                                                                            .cover,
-                                                                      ),
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              6.0,
-                                                                              0.0,
-                                                                              0.0,
-                                                                              0.0),
-                                                                      child: Text(
-                                                                        valueOrDefault<
-                                                                            String>(
-                                                                          getJsonField(
-                                                                            serviceListItem,
-                                                                            r'''$.username''',
-                                                                          )?.toString(),
-                                                                          'N/A',
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(
-                                                                                context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              fontFamily:
-                                                                                  'primaryFont',
-                                                                              color:
-                                                                                  Color(0xFF898989),
-                                                                              fontSize:
-                                                                                  8.0,
-                                                                              letterSpacing:
-                                                                                  0.0,
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                Align(
-                                                                  alignment:
-                                                                      AlignmentDirectional(
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child: Icon(
-                                                                    Icons
-                                                                        .bookmark_border,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryText,
-                                                                    size: 24.0,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        6.0,
-                                                                        0.0,
-                                                                        6.0,
-                                                                        0.0),
-                                                            child: Container(
-                                                              width: MediaQuery
-                                                                          .sizeOf(
-                                                                              context)
-                                                                      .width *
-                                                                  0.6,
-                                                              decoration:
-                                                                  BoxDecoration(),
-                                                              child: Text(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  getJsonField(
-                                                                    serviceListItem,
-                                                                    r'''$.description''',
-                                                                  )?.toString(),
-                                                                  'N/A',
-                                                                ),
-                                                                maxLines: 2,
-                                                                style: FlutterFlowTheme
-                                                                        .of(context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'primaryFont',
-                                                                      color: Color(
-                                                                          0xFF252525),
-                                                                      fontSize:
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 80.0,
+                                                                0.0, 10.0),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      6.0,
+                                                                      0.0,
+                                                                      6.0,
+                                                                      0.0),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .min,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  ClipRRect(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            8.0),
+                                                                    child: Image
+                                                                        .asset(
+                                                                      'assets/images/Icon_(Stroke).png',
+                                                                      width:
                                                                           10.0,
-                                                                      letterSpacing:
-                                                                          0.0,
+                                                                      height:
+                                                                          10.0,
+                                                                      fit: BoxFit
+                                                                          .cover,
                                                                     ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        6.0,
-                                                                        6.0,
-                                                                        6.0,
-                                                                        0.0),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Padding(
-                                                                  padding:
-                                                                      EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              6.0,
-                                                                              0.0,
-                                                                              0.0,
-                                                                              0.0),
-                                                                  child: Text(
-                                                                    'Start From \$${valueOrDefault<String>(
-                                                                      getJsonField(
-                                                                        serviceListItem,
-                                                                        r'''$.start_from''',
-                                                                      )?.toString(),
-                                                                      'N/A',
-                                                                    )}',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'primaryFont',
-                                                                          color: Color(
-                                                                              0xFF898989),
-                                                                          fontSize:
-                                                                              8.0,
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                        ),
                                                                   ),
-                                                                ),
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
-                                                                    Icon(
-                                                                      Icons.star,
-                                                                      color: Color(
-                                                                          0xFFFFCF26),
-                                                                      size: 12.0,
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              2.0,
-                                                                              0.0,
-                                                                              0.0,
-                                                                              0.0),
-                                                                      child: Text(
-                                                                        valueOrDefault<
-                                                                            String>(
-                                                                          getJsonField(
-                                                                            serviceListItem,
-                                                                            r'''$.average_reviews''',
-                                                                          )?.toString(),
-                                                                          'N/A',
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(
-                                                                                context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              fontFamily:
-                                                                                  'primaryFont',
-                                                                              fontSize:
-                                                                                  10.0,
-                                                                              letterSpacing:
-                                                                                  0.0,
-                                                                            ),
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            6.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child: Text(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        getJsonField(
+                                                                          serviceListItem,
+                                                                          r'''$.username''',
+                                                                        )?.toString(),
+                                                                        'N/A',
                                                                       ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'primaryFont',
+                                                                            color:
+                                                                                Color(0xFF898989),
+                                                                            fontSize:
+                                                                                8.0,
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                          ),
                                                                     ),
-                                                                  ],
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Align(
+                                                                alignment:
+                                                                    AlignmentDirectional(
+                                                                        0.0,
+                                                                        0.0),
+                                                                child: Icon(
+                                                                  Icons
+                                                                      .bookmark_border,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                                  size: 24.0,
                                                                 ),
-                                                              ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      6.0,
+                                                                      0.0,
+                                                                      6.0,
+                                                                      0.0),
+                                                          child: Container(
+                                                            width: MediaQuery
+                                                                        .sizeOf(
+                                                                            context)
+                                                                    .width *
+                                                                0.6,
+                                                            decoration:
+                                                                BoxDecoration(),
+                                                            child: Text(
+                                                              valueOrDefault<
+                                                                  String>(
+                                                                getJsonField(
+                                                                  serviceListItem,
+                                                                  r'''$.description''',
+                                                                )?.toString(),
+                                                                'N/A',
+                                                              ),
+                                                              maxLines: 2,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'primaryFont',
+                                                                    color: Color(
+                                                                        0xFF252525),
+                                                                    fontSize:
+                                                                        10.0,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
                                                             ),
                                                           ),
-                                                        ],
-                                                      ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      6.0,
+                                                                      6.0,
+                                                                      6.0,
+                                                                      0.0),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            6.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                child: Text(
+                                                                  'Start From \$${valueOrDefault<String>(
+                                                                    getJsonField(
+                                                                      serviceListItem,
+                                                                      r'''$.start_from''',
+                                                                    )?.toString(),
+                                                                    'N/A',
+                                                                  )}',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'primaryFont',
+                                                                        color: Color(
+                                                                            0xFF898989),
+                                                                        fontSize:
+                                                                            8.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                ),
+                                                              ),
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Icon(
+                                                                    Icons.star,
+                                                                    color: Color(
+                                                                        0xFFFFCF26),
+                                                                    size: 12.0,
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            2.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child: Text(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        getJsonField(
+                                                                          serviceListItem,
+                                                                          r'''$.average_reviews''',
+                                                                        )?.toString(),
+                                                                        'N/A',
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'primaryFont',
+                                                                            fontSize:
+                                                                                10.0,
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                          ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ),
-                                                                                ),
-                                        );
+                                        ),
+                                      );
                                     },
                                   );
                                 },
