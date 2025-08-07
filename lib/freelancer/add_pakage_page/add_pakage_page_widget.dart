@@ -734,6 +734,13 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                                 onChanged: (newValue) async {
                                   safeSetState(
                                       () => _model.switchValue = newValue);
+                                  if (newValue) {
+                                    _model.expDelivery = '1';
+                                    safeSetState(() {});
+                                  } else {
+                                    _model.expDelivery = '0';
+                                    safeSetState(() {});
+                                  }
                                 },
                                 activeColor: Color(0xFF53B175),
                                 activeTrackColor: Colors.white,
@@ -1268,13 +1275,13 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                                         price: _model.priceTextController.text,
                                         deliveryTime: _model.dropDownValue,
                                         expressDeliverEnable:
-                                            _model.switchValue?.toString(),
+                                            _model.expDelivery,
                                         expressDeliveryAmount:
                                             _model.amountTextController.text,
                                         numberOfRevisions:
                                             _model.revisionTextController.text,
                                         authToken: FFAppState().apitoken,
-                                        serviceId: '1',
+                                        serviceId: widget.id,
                                         featuresJson: FFAppState()
                                             .features
                                             .map((e) => getJsonField(
