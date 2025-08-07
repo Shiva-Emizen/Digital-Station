@@ -54,6 +54,7 @@ class LoginApiCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -100,6 +101,7 @@ class SignUpApiCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -129,6 +131,7 @@ class GetCountryCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -169,6 +172,7 @@ class VerifyOtpCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -199,6 +203,7 @@ class ForgotPasswordCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -230,6 +235,7 @@ class ResetPasswordCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       bodyType: BodyType.JSON,
@@ -263,6 +269,7 @@ class ResendOTPCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -303,6 +310,7 @@ class LoginWithSocialCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -364,6 +372,7 @@ class PopularServiceCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -399,6 +408,7 @@ class RecentServicesCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -432,6 +442,7 @@ class CategoryCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -467,6 +478,7 @@ class OrderCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {
         'paginate': paginate,
@@ -507,6 +519,7 @@ class SubCategoryCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {
         'category_id': categoryId,
@@ -546,6 +559,7 @@ class ServiceDetailCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -561,26 +575,31 @@ class ServiceDetailCall {
         response,
         r'''$.data''',
       );
+
   List? categoryList(dynamic response) => getJsonField(
         response,
         r'''$.data.categories''',
         true,
       ) as List?;
+
   List? galleryList(dynamic response) => getJsonField(
         response,
         r'''$.data.gallery''',
         true,
       ) as List?;
+
   List? portFolioList(dynamic response) => getJsonField(
         response,
         r'''$.data.portfolio''',
         true,
       ) as List?;
+
   List? faqList(dynamic response) => getJsonField(
         response,
         r'''$.data.faqs''',
         true,
       ) as List?;
+
   List? packageList(dynamic response) => getJsonField(
         response,
         r'''$.data.packages''',
@@ -605,6 +624,7 @@ class NotificationCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {
         'order_by[created_at]': orderBy,
@@ -640,6 +660,7 @@ class ClientProfileCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -673,6 +694,7 @@ class ServiceApiCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -711,6 +733,7 @@ class CreateOrderCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {
         'service_id': serviceId,
@@ -745,6 +768,7 @@ class SavedServicesCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -779,6 +803,7 @@ class AddToFavouriteCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -806,6 +831,7 @@ class GetSliderAPICall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -840,6 +866,7 @@ class AllServiceCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {
         'search': search,
@@ -876,6 +903,7 @@ class FreelancerProfileCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -909,6 +937,7 @@ class ChangeOrderCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -939,6 +968,7 @@ class UpdateOrderCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {
         'attachments[]': attachments,
@@ -1008,6 +1038,7 @@ class FreelancerLoginCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -1054,6 +1085,7 @@ class FreelancerRegistrationCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -1083,6 +1115,7 @@ class LanguageCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -1116,6 +1149,7 @@ class SkillsCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -1150,6 +1184,7 @@ class AvatarCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {
         'avatar': avatar,
@@ -1220,11 +1255,9 @@ class PersonalInfoUpdateCall {
     print('Raw Body: ${response.bodyText}');
     print('--------------------');
 
-
     return response;
   }
 }
-
 
 class AllLanguageCall {
   Future<ApiCallResponse> call({
@@ -1241,6 +1274,7 @@ class AllLanguageCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -1279,6 +1313,7 @@ class AddLanguageCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -1315,6 +1350,7 @@ class AddSkillCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -1344,6 +1380,7 @@ class LevelCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -1382,6 +1419,7 @@ class OccupationCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       body: ffApiRequestBody,
@@ -1411,6 +1449,7 @@ class GetOccupationCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -1471,6 +1510,7 @@ class OrderAPICall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {
         'paginate': paginate,
@@ -1510,6 +1550,7 @@ class AddPortfolioCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {
         'title': title,
@@ -1544,6 +1585,7 @@ class AddFAQCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {
         'service_id': serviceId,
@@ -1587,6 +1629,7 @@ class AddPackagesCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {
         'title': title,
@@ -1631,6 +1674,7 @@ class AddServicesCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {
         'title': title,
@@ -1668,6 +1712,7 @@ class MyServicesCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {
         'paginate': paginate,
@@ -1705,6 +1750,7 @@ class PortfolioCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -1739,6 +1785,7 @@ class GetPlanCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -1773,6 +1820,7 @@ class GetFAQCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -1809,6 +1857,7 @@ class ChangeStatusCall {
       headers: {
         'Authorization': 'Bearer ${authToken}',
         'Accept-Language': 'en',
+        'Accept': 'application/json',
       },
       params: {},
       returnBody: true,
