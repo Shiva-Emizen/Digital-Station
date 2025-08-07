@@ -1180,14 +1180,27 @@ class PersonalInfoUpdateCall {
   "nickname": "${escapeStringForJson(nickname)}",
   "about": "${escapeStringForJson(about)}"
 }''';
-    return ApiManager.instance.makeApiCall(
+
+    final headers = {
+      'Authorization': 'Bearer $authToken',
+      'Accept-Language': 'en',
+    };
+
+    final apiUrl = '${baseUrl}user-about-nick-name';
+
+    // 📌 Print API Request
+    print('--- API Request ---');
+    print('URL: $apiUrl');
+    print('Method: POST');
+    print('Headers: $headers');
+    print('Body: $ffApiRequestBody');
+    print('-------------------');
+
+    final response = await ApiManager.instance.makeApiCall(
       callName: 'PersonalInfoUpdate',
-      apiUrl: '${baseUrl}user-about-nick-name',
+      apiUrl: apiUrl,
       callType: ApiCallType.POST,
-      headers: {
-        'Authorization': 'Bearer ${authToken}',
-        'Accept-Language': 'en',
-      },
+      headers: headers,
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -1198,8 +1211,20 @@ class PersonalInfoUpdateCall {
       isStreamingApi: false,
       alwaysAllowBody: false,
     );
+
+    // 📌 Print API Response
+    print('--- API Response ---');
+    print('Status: ${response.statusCode}');
+    print('Succeeded: ${response.succeeded}');
+    print('Body: ${response.jsonBody}');
+    print('Raw Body: ${response.bodyText}');
+    print('--------------------');
+
+
+    return response;
   }
 }
+
 
 class AllLanguageCall {
   Future<ApiCallResponse> call({

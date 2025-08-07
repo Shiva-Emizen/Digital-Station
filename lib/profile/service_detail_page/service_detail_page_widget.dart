@@ -1168,7 +1168,7 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              FFLocalizations.of(context).getText('n5ybdzzz' /* Recently viewed */),
+                              FFLocalizations.of(context).getText('o7slffff' /* Recently viewed */),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(

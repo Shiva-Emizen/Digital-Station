@@ -1985,6 +1985,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Home',
       'ar': 'بيت',
     },
+    'o7slffff': {
+      'en': 'Recommended Services',
+      'ar': 'الخدمات الموصى بها',
+    },
   },
   // ViewAllPage
   {

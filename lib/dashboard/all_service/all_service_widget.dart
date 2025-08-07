@@ -96,22 +96,22 @@ class _AllServiceWidgetState extends State<AllServiceWidget> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Align(
-                            alignment: AlignmentDirectional(0.0, -1.0),
-                            child: FlutterFlowIconButton(
-                              borderRadius: 8.0,
-                              buttonSize: 36.0,
-                              fillColor: Colors.white,
-                              icon: Icon(
-                                Icons.arrow_back_ios_new,
-                                color: Color(0xFF252525),
-                                size: 18.0,
-                              ),
-                              onPressed: () async {
-                                context.safePop();
-                              },
-                            ),
-                          ),
+                          // Align(
+                          //   alignment: AlignmentDirectional(0.0, -1.0),
+                          //   child: FlutterFlowIconButton(
+                          //     borderRadius: 8.0,
+                          //     buttonSize: 36.0,
+                          //     fillColor: Colors.white,
+                          //     icon: Icon(
+                          //       Icons.arrow_back_ios_new,
+                          //       color: Color(0xFF252525),
+                          //       size: 18.0,
+                          //     ),
+                          //     onPressed: () async {
+                          //       context.safePop();
+                          //     },
+                          //   ),
+                          // ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 6.0, 20.0, 0.0),

@@ -65,6 +65,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _startSliderAutoScroll();
     });
+    print("apitoken===>${FFAppState().apitoken}");
   }
   void _startSliderAutoScroll() {
     _sliderTimer?.cancel();
@@ -97,6 +98,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       'popular': futures[3],
       'recent': futures[4],
     };
+
+
+
   }
 
   @override
@@ -1146,7 +1150,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                         homePageClientProfileResponse
                                                             .jsonBody,
                                                       ),
-                                                      r'''$.avatar''',
+                                                      r'''$.avatar.url''',
                                                     )?.toString(),
                                                     'https://picsum.photos/seed/6/600',
                                                   ),
@@ -1455,17 +1459,21 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             child: Image.network(
                                               valueOrDefault<String>(
                                                 getJsonField(
-                                                  (_model.apiResultmfv
-                                                      ?.jsonBody ??
-                                                      ''),
-                                                  r'''$.data.avatar.url''',
+                                                  ClientHomePageGroup
+                                                      .clientProfileCall
+                                                      .clientDetails(
+                                                    homePageClientProfileResponse
+                                                        .jsonBody,
+                                                  ),
+                                                  r'''$.avatar.url''',
                                                 )?.toString(),
-                                                'https://www.gravatar.com/avatar/?d=mp&f=y',
+                                                'https://picsum.photos/seed/6/600',
                                               ),
                                               fit: BoxFit.cover,
                                             ),
                                           ),
                                         ),
+
                                         Align(
                                           alignment:
                                           AlignmentDirectional(0.0, -1.0),
@@ -1499,15 +1507,18 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 Text(
                                                   valueOrDefault<String>(
                                                     getJsonField(
-                                                      (_model.apiResultmfv
-                                                          ?.jsonBody ??
-                                                          ''),
-                                                      r'''$.data.name''',
+                                                      ClientHomePageGroup
+                                                          .clientProfileCall
+                                                          .clientDetails(
+                                                        homePageClientProfileResponse
+                                                            .jsonBody,
+                                                      ),
+                                                      r'''$.name''',
                                                     )?.toString(),
                                                     'N/A',
                                                   ),
-                                                  style: FlutterFlowTheme.of(
-                                                      context)
+                                                  style: FlutterFlowTheme
+                                                      .of(context)
                                                       .bodyMedium
                                                       .override(
                                                     fontFamily:
@@ -1591,13 +1602,65 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                           children: [
+
                                             Text(
                                               valueOrDefault<String>(
                                                 getJsonField(
-                                                  (_model.apiResultmfv
-                                                      ?.jsonBody ??
-                                                      ''),
-                                                  r'''$.data.completed_jobs''',
+                                                  ClientHomePageGroup
+                                                      .clientProfileCall
+                                                      .clientDetails(
+                                                    homePageClientProfileResponse
+                                                        .jsonBody,
+                                                  ),
+                                                  r'''$.name''',
+                                                )?.toString(),
+                                                'N/A',
+                                              ),
+                                              style: FlutterFlowTheme
+                                                  .of(context)
+                                                  .bodyMedium
+                                                  .override(
+                                                fontFamily:
+                                                'primaryFont',
+                                                color: Colors.white,
+                                                fontSize: 16.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                FontWeight.w900,
+                                              ),
+                                            ),
+
+
+
+
+
+
+
+
+
+                                             Text(
+                                            //   valueOrDefault<String>(
+                                            //     getJsonField(
+                                            //       (_model.apiResultmfv
+                                            //           ?.jsonBody ??
+                                            //           ''),
+                                            //       r'''$.data.completed_jobs''',
+                                            //     )?.toString(),
+                                            //     'N/A',
+                                            //   ),
+
+
+
+
+                                              valueOrDefault<String>(
+                                                getJsonField(
+                                                  ClientHomePageGroup
+                                                      .clientProfileCall
+                                                      .clientDetails(
+                                                    homePageClientProfileResponse
+                                                        .jsonBody,
+                                                  ),
+                                                  r'''$.completed_jobs''',
                                                 )?.toString(),
                                                 'N/A',
                                               ),
