@@ -1671,15 +1671,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'rgnwpi5y': {
-      'en': 'Option 1',
+      'en': '1',
       'ar': '',
     },
     'uft629wj': {
-      'en': 'Option 2',
+      'en': '2',
       'ar': '',
     },
     'wg4tjjhh': {
-      'en': 'Option 3',
+      'en': '3',
       'ar': '',
     },
     '8tr993gw': {

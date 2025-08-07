@@ -626,15 +626,27 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                             controller: _model.dropDownValueController ??=
                                 FormFieldController<String>(null),
                             options: [
-                              FFLocalizations.of(context).getText(
-                                'rgnwpi5y' /* Option 1 */,
-                              ),
-                              FFLocalizations.of(context).getText(
-                                'uft629wj' /* Option 2 */,
-                              ),
-                              FFLocalizations.of(context).getText(
-                                'wg4tjjhh' /* Option 3 */,
-                              )
+                              // FFLocalizations.of(context).getText(
+                              //   'rgnwpi5y' /* Option 1 */,
+                              // ),
+                              // FFLocalizations.of(context).getText(
+                              //   'uft629wj' /* Option 2 */,
+                              // ),
+                              // FFLocalizations.of(context).getText(
+                              //   'wg4tjjhh' /* Option 3 */,
+                              // )
+                              "1",
+                              "2",
+                              "3",
+                              "4",
+                              "5",
+                              "6",
+                              "7",
+                              "8",
+                              "9",
+                              "10",
+                              "11",
+                              "12",
                             ],
                             onChanged: (val) =>
                                 safeSetState(() => _model.dropDownValue = val),
