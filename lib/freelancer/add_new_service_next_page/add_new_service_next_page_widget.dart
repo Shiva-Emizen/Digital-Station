@@ -58,167 +58,166 @@ class _AddNewServiceNextPageWidgetState
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
-          child: Stack(
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
-                child: Row(
+        body: Stack(
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(20.0, 30.0, 20.0, 0.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  FlutterFlowIconButton(
+                    borderRadius: 8.0,
+                    buttonSize: 36.0,
+                    fillColor: Colors.white,
+                    icon: Icon(
+                      Icons.arrow_back_ios_new,
+                      color: Color(0xFF252525),
+                      size: 18.0,
+                    ),
+                    onPressed: () async {
+                      context.pushNamed(AddNewServiceWidget.routeName);
+                    },
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 20.0, 0.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          FFLocalizations.of(context).getText(
+                            '1y1701ac' /* Add New Service */,
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'primaryFont',
+                                    color: Color(0xFF252525),
+                                    fontSize: 16.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 80.0, 0.0, 0.0),
+              child: SingleChildScrollView(
+                child: Column(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    FlutterFlowIconButton(
-                      borderRadius: 8.0,
-                      buttonSize: 36.0,
-                      fillColor: Colors.white,
-                      icon: Icon(
-                        Icons.arrow_back_ios_new,
-                        color: Color(0xFF252525),
-                        size: 18.0,
-                      ),
-                      onPressed: () async {
-                        context.pushNamed(AddNewServiceWidget.routeName);
-                      },
-                    ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 20.0, 0.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.end,
+                          EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(
-                            FFLocalizations.of(context).getText(
-                              '1y1701ac' /* Add New Service */,
-                            ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'primaryFont',
-                                  color: Color(0xFF252525),
-                                  fontSize: 16.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.bold,
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 15.0, 0.0, 0.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.asset(
+                                    'assets/images/edit-04.png',
+                                    width: 20.0,
+                                    height: 20.0,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            20.0, 0.0, 20.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 15.0, 0.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: Image.asset(
-                                      'assets/images/edit-04.png',
-                                      width: 20.0,
-                                      height: 20.0,
-                                      fit: BoxFit.cover,
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 0.0, 0.0, 0.0),
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      '1ig4bjdg' /* Packages */,
                                     ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'primaryFont',
+                                          fontSize: 12.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        10.0, 0.0, 0.0, 0.0),
-                                    child: Text(
-                                      FFLocalizations.of(context).getText(
-                                        '1ig4bjdg' /* Packages */,
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'primaryFont',
-                                            fontSize: 12.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                            FFButtonWidget(
-                              onPressed: () async {
-                                FFAppState().deleteFeatures();
-                                FFAppState().features = [];
+                          ),
+                          FFButtonWidget(
+                            onPressed: () async {
+                              FFAppState().deleteFeatures();
+                              FFAppState().features = [];
 
-                                safeSetState(() {});
+                              safeSetState(() {});
 
-                                context.pushNamed(
-                                  AddPakagePageWidget.routeName,
-                                  queryParameters: {
-                                    'id': serializeParam(
-                                      widget.serviceId,
-                                      ParamType.String,
-                                    ),
-                                  }.withoutNulls,
-                                );
-                              },
-                              text: FFLocalizations.of(context).getText(
-                                'swyjkk5a' /* Add  */,
-                              ),
-                              options: FFButtonOptions(
-                                height: 32.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: Color(0xFF6E2A87),
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      font: GoogleFonts.interTight(
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .fontStyle,
-                                      ),
-                                      color: Colors.white,
-                                      fontSize: 14.0,
-                                      letterSpacing: 0.0,
+                              context.pushNamed(
+                                AddPakagePageWidget.routeName,
+                                queryParameters: {
+                                  'id': serializeParam(
+                                    widget.serviceId,
+                                    ParamType.String,
+                                  ),
+                                }.withoutNulls,
+                              );
+                            },
+                            text: FFLocalizations.of(context).getText(
+                              'swyjkk5a' /* Add  */,
+                            ),
+                            options: FFButtonOptions(
+                              height: 32.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 16.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: Color(0xFF6E2A87),
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    font: GoogleFonts.interTight(
                                       fontWeight: FontWeight.bold,
                                       fontStyle: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .fontStyle,
                                     ),
-                                elevation: 0.0,
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
+                                    color: Colors.white,
+                                    fontSize: 14.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontStyle,
+                                  ),
+                              elevation: 0.0,
+                              borderRadius: BorderRadius.circular(10.0),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      FutureBuilder<ApiCallResponse>(
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                      child: FutureBuilder<ApiCallResponse>(
                         future: (_model.apiRequestCompleter ??=
                                 Completer<ApiCallResponse>()
                                   ..complete(
@@ -405,113 +404,113 @@ class _AddNewServiceNextPageWidgetState
                           );
                         },
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              Align(
-                alignment: AlignmentDirectional(0.0, 1.0),
-                child: Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(20.0, 200.0, 20.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.pushNamed(AddNewServiceWidget.routeName);
-                          },
-                          child: Container(
-                            width: double.infinity,
-                            height: 56.0,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFE7E7E7),
-                              borderRadius: BorderRadius.circular(8.0),
-                              shape: BoxShape.rectangle,
-                            ),
-                            child: Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Text(
-                                FFLocalizations.of(context).getText(
-                                  '3mllwvb3' /* Previous */,
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'primaryFont',
-                                      color: Color(0xFF6E2A87),
-                                      fontSize: 16.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+            ),
+            Align(
+              alignment: AlignmentDirectional(0.0, 1.0),
+              child: Padding(
+                padding:
+                    EdgeInsetsDirectional.fromSTEB(20.0, 200.0, 20.0, 20.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(AddNewServiceWidget.routeName);
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 56.0,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFE7E7E7),
+                            borderRadius: BorderRadius.circular(8.0),
+                            shape: BoxShape.rectangle,
+                          ),
+                          child: Align(
+                            alignment: AlignmentDirectional(0.0, 0.0),
+                            child: Text(
+                              FFLocalizations.of(context).getText(
+                                '3mllwvb3' /* Previous */,
                               ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'primaryFont',
+                                    color: Color(0xFF6E2A87),
+                                    fontSize: 16.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                             ),
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.pushNamed(
-                              PublishServicePageWidget.routeName,
-                              queryParameters: {
-                                'serviceId': serializeParam(
-                                  widget.serviceId,
-                                  ParamType.String,
-                                ),
-                              }.withoutNulls,
-                            );
-                          },
-                          child: Container(
-                            width: double.infinity,
-                            height: 56.0,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [Color(0xFF6E2A87), Color(0xFF16AFE6)],
-                                stops: [0.0, 1.0],
-                                begin: AlignmentDirectional(1.0, 0.0),
-                                end: AlignmentDirectional(-1.0, 0),
+                    ),
+                    Expanded(
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(
+                            PublishServicePageWidget.routeName,
+                            queryParameters: {
+                              'serviceId': serializeParam(
+                                widget.serviceId,
+                                ParamType.String,
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
-                              shape: BoxShape.rectangle,
+                            }.withoutNulls,
+                          );
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 56.0,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Color(0xFF6E2A87), Color(0xFF16AFE6)],
+                              stops: [0.0, 1.0],
+                              begin: AlignmentDirectional(1.0, 0.0),
+                              end: AlignmentDirectional(-1.0, 0),
                             ),
-                            child: Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Text(
-                                FFLocalizations.of(context).getText(
-                                  'xq9mxche' /* Next */,
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'primaryFont',
-                                      color: Colors.white,
-                                      fontSize: 16.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                            borderRadius: BorderRadius.circular(8.0),
+                            shape: BoxShape.rectangle,
+                          ),
+                          child: Align(
+                            alignment: AlignmentDirectional(0.0, 0.0),
+                            child: Text(
+                              FFLocalizations.of(context).getText(
+                                'xq9mxche' /* Next */,
                               ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'primaryFont',
+                                    color: Colors.white,
+                                    fontSize: 16.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                             ),
                           ),
                         ),
                       ),
-                    ].divide(SizedBox(width: 20.0)),
-                  ),
+                    ),
+                  ].divide(SizedBox(width: 20.0)),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
