@@ -1157,9 +1157,10 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                                                   .fromSTEB(
                                                       10.0, 0.0, 0.0, 0.0),
                                               child: Text(
-                                                featureListItem
-                                                    .hasTitle()
-                                                    .toString(),
+                                                getJsonField(
+                                                  featureListItem.toMap(),
+                                                  r'''$.title''',
+                                                ).toString(),
                                                 style: FlutterFlowTheme.of(
                                                         context)
                                                     .bodyMedium
