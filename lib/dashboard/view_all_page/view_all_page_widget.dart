@@ -210,7 +210,7 @@ class _ViewAllPageWidgetState extends State<ViewAllPageWidget> {
                                                       valueOrDefault<String>(
                                                         getJsonField(
                                                           serviceListItem,
-                                                          r'''$.gallery.url''',
+                                                          r'''$.gallery[0].url''',
                                                         )?.toString(),
                                                         'https://placebear.com/250/250',
                                                       ),
