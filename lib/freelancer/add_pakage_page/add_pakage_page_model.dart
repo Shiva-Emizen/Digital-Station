@@ -6,6 +6,10 @@ import 'add_pakage_page_widget.dart' show AddPakagePageWidget;
 import 'package:flutter/material.dart';
 
 class AddPakagePageModel extends FlutterFlowModel<AddPakagePageWidget> {
+  ///  Local state fields for this page.
+
+  String expDelivery = '0';
+
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();

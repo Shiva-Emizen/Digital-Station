@@ -2338,13 +2338,25 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // AllService
   {
-    'm5jh7qoa': {
-      'en': 'Services',
-      'ar': '',
-    },
     'yf4ct3f0': {
       'en': 'Search',
       'ar': 'يبحث',
+    },
+    'tq1gkx9t': {
+      'en': 'Services',
+      'ar': '',
+    },
+    '77oas297': {
+      'en': 'Add Service',
+      'ar': '',
+    },
+    's5qamjco': {
+      'en': 'Search',
+      'ar': '',
+    },
+    '8bn6pqix': {
+      'en': 'My Services',
+      'ar': '',
     },
     'lymwzj3p': {
       'en': 'Services',
