@@ -58,8 +58,8 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
+        body: Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
           child: Stack(
             children: [
               Padding(
@@ -387,7 +387,7 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                 alignment: AlignmentDirectional(0.0, 1.0),
                 child: Padding(
                   padding:
-                      EdgeInsetsDirectional.fromSTEB(20.0, 200.0, 20.0, 0.0),
+                      EdgeInsetsDirectional.fromSTEB(20.0, 200.0, 20.0, 20.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.start,
