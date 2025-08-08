@@ -33,6 +33,8 @@ class _AddNewServiceNextPageWidgetState
   late AddNewServiceNextPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  List<dynamic> _planList = [];
+
 
   @override
   void initState() {
@@ -230,11 +232,20 @@ class _AddNewServiceNextPageWidgetState
                           Completer<ApiCallResponse>()
                             ..complete(
                                 FreelancerHomePageGroup.getPlanCall.call(
-                                  authToken: FFAppState().apitoken,
-                                )))
+                                  authToken: FFAppState().apitoken,serviceId: widget.serviceId
+                                ).then((response) {
+                                  print('API Request Auth Token: ${FFAppState().apitoken}');
+                                  print('API Response JSON: ${response.jsonBody}');
+                                  print('API Response JSON: ${response.statusCode}');
+                                  return response;
+                                }))
+
+                          )
                               .future,
                           builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
+                            print('Auth Token Sent in Request: ${FFAppState().apitoken}');
+                            print('Auth Token Sent in Request: ${FFAppState().apitoken}');
+
                             if (!snapshot.hasData) {
                               return Center(
                                 child: SizedBox(
@@ -248,33 +259,32 @@ class _AddNewServiceNextPageWidgetState
                                 ),
                               );
                             }
+
                             final listViewGetPlanResponse = snapshot.data!;
+
+                            final planList = FreelancerHomePageGroup.getPlanCall
+                                .planList(listViewGetPlanResponse.jsonBody)
+                                ?.toList() ??
+                                [];
+
+                            // Store in state variable
+                            _planList = planList;
 
                             return Builder(
                               builder: (context) {
-                                final planList =
-                                    FreelancerHomePageGroup.getPlanCall
-                                        .planList(
-                                      listViewGetPlanResponse.jsonBody,
-                                    )
-                                        ?.toList() ??
-                                        [];
-
                                 return RefreshIndicator(
                                   color: Color(0xFF6E2A87),
                                   onRefresh: () async {
-                                    safeSetState(
-                                            () => _model.apiRequestCompleter = null);
+                                    safeSetState(() => _model.apiRequestCompleter = null);
                                     await _model.waitForApiRequestCompleted();
                                   },
                                   child: ListView.builder(
                                     padding: EdgeInsets.zero,
                                     shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
-                                    itemCount: planList.length,
+                                    itemCount: _planList.length,
                                     itemBuilder: (context, planListIndex) {
-                                      final planListItem =
-                                      planList[planListIndex];
+                                      final planListItem = _planList[planListIndex];
                                       return Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             20.0, 20.0, 20.0, 0.0),
@@ -317,7 +327,7 @@ class _AddNewServiceNextPageWidgetState
                                                       child: Text(
                                                         getJsonField(
                                                           planListItem,
-                                                          r'''$.name''',
+                                                          r'''$.title''',
                                                         ).toString(),
                                                         style: FlutterFlowTheme
                                                             .of(context)
@@ -471,6 +481,16 @@ class _AddNewServiceNextPageWidgetState
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            if (_planList.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Please add package',style: TextStyle(color:Color(0xFFFFFFFF) ),),
+                                  backgroundColor: Color(0xFF6E2A87),
+                                ),
+                              );
+                              return;
+                            }
+
                             context.pushNamed(
                               PublishServicePageWidget.routeName,
                               queryParameters: {
@@ -481,6 +501,7 @@ class _AddNewServiceNextPageWidgetState
                               }.withoutNulls,
                             );
                           },
+
                           child: Container(
                             width: double.infinity,
                             height: 56.0,

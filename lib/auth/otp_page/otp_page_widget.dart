@@ -310,52 +310,68 @@ class _OtpPageWidgetState extends State<OtpPageWidget> {
                             ),
                             child: FFButtonWidget(
                               onPressed: () async {
-                                if (_model.formKey.currentState == null ||
-                                    !_model.formKey.currentState!.validate()) {
+                                // ✅ Step 1: Validate form
+                                if (_model.formKey.currentState == null || !_model.formKey.currentState!.validate()) {
                                   return;
                                 }
-                                _model.apiResultqdf =
-                                    await ClientAuthorizationGroup.verifyOtpCall
-                                        .call(
+
+                                // ✅ Step 2: Print request payload
+                                print('📤 OTP Verification Request:');
+                                print('Email: ${widget.email}');
+                                print('OTP: ${widget.otp?.toString()}');
+
+                                // ✅ Step 3: Call verifyOtp API
+                                _model.apiResultqdf = await ClientAuthorizationGroup.verifyOtpCall.call(
                                   email: widget.email,
-                                  otp: widget.otp?.toString(),
+                                  otp: _model.pinCodeController.text,
                                 );
 
+                                // ✅ Step 4: Log raw response
+                                print('📥 OTP Verification Response:');
+                                print(_model.apiResultqdf?.jsonBody);
+
+                                // ✅ Step 5: Check if API call succeeded
                                 if ((_model.apiResultqdf?.succeeded ?? true)) {
+                                  // ✅ Show success message
+                                  String message = getJsonField(
+                                    (_model.apiResultqdf?.jsonBody ?? ''),
+                                    r'''$.message''',
+                                  ).toString();
+
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
-                                        getJsonField(
-                                          (_model.apiResultqdf?.jsonBody ?? ''),
-                                          r'''$.message''',
-                                        ).toString(),
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
+                                        message,
+                                        style: TextStyle(color: Colors.white),
                                       ),
                                       duration: Duration(milliseconds: 4000),
                                       backgroundColor: Color(0xFF6E2A87),
                                     ),
                                   );
+
+                                  // ✅ Save token and user type
                                   FFAppState().apitoken = getJsonField(
                                     (_model.apiResultqdf?.jsonBody ?? ''),
                                     r'''$.data.token''',
                                   ).toString();
-                                  FFAppState().userType = '0';
-                                  safeSetState(() {});
 
+                                  FFAppState().userType = '0';
+
+                                  // ✅ Refresh UI and navigate
+                                  safeSetState(() {});
                                   context.pushNamed(HomePageWidget.routeName);
                                 } else {
+                                  // ❌ Show error message
+                                  String errorMessage = getJsonField(
+                                    (_model.apiResultqdf?.jsonBody ?? ''),
+                                    r'''$.message''',
+                                  ).toString();
+
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
-                                        getJsonField(
-                                          (_model.apiResultqdf?.jsonBody ?? ''),
-                                          r'''$.message''',
-                                        ).toString(),
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
+                                        errorMessage,
+                                        style: TextStyle(color: Colors.white),
                                       ),
                                       duration: Duration(milliseconds: 4000),
                                       backgroundColor: Color(0xFF6E2A87),
@@ -363,8 +379,11 @@ class _OtpPageWidgetState extends State<OtpPageWidget> {
                                   );
                                 }
 
+                                // ✅ Final UI update
                                 safeSetState(() {});
                               },
+
+
                               text: FFLocalizations.of(context).getText(
                                 'ixwa74gr' /* Verify */,
                               ),

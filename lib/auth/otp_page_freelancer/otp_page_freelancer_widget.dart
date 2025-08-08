@@ -319,7 +319,7 @@ class _OtpPageFreelancerWidgetState extends State<OtpPageFreelancerWidget> {
                                     await ClientAuthorizationGroup.verifyOtpCall
                                         .call(
                                   email: widget.email,
-                                  otp: widget.otp?.toString(),
+                                  otp: _model.pinCodeController.text,
                                 );
 
                                 if ((_model.apiResultqdf?.succeeded ?? true)) {
