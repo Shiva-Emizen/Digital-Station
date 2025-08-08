@@ -1,3 +1,5 @@
+import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
+
 import '/backend/api_requests/api_calls.dart';
 import '/components/no_data_found_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -5,9 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:expandable/expandable.dart';
-import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -26,49 +26,59 @@ class ServiceDetailPageWidget extends StatefulWidget {
   static String routePath = '/serviceDetailPage';
 
   @override
-  State<ServiceDetailPageWidget> createState() =>
-      _ServiceDetailPageWidgetState();
+  State<ServiceDetailPageWidget> createState() => _ServiceDetailPageWidgetState();
 }
 
 class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
   late ServiceDetailPageModel _model;
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  bool _isApiCalled = false;
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => ServiceDetailPageModel());
+  }
 
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.detailsResponse = await ClientHomePageGroup.serviceDetailCall.call(
-        subCategoryId: widget.serviceId,
-        authToken: FFAppState().apitoken,
-      );
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_isApiCalled) {
+      _fetchServiceDetails();
+      _isApiCalled = true;
+    }
+  }
 
-      await Future.delayed(
-        Duration(
-          milliseconds: 2000,
-        ),
-      );
-      if (!(_model.detailsResponse?.succeeded ?? true)) {
-        return;
-      }
-    });
+  Future<void> _fetchServiceDetails() async {
+    setState(() => _isLoading = true); // Start loading
+    _model.detailsResponse = await ClientHomePageGroup.serviceDetailCall.call(
+      subCategoryId: widget.serviceId,
+      authToken: FFAppState().apitoken,
+    );
+    setState(() => _isLoading = false); // Stop loading
   }
 
   @override
   void dispose() {
     _model.dispose();
-
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
-
+    if (_isLoading) {
+      return Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF6E2A87)),
+          ),
+        ),
+      );
+    }
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -109,19 +119,19 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                       },
                     ),
                   ),
-                  FlutterFlowIconButton(
-                    borderRadius: 8.0,
-                    buttonSize: 36.0,
-                    fillColor: Colors.white,
-                    icon: Icon(
-                      Icons.edit_outlined,
-                      color: Color(0xFF252525),
-                      size: 18.0,
-                    ),
-                    onPressed: () async {
-                      context.safePop();
-                    },
-                  ),
+                  // FlutterFlowIconButton(
+                  //   borderRadius: 8.0,
+                  //   buttonSize: 36.0,
+                  //   fillColor: Colors.white,
+                  //   icon: Icon(
+                  //     Icons.edit_outlined,
+                  //     color: Color(0xFF252525),
+                  //     size: 18.0,
+                  //   ),
+                  //   onPressed: () async {
+                  //     context.safePop();
+                  //   },
+                  // ),
                 ],
               ),
               actions: [],
@@ -171,12 +181,10 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            color: FlutterFlowTheme.of(context).secondaryBackground,
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 20.0, 0.0),
+                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -184,14 +192,9 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                 Align(
                                   alignment: AlignmentDirectional(-1.0, 0.0),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        20.0, 20.0, 0.0, 10.0),
+                                    padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 0.0, 10.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
                                       children: [
                                         Container(
                                           width: 60.0,
@@ -202,12 +205,9 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                           ),
                                           child: Image.network(
                                             getJsonField(
-                                              ClientHomePageGroup
-                                                  .serviceDetailCall
+                                              ClientHomePageGroup.serviceDetailCall
                                                   .serviceDetail(
-                                                (_model.detailsResponse
-                                                        ?.jsonBody ??
-                                                    ''),
+                                                (_model.detailsResponse?.jsonBody ?? ''),
                                               ),
                                               r'''$.gallery[0].url''',
                                             ).toString(),
@@ -215,59 +215,44 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                           ),
                                         ),
                                         Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 0.0, 0.0),
+                                          padding: EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 0.0, 0.0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 getJsonField(
-                                                  ClientHomePageGroup
-                                                      .serviceDetailCall
+                                                  ClientHomePageGroup.serviceDetailCall
                                                       .serviceDetail(
-                                                    (_model.detailsResponse
-                                                            ?.jsonBody ??
-                                                        ''),
+                                                    (_model.detailsResponse?.jsonBody ?? ''),
                                                   ),
                                                   r'''$.username''',
                                                 ).toString(),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'primaryFont',
-                                                          fontSize: 16.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
+                                                style: FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .override(
+                                                  fontFamily: 'primaryFont',
+                                                  fontSize: 16.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
                                               Text(
                                                 getJsonField(
-                                                  ClientHomePageGroup
-                                                      .serviceDetailCall
+                                                  ClientHomePageGroup.serviceDetailCall
                                                       .serviceDetail(
-                                                    (_model.detailsResponse
-                                                            ?.jsonBody ??
-                                                        ''),
+                                                    (_model.detailsResponse?.jsonBody ?? ''),
                                                   ),
                                                   r'''$.title''',
                                                 ).toString(),
-                                                style: FlutterFlowTheme.of(
-                                                        context)
+                                                style: FlutterFlowTheme.of(context)
                                                     .bodyMedium
                                                     .override(
-                                                      fontFamily: 'primaryFont',
-                                                      color: Color(0xFF898989),
-                                                      fontSize: 12.0,
-                                                      letterSpacing: 0.0,
-                                                    ),
+                                                  fontFamily: 'primaryFont',
+                                                  color: Color(0xFF898989),
+                                                  fontSize: 12.0,
+                                                  letterSpacing: 0.0,
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -289,212 +274,120 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                       Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: Color(0x00FFFFFF),
+                          color: Colors.transparent,
                         ),
-                        child: Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                20.0, 22.0, 20.0, 0.0),
-                            child: Builder(
-                              builder: (context) {
-                                final packageList =
-                                    ClientHomePageGroup.serviceDetailCall
-                                            .packageList(
-                                              (_model.detailsResponse
-                                                      ?.jsonBody ??
-                                                  ''),
-                                            )
-                                            ?.toList() ??
-                                        [];
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(20.0, 22.0, 20.0, 0.0),
+                          child: Builder(
+                            builder: (context) {
+                              final packageList = ClientHomePageGroup.serviceDetailCall.packageList(
+                                (_model.detailsResponse?.jsonBody ?? ''),
+                              )?.toList() ?? [];
 
-                                return SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: List.generate(packageList.length,
-                                        (packageListIndex) {
-                                      final packageListItem =
-                                          packageList[packageListIndex];
-                                      return InkWell(
+                              return SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start, // Align items to start
+                                  children: List.generate(packageList.length, (packageListIndex) {
+                                    final packageListItem = packageList[packageListIndex];
+                                    final isSelected = getJsonField(_model.selectedPackage, r'''$.id''') ==
+                                        getJsonField(packageListItem, r'''$.id''');
+
+                                    return Padding(
+                                      padding: const EdgeInsets.only(right: 6.0),
+                                      child: InkWell(
                                         splashColor: Colors.transparent,
                                         focusColor: Colors.transparent,
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
-                                          _model.selectedPackage =
-                                              packageListItem;
+                                          _model.selectedPackage = packageListItem;
                                           safeSetState(() {});
                                         },
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
-                                          child: Container(
-                                            width: 120.0,
-                                            height: 80.0,
-                                            decoration: BoxDecoration(
-                                              color: getJsonField(
-                                                        _model.selectedPackage,
-                                                        r'''$.id''',
-                                                      ) ==
-                                                      getJsonField(
-                                                        packageListItem,
-                                                        r'''$.id''',
-                                                      )
-                                                  ? Color(0xFF6E2A87)
-                                                  : Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(12.0),
-                                              border: Border.all(
-                                                color: Color(0xFFD0B7EC),
-                                              ),
-                                            ),
-                                            child: Align(
-                                              alignment: AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        20.0, 10.0, 20.0, 10.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              0.0, 0.0),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    20.0,
-                                                                    0.0,
-                                                                    20.0,
-                                                                    0.0),
-                                                        child: Text(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            getJsonField(
-                                                              packageListItem,
-                                                              r'''$.price''',
-                                                            )?.toString(),
-                                                            'N/A',
-                                                          ),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                font:
-                                                                    GoogleFonts
-                                                                        .rubik(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .fontStyle,
-                                                                ),
-                                                                color: getJsonField(
-                                                                          _model
-                                                                              .selectedPackage,
-                                                                          r'''$.id''',
-                                                                        ) ==
-                                                                        getJsonField(
-                                                                          packageListItem,
-                                                                          r'''$.id''',
-                                                                        )
-                                                                    ? Colors.white
-                                                                    : Color(0xFF181818),
-                                                                fontSize: 16.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontStyle,
+                                        child: LayoutBuilder(
+                                          builder: (context, constraints) {
+                                            double screenWidth = MediaQuery.of(context).size.width;
+                                            double itemWidth = screenWidth * 0.3;
+
+                                            return ClipRRect(
+                                              borderRadius: BorderRadius.circular(12.0),
+                                              child: Container(
+                                                width: itemWidth,
+                                                height: 80.0,
+                                                decoration: BoxDecoration(
+                                                  color: isSelected ? Color(0xFF6E2A87) : Colors.white,
+                                                  borderRadius: BorderRadius.circular(12.0),
+                                                  border: Border.all(
+                                                    color: Color(0xFFD0B7EC),
+                                                  ),
+                                                ),
+                                                child: Center(
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Flexible(
+                                                          child: Text(
+                                                            valueOrDefault<String>(
+                                                              getJsonField(packageListItem, r'''$.price''')?.toString(),
+                                                              'N/A',
+                                                            ),
+                                                            overflow: TextOverflow.ellipsis,
+                                                            maxLines: 1,
+                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                              font: GoogleFonts.rubik(
+                                                                fontWeight: FontWeight.bold,
+                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                               ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              0.0, 0.0),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    20.0,
-                                                                    0.0,
-                                                                    20.0,
-                                                                    0.0),
-                                                        child: Text(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            getJsonField(
-                                                              packageListItem,
-                                                              r'''$.price''',
-                                                            )?.toString(),
-                                                            'N/A',
+                                                              color: isSelected ? Colors.white : Color(0xFF181818),
+                                                              fontSize: 16.0,
+                                                            ),
                                                           ),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'primaryFont',
-                                                                color: getJsonField(
-                                                                          _model
-                                                                              .selectedPackage,
-                                                                          r'''$.id''',
-                                                                        ) ==
-                                                                        getJsonField(
-                                                                          packageListItem,
-                                                                          r'''$.id''',
-                                                                        )
-                                                                    ? Colors.white
-                                                                    : Color(0xFF181818),
-                                                                fontSize: 13.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                              ),
                                                         ),
-                                                      ),
+                                                        SizedBox(height: 4),
+                                                        Flexible(
+                                                          child: Text(
+                                                            valueOrDefault<String>(
+                                                              getJsonField(packageListItem, r'''$.title''')?.toString(),
+                                                              'N/A',
+                                                            ),
+                                                            overflow: TextOverflow.ellipsis,
+                                                            maxLines: 1,
+                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                              fontFamily: 'primaryFont',
+                                                              color: isSelected ? Colors.white : Color(0xFF181818),
+                                                              fontSize: 13.0,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ),
+                                            );
+                                          },
                                         ),
-                                      );
-                                    }).divide(SizedBox(width: 6.0)),
-                                  ),
-                                );
-                              },
-                            ),
+                                      ),
+                                    );
+                                  }),
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ),
+
                       if (_model.selectedPackage != null)
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              20.0, 0.0, 20.0, 0.0),
+                          padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 20.0, 0.0, 0.0),
+                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                                 child: Text(
                                   getJsonField(
                                     _model.selectedPackage,
@@ -503,42 +396,36 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'primaryFont',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        fontSize: 15.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                    fontFamily: 'primaryFont',
+                                    color: FlutterFlowTheme.of(context).primaryText,
+                                    fontSize: 15.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                               Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    FFLocalizations.of(context).getText(
-                                      'ghyim16e' /* Delivery time */,
-                                    ),
+                                    FFLocalizations.of(context).getText('ghyim16e' /* Delivery time */),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          font: GoogleFonts.inter(
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
-                                          fontSize: 10.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.bold,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontStyle,
-                                        ),
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
+                                      fontSize: 10.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.bold,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                   ),
                                   Text(
                                     getJsonField(
@@ -548,44 +435,38 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          fontFamily: 'primaryFont',
-                                          fontSize: 10.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                      fontFamily: 'primaryFont',
+                                      fontSize: 10.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ],
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 16.0, 0.0, 0.0),
+                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      FFLocalizations.of(context).getText(
-                                        'yhvq829g' /* Revisions */,
-                                      ),
+                                      FFLocalizations.of(context).getText('yhvq829g' /* Revisions */),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            font: GoogleFonts.inter(
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontStyle,
-                                            ),
-                                            fontSize: 10.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
+                                        font: GoogleFonts.inter(
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .fontStyle,
+                                        ),
+                                        fontSize: 10.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
                                     ),
                                     Text(
                                       getJsonField(
@@ -595,11 +476,11 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'primaryFont',
-                                            fontSize: 10.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                        fontFamily: 'primaryFont',
+                                        fontSize: 10.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -618,17 +499,15 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                   return ListView.separated(
                                     padding: EdgeInsets.zero,
                                     shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
                                     scrollDirection: Axis.vertical,
                                     itemCount: featureList.length,
-                                    separatorBuilder: (_, __) =>
-                                        SizedBox(height: 6.0),
+                                    separatorBuilder: (_, __) => SizedBox(height: 6.0),
                                     itemBuilder: (context, featureListIndex) {
-                                      final featureListItem =
-                                          featureList[featureListIndex];
+                                      final featureListItem = featureList[featureListIndex];
                                       return Row(
                                         mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
                                             getJsonField(
@@ -638,15 +517,14 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'primaryFont',
-                                                  color: Color(0xFF252525),
-                                                  fontSize: 12.0,
-                                                  letterSpacing: 0.0,
-                                                ),
+                                              fontFamily: 'primaryFont',
+                                              color: Color(0xFF252525),
+                                              fontSize: 12.0,
+                                              letterSpacing: 0.0,
+                                            ),
                                           ),
                                           ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
+                                            borderRadius: BorderRadius.circular(8.0),
                                             child: Image.asset(
                                               'assets/images/Icon_(Stroke).png',
                                               width: 13.0,
@@ -661,8 +539,7 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                 },
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 40.0, 0.0, 0.0),
+                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
                                   height: 56.0,
@@ -715,52 +592,42 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                                 color: Colors.white,
                                               ),
                                             ),
-                                            duration:
-                                                Duration(milliseconds: 4000),
+                                            duration: Duration(milliseconds: 4000),
                                             backgroundColor: Color(0xFF6E2A87),
                                           ),
                                         );
                                       }
                                     },
-                                    text: FFLocalizations.of(context).getText(
-                                      'a0l4dtf9' /* Continue */,
-                                    ),
+                                    text: FFLocalizations.of(context).getText('a0l4dtf9' /* Continue */),
                                     icon: Icon(
                                       Icons.arrow_forward,
                                       size: 15.0,
                                     ),
                                     options: FFButtonOptions(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 0.0, 16.0, 0.0),
+                                      padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                                       iconAlignment: IconAlignment.end,
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
+                                      iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                                       color: Color(0x004B39EF),
                                       textStyle: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
-                                            font: GoogleFonts.interTight(
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontStyle,
-                                            ),
-                                            color: Colors.white,
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .fontStyle,
-                                          ),
+                                        font: GoogleFonts.interTight(
+                                          fontWeight: FlutterFlowTheme.of(context)
+                                              .titleSmall
+                                              .fontWeight,
+                                          fontStyle: FlutterFlowTheme.of(context)
+                                              .titleSmall
+                                              .fontStyle,
+                                        ),
+                                        color: Colors.white,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
+                                      ),
                                       elevation: 0.0,
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
@@ -771,8 +638,7 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                           ),
                         ),
                       Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
                         child: Container(
                           width: double.infinity,
                           height: 1.0,
@@ -782,8 +648,7 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            20.0, 16.0, 20.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(20.0, 16.0, 20.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -799,12 +664,12 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'primaryFont',
-                                    color: Color(0xFF252525),
-                                    fontSize: 17.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                fontFamily: 'primaryFont',
+                                color: Color(0xFF252525),
+                                fontSize: 17.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             Icon(
                               Icons.bookmark_rounded,
@@ -817,8 +682,7 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                       Align(
                         alignment: AlignmentDirectional(-1.0, 0.0),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              20.0, 10.0, 0.0, 0.0),
+                          padding: EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 0.0, 0.0),
                           child: Text(
                             getJsonField(
                               ClientHomePageGroup.serviceDetailCall
@@ -831,17 +695,16 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'primaryFont',
-                                  color: Color(0xFF252525),
-                                  fontSize: 12.0,
-                                  letterSpacing: 0.0,
-                                ),
+                              fontFamily: 'primaryFont',
+                              color: Color(0xFF252525),
+                              fontSize: 12.0,
+                              letterSpacing: 0.0,
+                            ),
                           ),
                         ),
                       ),
                       Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
                         child: Container(
                           width: double.infinity,
                           height: 1.0,
@@ -851,8 +714,7 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            20.0, 16.0, 20.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(20.0, 16.0, 20.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -863,96 +725,84 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  FFLocalizations.of(context).getText(
-                                    'h2ywztkp' /* Reviews */,
-                                  ),
+                                  FFLocalizations.of(context).getText('h2ywztkp' /* Reviews */),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'primaryFont',
-                                        fontSize: 16.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                    fontFamily: 'primaryFont',
+                                    fontSize: 16.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     RatingBar.builder(
                                       onRatingUpdate: (newValue) =>
-                                          safeSetState(() =>
-                                              _model.ratingBarValue = newValue),
+                                          safeSetState(() => _model.ratingBarValue = newValue),
                                       itemBuilder: (context, index) => Icon(
                                         Icons.star_rounded,
                                         color: Color(0xFF181725),
                                       ),
                                       direction: Axis.horizontal,
-                                      initialRating: _model.ratingBarValue ??=
-                                          3.0,
-                                      unratedColor:
-                                          FlutterFlowTheme.of(context).accent1,
+                                      initialRating: _model.ratingBarValue ??= 3.0,
+                                      unratedColor: FlutterFlowTheme.of(context).accent1,
                                       itemCount: 5,
                                       itemSize: 24.0,
                                       glowColor: Color(0xFF181725),
                                     ),
                                     Text(
-                                      FFLocalizations.of(context).getText(
-                                        'mdu06j9e' /* 4.9 */,
-                                      ),
+                                      FFLocalizations.of(context).getText('mdu06j9e' /* 4.9 */),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            font: GoogleFonts.inter(
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontStyle,
-                                            ),
-                                            fontSize: 16.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
+                                        font: GoogleFonts.inter(
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .fontStyle,
+                                        ),
+                                        fontSize: 16.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
                                     ),
                                   ],
                                 ),
                               ],
                             ),
-                            Text(
-                              FFLocalizations.of(context).getText(
-                                'gp1dky31' /* View all */,
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    font: GoogleFonts.inter(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                    ),
-                                    color: Color(0xFF898989),
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
-                            ),
+                            // Text(
+                            //   FFLocalizations.of(context).getText('gp1dky31' /* View all */),
+                            //   style: FlutterFlowTheme.of(context)
+                            //       .bodyMedium
+                            //       .override(
+                            //     font: GoogleFonts.inter(
+                            //       fontWeight: FlutterFlowTheme.of(context)
+                            //           .bodyMedium
+                            //           .fontWeight,
+                            //       fontStyle: FlutterFlowTheme.of(context)
+                            //           .bodyMedium
+                            //           .fontStyle,
+                            //     ),
+                            //     color: Color(0xFF898989),
+                            //     letterSpacing: 0.0,
+                            //     fontWeight: FlutterFlowTheme.of(context)
+                            //         .bodyMedium
+                            //         .fontWeight,
+                            //     fontStyle: FlutterFlowTheme.of(context)
+                            //         .bodyMedium
+                            //         .fontStyle,
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
                       Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
                         child: Container(
                           width: double.infinity,
                           height: 1.0,
@@ -962,74 +812,67 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            20.0, 16.0, 20.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(20.0, 16.0, 20.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              FFLocalizations.of(context).getText(
-                                'owlctk8d' /* FAQs */,
-                              ),
+                              FFLocalizations.of(context).getText('owlctk8d' /* FAQs */),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'primaryFont',
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            Text(
-                              FFLocalizations.of(context).getText(
-                                'lxzvlmeb' /* View all */,
+                                fontFamily: 'primaryFont',
+                                fontSize: 16.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.bold,
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    font: GoogleFonts.inter(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                    ),
-                                    color: Color(0xFF898989),
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
                             ),
+                            // Text(
+                            //   FFLocalizations.of(context).getText('lxzvlmeb' /* View all */),
+                            //   style: FlutterFlowTheme.of(context)
+                            //       .bodyMedium
+                            //       .override(
+                            //     font: GoogleFonts.inter(
+                            //       fontWeight: FlutterFlowTheme.of(context)
+                            //           .bodyMedium
+                            //           .fontWeight,
+                            //       fontStyle: FlutterFlowTheme.of(context)
+                            //           .bodyMedium
+                            //           .fontStyle,
+                            //     ),
+                            //     color: Color(0xFF898989),
+                            //     letterSpacing: 0.0,
+                            //     fontWeight: FlutterFlowTheme.of(context)
+                            //         .bodyMedium
+                            //         .fontWeight,
+                            //     fontStyle: FlutterFlowTheme.of(context)
+                            //         .bodyMedium
+                            //         .fontStyle,
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            20.0, 20.0, 20.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
                         child: Builder(
                           builder: (context) {
                             final faqList =
                                 ClientHomePageGroup.serviceDetailCall
-                                        .faqList(
-                                          (_model.detailsResponse?.jsonBody ??
-                                              ''),
-                                        )
-                                        ?.toList() ??
+                                    .faqList(
+                                  (_model.detailsResponse?.jsonBody ?? ''),
+                                )
+                                    ?.toList() ??
                                     [];
 
                             return ListView.separated(
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
                               scrollDirection: Axis.vertical,
                               itemCount: faqList.length,
-                              separatorBuilder: (_, __) =>
-                                  SizedBox(height: 6.0),
+                              separatorBuilder: (_, __) => SizedBox(height: 6.0),
                               itemBuilder: (context, faqListIndex) {
                                 final faqListItem = faqList[faqListIndex];
                                 return Container(
@@ -1046,56 +889,43 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                         width: double.infinity,
                                         decoration: BoxDecoration(
                                           color: Color(0x00F1F4F8),
-                                          borderRadius:
-                                              BorderRadius.circular(0.0),
+                                          borderRadius: BorderRadius.circular(0.0),
                                           border: Border.all(
                                             color: Color(0x00FFFFFF),
                                           ),
                                         ),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      14.0, 20.0, 14.0, 20.0),
+                                              padding: EdgeInsetsDirectional.fromSTEB(14.0, 20.0, 14.0, 20.0),
                                               child: Text(
                                                 getJsonField(
                                                   faqListItem,
                                                   r'''$.question''',
                                                 ).toString(),
-                                                style: FlutterFlowTheme.of(
-                                                        context)
+                                                style: FlutterFlowTheme.of(context)
                                                     .titleMedium
                                                     .override(
-                                                      font: GoogleFonts.rubik(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleMedium
-                                                                .fontStyle,
-                                                      ),
-                                                      color: Color(0xFF1B1B1B),
-                                                      fontSize: 15.0,
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleMedium
-                                                              .fontStyle,
-                                                    ),
+                                                  font: GoogleFonts.rubik(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontStyle: FlutterFlowTheme.of(context)
+                                                        .titleMedium
+                                                        .fontStyle,
+                                                  ),
+                                                  color: Color(0xFF1B1B1B),
+                                                  fontSize: 15.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontStyle: FlutterFlowTheme.of(context)
+                                                      .titleMedium
+                                                      .fontStyle,
+                                                ),
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 14.0, 0.0),
+                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 14.0, 0.0),
                                               child: Icon(
                                                 Icons.arrow_forward_ios_sharp,
                                                 color: Color(0xFFB8B8D2),
@@ -1113,90 +943,59 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                               color: Colors.transparent,
                                               elevation: 1.0,
                                               shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(14.0),
+                                                borderRadius: BorderRadius.circular(14.0),
                                               ),
                                               child: Container(
                                                 width: double.infinity,
                                                 decoration: BoxDecoration(
                                                   color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          14.0),
+                                                  borderRadius: BorderRadius.circular(14.0),
                                                   border: Border.all(
                                                     color: Color(0x2AFFFFFF),
                                                   ),
                                                 ),
                                                 child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  14.0,
-                                                                  10.0,
-                                                                  14.0,
-                                                                  0.0),
+                                                      padding: EdgeInsetsDirectional.fromSTEB(14.0, 10.0, 14.0, 0.0),
                                                       child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
+                                                        mainAxisSize: MainAxisSize.max,
+                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                         children: [
                                                           Text(
                                                             getJsonField(
                                                               faqListItem,
                                                               r'''$.question''',
                                                             ).toString(),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
+                                                            style: FlutterFlowTheme.of(context)
                                                                 .titleMedium
                                                                 .override(
-                                                                  font:
-                                                                      GoogleFonts
-                                                                          .rubik(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    fontStyle: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleMedium
-                                                                        .fontStyle,
-                                                                  ),
-                                                                  fontSize:
-                                                                      15.0,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  fontStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleMedium
-                                                                      .fontStyle,
-                                                                ),
+                                                              font: GoogleFonts.rubik(
+                                                                fontWeight: FontWeight.w500,
+                                                                fontStyle: FlutterFlowTheme.of(context)
+                                                                    .titleMedium
+                                                                    .fontStyle,
+                                                              ),
+                                                              fontSize: 15.0,
+                                                              letterSpacing: 0.0,
+                                                              fontWeight: FontWeight.w500,
+                                                              fontStyle: FlutterFlowTheme.of(context)
+                                                                  .titleMedium
+                                                                  .fontStyle,
+                                                            ),
                                                           ),
                                                           Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .rectangle,
-                                                              border:
-                                                                  Border.all(
-                                                                color: Color(
-                                                                    0x002F2F2F),
+                                                            decoration: BoxDecoration(
+                                                              shape: BoxShape.rectangle,
+                                                              border: Border.all(
+                                                                color: Color(0x002F2F2F),
                                                               ),
                                                             ),
                                                             child: Icon(
-                                                              Icons
-                                                                  .keyboard_arrow_down_outlined,
-                                                              color: Color(
-                                                                  0xFFB8B8D2),
+                                                              Icons.keyboard_arrow_down_outlined,
+                                                              color: Color(0xFFB8B8D2),
                                                               size: 20.0,
                                                             ),
                                                           ),
@@ -1204,49 +1003,33 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                                       ),
                                                     ),
                                                     Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  14.0,
-                                                                  10.0,
-                                                                  14.0,
-                                                                  10.0),
+                                                      padding: EdgeInsetsDirectional.fromSTEB(14.0, 10.0, 14.0, 10.0),
                                                       child: Text(
                                                         getJsonField(
                                                           faqListItem,
                                                           r'''$.answer''',
                                                         ).toString(),
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
+                                                        style: FlutterFlowTheme.of(context)
                                                             .bodySmall
                                                             .override(
-                                                              font: GoogleFonts
-                                                                  .rubik(
-                                                                fontWeight: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodySmall
-                                                                    .fontWeight,
-                                                                fontStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodySmall
-                                                                    .fontStyle,
-                                                              ),
-                                                              color: Color(
-                                                                  0xFF545454),
-                                                              fontSize: 14.0,
-                                                              letterSpacing:
-                                                                  0.0,
-                                                              fontWeight:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodySmall
-                                                                      .fontWeight,
-                                                              fontStyle:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodySmall
-                                                                      .fontStyle,
-                                                            ),
+                                                          font: GoogleFonts.rubik(
+                                                            fontWeight: FlutterFlowTheme.of(context)
+                                                                .bodySmall
+                                                                .fontWeight,
+                                                            fontStyle: FlutterFlowTheme.of(context)
+                                                                .bodySmall
+                                                                .fontStyle,
+                                                          ),
+                                                          color: Color(0xFF545454),
+                                                          fontSize: 14.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight: FlutterFlowTheme.of(context)
+                                                              .bodySmall
+                                                              .fontWeight,
+                                                          fontStyle: FlutterFlowTheme.of(context)
+                                                              .bodySmall
+                                                              .fontStyle,
+                                                        ),
                                                       ),
                                                     ),
                                                   ],
@@ -1260,8 +1043,7 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                         tapHeaderToExpand: true,
                                         tapBodyToExpand: true,
                                         tapBodyToCollapse: true,
-                                        headerAlignment:
-                                            ExpandablePanelHeaderAlignment.top,
+                                        headerAlignment: ExpandablePanelHeaderAlignment.top,
                                         hasIcon: false,
                                       ),
                                     ),
@@ -1273,8 +1055,7 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                         ),
                       ),
                       Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
                         child: Container(
                           width: double.infinity,
                           height: 1.0,
@@ -1284,56 +1065,50 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            20.0, 16.0, 20.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(20.0, 16.0, 20.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              FFLocalizations.of(context).getText(
-                                'yxhsmzhc' /* My Portfolio */,
-                              ),
+                              FFLocalizations.of(context).getText('yxhsmzhc' /* My Portfolio */),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'primaryFont',
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            Text(
-                              FFLocalizations.of(context).getText(
-                                'yum7tpzn' /* View all */,
+                                fontFamily: 'primaryFont',
+                                fontSize: 16.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.bold,
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    font: GoogleFonts.inter(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                    ),
-                                    color: Color(0xFF898989),
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
                             ),
+                            // Text(
+                            //   FFLocalizations.of(context).getText('yum7tpzn' /* View all */),
+                            //   style: FlutterFlowTheme.of(context)
+                            //       .bodyMedium
+                            //       .override(
+                            //     font: GoogleFonts.inter(
+                            //       fontWeight: FlutterFlowTheme.of(context)
+                            //           .bodyMedium
+                            //           .fontWeight,
+                            //       fontStyle: FlutterFlowTheme.of(context)
+                            //           .bodyMedium
+                            //           .fontStyle,
+                            //     ),
+                            //     color: Color(0xFF898989),
+                            //     letterSpacing: 0.0,
+                            //     fontWeight: FlutterFlowTheme.of(context)
+                            //         .bodyMedium
+                            //         .fontWeight,
+                            //     fontStyle: FlutterFlowTheme.of(context)
+                            //         .bodyMedium
+                            //         .fontStyle,
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            20.0, 16.0, 20.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(20.0, 16.0, 20.0, 0.0),
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
@@ -1343,34 +1118,30 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                             builder: (context) {
                               final prtFolioLst =
                                   ClientHomePageGroup.serviceDetailCall
-                                          .portFolioList(
-                                            (_model.detailsResponse?.jsonBody ??
-                                                ''),
-                                          )
-                                          ?.toList() ??
+                                      .portFolioList(
+                                    (_model.detailsResponse?.jsonBody ?? ''),
+                                  )
+                                      ?.toList() ??
                                       [];
 
                               return GridView.builder(
                                 padding: EdgeInsets.zero,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
                                   crossAxisSpacing: 10.0,
                                   mainAxisSpacing: 10.0,
                                   childAspectRatio: 1.0,
                                 ),
                                 shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
+                                physics: NeverScrollableScrollPhysics(),
                                 itemCount: prtFolioLst.length,
                                 itemBuilder: (context, prtFolioLstIndex) {
-                                  final prtFolioLstItem =
-                                      prtFolioLst[prtFolioLstIndex];
+                                  final prtFolioLstItem = prtFolioLst[prtFolioLstIndex];
                                   return Container(
                                     width: 100.0,
                                     height: 100.0,
                                     decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
+                                      color: FlutterFlowTheme.of(context).secondaryBackground,
                                     ),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8.0),
@@ -1392,50 +1163,43 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            20.0, 20.0, 20.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              FFLocalizations.of(context).getText(
-                                'n5ybdzzz' /* Recently viewed */,
-                              ),
+                              FFLocalizations.of(context).getText('o7slffff' /* Recently viewed */),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'primaryFont',
-                                    color: Colors.black,
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            Text(
-                              FFLocalizations.of(context).getText(
-                                'kbsotbtj' /* View all */,
+                                fontFamily: 'primaryFont',
+                                color: Colors.black,
+                                fontSize: 16.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.bold,
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'primaryFont',
-                                    color: Color(0xFF898989),
-                                    letterSpacing: 0.0,
-                                  ),
                             ),
+                            // Text(
+                            //   FFLocalizations.of(context).getText('kbsotbtj' /* View all */),
+                            //   style: FlutterFlowTheme.of(context)
+                            //       .bodyMedium
+                            //       .override(
+                            //     fontFamily: 'primaryFont',
+                            //     color: Color(0xFF898989),
+                            //     letterSpacing: 0.0,
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            20.0, 20.0, 20.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
                         child: FutureBuilder<ApiCallResponse>(
                           future: ClientHomePageGroup.recentServicesCall.call(
                             authToken: FFAppState().apitoken,
                           ),
                           builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
                               return Center(
                                 child: SizedBox(
@@ -1455,11 +1219,10 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                               builder: (context) {
                                 final recentViewList =
                                     ClientHomePageGroup.recentServicesCall
-                                            .recentViewList(
-                                              rowRecentServicesResponse
-                                                  .jsonBody,
-                                            )
-                                            ?.toList() ??
+                                        .recentViewList(
+                                      rowRecentServicesResponse.jsonBody,
+                                    )
+                                        ?.toList() ??
                                         [];
                                 if (recentViewList.isEmpty) {
                                   return NoDataFoundWidget(
@@ -1471,136 +1234,83 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                   scrollDirection: Axis.horizontal,
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
-                                    children:
-                                        List.generate(recentViewList.length,
-                                            (recentViewListIndex) {
-                                      final recentViewListItem =
-                                          recentViewList[recentViewListIndex];
+                                    children: List.generate(recentViewList.length, (recentViewListIndex) {
+                                      final recentViewListItem = recentViewList[recentViewListIndex];
                                       return Material(
                                         color: Colors.transparent,
                                         elevation: 10.0,
                                         shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(16.0),
+                                          borderRadius: BorderRadius.circular(16.0),
                                         ),
                                         child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(16.0),
+                                          borderRadius: BorderRadius.circular(16.0),
                                           child: Container(
                                             width: 140.0,
                                             decoration: BoxDecoration(
                                               color: Color(0xFFE9E9E9),
-                                              borderRadius:
-                                                  BorderRadius.circular(16.0),
+                                              borderRadius: BorderRadius.circular(16.0),
                                             ),
                                             child: Stack(
                                               children: [
                                                 ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          0.0),
+                                                  borderRadius: BorderRadius.circular(0.0),
                                                   child: Image.asset(
                                                     'assets/images/Rectangle_202.png',
                                                     fit: BoxFit.cover,
-                                                    alignment:
-                                                        Alignment(0.0, 0.0),
+                                                    alignment: Alignment(0.0, 0.0),
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 80.0, 0.0, 10.0),
+                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 80.0, 0.0, 10.0),
                                                   child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                    mainAxisSize: MainAxisSize.max,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
                                                       Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    6.0,
-                                                                    0.0,
-                                                                    6.0,
-                                                                    0.0),
+                                                        padding: EdgeInsetsDirectional.fromSTEB(6.0, 0.0, 6.0, 0.0),
                                                         child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
+                                                          mainAxisSize: MainAxisSize.max,
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                           children: [
                                                             Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .min,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
+                                                              mainAxisSize: MainAxisSize.min,
                                                               children: [
                                                                 ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              8.0),
-                                                                  child: Image
-                                                                      .asset(
+                                                                  borderRadius: BorderRadius.circular(8.0),
+                                                                  child: Image.asset(
                                                                     'assets/images/Icon_(Stroke).png',
                                                                     width: 10.0,
-                                                                    height:
-                                                                        10.0,
-                                                                    fit: BoxFit
-                                                                        .cover,
+                                                                    height: 10.0,
+                                                                    fit: BoxFit.cover,
                                                                   ),
                                                                 ),
                                                                 Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          6.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                  padding: EdgeInsetsDirectional.fromSTEB(6.0, 0.0, 0.0, 0.0),
                                                                   child: Text(
-                                                                    valueOrDefault<
-                                                                        String>(
+                                                                    valueOrDefault<String>(
                                                                       getJsonField(
                                                                         recentViewListItem,
                                                                         r'''$.username''',
                                                                       )?.toString(),
                                                                       'N/A',
                                                                     ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
+                                                                    style: FlutterFlowTheme.of(context)
                                                                         .bodyMedium
                                                                         .override(
-                                                                          fontFamily:
-                                                                              'primaryFont',
-                                                                          color:
-                                                                              Color(0xFF898989),
-                                                                          fontSize:
-                                                                              8.0,
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                        ),
+                                                                      fontFamily: 'primaryFont',
+                                                                      color: Color(0xFF898989),
+                                                                      fontSize: 8.0,
+                                                                      letterSpacing: 0.0,
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ],
                                                             ),
                                                             Align(
-                                                              alignment:
-                                                                  AlignmentDirectional(
-                                                                      0.0, 0.0),
+                                                              alignment: AlignmentDirectional(0.0, 0.0),
                                                               child: Icon(
-                                                                Icons
-                                                                    .bookmark_border,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryText,
+                                                                Icons.bookmark_border,
+                                                                color: FlutterFlowTheme.of(context).primaryText,
                                                                 size: 24.0,
                                                               ),
                                                             ),
@@ -1608,24 +1318,12 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                                         ),
                                                       ),
                                                       Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    6.0,
-                                                                    0.0,
-                                                                    6.0,
-                                                                    0.0),
+                                                        padding: EdgeInsetsDirectional.fromSTEB(6.0, 0.0, 6.0, 0.0),
                                                         child: Container(
-                                                          width:
-                                                              MediaQuery.sizeOf(
-                                                                          context)
-                                                                      .width *
-                                                                  0.6,
-                                                          decoration:
-                                                              BoxDecoration(),
+                                                          width: MediaQuery.sizeOf(context).width * 0.6,
+                                                          decoration: BoxDecoration(),
                                                           child: Text(
-                                                            valueOrDefault<
-                                                                String>(
+                                                            valueOrDefault<String>(
                                                               getJsonField(
                                                                 recentViewListItem,
                                                                 r'''$.description''',
@@ -1633,45 +1331,25 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                                               'N/A',
                                                             ),
                                                             maxLines: 2,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
+                                                            style: FlutterFlowTheme.of(context)
                                                                 .bodyMedium
                                                                 .override(
-                                                                  fontFamily:
-                                                                      'primaryFont',
-                                                                  color: Color(
-                                                                      0xFF252525),
-                                                                  fontSize:
-                                                                      10.0,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
+                                                              fontFamily: 'primaryFont',
+                                                              color: Color(0xFF252525),
+                                                              fontSize: 10.0,
+                                                              letterSpacing: 0.0,
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
                                                       Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    6.0,
-                                                                    6.0,
-                                                                    6.0,
-                                                                    0.0),
+                                                        padding: EdgeInsetsDirectional.fromSTEB(6.0, 6.0, 6.0, 0.0),
                                                         child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
+                                                          mainAxisSize: MainAxisSize.max,
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                           children: [
                                                             Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          6.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                              padding: EdgeInsetsDirectional.fromSTEB(6.0, 0.0, 0.0, 0.0),
                                                               child: Text(
                                                                 'Start From ${valueOrDefault<String>(
                                                                   getJsonField(
@@ -1680,59 +1358,41 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                                                                   )?.toString(),
                                                                   'N/A',
                                                                 )}',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
+                                                                style: FlutterFlowTheme.of(context)
                                                                     .bodyMedium
                                                                     .override(
-                                                                      fontFamily:
-                                                                          'primaryFont',
-                                                                      color: Color(
-                                                                          0xFF898989),
-                                                                      fontSize:
-                                                                          8.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
+                                                                  fontFamily: 'primaryFont',
+                                                                  color: Color(0xFF898989),
+                                                                  fontSize: 8.0,
+                                                                  letterSpacing: 0.0,
+                                                                ),
                                                               ),
                                                             ),
                                                             Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
+                                                              mainAxisSize: MainAxisSize.max,
                                                               children: [
                                                                 Icon(
                                                                   Icons.star,
-                                                                  color: Color(
-                                                                      0xFFFFCF26),
+                                                                  color: Color(0xFFFFCF26),
                                                                   size: 12.0,
                                                                 ),
                                                                 Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          2.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                  padding: EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 0.0),
                                                                   child: Text(
-                                                                    valueOrDefault<
-                                                                        String>(
+                                                                    valueOrDefault<String>(
                                                                       getJsonField(
                                                                         recentViewListItem,
                                                                         r'''$.average_reviews''',
                                                                       )?.toString(),
                                                                       'N/A',
                                                                     ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
+                                                                    style: FlutterFlowTheme.of(context)
                                                                         .bodyMedium
                                                                         .override(
-                                                                          fontFamily:
-                                                                              'primaryFont',
-                                                                          fontSize:
-                                                                              10.0,
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                        ),
+                                                                      fontFamily: 'primaryFont',
+                                                                      fontSize: 10.0,
+                                                                      letterSpacing: 0.0,
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ],

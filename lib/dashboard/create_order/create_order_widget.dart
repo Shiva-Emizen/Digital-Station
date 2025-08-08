@@ -520,107 +520,126 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                                     ),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        if (_model.formKey.currentState ==
-                                                null ||
-                                            !_model.formKey.currentState!
-                                                .validate()) {
+                                        print('Submit button pressed');
+
+                                        // Form validation
+                                        if (_model.formKey.currentState == null || !_model.formKey.currentState!.validate()) {
+                                          print('Form is not valid.');
                                           return;
                                         }
-                                        _model.orderCreatedResponse =
-                                            await ClientHomePageGroup
-                                                .createOrderCall
-                                                .call(
+
+                                        print('Form is valid. Proceeding to create order...');
+
+                                        // Call to create the order
+                                        _model.orderCreatedResponse = await ClientHomePageGroup.createOrderCall.call(
                                           serviceId: widget.serviceId,
                                           packageId: widget.packageId,
-                                          description:
-                                              _model.textController.text,
+                                          description: _model.textController.text,
                                           attachments: _model.selectedPath,
-                                          expressDelivery:
-                                              _model.extraPay == true
-                                                  ? '1'
-                                                  : '0',
+                                          expressDelivery: _model.extraPay == true ? '1' : '0',
                                           authToken: FFAppState().apitoken,
                                         );
 
-                                        if ((_model.orderCreatedResponse
-                                                ?.succeeded ??
-                                            true)) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
+                                        // Log response
+                                        print('Order response: ${_model.orderCreatedResponse?.jsonBody}');
+
+                                        // Explicitly check for success
+                                        if (_model.orderCreatedResponse?.succeeded == true) {
+                                          print('Order created successfully');
+
+                                          // Parse total
+                                          double total = double.tryParse(
+                                            getJsonField(
+                                              (_model.orderCreatedResponse?.jsonBody ?? ''),
+                                              r'''$.data.total''',
+                                            ).toString(),
+                                          ) ??
+                                              0.0;
+
+                                          print('Parsed total amount: $total');
+
+                                          if (total <= 0) {
+                                            print('Invalid total amount. Aborting PayPal payment.');
+                                            return;
+                                          }
+
+                                          // Show success message
+                                          ScaffoldMessenger.of(context).showSnackBar(
                                             SnackBar(
                                               content: Text(
                                                 getJsonField(
-                                                  (_model.orderCreatedResponse
-                                                          ?.jsonBody ??
-                                                      ''),
+                                                  (_model.orderCreatedResponse?.jsonBody ?? ''),
                                                   r'''$.message''',
                                                 ).toString(),
                                                 style: TextStyle(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
+                                                  color: FlutterFlowTheme.of(context).primaryText,
                                                 ),
                                               ),
-                                              duration:
-                                                  Duration(milliseconds: 4000),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondary,
+                                              duration: Duration(milliseconds: 4000),
+                                              backgroundColor: FlutterFlowTheme.of(context).secondary,
                                             ),
                                           );
-                                          await paypal_integration_marketplace_library_9mtra1_actions
-                                              .paypalPay(
+
+                                          // Log PayPal parameters
+                                          print('Starting PayPal payment...');
+                                          print('Client ID: [TRUNCATED]');
+                                          print('Secret Key: [TRUNCATED]');
+                                          print('Currency: USD');
+                                          print('Description: ${_model.textController.text}');
+                                          print('Amount Details: ${_model.amountDetails}');
+                                          print('Product List: ${_model.productList}');
+
+                                          // Call PayPal integration
+                                          await paypal_integration_marketplace_library_9mtra1_actions.paypalPay(
                                             context,
-                                            'AQzOQFUCXTbmGocpHXvBm8ZsZxR-ODRn9bSrCdQsKs9fgzOJe07-eYsPUKN7BmWCw8Vt3izzvG6BmJIx ',
-                                            'EPSYJsR227guAVsnR3HZDE-CKI0WaecqRYfuvwXNP5YOf1yUVAtzTlgeqZS4d9rwGErZQog6fA1eHtnB ',
-                                            getJsonField(
-                                              (_model.orderCreatedResponse
-                                                      ?.jsonBody ??
-                                                  ''),
-                                              r'''$.data.total''',
-                                            ),
+                                            'AQzOQFUCXTbmGocpHXvBm8ZsZxR-ODRn9bSrCdQsKs9fgzOJe07-eYsPUKN7BmWCw8Vt3izzvG6BmJIx',
+                                            'EPSYJsR227guAVsnR3HZDE-CKI0WaecqRYfuvwXNP5YOf1yUVAtzTlgeqZS4d9rwGErZQog6fA1eHtnB',
+                                            total,
                                             'USD',
                                             _model.textController.text,
-                                            '',
+                                            'not to find',
                                             _model.amountDetails,
                                             _model.productList.toList(),
                                             _model.amountDetails,
                                             true,
-                                            (data) async {},
-                                            (params) async {},
-                                            (message) async {},
+                                                (data) async {
+                                              print('PayPal Success Callback: $data');
+                                            },
+                                                (params) async {
+                                              print('PayPal Params Callback: $params');
+                                            },
+                                                (message) async {
+                                              print('PayPal Error Callback: $message');
+                                            },
                                           );
                                         } else {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
+                                          // Order creation failed
+                                          print('Order creation failed');
+
+                                          ScaffoldMessenger.of(context).showSnackBar(
                                             SnackBar(
                                               content: Text(
                                                 getJsonField(
-                                                  (_model.orderCreatedResponse
-                                                          ?.jsonBody ??
-                                                      ''),
+                                                  (_model.orderCreatedResponse?.jsonBody ?? ''),
                                                   r'''$.message''',
                                                 ).toString(),
                                                 style: TextStyle(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
+                                                  color: FlutterFlowTheme.of(context).primaryText,
                                                 ),
                                               ),
-                                              duration:
-                                                  Duration(milliseconds: 4000),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondary,
+                                              duration: Duration(milliseconds: 4000),
+                                              backgroundColor: FlutterFlowTheme.of(context).secondary,
                                             ),
                                           );
                                         }
 
                                         safeSetState(() {});
                                       },
+
                                       text: FFLocalizations.of(context).getText(
                                         'tfdg6m2u' /* Confirm */,
                                       ),
+
                                       options: FFButtonOptions(
                                         height: 40.0,
                                         padding: EdgeInsetsDirectional.fromSTEB(

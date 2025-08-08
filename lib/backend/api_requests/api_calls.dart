@@ -1620,7 +1620,7 @@ class AddPackagesCall {
         'service_id': serviceId,
         'features': features,
       },
-      bodyType: BodyType.X_WWW_FORM_URL_ENCODED,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
