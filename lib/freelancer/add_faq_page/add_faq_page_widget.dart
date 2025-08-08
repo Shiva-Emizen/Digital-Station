@@ -395,8 +395,6 @@ class _AddFaqPageWidgetState extends State<AddFaqPageWidget> {
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
-                                contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 93.0),
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
@@ -419,7 +417,7 @@ class _AddFaqPageWidgetState extends State<AddFaqPageWidget> {
                                         .bodyMedium
                                         .fontStyle,
                                   ),
-                              maxLines: null,
+                              maxLines: 4,
                               cursorColor:
                                   FlutterFlowTheme.of(context).primaryText,
                               validator: _model.textController2Validator
