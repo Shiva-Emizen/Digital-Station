@@ -1798,7 +1798,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
                                             context.pushNamed(
-                                                MyServicePageWidget.routeName);
+                                                AllServiceWidget.routeName);
                                           },
                                           child: Container(
                                             decoration: BoxDecoration(
