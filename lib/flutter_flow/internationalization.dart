@@ -1654,7 +1654,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'rgnwpi5y': {
-      'en': 'Option 1',
+      'en': '',
       'ar': '',
     },
     'uft629wj': {
@@ -1752,7 +1752,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Question',
       'ar': '',
     },
-    'gkm1etui': {
+    'pgj5onok': {
       'en': 'Question',
       'ar': '',
     },
@@ -1760,11 +1760,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Answer',
       'ar': '',
     },
-    'xu3pw4ek': {
+    '5tl9o6zp': {
       'en': 'Question is required',
       'ar': '',
     },
-    '7tgw3pjr': {
+    'hlnn1fib': {
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },
@@ -2541,7 +2541,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Project link is required',
       'ar': '',
     },
-    'hlnn1fib': {
+    'nuorqyb5': {
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },

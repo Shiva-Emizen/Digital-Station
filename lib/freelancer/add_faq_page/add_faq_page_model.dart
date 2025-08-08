@@ -15,7 +15,7 @@ class AddFaqPageModel extends FlutterFlowModel<AddFaqPageWidget> {
   String? _nameTextControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        'xu3pw4ek' /* Question is required */,
+        '5tl9o6zp' /* Question is required */,
       );
     }
 

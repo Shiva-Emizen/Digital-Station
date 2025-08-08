@@ -627,7 +627,7 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                                 FormFieldController<String>(null),
                             options: [
                               FFLocalizations.of(context).getText(
-                                'rgnwpi5y' /* Option 1 */,
+                                'rgnwpi5y' /*  */,
                               ),
                               FFLocalizations.of(context).getText(
                                 'uft629wj' /* Option 2 */,
