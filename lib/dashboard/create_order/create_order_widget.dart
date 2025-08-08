@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import '/index.dart';
 import 'package:paypal_integration_marketplace_library_9mtra1/custom_code/actions/index.dart'
     as paypal_integration_marketplace_library_9mtra1_actions;
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
@@ -399,7 +400,7 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                                       ),
                                       Text(
                                         FFLocalizations.of(context).getText(
-                                          'd3dq8wss' /*  $20 */,
+                                          'd3dq8wss' /*   */,
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
@@ -520,126 +521,110 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                                     ),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        print('Submit button pressed');
-
-                                        // Form validation
-                                        if (_model.formKey.currentState == null || !_model.formKey.currentState!.validate()) {
-                                          print('Form is not valid.');
+                                        if (_model.formKey.currentState ==
+                                                null ||
+                                            !_model.formKey.currentState!
+                                                .validate()) {
                                           return;
                                         }
-
-                                        print('Form is valid. Proceeding to create order...');
-
-                                        // Call to create the order
-                                        _model.orderCreatedResponse = await ClientHomePageGroup.createOrderCall.call(
+                                        _model.orderCreatedResponse =
+                                            await ClientHomePageGroup
+                                                .createOrderCall
+                                                .call(
                                           serviceId: widget.serviceId,
                                           packageId: widget.packageId,
-                                          description: _model.textController.text,
+                                          description:
+                                              _model.textController.text,
                                           attachments: _model.selectedPath,
-                                          expressDelivery: _model.extraPay == true ? '1' : '0',
+                                          expressDelivery:
+                                              _model.extraPay == true
+                                                  ? '1'
+                                                  : '0',
                                           authToken: FFAppState().apitoken,
                                         );
 
-                                        // Log response
-                                        print('Order response: ${_model.orderCreatedResponse?.jsonBody}');
-
-                                        // Explicitly check for success
-                                        if (_model.orderCreatedResponse?.succeeded == true) {
-                                          print('Order created successfully');
-
-                                          // Parse total
-                                          double total = double.tryParse(
-                                            getJsonField(
-                                              (_model.orderCreatedResponse?.jsonBody ?? ''),
-                                              r'''$.data.total''',
-                                            ).toString(),
-                                          ) ??
-                                              0.0;
-
-                                          print('Parsed total amount: $total');
-
-                                          if (total <= 0) {
-                                            print('Invalid total amount. Aborting PayPal payment.');
-                                            return;
-                                          }
-
-                                          // Show success message
-                                          ScaffoldMessenger.of(context).showSnackBar(
+                                        if ((_model.orderCreatedResponse
+                                                ?.succeeded ??
+                                            true)) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
                                             SnackBar(
                                               content: Text(
                                                 getJsonField(
-                                                  (_model.orderCreatedResponse?.jsonBody ?? ''),
+                                                  (_model.orderCreatedResponse
+                                                          ?.jsonBody ??
+                                                      ''),
                                                   r'''$.message''',
                                                 ).toString(),
                                                 style: TextStyle(
-                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
                                                 ),
                                               ),
-                                              duration: Duration(milliseconds: 4000),
-                                              backgroundColor: FlutterFlowTheme.of(context).secondary,
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
                                             ),
                                           );
-
-                                          // Log PayPal parameters
-                                          print('Starting PayPal payment...');
-                                          print('Client ID: [TRUNCATED]');
-                                          print('Secret Key: [TRUNCATED]');
-                                          print('Currency: USD');
-                                          print('Description: ${_model.textController.text}');
-                                          print('Amount Details: ${_model.amountDetails}');
-                                          print('Product List: ${_model.productList}');
-
-                                          // Call PayPal integration
-                                          await paypal_integration_marketplace_library_9mtra1_actions.paypalPay(
+                                          await paypal_integration_marketplace_library_9mtra1_actions
+                                              .paypalPay(
                                             context,
-                                            'AQzOQFUCXTbmGocpHXvBm8ZsZxR-ODRn9bSrCdQsKs9fgzOJe07-eYsPUKN7BmWCw8Vt3izzvG6BmJIx',
-                                            'EPSYJsR227guAVsnR3HZDE-CKI0WaecqRYfuvwXNP5YOf1yUVAtzTlgeqZS4d9rwGErZQog6fA1eHtnB',
-                                            total,
+                                            'AQzOQFUCXTbmGocpHXvBm8ZsZxR-ODRn9bSrCdQsKs9fgzOJe07-eYsPUKN7BmWCw8Vt3izzvG6BmJIx ',
+                                            'EPSYJsR227guAVsnR3HZDE-CKI0WaecqRYfuvwXNP5YOf1yUVAtzTlgeqZS4d9rwGErZQog6fA1eHtnB ',
+                                            getJsonField(
+                                              (_model.orderCreatedResponse
+                                                      ?.jsonBody ??
+                                                  ''),
+                                              r'''$.data.total''',
+                                            ),
                                             'USD',
                                             _model.textController.text,
-                                            'not to find',
+                                            'paypal',
                                             _model.amountDetails,
                                             _model.productList.toList(),
                                             _model.amountDetails,
                                             true,
-                                                (data) async {
-                                              print('PayPal Success Callback: $data');
+                                            (data) async {
+                                              context.pushNamed(
+                                                  HomePageWidget.routeName);
                                             },
-                                                (params) async {
-                                              print('PayPal Params Callback: $params');
-                                            },
-                                                (message) async {
-                                              print('PayPal Error Callback: $message');
-                                            },
+                                            (params) async {},
+                                            (message) async {},
                                           );
                                         } else {
-                                          // Order creation failed
-                                          print('Order creation failed');
-
-                                          ScaffoldMessenger.of(context).showSnackBar(
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
                                             SnackBar(
                                               content: Text(
                                                 getJsonField(
-                                                  (_model.orderCreatedResponse?.jsonBody ?? ''),
+                                                  (_model.orderCreatedResponse
+                                                          ?.jsonBody ??
+                                                      ''),
                                                   r'''$.message''',
                                                 ).toString(),
                                                 style: TextStyle(
-                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
                                                 ),
                                               ),
-                                              duration: Duration(milliseconds: 4000),
-                                              backgroundColor: FlutterFlowTheme.of(context).secondary,
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
                                             ),
                                           );
                                         }
 
                                         safeSetState(() {});
                                       },
-
                                       text: FFLocalizations.of(context).getText(
                                         'tfdg6m2u' /* Confirm */,
                                       ),
-
                                       options: FFButtonOptions(
                                         height: 40.0,
                                         padding: EdgeInsetsDirectional.fromSTEB(

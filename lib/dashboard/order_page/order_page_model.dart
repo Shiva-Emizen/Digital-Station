@@ -16,8 +16,6 @@ class OrderPageModel extends FlutterFlowModel<OrderPageWidget> {
   // Stores action output result for [Backend Call - API (ChangeStatus)] action in Button widget.
   ApiCallResponse? apiResultgth;
   // Stores action output result for [Backend Call - API (ChangeStatus)] action in Button widget.
-  ApiCallResponse? apiResultj13;
-  // Stores action output result for [Backend Call - API (ChangeStatus)] action in Button widget.
   ApiCallResponse? apiResult3ts;
   // Stores action output result for [Backend Call - API (ChangeOrder)] action in Button widget.
   ApiCallResponse? apiResulthtk;

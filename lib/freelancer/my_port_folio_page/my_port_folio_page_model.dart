@@ -21,6 +21,13 @@ class MyPortFolioPageModel extends FlutterFlowModel<MyPortFolioPageWidget> {
       );
     }
 
+    if (!RegExp('^[a-zA-Z ]+\$').hasMatch(val)) {
+      return FFLocalizations.of(context).getText(
+        'fpb468ij' /* 
+Only alphabetic characters (... */
+        ,
+      );
+    }
     return null;
   }
 

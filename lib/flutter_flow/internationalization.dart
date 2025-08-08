@@ -668,41 +668,20 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Orders',
       'ar': '',
     },
-    'a6hbrpfo': {
-      'en': ' Minimalist logo design',
-      'ar': '',
-    },
     '4w4x139b': {
       'en': 'Service by :',
-      'ar': '',
-    },
-    'h9p6gmdl': {
-      'en': '  Ahmed Edrress',
       'ar': '',
     },
     'cdd7sh8w': {
       'en': 'Package :',
       'ar': '',
     },
-    'dbi8cwz4': {
-      'en': '  Gold',
-      'ar': '',
-    },
     'xlfh7nwo': {
       'en': 'Delivery time :',
       'ar': '',
     },
-    '6inckutq': {
-      'en': '  2 days',
-      'ar': '',
-    },
     's3ndfd7x': {
       'en': 'Comments',
-      'ar': '',
-    },
-    'yqrvnrb4': {
-      'en':
-          'Excellent question! We suggest you either register for a RANDOM.ORG account or make a donation to Concern. In case you don\'t know them, Concern is a charity that helps poor people in the third world achieve self-sustainable improvements in their lifestyles. We recommend them because we agree with their mission statement (which they unfortunately removed as per January 2010 Excellent question! We suggest you either register for a RANDOM.ORG account or make a donation to Concern. In case you don\'t know them, Concern is a charity that helps poor people in the third world achieve self-sustainable improvements in their lifestyles. We recommend them because we agree with their mission statement (which they unfortunately removed as per January 2010 Excellent question! We suggest you either register for a RANDOM.ORG account or make a donation to Concern. In case you don\'t know them, Concern is a charity that helps poor people in the third world achieve self-sustainable improvements in their lifestyles. We recommend them because we agree with their mission statement (which they unfortunately as per January 2010',
       'ar': '',
     },
     'a71qy4ym': {
@@ -832,7 +811,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'd3dq8wss': {
-      'en': ' \$20',
+      'en': ' ',
       'ar': '',
     },
     '5oc4qkeu': {
@@ -1274,6 +1253,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'xgjjm5ak': {
       'en': 'Title is required',
+      'ar': '',
+    },
+    'fpb468ij': {
+      'en': '\nOnly alphabetic characters (A–Z, a–z) are allowed.',
       'ar': '',
     },
     'qqyxur81': {
@@ -1974,7 +1957,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'n5ybdzzz': {
-      'en': 'Recently viewed',
+      'en': 'Recommended Services',
       'ar': '',
     },
     'kbsotbtj': {
@@ -2374,6 +2357,33 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
   },
+  // FreelancerOrderDetailPage
+  {
+    'x7fh3crt': {
+      'en': 'Orders',
+      'ar': '',
+    },
+    'p20mnc6e': {
+      'en': 'Service by :',
+      'ar': '',
+    },
+    'avmt48b7': {
+      'en': 'Package :',
+      'ar': '',
+    },
+    'enclyldd': {
+      'en': 'Delivery time :',
+      'ar': '',
+    },
+    '4hioffja': {
+      'en': 'Comments',
+      'ar': '',
+    },
+    'q0t3qyqd': {
+      'en': 'Home',
+      'ar': '',
+    },
+  },
   // Logout
   {
     '3zn7uzpj': {
@@ -2505,6 +2515,33 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'obdwtdf1': {
+      'en': 'Please choose an option from the dropdown',
+      'ar': '',
+    },
+  },
+  // AddProjectLink
+  {
+    'ekdlgbyj': {
+      'en': 'Add Project link',
+      'ar': '',
+    },
+    '560of835': {
+      'en': 'Project link',
+      'ar': '',
+    },
+    'gk5mxd9g': {
+      'en': 'Add',
+      'ar': '',
+    },
+    'gijxuevj': {
+      'en': 'Cancel',
+      'ar': '',
+    },
+    '5avswz7l': {
+      'en': 'Project link is required',
+      'ar': '',
+    },
+    'hlnn1fib': {
       'en': 'Please choose an option from the dropdown',
       'ar': '',
     },

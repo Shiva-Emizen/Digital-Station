@@ -74,8 +74,8 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
+        body: Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
           child: Stack(
             children: [
               Column(
@@ -83,7 +83,7 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 20, 20.0, 20),
+                        EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -626,27 +626,15 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                             controller: _model.dropDownValueController ??=
                                 FormFieldController<String>(null),
                             options: [
-                              // FFLocalizations.of(context).getText(
-                              //   'rgnwpi5y' /* Option 1 */,
-                              // ),
-                              // FFLocalizations.of(context).getText(
-                              //   'uft629wj' /* Option 2 */,
-                              // ),
-                              // FFLocalizations.of(context).getText(
-                              //   'wg4tjjhh' /* Option 3 */,
-                              // )
-                              "1",
-                              "2",
-                              "3",
-                              "4",
-                              "5",
-                              "6",
-                              "7",
-                              "8",
-                              "9",
-                              "10",
-                              "11",
-                              "12",
+                              FFLocalizations.of(context).getText(
+                                'rgnwpi5y' /* Option 1 */,
+                              ),
+                              FFLocalizations.of(context).getText(
+                                'uft629wj' /* Option 2 */,
+                              ),
+                              FFLocalizations.of(context).getText(
+                                'wg4tjjhh' /* Option 3 */,
+                              )
                             ],
                             onChanged: (val) =>
                                 safeSetState(() => _model.dropDownValue = val),
@@ -1172,7 +1160,12 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                                                 getJsonField(
                                                   featureListItem.toMap(),
                                                   r'''$.title''',
-                                                ).toString(),
+                                                )
+                                                    .toString()
+                                                    .maybeHandleOverflow(
+                                                      maxChars: 20,
+                                                      replacement: '…',
+                                                    ),
                                                 style: FlutterFlowTheme.of(
                                                         context)
                                                     .bodyMedium
@@ -1269,95 +1262,94 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                                     shape: BoxShape.rectangle,
                                   ),
                                   child: FFButtonWidget(
+                                    onPressed: () async {
+                                      if (_model.formKey.currentState == null ||
+                                          !_model.formKey.currentState!
+                                              .validate()) {
+                                        return;
+                                      }
+                                      if (_model.dropDownValue == null) {
+                                        return;
+                                      }
+                                      _model.apiResultlvw =
+                                          await FreelancerHomePageGroup
+                                              .addPackagesCall
+                                              .call(
+                                        title: _model.titleTextController.text,
+                                        description: _model
+                                            .descriptionTextController.text,
+                                        price: _model.priceTextController.text,
+                                        deliveryTime: _model.dropDownValue,
+                                        expressDeliverEnable:
+                                            _model.expDelivery,
+                                        expressDeliveryAmount:
+                                            _model.amountTextController.text,
+                                        numberOfRevisions:
+                                            _model.revisionTextController.text,
+                                        authToken: FFAppState().apitoken,
+                                        serviceId: widget.id,
+                                        featuresJson: FFAppState()
+                                            .features
+                                            .map((e) => e.toMap())
+                                            .toList(),
+                                      );
 
-                                      onPressed: () async {
-                                        print('Form submission started.');
-
-                                        // ✅ Validate form
-                                        if (_model.formKey.currentState == null || !_model.formKey.currentState!.validate()) {
-                                          print('Form is invalid.');
-                                          return;
-                                        }
-
-                                        // ✅ Validate dropdown
-                                        if (_model.dropDownValue == null) {
-                                          print('Delivery time not selected.');
-                                          return;
-                                        }
-
-                                        // ✅ Convert FeatureStructs to List<Map<String, dynamic>>
-                                        final featureList = FFAppState().features.map((feature) => feature.toSerializableMap()).toList();
-
-
-                                        // ✅ Print request body
-                                        print('Sending API request with:');
-                                        print('Title: ${_model.titleTextController.text}');
-                                        print('Description: ${_model.descriptionTextController.text}');
-                                        print('Price: ${_model.priceTextController.text}');
-                                        print('Delivery Time: ${_model.dropDownValue}');
-                                        print('Express Delivery Enabled: ${_model.expDelivery}');
-                                        print('Express Delivery Amount: ${_model.amountTextController.text}');
-                                        print('Revisions: ${_model.revisionTextController.text}');
-                                        print('Service ID: ${widget.id}');
-                                        print('Features JSON: $featureList');
-
-                                        // ✅ Make the API call
-                                        _model.apiResultlvw = await FreelancerHomePageGroup.addPackagesCall.call(
-                                          title: _model.titleTextController.text,
-                                          description: _model.descriptionTextController.text,
-                                          price: _model.priceTextController.text,
-                                          deliveryTime: _model.dropDownValue,
-                                          expressDeliverEnable: _model.expDelivery,
-                                          expressDeliveryAmount: _model.amountTextController.text,
-                                          numberOfRevisions: _model.revisionTextController.text,
-                                          authToken: FFAppState().apitoken,
-                                          serviceId: widget.id,
-                                          featuresJson: jsonEncode(featureList), // 👈 Correctly formatted
+                                      if ((_model.apiResultlvw?.succeeded ??
+                                          true)) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              getJsonField(
+                                                (_model.apiResultlvw
+                                                        ?.jsonBody ??
+                                                    ''),
+                                                r'''$.message''',
+                                              ).toString(),
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor: Color(0xFF6E2A87),
+                                          ),
                                         );
 
-                                        // ✅ Print and handle response
-                                        print('API response received.');
-                                        print('Succeeded: ${_model.apiResultlvw?.succeeded}');
-                                        print('Response body: ${_model.apiResultlvw?.jsonBody}');
-
-                                        final message = getJsonField(
-                                          (_model.apiResultlvw?.jsonBody ?? ''),
-                                          r'''$.message''',
-                                        ).toString();
-
-                                        if ((_model.apiResultlvw?.succeeded ?? false)) {
-                                          // ✅ Success snackbar
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(
-                                              content: Text(message),
-                                              backgroundColor: Color(0xFF6E2A87),
-                                              duration: Duration(milliseconds: 4000),
+                                        context.pushNamed(
+                                          AddNewServiceNextPageWidget.routeName,
+                                          queryParameters: {
+                                            'serviceId': serializeParam(
+                                              widget.id,
+                                              ParamType.String,
                                             ),
-                                          );
-
-                                          // ✅ Navigate to next page
-                                          context.pushNamed(
-                                            AddNewServiceNextPageWidget.routeName,
-                                            queryParameters: {
-                                              'serviceId': serializeParam(widget.id, ParamType.String),
-                                            }.withoutNulls,
-                                          );
-                                        } else {
-                                          // ❌ Error snackbar
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(
-                                              content: Text(message),
-                                              backgroundColor: Colors.red,
-                                              duration: Duration(milliseconds: 4000),
+                                          }.withoutNulls,
+                                        );
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              getJsonField(
+                                                (_model.apiResultlvw
+                                                        ?.jsonBody ??
+                                                    ''),
+                                                r'''$.message''',
+                                              ).toString(),
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
                                             ),
-                                          );
-                                        }
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor: Color(0xFF6E2A87),
+                                          ),
+                                        );
+                                      }
 
-                                        safeSetState(() {});
-                                      },
-
-
-                                      text: FFLocalizations.of(context).getText(
+                                      safeSetState(() {});
+                                    },
+                                    text: FFLocalizations.of(context).getText(
                                       '6nfv7i1i' /* Add */,
                                     ),
                                     options: FFButtonOptions(
