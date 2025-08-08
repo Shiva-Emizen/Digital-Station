@@ -358,6 +358,7 @@ class ClientHomePageGroup {
   static FreelancerProfileCall freelancerProfileCall = FreelancerProfileCall();
   static ChangeOrderCall changeOrderCall = ChangeOrderCall();
   static UpdateOrderCall updateOrderCall = UpdateOrderCall();
+  static OrderDetailCall orderDetailCall = OrderDetailCall();
 }
 
 class PopularServiceCall {
@@ -983,6 +984,40 @@ class UpdateOrderCall {
   }
 }
 
+class OrderDetailCall {
+  Future<ApiCallResponse> call({
+    String? orderId = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = ClientHomePageGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'OrderDetail',
+      apiUrl: '${baseUrl}/user/orders/${orderId}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
+        'Accept': 'application/json',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  dynamic orderDetail(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
+}
+
 /// End ClientHomePage Group Code
 
 /// Start FreelancerAuthorization Group Code
@@ -1469,6 +1504,8 @@ class FreelancerHomePageGroup {
   static GetPlanCall getPlanCall = GetPlanCall();
   static GetFAQCall getFAQCall = GetFAQCall();
   static ChangeStatusCall changeStatusCall = ChangeStatusCall();
+  static FreelancerOrderDetailCall freelancerOrderDetailCall =
+      FreelancerOrderDetailCall();
 }
 
 class OrderAPICall {
@@ -1599,7 +1636,18 @@ class AddPackagesCall {
     );
 
     final features = _serializeJson(featuresJson, true);
-
+    final ffApiRequestBody = '''
+{
+  "title": "${escapeStringForJson(title)}",
+  "description": "${escapeStringForJson(description)}",
+  "price": "${escapeStringForJson(price)}",
+  "delivery_time": "${escapeStringForJson(deliveryTime)}",
+  "express_deliver_enable": "${escapeStringForJson(expressDeliverEnable)}",
+  "express_delivery_amount": "${escapeStringForJson(expressDeliveryAmount)}",
+  "number_of_revisions": "${escapeStringForJson(numberOfRevisions)}",
+  "service_id": "${escapeStringForJson(serviceId)}",
+  "features": ${features}
+}''';
     return ApiManager.instance.makeApiCall(
       callName: 'AddPackages',
       apiUrl: '${baseUrl}packages',
@@ -1609,18 +1657,9 @@ class AddPackagesCall {
         'Accept-Language': 'en',
         'Accept': 'application/json',
       },
-      params: {
-        'title': title,
-        'description': description,
-        'price': price,
-        'delivery_time': deliveryTime,
-        'express_deliver_enable': expressDeliverEnable,
-        'express_delivery_amount': expressDeliveryAmount,
-        'number_of_revisions': numberOfRevisions,
-        'service_id': serviceId,
-        'features': features,
-      },
-      bodyType: BodyType.X_WWW_FORM_URL_ENCODED,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -1821,6 +1860,7 @@ class ChangeStatusCall {
   Future<ApiCallResponse> call({
     String? orderId = '',
     String? serviceId = '',
+    String? link = '',
     String? authToken = '',
   }) async {
     final baseUrl = FreelancerHomePageGroup.getBaseUrl(
@@ -1837,6 +1877,37 @@ class ChangeStatusCall {
         'Accept-Language': 'en',
         'Accept': 'application/json',
       },
+      params: {
+        'link': link,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class FreelancerOrderDetailCall {
+  Future<ApiCallResponse> call({
+    String? orderId = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = FreelancerHomePageGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'FreelancerOrderDetail',
+      apiUrl: '${baseUrl}freelancer/order/${orderId}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
+        'Accept': 'application/json',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -1846,6 +1917,11 @@ class ChangeStatusCall {
       alwaysAllowBody: false,
     );
   }
+
+  dynamic orderDetail(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
 }
 
 /// End FreelancerHomePage Group Code

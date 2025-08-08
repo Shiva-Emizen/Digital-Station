@@ -259,6 +259,10 @@ class _OtpPageWidgetState extends State<OtpPageWidget> {
                                         _model.timerValue = displayTime;
                                         if (shouldUpdate) safeSetState(() {});
                                       },
+                                      onEnded: () async {
+                                        _model.isView = true;
+                                        safeSetState(() {});
+                                      },
                                       textAlign: TextAlign.start,
                                       style: FlutterFlowTheme.of(context)
                                           .headlineSmall
@@ -414,98 +418,111 @@ class _OtpPageWidgetState extends State<OtpPageWidget> {
                                         letterSpacing: 0.0,
                                       ),
                                 ),
-                                InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    safeSetState(() {
-                                      _model.pinCodeController?.clear();
-                                    });
-                                    _model.apiResultciw =
-                                        await ClientAuthorizationGroup
-                                            .resendOTPCall
-                                            .call(
-                                      email: widget.email,
-                                      authToken: FFAppState().apitoken,
-                                    );
+                                if (_model.isView)
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      safeSetState(() {
+                                        _model.pinCodeController?.clear();
+                                      });
+                                      _model.timerController.onResetTimer();
 
-                                    if ((_model.apiResultciw?.succeeded ??
-                                        true)) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            getJsonField(
-                                              (_model.apiResultciw?.jsonBody ??
-                                                  ''),
-                                              r'''$.data.verification_code''',
-                                            ).toString(),
-                                            style: TextStyle(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                            ),
-                                          ),
-                                          duration:
-                                              Duration(milliseconds: 4000),
-                                          backgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .secondary,
+                                      await Future.delayed(
+                                        Duration(
+                                          milliseconds: 1000,
                                         ),
                                       );
-                                    } else {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            getJsonField(
-                                              (_model.apiResultciw?.jsonBody ??
-                                                  ''),
-                                              r'''$.message''',
-                                            ).toString(),
-                                            style: TextStyle(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                            ),
-                                          ),
-                                          duration:
-                                              Duration(milliseconds: 4000),
-                                          backgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .secondary,
-                                        ),
+                                      _model.timerController.onStartTimer();
+                                      _model.isView = false;
+                                      safeSetState(() {});
+                                      _model.apiResultciw =
+                                          await ClientAuthorizationGroup
+                                              .resendOTPCall
+                                              .call(
+                                        email: widget.email,
+                                        authToken: FFAppState().apitoken,
                                       );
-                                    }
 
-                                    safeSetState(() {});
-                                  },
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      '863h18mx' /* Resend */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          font: GoogleFonts.inter(
+                                      if ((_model.apiResultciw?.succeeded ??
+                                          true)) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              getJsonField(
+                                                (_model.apiResultciw
+                                                        ?.jsonBody ??
+                                                    ''),
+                                                r'''$.data.verification_code''',
+                                              ).toString(),
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                          ),
+                                        );
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              getJsonField(
+                                                (_model.apiResultciw
+                                                        ?.jsonBody ??
+                                                    ''),
+                                                r'''$.message''',
+                                              ).toString(),
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                          ),
+                                        );
+                                      }
+
+                                      safeSetState(() {});
+                                    },
+                                    child: Text(
+                                      FFLocalizations.of(context).getText(
+                                        '863h18mx' /* Resend */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight: FontWeight.bold,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                            color: Color(0xFF6E2A87),
+                                            letterSpacing: 0.0,
                                             fontWeight: FontWeight.bold,
                                             fontStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .bodyMedium
                                                     .fontStyle,
                                           ),
-                                          color: Color(0xFF6E2A87),
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.bold,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontStyle,
-                                        ),
+                                    ),
                                   ),
-                                ),
                               ],
                             ),
                           ),

@@ -122,41 +122,58 @@ class _MyPortFolioPageWidgetState extends State<MyPortFolioPageWidget> {
                                     (file.bytes?.isEmpty ?? true))) {
                               return;
                             }
-                            _model.apiResultks3 = await FreelancerHomePageGroup
-                                .addPortfolioCall
-                                .call(
-                              title: _model.nameTextController.text,
-                              galleryList:
-                                  _model.uploadedLocalFiles_uploadDataEx6,
-                              authToken: FFAppState().apitoken,
-                            );
-
-                            if ((_model.apiResultks3?.succeeded ?? true)) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    getJsonField(
-                                      (_model.apiResultks3?.jsonBody ?? ''),
-                                      r'''$.message''',
-                                    ).toString(),
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  duration: Duration(milliseconds: 4000),
-                                  backgroundColor: Color(0xFF6E2A87),
-                                ),
+                            if (_model
+                                .uploadedLocalFiles_uploadDataEx6.isNotEmpty) {
+                              _model.apiResultks3 =
+                                  await FreelancerHomePageGroup.addPortfolioCall
+                                      .call(
+                                title: _model.nameTextController.text,
+                                galleryList:
+                                    _model.uploadedLocalFiles_uploadDataEx6,
+                                authToken: FFAppState().apitoken,
                               );
 
-                              context.pushNamed(PortfolioPageWidget.routeName);
+                              if ((_model.apiResultks3?.succeeded ?? true)) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      getJsonField(
+                                        (_model.apiResultks3?.jsonBody ?? ''),
+                                        r'''$.message''',
+                                      ).toString(),
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor: Color(0xFF6E2A87),
+                                  ),
+                                );
+
+                                context
+                                    .pushNamed(PortfolioPageWidget.routeName);
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      getJsonField(
+                                        (_model.apiResultks3?.jsonBody ?? ''),
+                                        r'''$.message''',
+                                      ).toString(),
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor: Color(0xFF6E2A87),
+                                  ),
+                                );
+                              }
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    getJsonField(
-                                      (_model.apiResultks3?.jsonBody ?? ''),
-                                      r'''$.message''',
-                                    ).toString(),
+                                    'Please upload files',
                                     style: TextStyle(
                                       color: Colors.white,
                                     ),

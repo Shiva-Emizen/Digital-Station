@@ -1400,7 +1400,7 @@ class _ServiceDetailPageWidgetState extends State<ServiceDetailPageWidget> {
                           children: [
                             Text(
                               FFLocalizations.of(context).getText(
-                                'n5ybdzzz' /* Recently viewed */,
+                                'n5ybdzzz' /* Recommended Services */,
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium

@@ -430,6 +430,16 @@ class _OtpPageFreelancerWidgetState extends State<OtpPageFreelancerWidget> {
                                       safeSetState(() {
                                         _model.pinCodeController?.clear();
                                       });
+                                      _model.timerController.onResetTimer();
+
+                                      await Future.delayed(
+                                        Duration(
+                                          milliseconds: 1000,
+                                        ),
+                                      );
+                                      _model.timerController.onStartTimer();
+                                      _model.isView = false;
+                                      safeSetState(() {});
                                       _model.apiResultciw =
                                           await ClientAuthorizationGroup
                                               .resendOTPCall

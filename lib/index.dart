@@ -86,3 +86,5 @@ export '/auth/edit_personal_information_page/edit_personal_information_page_widg
 export '/dashboard/all_service/all_service_widget.dart' show AllServiceWidget;
 export '/dashboard/view_file_page/view_file_page_widget.dart'
     show ViewFilePageWidget;
+export '/freelancer_order_detail_page/freelancer_order_detail_page_widget.dart'
+    show FreelancerOrderDetailPageWidget;

@@ -6,42 +6,45 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'orders_page_model.dart';
-export 'orders_page_model.dart';
+import 'freelancer_order_detail_page_model.dart';
+export 'freelancer_order_detail_page_model.dart';
 
-class OrdersPageWidget extends StatefulWidget {
-  const OrdersPageWidget({
+class FreelancerOrderDetailPageWidget extends StatefulWidget {
+  const FreelancerOrderDetailPageWidget({
     super.key,
     required this.orderId,
   });
 
   final String? orderId;
 
-  static String routeName = 'OrdersPage';
-  static String routePath = '/ordersPage';
+  static String routeName = 'FreelancerOrderDetailPage';
+  static String routePath = '/freelancerOrderDetailPage';
 
   @override
-  State<OrdersPageWidget> createState() => _OrdersPageWidgetState();
+  State<FreelancerOrderDetailPageWidget> createState() =>
+      _FreelancerOrderDetailPageWidgetState();
 }
 
-class _OrdersPageWidgetState extends State<OrdersPageWidget> {
-  late OrdersPageModel _model;
+class _FreelancerOrderDetailPageWidgetState
+    extends State<FreelancerOrderDetailPageWidget> {
+  late FreelancerOrderDetailPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => OrdersPageModel());
+    _model = createModel(context, () => FreelancerOrderDetailPageModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.apiResultmh7 = await ClientHomePageGroup.orderDetailCall.call(
+      _model.apiResultznk =
+          await FreelancerHomePageGroup.freelancerOrderDetailCall.call(
         orderId: widget.orderId,
         authToken: FFAppState().apitoken,
       );
 
-      if ((_model.apiResultmh7?.succeeded ?? true)) {
+      if ((_model.apiResultznk?.succeeded ?? true)) {
         return;
       }
 
@@ -101,7 +104,7 @@ class _OrdersPageWidgetState extends State<OrdersPageWidget> {
                         children: [
                           Text(
                             FFLocalizations.of(context).getText(
-                              'lur27yvo' /* Orders */,
+                              'x7fh3crt' /* Orders */,
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
@@ -144,8 +147,10 @@ class _OrdersPageWidgetState extends State<OrdersPageWidget> {
                           child: Text(
                             valueOrDefault<String>(
                               getJsonField(
-                                ClientHomePageGroup.orderDetailCall.orderDetail(
-                                  (_model.apiResultmh7?.jsonBody ?? ''),
+                                FreelancerHomePageGroup
+                                    .freelancerOrderDetailCall
+                                    .orderDetail(
+                                  (_model.apiResultznk?.jsonBody ?? ''),
                                 ),
                                 r'''$.service.title''',
                               )?.toString(),
@@ -180,7 +185,7 @@ class _OrdersPageWidgetState extends State<OrdersPageWidget> {
                                     5.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
-                                    '4w4x139b' /* Service by : */,
+                                    'p20mnc6e' /* Service by : */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -209,9 +214,10 @@ class _OrdersPageWidgetState extends State<OrdersPageWidget> {
                               Text(
                                 valueOrDefault<String>(
                                   getJsonField(
-                                    ClientHomePageGroup.orderDetailCall
+                                    FreelancerHomePageGroup
+                                        .freelancerOrderDetailCall
                                         .orderDetail(
-                                      (_model.apiResultmh7?.jsonBody ?? ''),
+                                      (_model.apiResultznk?.jsonBody ?? ''),
                                     ),
                                     r'''$.service.username''',
                                   )?.toString(),
@@ -249,7 +255,7 @@ class _OrdersPageWidgetState extends State<OrdersPageWidget> {
                                     5.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
-                                    'cdd7sh8w' /* Package : */,
+                                    'avmt48b7' /* Package : */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -278,9 +284,10 @@ class _OrdersPageWidgetState extends State<OrdersPageWidget> {
                               Text(
                                 valueOrDefault<String>(
                                   getJsonField(
-                                    ClientHomePageGroup.orderDetailCall
+                                    FreelancerHomePageGroup
+                                        .freelancerOrderDetailCall
                                         .orderDetail(
-                                      (_model.apiResultmh7?.jsonBody ?? ''),
+                                      (_model.apiResultznk?.jsonBody ?? ''),
                                     ),
                                     r'''$.package.title''',
                                   )?.toString(),
@@ -318,7 +325,7 @@ class _OrdersPageWidgetState extends State<OrdersPageWidget> {
                                     5.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
-                                    'xlfh7nwo' /* Delivery time : */,
+                                    'enclyldd' /* Delivery time : */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -347,9 +354,10 @@ class _OrdersPageWidgetState extends State<OrdersPageWidget> {
                               Text(
                                 valueOrDefault<String>(
                                   getJsonField(
-                                    ClientHomePageGroup.orderDetailCall
+                                    FreelancerHomePageGroup
+                                        .freelancerOrderDetailCall
                                         .orderDetail(
-                                      (_model.apiResultmh7?.jsonBody ?? ''),
+                                      (_model.apiResultznk?.jsonBody ?? ''),
                                     ),
                                     r'''$.package.delivery_time''',
                                   )?.toString(),
@@ -376,7 +384,7 @@ class _OrdersPageWidgetState extends State<OrdersPageWidget> {
                               0.0, 5.0, 0.0, 0.0),
                           child: Text(
                             FFLocalizations.of(context).getText(
-                              's3ndfd7x' /* Comments */,
+                              '4hioffja' /* Comments */,
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
@@ -394,8 +402,10 @@ class _OrdersPageWidgetState extends State<OrdersPageWidget> {
                           child: Text(
                             valueOrDefault<String>(
                               getJsonField(
-                                ClientHomePageGroup.orderDetailCall.orderDetail(
-                                  (_model.apiResultmh7?.jsonBody ?? ''),
+                                FreelancerHomePageGroup
+                                    .freelancerOrderDetailCall
+                                    .orderDetail(
+                                  (_model.apiResultznk?.jsonBody ?? ''),
                                 ),
                                 r'''$.service.description''',
                               )?.toString(),

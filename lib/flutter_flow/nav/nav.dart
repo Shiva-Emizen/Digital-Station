@@ -179,7 +179,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) {
       FFRoute(
         name: OrdersPageWidget.routeName,
         path: OrdersPageWidget.routePath,
-        builder: (context, params) => OrdersPageWidget(),
+        builder: (context, params) => OrdersPageWidget(
+          orderId: params.getParam(
+            'orderId',
+            ParamType.String,
+          ),
+        ),
       ),
       FFRoute(
         name: SavedPageWidget.routeName,
@@ -445,6 +450,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) {
             'galleryList',
             ParamType.JSON,
             isList: true,
+          ),
+        ),
+      ),
+      FFRoute(
+        name: FreelancerOrderDetailPageWidget.routeName,
+        path: FreelancerOrderDetailPageWidget.routePath,
+        builder: (context, params) => FreelancerOrderDetailPageWidget(
+          orderId: params.getParam(
+            'orderId',
+            ParamType.String,
           ),
         ),
       ),

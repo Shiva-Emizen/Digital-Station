@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import '/index.dart';
 import 'package:paypal_integration_marketplace_library_9mtra1/custom_code/actions/index.dart'
     as paypal_integration_marketplace_library_9mtra1_actions;
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
@@ -399,7 +400,7 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                                       ),
                                       Text(
                                         FFLocalizations.of(context).getText(
-                                          'd3dq8wss' /*  $20 */,
+                                          'd3dq8wss' /*   */,
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
@@ -581,12 +582,15 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                                             ),
                                             'USD',
                                             _model.textController.text,
-                                            '',
+                                            'paypal',
                                             _model.amountDetails,
                                             _model.productList.toList(),
                                             _model.amountDetails,
                                             true,
-                                            (data) async {},
+                                            (data) async {
+                                              context.pushNamed(
+                                                  HomePageWidget.routeName);
+                                            },
                                             (params) async {},
                                             (message) async {},
                                           );

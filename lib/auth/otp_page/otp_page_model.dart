@@ -7,6 +7,10 @@ import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 
 class OtpPageModel extends FlutterFlowModel<OtpPageWidget> {
+  ///  Local state fields for this page.
+
+  bool isView = false;
+
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();

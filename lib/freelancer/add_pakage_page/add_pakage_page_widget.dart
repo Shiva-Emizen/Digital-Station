@@ -74,8 +74,8 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
+        body: Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
           child: Stack(
             children: [
               Column(
@@ -1160,7 +1160,12 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                                                 getJsonField(
                                                   featureListItem.toMap(),
                                                   r'''$.title''',
-                                                ).toString(),
+                                                )
+                                                    .toString()
+                                                    .maybeHandleOverflow(
+                                                      maxChars: 20,
+                                                      replacement: '…',
+                                                    ),
                                                 style: FlutterFlowTheme.of(
                                                         context)
                                                     .bodyMedium
@@ -1285,10 +1290,7 @@ class _AddPakagePageWidgetState extends State<AddPakagePageWidget> {
                                         serviceId: widget.id,
                                         featuresJson: FFAppState()
                                             .features
-                                            .map((e) => getJsonField(
-                                                  e.toMap(),
-                                                  r'''$.title''',
-                                                ))
+                                            .map((e) => e.toMap())
                                             .toList(),
                                       );
 
