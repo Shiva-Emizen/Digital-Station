@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'dart:async';
@@ -10,6 +11,8 @@ class OrderPageModel extends FlutterFlowModel<OrderPageWidget> {
 
   // Stores action output result for [Backend Call - API (ChangeStatus)] action in Button widget.
   ApiCallResponse? apiResultn5n;
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  ChatsRecord? createdChatDoc;
   Completer<ApiCallResponse>? apiRequestCompleter1;
   // Stores action output result for [Backend Call - API (ChangeStatus)] action in Button widget.
   ApiCallResponse? apiResultmhn;

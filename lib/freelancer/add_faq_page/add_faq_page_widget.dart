@@ -49,7 +49,6 @@ class _AddFaqPageWidgetState extends State<AddFaqPageWidget> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
@@ -71,7 +70,7 @@ class _AddFaqPageWidgetState extends State<AddFaqPageWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 20, 20.0, 20),
+                        EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

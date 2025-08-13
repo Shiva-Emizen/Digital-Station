@@ -464,6 +464,40 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) {
         ),
       ),
       FFRoute(
+        name: UserChatMessageWidget.routeName,
+        path: UserChatMessageWidget.routePath,
+        builder: (context, params) => UserChatMessageWidget(
+          chatId: params.getParam(
+            'chatId',
+            ParamType.String,
+          ),
+          name: params.getParam(
+            'name',
+            ParamType.String,
+          ),
+          userId: params.getParam(
+            'userId',
+            ParamType.String,
+          ),
+          id: params.getParam(
+            'id',
+            ParamType.String,
+          ),
+          profileURL: params.getParam(
+            'profileURL',
+            ParamType.String,
+          ),
+          lastMessage: params.getParam(
+            'lastMessage',
+            ParamType.DateTime,
+          ),
+          userType: params.getParam(
+            'userType',
+            ParamType.String,
+          ),
+        ),
+      ),
+      FFRoute(
         name: $paypal_integration_marketplace_library_9mtra1
             .HomePageWidget.routeName,
         path: $paypal_integration_marketplace_library_9mtra1

@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -319,7 +320,7 @@ class _OtpPageFreelancerWidgetState extends State<OtpPageFreelancerWidget> {
                                     await ClientAuthorizationGroup.verifyOtpCall
                                         .call(
                                   email: widget.email,
-                                  otp: _model.pinCodeController.text,
+                                  otp: widget.otp?.toString(),
                                 );
 
                                 if ((_model.apiResultqdf?.succeeded ?? true)) {
@@ -342,7 +343,18 @@ class _OtpPageFreelancerWidgetState extends State<OtpPageFreelancerWidget> {
                                     (_model.apiResultqdf?.jsonBody ?? ''),
                                     r'''$.data.token''',
                                   ).toString();
-                                  FFAppState().userType = '1';
+                                  FFAppState().userType = UserTypeStruct(
+                                            userType: getJsonField(
+                                              (_model.apiResultqdf?.jsonBody ??
+                                                  ''),
+                                              r'''$.data.type''',
+                                            ).toString(),
+                                          ) ==
+                                          UserTypeStruct(
+                                            userType: 'user',
+                                          )
+                                      ? '0'
+                                      : '1';
                                   safeSetState(() {});
 
                                   context.pushNamed(

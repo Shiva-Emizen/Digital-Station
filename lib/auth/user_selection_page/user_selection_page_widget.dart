@@ -144,7 +144,8 @@ class _UserSelectionPageWidgetState extends State<UserSelectionPageWidget> {
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
                                     context.pushNamed(
-                                        CreateAccountPageWidget.routeName);
+                                        CreateAccountPageFreelancerWidget
+                                            .routeName);
                                   },
                                   child: Container(
                                     width: 166.0,

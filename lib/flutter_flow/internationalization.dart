@@ -1368,66 +1368,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Messages',
       'ar': '',
     },
-    'lmldn563': {
-      'en': 'Mohamed Hamed',
-      'ar': '',
-    },
-    'fbv24wmp': {
-      'en': 'Lorem Ipsum is simply... ',
-      'ar': '',
-    },
-    'm1f2cn3j': {
-      'en': '5 Min',
-      'ar': '',
-    },
-    'y0g16bt0': {
-      'en': 'Mohamed Hamed',
-      'ar': '',
-    },
-    '7r474ton': {
-      'en': 'Lorem Ipsum is simply... ',
-      'ar': '',
-    },
-    'tt9ltu8x': {
-      'en': '5 Min',
-      'ar': '',
-    },
-    '9ebmpryf': {
-      'en': 'Mohamed Hamed',
-      'ar': '',
-    },
-    '3sp0aala': {
-      'en': 'Lorem Ipsum is simply... ',
-      'ar': '',
-    },
-    'p95j73lu': {
-      'en': '5 Min',
-      'ar': '',
-    },
-    '4x8p47s5': {
-      'en': 'Mohamed Hamed',
-      'ar': '',
-    },
-    'jc1ii5fz': {
-      'en': 'Lorem Ipsum is simply... ',
-      'ar': '',
-    },
-    'orh5pbf1': {
-      'en': '5 Min',
-      'ar': '',
-    },
-    '5ckz46l8': {
-      'en': 'Mohamed Hamed',
-      'ar': '',
-    },
-    'w3wpxd0c': {
-      'en': 'Lorem Ipsum is simply... ',
-      'ar': '',
-    },
-    'y9c0ni6f': {
-      'en': '5 Min',
-      'ar': '',
-    },
     'dpvfkx7d': {
       'en': 'Chats',
       'ar': 'بيت',
@@ -2380,6 +2320,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'q0t3qyqd': {
+      'en': 'Home',
+      'ar': '',
+    },
+  },
+  // UserChatMessage
+  {
+    'd9xn62p6': {
+      'en': 'Type a message..',
+      'ar': '',
+    },
+    'sm090agd': {
       'en': 'Home',
       'ar': '',
     },

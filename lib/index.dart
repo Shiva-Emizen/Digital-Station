@@ -88,3 +88,5 @@ export '/dashboard/view_file_page/view_file_page_widget.dart'
     show ViewFilePageWidget;
 export '/freelancer_order_detail_page/freelancer_order_detail_page_widget.dart'
     show FreelancerOrderDetailPageWidget;
+export '/user_chat_message/user_chat_message_widget.dart'
+    show UserChatMessageWidget;
