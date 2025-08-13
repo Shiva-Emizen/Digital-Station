@@ -192,16 +192,25 @@ class _MessagePageWidgetState extends State<MessagePageWidget> {
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(0.0),
-                                              child: Image.network(
-                                                listViewChatsRecord.imageURL,
-                                                width: 50.0,
-                                                height: 50.0,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
+                                    ClipRRect(
+                                    borderRadius: BorderRadius.circular(0.0),
+                                    child: Image.network(
+                                      listViewChatsRecord.imageURL,
+                                      width: 50.0,
+                                      height: 50.0,
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (context, error, stackTrace) {
+                                        // Show default image on error
+                                        return Image.asset(
+                                          'assets/images/app_launcher_icon.png',
+                                          width: 50.0,
+                                          height: 50.0,
+                                          fit: BoxFit.cover,
+                                        );
+                                      },
+                                    ),
+                                  ),
+
                                             Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(

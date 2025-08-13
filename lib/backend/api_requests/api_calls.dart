@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:ff_commons/api_requests/api_manager.dart';
 
-
 export 'package:ff_commons/api_requests/api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
@@ -579,26 +578,31 @@ class ServiceDetailCall {
         response,
         r'''$.data''',
       );
+
   List? categoryList(dynamic response) => getJsonField(
         response,
         r'''$.data.categories''',
         true,
       ) as List?;
+
   List? galleryList(dynamic response) => getJsonField(
         response,
         r'''$.data.gallery''',
         true,
       ) as List?;
+
   List? portFolioList(dynamic response) => getJsonField(
         response,
         r'''$.data.portfolio''',
         true,
       ) as List?;
+
   List? faqList(dynamic response) => getJsonField(
         response,
         r'''$.data.faqs''',
         true,
       ) as List?;
+
   List? packageList(dynamic response) => getJsonField(
         response,
         r'''$.data.packages''',
