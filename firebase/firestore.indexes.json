@@ -5,11 +5,25 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "userId",
+          "fieldPath": "freelancerId",
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "lastUpdate",
+          "fieldPath": "lastUpdated",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "chats",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "clientId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "lastUpdated",
           "order": "DESCENDING"
         }
       ]

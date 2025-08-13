@@ -30,20 +30,35 @@ class ChatsRecord extends FirestoreRecord {
   DateTime? get timeStamp => _timeStamp;
   bool hasTimeStamp() => _timeStamp != null;
 
-  // "serviceId" field.
-  String? _serviceId;
-  String get serviceId => _serviceId ?? '';
-  bool hasServiceId() => _serviceId != null;
+  // "freelancerId" field.
+  String? _freelancerId;
+  String get freelancerId => _freelancerId ?? '';
+  bool hasFreelancerId() => _freelancerId != null;
 
-  // "userId" field.
-  String? _userId;
-  String get userId => _userId ?? '';
-  bool hasUserId() => _userId != null;
+  // "clientId" field.
+  String? _clientId;
+  String get clientId => _clientId ?? '';
+  bool hasClientId() => _clientId != null;
 
-  // "lastUpdate" field.
-  DateTime? _lastUpdate;
-  DateTime? get lastUpdate => _lastUpdate;
-  bool hasLastUpdate() => _lastUpdate != null;
+  // "clientProfile" field.
+  String? _clientProfile;
+  String get clientProfile => _clientProfile ?? '';
+  bool hasClientProfile() => _clientProfile != null;
+
+  // "freelancerProfile" field.
+  String? _freelancerProfile;
+  String get freelancerProfile => _freelancerProfile ?? '';
+  bool hasFreelancerProfile() => _freelancerProfile != null;
+
+  // "lastUpdated" field.
+  DateTime? _lastUpdated;
+  DateTime? get lastUpdated => _lastUpdated;
+  bool hasLastUpdated() => _lastUpdated != null;
+
+  // "freelancerName" field.
+  String? _freelancerName;
+  String get freelancerName => _freelancerName ?? '';
+  bool hasFreelancerName() => _freelancerName != null;
 
   // "clientName" field.
   String? _clientName;
@@ -55,45 +70,24 @@ class ChatsRecord extends FirestoreRecord {
   String get email => _email ?? '';
   bool hasEmail() => _email != null;
 
-  // "displayName" field.
-  String? _displayName;
-  String get displayName => _displayName ?? '';
-  bool hasDisplayName() => _displayName != null;
-
-  // "uid" field.
-  String? _uid;
-  String get uid => _uid ?? '';
-  bool hasUid() => _uid != null;
-
   // "created_time" field.
   DateTime? _createdTime;
   DateTime? get createdTime => _createdTime;
   bool hasCreatedTime() => _createdTime != null;
 
-  // "PhoneNumber" field.
-  String? _phoneNumber;
-  String get phoneNumber => _phoneNumber ?? '';
-  bool hasPhoneNumber() => _phoneNumber != null;
-
-  // "imageURL" field.
-  String? _imageURL;
-  String get imageURL => _imageURL ?? '';
-  bool hasImageURL() => _imageURL != null;
-
   void _initializeFields() {
     _chatId = snapshotData['chat_id'] as String?;
     _lastMessage = snapshotData['lastMessage'] as String?;
     _timeStamp = snapshotData['timeStamp'] as DateTime?;
-    _serviceId = snapshotData['serviceId'] as String?;
-    _userId = snapshotData['userId'] as String?;
-    _lastUpdate = snapshotData['lastUpdate'] as DateTime?;
+    _freelancerId = snapshotData['freelancerId'] as String?;
+    _clientId = snapshotData['clientId'] as String?;
+    _clientProfile = snapshotData['clientProfile'] as String?;
+    _freelancerProfile = snapshotData['freelancerProfile'] as String?;
+    _lastUpdated = snapshotData['lastUpdated'] as DateTime?;
+    _freelancerName = snapshotData['freelancerName'] as String?;
     _clientName = snapshotData['clientName'] as String?;
     _email = snapshotData['email'] as String?;
-    _displayName = snapshotData['displayName'] as String?;
-    _uid = snapshotData['uid'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
-    _phoneNumber = snapshotData['PhoneNumber'] as String?;
-    _imageURL = snapshotData['imageURL'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -133,32 +127,30 @@ Map<String, dynamic> createChatsRecordData({
   String? chatId,
   String? lastMessage,
   DateTime? timeStamp,
-  String? serviceId,
-  String? userId,
-  DateTime? lastUpdate,
+  String? freelancerId,
+  String? clientId,
+  String? clientProfile,
+  String? freelancerProfile,
+  DateTime? lastUpdated,
+  String? freelancerName,
   String? clientName,
   String? email,
-  String? displayName,
-  String? uid,
   DateTime? createdTime,
-  String? phoneNumber,
-  String? imageURL,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'chat_id': chatId,
       'lastMessage': lastMessage,
       'timeStamp': timeStamp,
-      'serviceId': serviceId,
-      'userId': userId,
-      'lastUpdate': lastUpdate,
+      'freelancerId': freelancerId,
+      'clientId': clientId,
+      'clientProfile': clientProfile,
+      'freelancerProfile': freelancerProfile,
+      'lastUpdated': lastUpdated,
+      'freelancerName': freelancerName,
       'clientName': clientName,
       'email': email,
-      'displayName': displayName,
-      'uid': uid,
       'created_time': createdTime,
-      'PhoneNumber': phoneNumber,
-      'imageURL': imageURL,
     }.withoutNulls,
   );
 
@@ -173,16 +165,15 @@ class ChatsRecordDocumentEquality implements Equality<ChatsRecord> {
     return e1?.chatId == e2?.chatId &&
         e1?.lastMessage == e2?.lastMessage &&
         e1?.timeStamp == e2?.timeStamp &&
-        e1?.serviceId == e2?.serviceId &&
-        e1?.userId == e2?.userId &&
-        e1?.lastUpdate == e2?.lastUpdate &&
+        e1?.freelancerId == e2?.freelancerId &&
+        e1?.clientId == e2?.clientId &&
+        e1?.clientProfile == e2?.clientProfile &&
+        e1?.freelancerProfile == e2?.freelancerProfile &&
+        e1?.lastUpdated == e2?.lastUpdated &&
+        e1?.freelancerName == e2?.freelancerName &&
         e1?.clientName == e2?.clientName &&
         e1?.email == e2?.email &&
-        e1?.displayName == e2?.displayName &&
-        e1?.uid == e2?.uid &&
-        e1?.createdTime == e2?.createdTime &&
-        e1?.phoneNumber == e2?.phoneNumber &&
-        e1?.imageURL == e2?.imageURL;
+        e1?.createdTime == e2?.createdTime;
   }
 
   @override
@@ -190,16 +181,15 @@ class ChatsRecordDocumentEquality implements Equality<ChatsRecord> {
         e?.chatId,
         e?.lastMessage,
         e?.timeStamp,
-        e?.serviceId,
-        e?.userId,
-        e?.lastUpdate,
+        e?.freelancerId,
+        e?.clientId,
+        e?.clientProfile,
+        e?.freelancerProfile,
+        e?.lastUpdated,
+        e?.freelancerName,
         e?.clientName,
         e?.email,
-        e?.displayName,
-        e?.uid,
-        e?.createdTime,
-        e?.phoneNumber,
-        e?.imageURL
+        e?.createdTime
       ]);
 
   @override

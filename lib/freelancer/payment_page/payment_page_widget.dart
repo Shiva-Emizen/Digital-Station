@@ -81,7 +81,6 @@ class _PaymentPageWidgetState extends State<PaymentPageWidget> {
                           size: 18.0,
                         ),
                         onPressed: () {
-                          Navigator.pop(context);
                           print('IconButton pressed ...');
                         },
                       ),

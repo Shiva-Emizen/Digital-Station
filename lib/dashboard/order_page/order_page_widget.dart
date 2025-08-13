@@ -137,8 +137,6 @@ class _OrderPageWidgetState extends State<OrderPageWidget> {
                                               .orderAPICall
                                               .call(
                                             authToken: FFAppState().apitoken,
-                                            paginate: '10',
-                                            statuses: '5',
                                           )))
                                     .future,
                                 builder: (context, snapshot) {
@@ -714,56 +712,153 @@ class _OrderPageWidgetState extends State<OrderPageWidget> {
                                                                               .secondary,
                                                                     ),
                                                                   );
-                                                                  safeSetState(() =>
-                                                                      _model.apiRequestCompleter1 =
-                                                                          null);
 
-                                                                  await ChatsRecord
-                                                                      .collection
-                                                                      .doc()
+                                                                  var chatsRecordReference =
+                                                                      ChatsRecord
+                                                                          .collection
+                                                                          .doc(
+                                                                              '${getJsonField(
+                                                                    freelancerOrderListItem,
+                                                                    r'''$.service.user_id''',
+                                                                  ).toString()}_${getJsonField(
+                                                                    freelancerOrderListItem,
+                                                                    r'''$.user.id''',
+                                                                  ).toString()}');
+                                                                  await chatsRecordReference
                                                                       .set({
                                                                     ...createChatsRecordData(
                                                                       chatId:
                                                                           '${getJsonField(
                                                                         freelancerOrderListItem,
-                                                                        r'''$.user.id''',
-                                                                      ).toString()}-${getJsonField(
-                                                                        freelancerOrderListItem,
                                                                         r'''$.service.user_id''',
+                                                                      ).toString()}_${getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.user.id''',
                                                                       ).toString()}',
                                                                       lastMessage:
                                                                           'Hello',
-                                                                      serviceId:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.service.id''',
-                                                                      ).toString(),
-                                                                      userId:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.user.id''',
-                                                                      ).toString(),
-                                                                      lastUpdate:
-                                                                          getCurrentTimestamp,
                                                                       clientName:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.service.username''',
-                                                                      ).toString(),
-                                                                      email:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.user.email''',
-                                                                      ).toString(),
-                                                                      displayName:
                                                                           getJsonField(
                                                                         freelancerOrderListItem,
                                                                         r'''$.user.name''',
                                                                       ).toString(),
-                                                                      uid:
+                                                                      email:
                                                                           getJsonField(
                                                                         freelancerOrderListItem,
-                                                                        r'''$.id''',
+                                                                        r'''$.email''',
+                                                                      ).toString(),
+                                                                      freelancerId:
+                                                                          getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.service.user_id''',
+                                                                      ).toString(),
+                                                                      clientId:
+                                                                          getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.user.id''',
+                                                                      ).toString(),
+                                                                      clientProfile:
+                                                                          getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.user.avatar''',
+                                                                      ).toString(),
+                                                                      freelancerProfile:
+                                                                          getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.user_avatar.url''',
+                                                                      ).toString(),
+                                                                      lastUpdated:
+                                                                          getCurrentTimestamp,
+                                                                      freelancerName:
+                                                                          getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.service.username''',
+                                                                      ).toString(),
+                                                                      createdTime:
+                                                                          getCurrentTimestamp,
+                                                                    ),
+                                                                    ...mapToFirestore(
+                                                                      {
+                                                                        'timeStamp':
+                                                                            FieldValue.serverTimestamp(),
+                                                                      },
+                                                                    ),
+                                                                  });
+                                                                  _model.createdChatDoc =
+                                                                      ChatsRecord
+                                                                          .getDocumentFromData({
+                                                                    ...createChatsRecordData(
+                                                                      chatId:
+                                                                          '${getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.service.user_id''',
+                                                                      ).toString()}_${getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.user.id''',
+                                                                      ).toString()}',
+                                                                      lastMessage:
+                                                                          'Hello',
+                                                                      clientName:
+                                                                          getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.user.name''',
+                                                                      ).toString(),
+                                                                      email:
+                                                                          getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.email''',
+                                                                      ).toString(),
+                                                                      freelancerId:
+                                                                          getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.service.user_id''',
+                                                                      ).toString(),
+                                                                      clientId:
+                                                                          getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.user.id''',
+                                                                      ).toString(),
+                                                                      clientProfile:
+                                                                          getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.user.avatar''',
+                                                                      ).toString(),
+                                                                      freelancerProfile:
+                                                                          getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.user_avatar.url''',
+                                                                      ).toString(),
+                                                                      lastUpdated:
+                                                                          getCurrentTimestamp,
+                                                                      freelancerName:
+                                                                          getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.service.username''',
+                                                                      ).toString(),
+                                                                      createdTime:
+                                                                          getCurrentTimestamp,
+                                                                    ),
+                                                                    ...mapToFirestore(
+                                                                      {
+                                                                        'timeStamp':
+                                                                            DateTime.now(),
+                                                                      },
+                                                                    ),
+                                                                  }, chatsRecordReference);
+
+                                                                  await ChatMessagesRecord.createDoc(_model
+                                                                          .createdChatDoc!
+                                                                          .reference)
+                                                                      .set({
+                                                                    ...createChatMessagesRecordData(
+                                                                      message:
+                                                                          'Hello',
+                                                                      senderType:
+                                                                          'freelancer',
+                                                                      senderId:
+                                                                          getJsonField(
+                                                                        freelancerOrderListItem,
+                                                                        r'''$.service.user_id''',
                                                                       ).toString(),
                                                                     ),
                                                                     ...mapToFirestore(
@@ -773,6 +868,9 @@ class _OrderPageWidgetState extends State<OrderPageWidget> {
                                                                       },
                                                                     ),
                                                                   });
+                                                                  safeSetState(() =>
+                                                                      _model.apiRequestCompleter1 =
+                                                                          null);
                                                                 } else {
                                                                   ScaffoldMessenger.of(
                                                                           context)
