@@ -9,6 +9,8 @@ class PortfolioPageModel extends FlutterFlowModel<PortfolioPageWidget> {
   ///  State fields for stateful widgets in this page.
 
   Completer<ApiCallResponse>? apiRequestCompleter;
+  // Stores action output result for [Backend Call - API (deletePortfolio)] action in Icon widget.
+  ApiCallResponse? apiResultpah;
 
   @override
   void initState(BuildContext context) {}

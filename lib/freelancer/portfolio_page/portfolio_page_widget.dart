@@ -275,78 +275,84 @@ class _PortfolioPageWidgetState extends State<PortfolioPageWidget> {
                                     borderRadius: BorderRadius.circular(10.0),
                                     shape: BoxShape.rectangle,
                                   ),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(6.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.network(
-                                            valueOrDefault<String>(
-                                              getJsonField(
-                                                portfolioLastItem,
-                                                r'''$.gallery[0].url''',
-                                              )?.toString(),
-                                              'https://digitalstation.ezxdemo.com/storage/3/01J368C5WP2Y13A7Y1SVV0CXSF.png',
-                                            ),
-                                            width: 155.0,
-                                            height: 110.0,
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 10.0, 0.0, 0.0),
-                                          child: Text(
-                                            valueOrDefault<String>(
-                                              getJsonField(
-                                                portfolioLastItem,
-                                                r'''$.title''',
-                                              )?.toString(),
-                                              'N/A',
-                                            ).maybeHandleOverflow(
-                                              maxChars: 10,
-                                              replacement: '…',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'primaryFont',
-                                                  color: Color(0xFF454545),
-                                                  fontSize: 12.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                          ),
-                                        ),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
+                                  child: Stack(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.all(6.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(0.0),
-                                              child: Image.asset(
-                                                'assets/images/Icon_(Stroke)_(17).png',
-                                                width: 11.0,
-                                                height: 11.0,
-                                                fit: BoxFit.cover,
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.network(
+                                                valueOrDefault<String>(
+                                                  getJsonField(
+                                                    portfolioLastItem,
+                                                    r'''$.gallery[0].url''',
+                                                  )?.toString(),
+                                                  'https://digitalstation.ezxdemo.com/storage/3/01J368C5WP2Y13A7Y1SVV0CXSF.png',
+                                                ),
+                                                width: 155.0,
+                                                height: 110.0,
+                                                fit: BoxFit.fill,
                                               ),
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(4.0, 0.0, 0.0, 0.0),
+                                                  .fromSTEB(
+                                                      0.0, 10.0, 0.0, 0.0),
                                               child: Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  '3na60rmn' /* 1 */,
+                                                valueOrDefault<String>(
+                                                  getJsonField(
+                                                    portfolioLastItem,
+                                                    r'''$.title''',
+                                                  )?.toString(),
+                                                  'N/A',
+                                                ).maybeHandleOverflow(
+                                                  maxChars: 10,
+                                                  replacement: '…',
                                                 ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      fontFamily: 'primaryFont',
+                                                      color: Color(0xFF454545),
+                                                      fontSize: 12.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                              ),
+                                            ),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          0.0),
+                                                  child: Image.asset(
+                                                    'assets/images/Icon_(Stroke)_(17).png',
+                                                    width: 11.0,
+                                                    height: 11.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          4.0, 0.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      '3na60rmn' /* 1 */,
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily:
@@ -354,12 +360,96 @@ class _PortfolioPageWidgetState extends State<PortfolioPageWidget> {
                                                           fontSize: 12.0,
                                                           letterSpacing: 0.0,
                                                         ),
-                                              ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                      Icon(
+                                        Icons.edit,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        size: 24.0,
+                                      ),
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(1.0, -1.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            _model.apiResultpah =
+                                                await FreelancerHomePageGroup
+                                                    .deletePortfolioCall
+                                                    .call(
+                                              id: getJsonField(
+                                                portfolioLastItem,
+                                                r'''$.id''',
+                                              ).toString(),
+                                              authToken: FFAppState().apitoken,
+                                            );
+
+                                            if ((_model
+                                                    .apiResultpah?.succeeded ??
+                                                true)) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    getJsonField(
+                                                      (_model.apiResultpah
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                      r'''$.message''',
+                                                    ).toString(),
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  duration: Duration(
+                                                      milliseconds: 4000),
+                                                  backgroundColor:
+                                                      Color(0xFF6E2A87),
+                                                ),
+                                              );
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    getJsonField(
+                                                      (_model.apiResultpah
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                      r'''$.message''',
+                                                    ).toString(),
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  duration: Duration(
+                                                      milliseconds: 4000),
+                                                  backgroundColor:
+                                                      Color(0xFF6E2A87),
+                                                ),
+                                              );
+                                            }
+
+                                            safeSetState(() {});
+                                          },
+                                          child: Icon(
+                                            Icons.delete,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            size: 24.0,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 );
                               },
