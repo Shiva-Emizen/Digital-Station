@@ -1510,6 +1510,8 @@ class FreelancerHomePageGroup {
   static ChangeStatusCall changeStatusCall = ChangeStatusCall();
   static FreelancerOrderDetailCall freelancerOrderDetailCall =
       FreelancerOrderDetailCall();
+  static DeletePortfolioCall deletePortfolioCall = DeletePortfolioCall();
+  static UpdatePortfolioCall updatePortfolioCall = UpdatePortfolioCall();
 }
 
 class OrderAPICall {
@@ -1926,6 +1928,66 @@ class FreelancerOrderDetailCall {
         response,
         r'''$.data''',
       );
+}
+
+class DeletePortfolioCall {
+  Future<ApiCallResponse> call({
+    String? id = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = FreelancerHomePageGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'deletePortfolio',
+      apiUrl: '${baseUrl}portfolio/${id}',
+      callType: ApiCallType.DELETE,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
+        'Accept': 'application/json',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class UpdatePortfolioCall {
+  Future<ApiCallResponse> call({
+    String? id = '',
+    String? title = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = FreelancerHomePageGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'updatePortfolio',
+      apiUrl: '${baseUrl}portfolio/${id}',
+      callType: ApiCallType.PUT,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
+        'Accept': 'application/json',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
 }
 
 /// End FreelancerHomePage Group Code
