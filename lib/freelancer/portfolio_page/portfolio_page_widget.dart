@@ -416,6 +416,8 @@ class _PortfolioPageWidgetState extends State<PortfolioPageWidget> {
                                                       Color(0xFF6E2A87),
                                                 ),
                                               );
+                                              safeSetState(() => _model
+                                                  .apiRequestCompleter = null);
                                             } else {
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(
