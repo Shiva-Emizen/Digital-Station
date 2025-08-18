@@ -498,6 +498,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) {
         ),
       ),
       FFRoute(
+        name: EditPortfolioWidget.routeName,
+        path: EditPortfolioWidget.routePath,
+        builder: (context, params) => EditPortfolioWidget(),
+      ),
+      FFRoute(
         name: $paypal_integration_marketplace_library_9mtra1
             .HomePageWidget.routeName,
         path: $paypal_integration_marketplace_library_9mtra1
