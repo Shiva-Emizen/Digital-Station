@@ -35,8 +35,31 @@ class _EditPortfolioPageWidgetState extends State<EditPortfolioPageWidget> {
 
   Future<void> _updatePortfolio() async {
     setState(() => _isUpdating = true);
-    // TODO: Call your update API here using widget.portfolioId and _titleController.text
-    // On success:
+    // Simulate an API call to update the portfolio
+    await Future.delayed(const Duration(seconds: 2));
+    // Here you would typically call your API to update the portfolio
+    // For example:
+    // final response = await ApiService.updatePortfolioCall(
+    //   portfolioId: widget.portfolioId,
+    //   title: _titleController.text,
+    //   galleryUrls: widget.galleryUrls,
+    // );
+    // if (response.success) {
+    //   // Handle success, maybe show a snackbar or navigate back
+    // } else {
+    //   // Handle error, maybe show an error message
+    // }
+    // For now, we just simulate success
+    await Future.delayed(const Duration(seconds: 1));
+    // After successful update, you can pop the page or show a success message
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Portfolio updated successfully!'),
+        backgroundColor: Colors.green,
+      ),
+    );
+    // Optionally, you can return a result to the previous page
+    //
     Navigator.pop(context, true); // Optionally return a result
     setState(() => _isUpdating = false);
   }
