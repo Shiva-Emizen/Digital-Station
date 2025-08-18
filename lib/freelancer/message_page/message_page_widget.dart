@@ -136,7 +136,8 @@ class _MessagePageWidgetState extends State<MessagePageWidget> {
                         UserTypeStruct(
                           userType: 'freelancer',
                         )) {
-                      return Padding(
+                      return
+                        Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                         child: Column(
@@ -147,13 +148,7 @@ class _MessagePageWidgetState extends State<MessagePageWidget> {
                                 queryBuilder: (chatsRecord) => chatsRecord
                                     .where(
                                       'freelancerId',
-                                      isEqualTo: getJsonField(
-                                        ClientHomePageGroup.clientProfileCall
-                                            .clientDetails(
-                                          (_model.apiResultpy7?.jsonBody ?? ''),
-                                        ),
-                                        r'''$.service.user_id''',
-                                      ).toString(),
+                                      isEqualTo:  _model.userId,
                                     )
                                     .orderBy('lastUpdated', descending: true),
                               ),
@@ -378,32 +373,25 @@ class _MessagePageWidgetState extends State<MessagePageWidget> {
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     children: [
-                                                      Text(
+                                                      listViewChatsRecord.lastUpdated != null
+                                                          ? Text(
                                                         dateTimeFormat(
                                                           "relative",
-                                                          listViewChatsRecord
-                                                              .lastUpdated!,
-                                                          locale:
-                                                              FFLocalizations.of(
-                                                                      context)
-                                                                  .languageCode,
+                                                          listViewChatsRecord.lastUpdated!,
+                                                          locale: FFLocalizations.of(context).languageCode,
                                                         ).maybeHandleOverflow(
                                                           maxChars: 10,
                                                           replacement: '…',
                                                         ),
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'primaryFont',
-                                                              color: Color(
-                                                                  0xFF898989),
-                                                              fontSize: 10.0,
-                                                              letterSpacing:
-                                                                  0.0,
-                                                            ),
-                                                      ),
+                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                          fontFamily: 'primaryFont',
+                                                          color: Color(0xFF898989),
+                                                          fontSize: 10.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                      )
+                                                          : SizedBox.shrink(),
+
                                                       Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
@@ -682,31 +670,24 @@ class _MessagePageWidgetState extends State<MessagePageWidget> {
                                                         MainAxisSize.max,
                                                     children: [
                                                       Text(
-                                                        dateTimeFormat(
+                                                        listViewChatsRecord.lastUpdated != null
+                                                            ? dateTimeFormat(
                                                           "relative",
-                                                          listViewChatsRecord
-                                                              .lastUpdated!,
-                                                          locale:
-                                                              FFLocalizations.of(
-                                                                      context)
-                                                                  .languageCode,
+                                                          listViewChatsRecord.lastUpdated!,
+                                                          locale: FFLocalizations.of(context).languageCode,
                                                         ).maybeHandleOverflow(
                                                           maxChars: 10,
                                                           replacement: '…',
+                                                        )
+                                                            : '', // empty or "No date"
+                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                          fontFamily: 'primaryFont',
+                                                          color: Color(0xFF898989),
+                                                          fontSize: 10.0,
+                                                          letterSpacing: 0.0,
                                                         ),
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'primaryFont',
-                                                              color: Color(
-                                                                  0xFF898989),
-                                                              fontSize: 10.0,
-                                                              letterSpacing:
-                                                                  0.0,
-                                                            ),
                                                       ),
+
                                                       Padding(
                                                         padding:
                                                             EdgeInsetsDirectional

@@ -57,7 +57,7 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                 if (FFAppState().userType == '1') {
                   return Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                    EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -66,21 +66,21 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                               20.0, 0.0, 20.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              FlutterFlowIconButton(
-                                borderRadius: 8.0,
-                                buttonSize: 36.0,
-                                fillColor: Colors.white,
-                                icon: Icon(
-                                  Icons.arrow_back_ios_new,
-                                  color: Color(0xFF252525),
-                                  size: 18.0,
-                                ),
-                                onPressed: () {
-                                  print('IconButton pressed ...');
-                                },
-                              ),
+                              // FlutterFlowIconButton(
+                              //   borderRadius: 8.0,
+                              //   buttonSize: 36.0,
+                              //   fillColor: Colors.white,
+                              //   icon: Icon(
+                              //     Icons.arrow_back_ios_new,
+                              //     color: Color(0xFF252525),
+                              //     size: 18.0,
+                              //   ),
+                              //   onPressed: () {
+                              //     print('IconButton pressed ...');
+                              //   },
+                              // ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 20.0, 0.0),
@@ -95,12 +95,12 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'primaryFont',
-                                            color: Color(0xFF252525),
-                                            fontSize: 16.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                        fontFamily: 'primaryFont',
+                                        color: Color(0xFF252525),
+                                        fontSize: 16.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -139,15 +139,15 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                           children: [
                                             Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 ClipRRect(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          0.0),
+                                                  BorderRadius.circular(
+                                                      0.0),
                                                   child: Image.asset(
                                                     'assets/images/Icon_(Stroke)_(1).png',
                                                     width: 20.0,
@@ -158,23 +158,23 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
-                                                          20.0, 0.0, 0.0, 0.0),
+                                                      20.0, 0.0, 0.0, 0.0),
                                                   child: Text(
                                                     FFLocalizations.of(context)
                                                         .getText(
                                                       'e210nnpf' /* Orders */,
                                                     ),
                                                     style: FlutterFlowTheme.of(
-                                                            context)
+                                                        context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily:
-                                                              'primaryFont',
-                                                          fontSize: 15.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
+                                                      fontFamily:
+                                                      'primaryFont',
+                                                      fontSize: 15.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                      FontWeight.bold,
+                                                    ),
                                                   ),
                                                 ),
                                               ],
@@ -213,14 +213,14 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               ClipRRect(
                                                 borderRadius:
-                                                    BorderRadius.circular(0.0),
+                                                BorderRadius.circular(0.0),
                                                 child: Image.asset(
                                                   'assets/images/Icon_(Stroke)_(2).png',
                                                   width: 22.0,
@@ -231,23 +231,23 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        20.0, 0.0, 0.0, 0.0),
+                                                    20.0, 0.0, 0.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
                                                     '8xopt5o9' /* My Profile */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
-                                                          context)
+                                                      context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily:
-                                                            'primaryFont',
-                                                        fontSize: 15.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
+                                                    fontFamily:
+                                                    'primaryFont',
+                                                    fontSize: 15.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                    FontWeight.bold,
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -285,14 +285,14 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               ClipRRect(
                                                 borderRadius:
-                                                    BorderRadius.circular(0.0),
+                                                BorderRadius.circular(0.0),
                                                 child: Image.asset(
                                                   'assets/images/Icon_(Stroke)_(18).png',
                                                   width: 22.0,
@@ -303,23 +303,23 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        20.0, 0.0, 0.0, 0.0),
+                                                    20.0, 0.0, 0.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
                                                     '5jc5pjnj' /* My Portfolio */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
-                                                          context)
+                                                      context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily:
-                                                            'primaryFont',
-                                                        fontSize: 15.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
+                                                    fontFamily:
+                                                    'primaryFont',
+                                                    fontSize: 15.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                    FontWeight.bold,
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -356,14 +356,14 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               ClipRRect(
                                                 borderRadius:
-                                                    BorderRadius.circular(0.0),
+                                                BorderRadius.circular(0.0),
                                                 child: Image.asset(
                                                   'assets/images/Icon_(Stroke)_(19).png',
                                                   width: 22.0,
@@ -374,23 +374,23 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        20.0, 0.0, 0.0, 0.0),
+                                                    20.0, 0.0, 0.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
                                                     'owveokpy' /* Wallet */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
-                                                          context)
+                                                      context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily:
-                                                            'primaryFont',
-                                                        fontSize: 15.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
+                                                    fontFamily:
+                                                    'primaryFont',
+                                                    fontSize: 15.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                    FontWeight.bold,
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -428,14 +428,14 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               ClipRRect(
                                                 borderRadius:
-                                                    BorderRadius.circular(0.0),
+                                                BorderRadius.circular(0.0),
                                                 child: Image.asset(
                                                   'assets/images/Icon_(Stroke)_(20).png',
                                                   width: 22.0,
@@ -446,23 +446,23 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        20.0, 0.0, 0.0, 0.0),
+                                                    20.0, 0.0, 0.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
                                                     'zcje2wmc' /* Payment Methods */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
-                                                          context)
+                                                      context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily:
-                                                            'primaryFont',
-                                                        fontSize: 15.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
+                                                    fontFamily:
+                                                    'primaryFont',
+                                                    fontSize: 15.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                    FontWeight.bold,
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -500,14 +500,14 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               ClipRRect(
                                                 borderRadius:
-                                                    BorderRadius.circular(0.0),
+                                                BorderRadius.circular(0.0),
                                                 child: Image.asset(
                                                   'assets/images/Icon_(Stroke)_(3).png',
                                                   width: 21.0,
@@ -518,23 +518,23 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        20.0, 0.0, 0.0, 0.0),
+                                                    20.0, 0.0, 0.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
                                                     '40b9lok5' /* Notifications  */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
-                                                          context)
+                                                      context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily:
-                                                            'primaryFont',
-                                                        fontSize: 15.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
+                                                    fontFamily:
+                                                    'primaryFont',
+                                                    fontSize: 15.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                    FontWeight.bold,
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -572,14 +572,14 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               ClipRRect(
                                                 borderRadius:
-                                                    BorderRadius.circular(0.0),
+                                                BorderRadius.circular(0.0),
                                                 child: Image.asset(
                                                   'assets/images/Icon_(Stroke)_(4).png',
                                                   width: 22.0,
@@ -590,23 +590,23 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        20.0, 0.0, 0.0, 0.0),
+                                                    20.0, 0.0, 0.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
                                                     '37cjzr0x' /* Language */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
-                                                          context)
+                                                      context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily:
-                                                            'primaryFont',
-                                                        fontSize: 15.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
+                                                    fontFamily:
+                                                    'primaryFont',
+                                                    fontSize: 15.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                    FontWeight.bold,
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -635,14 +635,14 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                       children: [
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(0.0),
+                                              BorderRadius.circular(0.0),
                                               child: Image.asset(
                                                 'assets/images/Icon_(Stroke)_(6).png',
                                                 width: 20.0,
@@ -653,23 +653,23 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                             Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(
-                                                      20.0, 0.0, 0.0, 0.0),
+                                                  20.0, 0.0, 0.0, 0.0),
                                               child: Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
                                                   'laywq6hc' /* Invite friends */,
                                                 ),
                                                 style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'primaryFont',
-                                                          fontSize: 15.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .override(
+                                                  fontFamily:
+                                                  'primaryFont',
+                                                  fontSize: 15.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                  FontWeight.bold,
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -697,14 +697,14 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                       children: [
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(0.0),
+                                              BorderRadius.circular(0.0),
                                               child: Image.asset(
                                                 'assets/images/Icon_(Stroke)_(7).png',
                                                 width: 22.0,
@@ -715,23 +715,23 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                             Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(
-                                                      20.0, 0.0, 0.0, 0.0),
+                                                  20.0, 0.0, 0.0, 0.0),
                                               child: Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
                                                   's996upmk' /* About */,
                                                 ),
                                                 style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'primaryFont',
-                                                          fontSize: 15.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .override(
+                                                  fontFamily:
+                                                  'primaryFont',
+                                                  fontSize: 15.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                  FontWeight.bold,
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -759,14 +759,14 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                       children: [
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(0.0),
+                                              BorderRadius.circular(0.0),
                                               child: Image.asset(
                                                 'assets/images/Icon_(Stroke)_(8).png',
                                                 width: 22.0,
@@ -777,23 +777,23 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                             Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(
-                                                      20.0, 0.0, 0.0, 0.0),
+                                                  20.0, 0.0, 0.0, 0.0),
                                               child: Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
                                                   'h80zjut3' /* Help */,
                                                 ),
                                                 style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'primaryFont',
-                                                          fontSize: 15.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .override(
+                                                  fontFamily:
+                                                  'primaryFont',
+                                                  fontSize: 15.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                  FontWeight.bold,
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -827,9 +827,9 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                           insetPadding: EdgeInsets.zero,
                                           backgroundColor: Colors.transparent,
                                           alignment: AlignmentDirectional(
-                                                  0.0, 0.0)
+                                              0.0, 0.0)
                                               .resolve(
-                                                  Directionality.of(context)),
+                                              Directionality.of(context)),
                                           child: GestureDetector(
                                             onTap: () {
                                               FocusScope.of(dialogContext)
@@ -839,7 +839,7 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                             },
                                             child: Container(
                                               height: MediaQuery.sizeOf(context)
-                                                      .height *
+                                                  .height *
                                                   0.3,
                                               child: LogoutWidget(),
                                             ),
@@ -857,15 +857,15 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                           children: [
                                             Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 ClipRRect(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          0.0),
+                                                  BorderRadius.circular(
+                                                      0.0),
                                                   child: Image.asset(
                                                     'assets/images/Icon_(Stroke)_(9).png',
                                                     width: 22.0,
@@ -876,25 +876,25 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
-                                                          20.0, 0.0, 0.0, 0.0),
+                                                      20.0, 0.0, 0.0, 0.0),
                                                   child: Text(
                                                     FFLocalizations.of(context)
                                                         .getText(
                                                       'rr0f9sjr' /* Logout */,
                                                     ),
                                                     style: FlutterFlowTheme.of(
-                                                            context)
+                                                        context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily:
-                                                              'primaryFont',
-                                                          color:
-                                                              Color(0xFFFF2C20),
-                                                          fontSize: 15.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
+                                                      fontFamily:
+                                                      'primaryFont',
+                                                      color:
+                                                      Color(0xFFFF2C20),
+                                                      fontSize: 15.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                      FontWeight.bold,
+                                                    ),
                                                   ),
                                                 ),
                                               ],
@@ -924,7 +924,7 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                 } else {
                   return Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                    EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -933,21 +933,21 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                               20.0, 0.0, 20.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              FlutterFlowIconButton(
-                                borderRadius: 8.0,
-                                buttonSize: 36.0,
-                                fillColor: Colors.white,
-                                icon: Icon(
-                                  Icons.arrow_back_ios_new,
-                                  color: Color(0xFF252525),
-                                  size: 18.0,
-                                ),
-                                onPressed: () {
-                                  print('IconButton pressed ...');
-                                },
-                              ),
+                              // FlutterFlowIconButton(
+                              //   borderRadius: 8.0,
+                              //   buttonSize: 36.0,
+                              //   fillColor: Colors.white,
+                              //   icon: Icon(
+                              //     Icons.arrow_back_ios_new,
+                              //     color: Color(0xFF252525),
+                              //     size: 18.0,
+                              //   ),
+                              //   onPressed: () {
+                              //     print('IconButton pressed ...');
+                              //   },
+                              // ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 20.0, 0.0),
@@ -962,12 +962,12 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'primaryFont',
-                                            color: Color(0xFF252525),
-                                            fontSize: 16.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                        fontFamily: 'primaryFont',
+                                        color: Color(0xFF252525),
+                                        fontSize: 16.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -1006,15 +1006,15 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                           children: [
                                             Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 ClipRRect(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          0.0),
+                                                  BorderRadius.circular(
+                                                      0.0),
                                                   child: Image.asset(
                                                     'assets/images/Icon_(Stroke)_(1).png',
                                                     width: 20.0,
@@ -1025,23 +1025,23 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
-                                                          20.0, 0.0, 0.0, 0.0),
+                                                      20.0, 0.0, 0.0, 0.0),
                                                   child: Text(
                                                     FFLocalizations.of(context)
                                                         .getText(
                                                       'y03i6yjk' /* Orders */,
                                                     ),
                                                     style: FlutterFlowTheme.of(
-                                                            context)
+                                                        context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily:
-                                                              'primaryFont',
-                                                          fontSize: 15.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
+                                                      fontFamily:
+                                                      'primaryFont',
+                                                      fontSize: 15.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                      FontWeight.bold,
+                                                    ),
                                                   ),
                                                 ),
                                               ],
@@ -1062,67 +1062,77 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                   ),
                                 ),
                               ),
-                              Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        20.0, 0.0, 20.0, 0.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(0.0),
-                                              child: Image.asset(
-                                                'assets/images/Icon_(Stroke)_(2).png',
-                                                width: 22.0,
-                                                height: 22.0,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      20.0, 0.0, 0.0, 0.0),
-                                              child: Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  '8yt6ozs8' /* My Profile */,
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context
+                                      .pushNamed(ProfilePageWidget.routeName);
+                                },
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          20.0, 0.0, 20.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                BorderRadius.circular(0.0),
+                                                child: Image.asset(
+                                                  'assets/images/Icon_(Stroke)_(2).png',
+                                                  width: 22.0,
+                                                  height: 22.0,
+                                                  fit: BoxFit.cover,
                                                 ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'primaryFont',
-                                                          fontSize: 15.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        Icon(
-                                          Icons.arrow_forward_ios,
-                                          color: Color(0xFF181725),
-                                          size: 24.0,
-                                        ),
-                                      ],
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                    20.0, 0.0, 0.0, 0.0),
+                                                child: Text(
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    '8yt6ozs8' /* My Profile */,
+                                                  ),
+                                                  style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                    fontFamily:
+                                                    'primaryFont',
+                                                    fontSize: 15.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                    FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Icon(
+                                            Icons.arrow_forward_ios,
+                                            color: Color(0xFF181725),
+                                            size: 24.0,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  Divider(
-                                    thickness: 1.0,
-                                    color: Color(0xFFE2E2E2),
-                                  ),
-                                ].divide(SizedBox(height: 10.0)),
+                                    Divider(
+                                      thickness: 1.0,
+                                      color: Color(0xFFE2E2E2),
+                                    ),
+                                  ].divide(SizedBox(height: 10.0)),
+                                ),
                               ),
                               InkWell(
                                 splashColor: Colors.transparent,
@@ -1142,14 +1152,14 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               ClipRRect(
                                                 borderRadius:
-                                                    BorderRadius.circular(0.0),
+                                                BorderRadius.circular(0.0),
                                                 child: Image.asset(
                                                   'assets/images/Icon_(Stroke)_(3).png',
                                                   width: 21.0,
@@ -1160,23 +1170,23 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        20.0, 0.0, 0.0, 0.0),
+                                                    20.0, 0.0, 0.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
                                                     'paux1ykz' /* Notifications  */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
-                                                          context)
+                                                      context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily:
-                                                            'primaryFont',
-                                                        fontSize: 15.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
+                                                    fontFamily:
+                                                    'primaryFont',
+                                                    fontSize: 15.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                    FontWeight.bold,
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -1214,14 +1224,14 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               ClipRRect(
                                                 borderRadius:
-                                                    BorderRadius.circular(0.0),
+                                                BorderRadius.circular(0.0),
                                                 child: Image.asset(
                                                   'assets/images/Icon_(Stroke)_(4).png',
                                                   width: 22.0,
@@ -1232,23 +1242,23 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        20.0, 0.0, 0.0, 0.0),
+                                                    20.0, 0.0, 0.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
                                                     '5yd61tmp' /* Language */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
-                                                          context)
+                                                      context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily:
-                                                            'primaryFont',
-                                                        fontSize: 15.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
+                                                    fontFamily:
+                                                    'primaryFont',
+                                                    fontSize: 15.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                    FontWeight.bold,
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -1285,14 +1295,14 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               ClipRRect(
                                                 borderRadius:
-                                                    BorderRadius.circular(0.0),
+                                                BorderRadius.circular(0.0),
                                                 child: Image.asset(
                                                   'assets/images/Icon_(Stroke)_(5).png',
                                                   width: 16.0,
@@ -1303,23 +1313,23 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        20.0, 0.0, 0.0, 0.0),
+                                                    20.0, 0.0, 0.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
                                                     '7k0dqx8r' /* Saved Services */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
-                                                          context)
+                                                      context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily:
-                                                            'primaryFont',
-                                                        fontSize: 15.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
+                                                    fontFamily:
+                                                    'primaryFont',
+                                                    fontSize: 15.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                    FontWeight.bold,
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -1348,14 +1358,14 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                       children: [
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(0.0),
+                                              BorderRadius.circular(0.0),
                                               child: Image.asset(
                                                 'assets/images/Icon_(Stroke)_(6).png',
                                                 width: 20.0,
@@ -1366,23 +1376,23 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                             Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(
-                                                      20.0, 0.0, 0.0, 0.0),
+                                                  20.0, 0.0, 0.0, 0.0),
                                               child: Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
                                                   'sq71m0gd' /* Invite friends */,
                                                 ),
                                                 style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'primaryFont',
-                                                          fontSize: 15.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .override(
+                                                  fontFamily:
+                                                  'primaryFont',
+                                                  fontSize: 15.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                  FontWeight.bold,
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -1410,14 +1420,14 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                       children: [
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(0.0),
+                                              BorderRadius.circular(0.0),
                                               child: Image.asset(
                                                 'assets/images/Icon_(Stroke)_(7).png',
                                                 width: 22.0,
@@ -1428,23 +1438,23 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                             Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(
-                                                      20.0, 0.0, 0.0, 0.0),
+                                                  20.0, 0.0, 0.0, 0.0),
                                               child: Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
                                                   'pph8p7hc' /* About */,
                                                 ),
                                                 style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'primaryFont',
-                                                          fontSize: 15.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .override(
+                                                  fontFamily:
+                                                  'primaryFont',
+                                                  fontSize: 15.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                  FontWeight.bold,
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -1472,14 +1482,14 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                       children: [
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(0.0),
+                                              BorderRadius.circular(0.0),
                                               child: Image.asset(
                                                 'assets/images/Icon_(Stroke)_(8).png',
                                                 width: 22.0,
@@ -1490,23 +1500,23 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                             Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(
-                                                      20.0, 0.0, 0.0, 0.0),
+                                                  20.0, 0.0, 0.0, 0.0),
                                               child: Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
                                                   'frowf834' /* Help */,
                                                 ),
                                                 style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'primaryFont',
-                                                          fontSize: 15.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .override(
+                                                  fontFamily:
+                                                  'primaryFont',
+                                                  fontSize: 15.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                  FontWeight.bold,
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -1548,14 +1558,14 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               ClipRRect(
                                                 borderRadius:
-                                                    BorderRadius.circular(0.0),
+                                                BorderRadius.circular(0.0),
                                                 child: Image.asset(
                                                   'assets/images/Icon_(Stroke)_(9).png',
                                                   width: 22.0,
@@ -1566,25 +1576,25 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        20.0, 0.0, 0.0, 0.0),
+                                                    20.0, 0.0, 0.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
                                                     '0789fh7g' /* Logout */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
-                                                          context)
+                                                      context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily:
-                                                            'primaryFont',
-                                                        color:
-                                                            Color(0xFFFF2C20),
-                                                        fontSize: 15.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
+                                                    fontFamily:
+                                                    'primaryFont',
+                                                    color:
+                                                    Color(0xFFFF2C20),
+                                                    fontSize: 15.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                    FontWeight.bold,
+                                                  ),
                                                 ),
                                               ),
                                             ],

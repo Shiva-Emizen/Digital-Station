@@ -520,108 +520,124 @@ class _CreateOrderWidgetState extends State<CreateOrderWidget> {
                                       shape: BoxShape.rectangle,
                                     ),
                                     child: FFButtonWidget(
-                                      onPressed: () async {
-                                        if (_model.formKey.currentState ==
-                                                null ||
-                                            !_model.formKey.currentState!
-                                                .validate()) {
-                                          return;
-                                        }
-                                        _model.orderCreatedResponse =
-                                            await ClientHomePageGroup
-                                                .createOrderCall
-                                                .call(
-                                          serviceId: widget.serviceId,
-                                          packageId: widget.packageId,
-                                          description:
-                                              _model.textController.text,
-                                          attachments: _model.selectedPath,
-                                          expressDelivery:
-                                              _model.extraPay == true
-                                                  ? '1'
-                                                  : '0',
-                                          authToken: FFAppState().apitoken,
-                                        );
+                                        onPressed: () async {
+                                          // Form validation
+                                          if (_model.formKey.currentState == null || !_model.formKey.currentState!.validate()) {
+                                            return;
+                                          }
 
-                                        if ((_model.orderCreatedResponse
-                                                ?.succeeded ??
-                                            true)) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                getJsonField(
-                                                  (_model.orderCreatedResponse
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                  r'''$.message''',
-                                                ).toString(),
-                                                style: TextStyle(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                ),
-                                              ),
-                                              duration:
-                                                  Duration(milliseconds: 4000),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondary,
-                                            ),
+                                          // Call create order API
+                                          _model.orderCreatedResponse = await ClientHomePageGroup.createOrderCall.call(
+                                            serviceId: widget.serviceId,
+                                            packageId: widget.packageId,
+                                            description: _model.textController.text,
+                                            attachments: _model.selectedPath,
+                                            expressDelivery: _model.extraPay == true ? '1' : '0',
+                                            authToken: FFAppState().apitoken,
                                           );
-                                          await paypal_integration_marketplace_library_9mtra1_actions
-                                              .paypalPay(
-                                            context,
-                                            'AQzOQFUCXTbmGocpHXvBm8ZsZxR-ODRn9bSrCdQsKs9fgzOJe07-eYsPUKN7BmWCw8Vt3izzvG6BmJIx ',
-                                            'EPSYJsR227guAVsnR3HZDE-CKI0WaecqRYfuvwXNP5YOf1yUVAtzTlgeqZS4d9rwGErZQog6fA1eHtnB ',
-                                            getJsonField(
-                                              (_model.orderCreatedResponse
-                                                      ?.jsonBody ??
-                                                  ''),
+
+                                          // If the order was created successfully
+                                          if ((_model.orderCreatedResponse?.succeeded ?? true)) {
+                                            // Parse total from response
+                                            String? totalStr = getJsonField(
+                                              (_model.orderCreatedResponse?.jsonBody ?? ''),
                                               r'''$.data.total''',
-                                            ),
-                                            'USD',
-                                            _model.textController.text,
-                                            'paypal',
-                                            _model.amountDetails,
-                                            _model.productList.toList(),
-                                            _model.amountDetails,
-                                            true,
-                                            (data) async {
-                                              context.pushNamed(
-                                                  HomePageWidget.routeName);
-                                            },
-                                            (params) async {},
-                                            (message) async {},
-                                          );
-                                        } else {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                getJsonField(
-                                                  (_model.orderCreatedResponse
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                  r'''$.message''',
-                                                ).toString(),
-                                                style: TextStyle(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                ),
-                                              ),
-                                              duration:
-                                                  Duration(milliseconds: 4000),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondary,
-                                            ),
-                                          );
-                                        }
+                                            )?.toString();
 
-                                        safeSetState(() {});
-                                      },
+                                            double total = double.tryParse(totalStr ?? '0') ?? 0.0;
+
+                                            // Show success message
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  getJsonField(
+                                                    (_model.orderCreatedResponse?.jsonBody ?? ''),
+                                                    r'''$.message''',
+                                                  ).toString(),
+                                                  style: TextStyle(
+                                                    color: FlutterFlowTheme.of(context).primaryText,
+                                                  ),
+                                                ),
+                                                duration: Duration(milliseconds: 4000),
+                                                backgroundColor: FlutterFlowTheme.of(context).secondary,
+                                              ),
+                                            );
+
+                                            // ✅ Log request payload
+                                            print('📤 PayPal Request:');
+                                            print('Client ID: AQzOQFUCXTbmGocpHXvBm8ZsZxR...');
+                                            print('Secret: EPSYJsR227guAVsnR3HZDE-CKI0Waecq...');
+                                            print('Total: $total');
+                                            print('Currency: USD');
+                                            print('Description: ${_model.textController.text}');
+                                            print('Amount Details: ${_model.amountDetails}');
+                                            print('Product List: ${_model.productList.toList()}');
+
+                                            // 🔄 Call PayPal integration
+                                            await paypal_integration_marketplace_library_9mtra1_actions.paypalPay(
+                                              context,
+                                              'AQzOQFUCXTbmGocpHXvBm8ZsZxR-ODRn9bSrCdQsKs9fgzOJe07-eYsPUKN7BmWCw8Vt3izzvG6BmJIx',
+                                              'EPSYJsR227guAVsnR3HZDE-CKI0WaecqRYfuvwXNP5YOf1yUVAtzTlgeqZS4d9rwGErZQog6fA1eHtnB',
+                                              total,
+                                              'USD',
+                                              _model.textController.text,
+                                              'paypal',
+                                              _model.amountDetails,
+                                              _model.productList.toList(),
+                                              _model.amountDetails,
+                                              true,
+
+                                              // ✅ Success callback
+                                                  (data) async {
+                                                print('✅ PayPal Success Response:');
+                                                print(data);
+
+                                                context.pushNamed(HomePageWidget.routeName);
+                                              },
+
+                                              // ❌ Cancel callback
+                                                  (params) async {
+                                                print('⚠️ PayPal Cancelled:');
+                                                print(params);
+                                              },
+
+                                              // ❌ Error callback
+                                                  (message) async {
+                                                print('🚫 PayPal Error:');
+                                                print(message);
+
+                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(
+                                                    content: Text('PayPal Error: $message'),
+                                                    backgroundColor: Colors.red,
+                                                    duration: Duration(seconds: 5),
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          } else {
+                                            // Show error from order creation
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  getJsonField(
+                                                    (_model.orderCreatedResponse?.jsonBody ?? ''),
+                                                    r'''$.message''',
+                                                  ).toString(),
+                                                  style: TextStyle(
+                                                    color: FlutterFlowTheme.of(context).primaryText,
+                                                  ),
+                                                ),
+                                                duration: Duration(milliseconds: 4000),
+                                                backgroundColor: FlutterFlowTheme.of(context).secondary,
+                                              ),
+                                            );
+                                          }
+
+                                          // Refresh UI
+                                          safeSetState(() {});
+                                        },
+
                                       text: FFLocalizations.of(context).getText(
                                         'tfdg6m2u' /* Confirm */,
                                       ),

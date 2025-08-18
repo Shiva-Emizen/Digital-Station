@@ -13,6 +13,7 @@ class UserChatMessageModel extends FlutterFlowModel<UserChatMessageWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
+  String? _attachmentUrl;
 
   @override
   void initState(BuildContext context) {

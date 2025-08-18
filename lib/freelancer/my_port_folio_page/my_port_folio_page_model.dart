@@ -10,6 +10,8 @@ class MyPortFolioPageModel extends FlutterFlowModel<MyPortFolioPageWidget> {
   final formKey = GlobalKey<FormState>();
   // Stores action output result for [Backend Call - API (AddPortfolio)] action in Text widget.
   ApiCallResponse? apiResultks3;
+  bool isSavingPortfolio = false;
+
   // State field(s) for name widget.
   FocusNode? nameFocusNode;
   TextEditingController? nameTextController;

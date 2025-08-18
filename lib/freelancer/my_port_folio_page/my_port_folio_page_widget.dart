@@ -107,96 +107,112 @@ class _MyPortFolioPageWidgetState extends State<MyPortFolioPageWidget> {
                       ),
                       Align(
                         alignment: AlignmentDirectional(0.0, -1.0),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            if (_model.formKey.currentState == null ||
-                                !_model.formKey.currentState!.validate()) {
-                              return;
-                            }
-                            if (_model.uploadedLocalFiles_uploadDataEx6.any(
-                                (file) =>
-                                    (file.bytes?.isEmpty ?? true))) {
-                              return;
-                            }
-                            if (_model
-                                .uploadedLocalFiles_uploadDataEx6.isNotEmpty) {
-                              _model.apiResultks3 =
-                                  await FreelancerHomePageGroup.addPortfolioCall
-                                      .call(
-                                title: _model.nameTextController.text,
-                                galleryList:
-                                    _model.uploadedLocalFiles_uploadDataEx6,
-                                authToken: FFAppState().apitoken,
-                              );
+                        child: GestureDetector(
+                          onTap: _model.isSavingPortfolio
+                              ? null
+                              : () async {
+                                  if (_model.formKey.currentState == null ||
+                                      !_model.formKey.currentState!
+                                          .validate()) {
+                                    return;
+                                  }
 
-                              if ((_model.apiResultks3?.succeeded ?? true)) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      getJsonField(
-                                        (_model.apiResultks3?.jsonBody ?? ''),
-                                        r'''$.message''',
-                                      ).toString(),
-                                      style: TextStyle(
-                                        color: Colors.white,
+                                  if (_model.uploadedLocalFiles_uploadDataEx6
+                                      .any((file) =>
+                                          (file.bytes?.isEmpty ?? true))) {
+                                    return;
+                                  }
+
+                                  if (_model.uploadedLocalFiles_uploadDataEx6
+                                      .isEmpty) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Please upload files',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor: Color(0xFF6E2A87),
                                       ),
-                                    ),
-                                    duration: Duration(milliseconds: 4000),
-                                    backgroundColor: Color(0xFF6E2A87),
-                                  ),
-                                );
+                                    );
+                                    return;
+                                  }
 
-                                context
-                                    .pushNamed(PortfolioPageWidget.routeName);
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      getJsonField(
-                                        (_model.apiResultks3?.jsonBody ?? ''),
-                                        r'''$.message''',
-                                      ).toString(),
-                                      style: TextStyle(
-                                        color: Colors.white,
+                                  setState(
+                                      () => _model.isSavingPortfolio = true);
+
+                                  try {
+                                    _model.apiResultks3 =
+                                        await FreelancerHomePageGroup
+                                            .addPortfolioCall
+                                            .call(
+                                      title: _model.nameTextController.text,
+                                      galleryList: _model
+                                          .uploadedLocalFiles_uploadDataEx6,
+                                      authToken: FFAppState().apitoken,
+                                    );
+
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          getJsonField(
+                                            (_model.apiResultks3?.jsonBody ??
+                                                ''),
+                                            r'''$.message''',
+                                          ).toString(),
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor: Color(0xFF6E2A87),
                                       ),
-                                    ),
-                                    duration: Duration(milliseconds: 4000),
-                                    backgroundColor: Color(0xFF6E2A87),
-                                  ),
-                                );
-                              }
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Please upload files',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  duration: Duration(milliseconds: 4000),
-                                  backgroundColor: Color(0xFF6E2A87),
-                                ),
-                              );
-                            }
+                                    );
 
-                            safeSetState(() {});
-                          },
-                          child: Text(
-                            FFLocalizations.of(context).getText(
-                              '4d3c2aow' /* Save */,
+                                    if ((_model.apiResultks3?.succeeded ??
+                                        true)) {
+                                      context.pushNamed(
+                                          PortfolioPageWidget.routeName);
+                                    }
+                                  } finally {
+                                    setState(
+                                        () => _model.isSavingPortfolio = false);
+                                  }
+                                },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 24, vertical: 12),
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              // 🔹 Transparent background
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: Colors.transparent,
+                                // 🔹 Transparent border
+                                width: 1.0,
+                              ),
                             ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'primaryFont',
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            child: _model.isSavingPortfolio
+                                ? SizedBox(
+                                    width: 18,
+                                    height: 18,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Colors.black),
+                                    ),
+                                  )
+                                : Text(
+                                    FFLocalizations.of(context)
+                                        .getText('4d3c2aow' /* Save */),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'primaryFont',
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                          // 🔹 Use desired text color here
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
                           ),
                         ),
                       ),
@@ -324,111 +340,84 @@ class _MyPortFolioPageWidgetState extends State<MyPortFolioPageWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 10.0, 20.0, 0.0),
-                          child: Stack(
-                            children: [
-                              InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  final selectedMedia = await selectMedia(
-                                    mediaSource: MediaSource.photoGallery,
-                                    multiImage: true,
-                                  );
-                                  if (selectedMedia != null &&
-                                      selectedMedia.every((m) =>
-                                          validateFileFormat(
-                                              m.storagePath, context))) {
-                                    safeSetState(() => _model
-                                        .isDataUploading_uploadDataEx6 = true);
-                                    var selectedUploadedFiles =
-                                        <FFUploadedFile>[];
+                          child: GestureDetector(
+                            onTap: () async {
+                              final selectedMedia = await selectMedia(
+                                mediaSource: MediaSource.photoGallery,
+                                multiImage: true,
+                              );
+                              if (selectedMedia != null &&
+                                  selectedMedia.every((m) => validateFileFormat(
+                                      m.storagePath, context))) {
+                                safeSetState(() => _model
+                                    .isDataUploading_uploadDataEx6 = true);
+                                var selectedUploadedFiles = <FFUploadedFile>[];
 
-                                    try {
-                                      selectedUploadedFiles = selectedMedia
-                                          .map((m) => FFUploadedFile(
-                                                name: m.storagePath
-                                                    .split('/')
-                                                    .last,
-                                                bytes: m.bytes,
-                                                height: m.dimensions?.height,
-                                                width: m.dimensions?.width,
-                                                blurHash: m.blurHash,
-                                              ))
-                                          .toList();
-                                    } finally {
-                                      _model.isDataUploading_uploadDataEx6 =
-                                          false;
-                                    }
-                                    if (selectedUploadedFiles.length ==
-                                        selectedMedia.length) {
-                                      safeSetState(() {
-                                        _model.uploadedLocalFiles_uploadDataEx6 =
-                                            selectedUploadedFiles;
-                                      });
-                                    } else {
-                                      safeSetState(() {});
-                                      return;
-                                    }
-                                  }
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(16.0),
-                                    child: Image.asset(
-                                      'assets/images/Rectangle_188.png',
-                                      width: double.infinity,
-                                      fit: BoxFit.cover,
-                                    ),
+                                try {
+                                  selectedUploadedFiles = selectedMedia
+                                      .map((m) => FFUploadedFile(
+                                            name: m.storagePath.split('/').last,
+                                            bytes: m.bytes,
+                                            height: m.dimensions?.height,
+                                            width: m.dimensions?.width,
+                                            blurHash: m.blurHash,
+                                          ))
+                                      .toList();
+                                } finally {
+                                  _model.isDataUploading_uploadDataEx6 = false;
+                                }
+
+                                if (selectedUploadedFiles.length ==
+                                    selectedMedia.length) {
+                                  safeSetState(() {
+                                    _model.uploadedLocalFiles_uploadDataEx6 =
+                                        selectedUploadedFiles;
+                                  });
+                                } else {
+                                  safeSetState(() {});
+                                  return;
+                                }
+                              }
+                            },
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(16.0),
+                                  child: Image.asset(
+                                    'assets/images/Rectangle_188.png',
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
-                              ),
-                              Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 36.0, 0.0, 0.0),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 36.0),
                                   child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(0.0),
-                                          bottomRight: Radius.circular(0.0),
-                                          topLeft: Radius.circular(0.0),
-                                          topRight: Radius.circular(0.0),
-                                        ),
-                                        child: Image.asset(
-                                          'assets/images/Icon_(Stroke)_(16).png',
-                                          width: 22.0,
-                                          height: 22.0,
-                                          fit: BoxFit.cover,
-                                        ),
+                                      Image.asset(
+                                        'assets/images/Icon_(Stroke)_(16).png',
+                                        width: 22.0,
+                                        height: 22.0,
+                                        fit: BoxFit.cover,
                                       ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 15.0, 0.0, 0.0),
-                                        child: Text(
-                                          FFLocalizations.of(context).getText(
-                                            'ig23abo7' /* Add New Gallery */,
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'primaryFont',
-                                                color: Color(0xFF898989),
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
+                                      const SizedBox(height: 15.0),
+                                      Text(
+                                        FFLocalizations.of(context).getText(
+                                            'ig23abo7' /* Add New Gallery */),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'primaryFont',
+                                              color: const Color(0xFF898989),
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ].divide(SizedBox(height: 8.0)),
@@ -496,21 +485,29 @@ class _MyPortFolioPageWidgetState extends State<MyPortFolioPageWidget> {
                                             ),
                                           ),
                                         ),
-                                        Align(
-                                          alignment:
-                                              AlignmentDirectional(1.0, -1.0),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 13.0, 13.0, 0.0),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                              child: Image.asset(
-                                                'assets/images/Group_1597881529.png',
-                                                width: 27.0,
-                                                height: 27.0,
-                                                fit: BoxFit.cover,
+                                        InkWell(
+                                          onTap: () async {
+                                            _model
+                                                .uploadedLocalFiles_uploadDataEx6
+                                                .removeAt(uploadedListIndex);
+                                            setState(() {});
+                                          },
+                                          child: Align(
+                                            alignment:
+                                                AlignmentDirectional(1.0, -1.0),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 13.0, 13.0, 0.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.asset(
+                                                  'assets/images/Group_1597881529.png',
+                                                  width: 27.0,
+                                                  height: 27.0,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
                                           ),

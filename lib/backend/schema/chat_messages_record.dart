@@ -35,6 +35,13 @@ class ChatMessagesRecord extends FirestoreRecord {
   String get senderId => _senderId ?? '';
   bool hasSenderId() => _senderId != null;
 
+  // "attachmentUrl" field.
+  /// URL of the attachment, if any.
+  /// This field is optional and may be null if no attachment is present.
+  String? _attachmentUrl;
+  String get attachmentUrl => _attachmentUrl ?? '';
+  bool hasAttachmentUrl() => _attachmentUrl != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -42,6 +49,8 @@ class ChatMessagesRecord extends FirestoreRecord {
     _timeStamp = snapshotData['timeStamp'] as DateTime?;
     _senderType = snapshotData['senderType'] as String?;
     _senderId = snapshotData['senderId'] as String?;
+    _attachmentUrl = snapshotData['attachmentUrl'] as String?;
+
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -88,6 +97,7 @@ Map<String, dynamic> createChatMessagesRecordData({
   DateTime? timeStamp,
   String? senderType,
   String? senderId,
+  String? attachmentUrl,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -95,6 +105,7 @@ Map<String, dynamic> createChatMessagesRecordData({
       'timeStamp': timeStamp,
       'senderType': senderType,
       'senderId': senderId,
+      'attachmentUrl': attachmentUrl,
     }.withoutNulls,
   );
 

@@ -302,16 +302,21 @@ class _AddTitleWidgetState extends State<AddTitleWidget> {
                                   child: FFButtonWidget(
                                     onPressed: () async {
                                       if (_model.formKey.currentState == null ||
-                                          !_model.formKey.currentState!
-                                              .validate()) {
+                                          !_model.formKey.currentState!.validate()) {
                                         return;
                                       }
-                                      FFAppState().addToFeatures(FeatureStruct(
-                                        title: _model.emailTextController.text,
-                                      ));
+
+                                      // Add FeatureStruct to app state
+                                      final newFeature = FeatureStruct(title: _model.emailTextController.text);
+
+                                      FFAppState().addToFeatures(newFeature);
                                       FFAppState().update(() {});
+
+                                      print('Feature added: ${newFeature.toMap()}');
+
                                       Navigator.pop(context);
                                     },
+
                                     text: FFLocalizations.of(context).getText(
                                       'lfcfvsj4' /* Add */,
                                     ),

@@ -31,10 +31,10 @@ class OtpPageFreelancerModel extends FlutterFlowModel<OtpPageFreelancerWidget> {
   }
 
   // State field(s) for Timer widget.
-  final timerInitialTimeMs = 30000;
-  int timerMilliseconds = 30000;
+  final timerInitialTimeMs = 60000;
+  int timerMilliseconds = 60000;
   String timerValue = StopWatchTimer.getDisplayTime(
-    30000,
+    60000,
     hours: false,
     milliSecond: false,
   );
