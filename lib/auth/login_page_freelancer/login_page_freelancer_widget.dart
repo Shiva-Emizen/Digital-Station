@@ -84,7 +84,7 @@ class _LoginPageFreelancerWidgetState extends State<LoginPageFreelancerWidget> {
                           size: 18.0,
                         ),
                         onPressed: () {
-                          print('IconButton pressed ...');
+                          context.safePop();
                         },
                       ),
                       Padding(
@@ -500,8 +500,9 @@ class _LoginPageFreelancerWidgetState extends State<LoginPageFreelancerWidget> {
                                       ? '0'
                                       : '1';
                                   safeSetState(() {});
-
+                                  
                                   context.goNamed(HomePageWidget.routeName);
+                                  // context.goNamed(HomePageWidget.routeName);
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
@@ -597,7 +598,7 @@ class _LoginPageFreelancerWidgetState extends State<LoginPageFreelancerWidget> {
                                         await ClientAuthorizationGroup
                                             .loginWithSocialCall
                                             .call(
-                                      providerName: 'Google',
+                                      providerName: 'Apple',
                                       email: currentUserEmail,
                                       name: currentUserDisplayName,
                                       fcmToken: _model.fcmToken,
@@ -643,10 +644,11 @@ class _LoginPageFreelancerWidgetState extends State<LoginPageFreelancerWidget> {
                                           ? '0'
                                           : '1';
                                       safeSetState(() {});
-
-                                      context.pushNamedAuth(
-                                          HomePageWidget.routeName,
-                                          context.mounted);
+                                      context.goNamed(HomePageWidget.routeName);
+                                      //
+                                      // context.pushNamedAuth(
+                                      //     HomePageWidget.routeName,
+                                      //     context.mounted);
                                     } else {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
@@ -701,77 +703,75 @@ class _LoginPageFreelancerWidgetState extends State<LoginPageFreelancerWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
-                                  _model.isLoading = true;
-                                  safeSetState(() {});
-                                  GoRouter.of(context).prepareAuthEvent();
-                                  final user = await authManager
-                                      .signInWithGoogle(context);
-                                  if (user == null) {
-                                    return;
-                                  }
-                                  _model.apiResult1rs =
-                                      await ClientAuthorizationGroup
-                                          .loginWithSocialCall
-                                          .call(
-                                    providerName: 'Google',
-                                    email: currentUserEmail,
-                                    name: currentUserDisplayName,
-                                    fcmToken: _model.fcmToken,
-                                  );
-
-                                  if ((_model.apiResult1rs?.succeeded ??
-                                      true)) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          getJsonField(
-                                            (_model.apiResult1rs?.jsonBody ??
-                                                ''),
-                                            r'''$.message''',
-                                          ).toString(),
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        duration: Duration(milliseconds: 4000),
-                                        backgroundColor: Color(0xFF6E2A87),
-                                      ),
-                                    );
-                                    FFAppState().apitoken = getJsonField(
-                                      (_model.apiResult1rs?.jsonBody ?? ''),
-                                      r'''$.data.token''',
-                                    ).toString();
-                                    FFAppState().userType = UserTypeStruct(
-                                              userType: getJsonField(
-                                                (_model.apiResult1rs
-                                                        ?.jsonBody ??
-                                                    ''),
-                                                r'''$.data.type''',
-                                              ).toString(),
-                                            ) ==
-                                            UserTypeStruct(
-                                              userType: 'user',
-                                            )
-                                        ? '0'
-                                        : '1';
+                                  try {
+                                    print('Google sign-in started');
+                                    _model.isLoading = true;
                                     safeSetState(() {});
+                                    GoRouter.of(context).prepareAuthEvent();
 
-                                    context.pushNamedAuth(
-                                        HomePageWidget.routeName,
-                                        context.mounted);
-                                  } else {
+                                    final user = await authManager.signInWithGoogle(context);
+                                    print('Google sign-in user: $user');
+                                    if (user == null) {
+                                      print('Google sign-in failed: user is null');
+                                      return;
+                                    }
+
+                                    print('Sending loginWithSocialCall request...');
+                                    _model.apiResult1rs = await ClientAuthorizationGroup.loginWithSocialCall.call(
+                                      providerName: 'Google',
+                                      email: currentUserEmail,
+                                      name: currentUserDisplayName,
+                                      fcmToken: _model.fcmToken,
+                                    );
+                                    print('loginWithSocialCall response: ${_model.apiResult1rs?.jsonBody}');
+
+                                    if ((_model.apiResult1rs?.succeeded ?? true)) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            getJsonField((_model.apiResult1rs?.jsonBody ?? ''), r'''$.message''').toString(),
+                                            style: TextStyle(color: Colors.white),
+                                          ),
+                                          duration: Duration(milliseconds: 4000),
+                                          backgroundColor: Color(0xFF6E2A87),
+                                        ),
+                                      );
+                                      FFAppState().apitoken = getJsonField(
+                                        (_model.apiResult1rs?.jsonBody ?? ''),
+                                        r'''$.data.token''',
+                                      ).toString();
+                                      FFAppState().userType = UserTypeStruct(
+                                        userType: getJsonField(
+                                          (_model.apiResult1rs?.jsonBody ?? ''),
+                                          r'''$.data.type''',
+                                        ).toString(),
+                                      ) == UserTypeStruct(userType: 'user') ? '0' : '1';
+                                      safeSetState(() {});
+
+                                      print('Google sign-in successful, navigating to HomePage');
+                                      //context.pushNamedAuth(HomePageWidget.routeName, context.mounted);
+                                      context.goNamed(HomePageWidget.routeName);
+                                    } else {
+                                      print('loginWithSocialCall failed: ${_model.apiResult1rs?.jsonBody}');
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            getJsonField((_model.apiResult1rs?.jsonBody ?? ''), r'''$.message''').toString(),
+                                            style: TextStyle(color: Colors.white),
+                                          ),
+                                          duration: Duration(milliseconds: 4000),
+                                          backgroundColor: Color(0xFF6E2A87),
+                                        ),
+                                      );
+                                      _model.isLoading = false;
+                                      safeSetState(() {});
+                                    }
+                                  } catch (e, stack) {
+                                    print('Exception during Google sign-in: $e');
+                                    print('Stack trace: $stack');
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                        content: Text(
-                                          getJsonField(
-                                            (_model.apiResult1rs?.jsonBody ??
-                                                ''),
-                                            r'''$.message''',
-                                          ).toString(),
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                          ),
-                                        ),
+                                        content: Text('Error: $e', style: TextStyle(color: Colors.white)),
                                         duration: Duration(milliseconds: 4000),
                                         backgroundColor: Color(0xFF6E2A87),
                                       ),
@@ -779,7 +779,6 @@ class _LoginPageFreelancerWidgetState extends State<LoginPageFreelancerWidget> {
                                     _model.isLoading = false;
                                     safeSetState(() {});
                                   }
-
                                   safeSetState(() {});
                                 },
                                 child: Container(

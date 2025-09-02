@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
@@ -11,6 +13,11 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   ApiCallResponse? apiResultmfv;
   // State field(s) for PageView widget.
   PageController? pageViewController;
+
+  ApiCallResponse? apiResultp7f;
+  Completer<ApiCallResponse>? apiRequestCompleter2;
+  // Stores action output result for [Backend Call - API (AddToFavourite)] action in Icon widget.
+  ApiCallResponse? apiResultd05;
 
   int get pageViewCurrentIndex => pageViewController != null &&
           pageViewController!.hasClients &&

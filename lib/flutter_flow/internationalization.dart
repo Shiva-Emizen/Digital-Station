@@ -16,20 +16,25 @@ class FFLocalizations {
   static List<String> languages() => ['en', 'ar'];
 
   static late SharedPreferences _prefs;
+
   static Future initialize() async =>
       _prefs = await SharedPreferences.getInstance();
+
   static Future storeLocale(String locale) =>
       _prefs.setString(_kLocaleStorageKey, locale);
+
   static Locale? getStoredLocale() {
     final locale = _prefs.getString(_kLocaleStorageKey);
     return locale != null && locale.isNotEmpty ? createLocale(locale) : null;
   }
 
   String get languageCode => locale.toString();
+
   String? get languageShortCode =>
       _languagesWithShortCode.contains(locale.toString())
           ? '${locale.toString()}_short'
           : null;
+
   int get languageIndex => languages().contains(languageCode)
       ? languages().indexOf(languageCode)
       : 0;
@@ -277,7 +282,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'j57tqj2k': {
       'en': 'Next',
-      'ar': '',
+      'ar': 'التالي',
     },
     '5ksw11rq': {
       'en': 'Already Member ? ',
@@ -1613,6 +1618,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Price',
       'ar': '',
     },
+    'udsjgowa': {
+      'en': 'Delivery time',
+      'ar': '',
+    },
     'cohapn67': {
       'en': 'Number of revisions',
       'ar': '',
@@ -1663,6 +1672,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'z4huyg7f': {
       'en': 'Price is required',
+      'ar': '',
+    },
+    'z4huyg7g': {
+      'en': 'Delivery time is required',
       'ar': '',
     },
     'asdsa7vd': {
@@ -2147,6 +2160,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Recently viewed',
       'ar': '',
     },
+    'b158s3sb': {
+      'en': 'Recommended services',
+      'ar': 'مُستَحسَن',
+    },
     '2kfgiogy': {
       'en': 'View all',
       'ar': '',
@@ -2607,5 +2624,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
       'ar': '',
     },
+    'm3z4x1y6': {
+      'en': 'Chat Now',
+      'ar': 'الدردشة الآن',},
+
+
   },
 ].reduce((a, b) => a..addAll(b));

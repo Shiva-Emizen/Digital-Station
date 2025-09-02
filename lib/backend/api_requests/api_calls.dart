@@ -196,76 +196,20 @@ class ForgotPasswordCall {
     final baseUrl = ClientAuthorizationGroup.getBaseUrl(
       authToken: authToken,
     );
-
-    return ApiManager.instance.makeApiCall(
-      callName: 'ForgotPassword',
-      apiUrl: '${baseUrl}/password/code',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer ${authToken}',
-        'Accept-Language': 'en',
-        'Accept': 'application/json',
-      },
-      params: {},
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      isStreamingApi: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
-class ResetPasswordCall {
-  Future<ApiCallResponse> call({
-    String? email = '',
-    String? otp = '',
-    String? password = '',
-    String? passwordConfirmation = '',
-    String? authToken = '',
-  }) async {
-    final baseUrl = ClientAuthorizationGroup.getBaseUrl(
-      authToken: authToken,
-    );
-
-    return ApiManager.instance.makeApiCall(
-      callName: 'ResetPassword',
-      apiUrl: '${baseUrl}/password/reset',
-      callType: ApiCallType.POST,
-      headers: {
-        'Authorization': 'Bearer ${authToken}',
-        'Accept-Language': 'en',
-        'Accept': 'application/json',
-      },
-      params: {},
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      isStreamingApi: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
-class ResendOTPCall {
-  Future<ApiCallResponse> call({
-    String? email = '',
-    String? authToken = '',
-  }) async {
-    final baseUrl = ClientAuthorizationGroup.getBaseUrl(
-      authToken: authToken,
-    );
-
     final ffApiRequestBody = '''
 {
   "email": "${escapeStringForJson(email)}"
 }''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'ResendOTP',
-      apiUrl: '${baseUrl}/resend-code',
+    print('ForgotPassword Request URL: ${baseUrl}/password/code');
+    print('ForgotPassword Request Headers: ${{
+      'Authorization': 'Bearer ${authToken}',
+      'Accept-Language': 'en',
+      'Accept': 'application/json',
+    }}');
+    print('ForgotPassword Request Body: $ffApiRequestBody');
+    final response = await ApiManager.instance.makeApiCall(
+      callName: 'ForgotPassword',
+      apiUrl: '${baseUrl}/password/code',
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
@@ -282,6 +226,106 @@ class ResendOTPCall {
       isStreamingApi: false,
       alwaysAllowBody: false,
     );
+    print('ForgotPassword Response: $response');
+    return response;
+  }
+}
+
+class ResetPasswordCall {
+  Future<ApiCallResponse> call({
+    String? email = '',
+    String? otp = '',
+    String? password = '',
+    String? passwordConfirmation = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = ClientAuthorizationGroup.getBaseUrl(
+      authToken: authToken,
+    );
+    final ffApiRequestBody = '''
+{
+  "email": "${escapeStringForJson(email)}",
+  "otp": "${escapeStringForJson(otp)}",
+  "password": "${escapeStringForJson(password)}",
+  "password_confirmation": "${escapeStringForJson(passwordConfirmation)}"
+}''';
+    print('ResetPassword Request URL: ${baseUrl}/password/reset');
+    print('ResetPassword Request Headers: ${{
+      'Authorization': 'Bearer ${authToken}',
+      'Accept-Language': 'en',
+      'Accept': 'application/json',
+    }}');
+    print('ResetPassword Request Body: $ffApiRequestBody');
+    final response = await ApiManager.instance.makeApiCall(
+      callName: 'ResetPassword',
+      apiUrl: '${baseUrl}/password/reset',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
+        'Accept': 'application/json',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      body: ffApiRequestBody,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+    print('ResetPassword Response: ${response.jsonBody}');
+    return response;
+  }
+}
+
+
+class ResendOTPCall {
+  Future<ApiCallResponse> call({
+    String? email = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = ClientAuthorizationGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "email": "${escapeStringForJson(email)}"
+}''';
+
+    final apiUrl = '${baseUrl}/resend-code';
+    final headers = {
+      'Authorization': 'Bearer ${authToken}',
+      'Accept-Language': 'en',
+      'Accept': 'application/json',
+    };
+
+    print('ResendOTP Request URL: $apiUrl');
+    print('ResendOTP Request Headers: $headers');
+    print('ResendOTP Request Body: $ffApiRequestBody');
+
+    final response = await ApiManager.instance.makeApiCall(
+      callName: 'ResendOTP',
+      apiUrl: apiUrl,
+      callType: ApiCallType.POST,
+      headers: headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+
+    print('ResendOTP Response: ${response.jsonBody}');
+    print('ResendOTP Status Code: ${response.statusCode}');
+
+    return response;
   }
 }
 
@@ -346,10 +390,13 @@ class ClientHomePageGroup {
   static OrderCall orderCall = OrderCall();
   static SubCategoryCall subCategoryCall = SubCategoryCall();
   static ServiceDetailCall serviceDetailCall = ServiceDetailCall();
+  static HelpDetail helpDetail = HelpDetail();
+  static AboutUsDetail aboutUsDetail = AboutUsDetail();
   static NotificationCall notificationCall = NotificationCall();
   static ClientProfileCall clientProfileCall = ClientProfileCall();
   static ServiceApiCall serviceApiCall = ServiceApiCall();
   static CreateOrderCall createOrderCall = CreateOrderCall();
+  static SubmitReviewCall submitReviewCall = SubmitReviewCall();
   static SavedServicesCall savedServicesCall = SavedServicesCall();
   static AddToFavouriteCall addToFavouriteCall = AddToFavouriteCall();
   static GetSliderAPICall getSliderAPICall = GetSliderAPICall();
@@ -484,7 +531,6 @@ class OrderCall {
         'Accept': 'application/json',
       },
       params: {
-        'paginate': paginate,
         'order_by[created_at]': orderBycreatedAt,
       },
       returnBody: true,
@@ -526,9 +572,6 @@ class SubCategoryCall {
       },
       params: {
         'category_id': categoryId,
-        'name': name,
-        'paginate': paginate,
-        'page': page,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -594,6 +637,150 @@ class ServiceDetailCall {
   List? portFolioList(dynamic response) => getJsonField(
         response,
         r'''$.data.portfolio''',
+        true,
+      ) as List?;
+
+  List? recommendedList(dynamic response) => getJsonField(
+        response,
+        r'''$.data.recommended''',
+        true,
+      ) as List?;
+
+  List? faqList(dynamic response) => getJsonField(
+        response,
+        r'''$.data.faqs''',
+        true,
+      ) as List?;
+
+  List? packageList(dynamic response) => getJsonField(
+        response,
+        r'''$.data.packages''',
+        true,
+      ) as List?;
+}
+
+class HelpDetail {
+  Future<ApiCallResponse> call({
+    String? authToken = '',
+  }) async {
+    final baseUrl = ClientHomePageGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'helpDetail',
+      apiUrl: '${baseUrl}/help',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
+        'Accept': 'application/json',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  dynamic serviceDetail(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
+
+  List? categoryList(dynamic response) => getJsonField(
+        response,
+        r'''$.data.categories''',
+        true,
+      ) as List?;
+
+  List? galleryList(dynamic response) => getJsonField(
+        response,
+        r'''$.data.gallery''',
+        true,
+      ) as List?;
+
+  List? portFolioList(dynamic response) => getJsonField(
+        response,
+        r'''$.data.portfolio''',
+        true,
+      ) as List?;
+
+  List? recommendedList(dynamic response) => getJsonField(
+        response,
+        r'''$.data.recommended''',
+        true,
+      ) as List?;
+
+  List? faqList(dynamic response) => getJsonField(
+        response,
+        r'''$.data.faqs''',
+        true,
+      ) as List?;
+
+  List? packageList(dynamic response) => getJsonField(
+        response,
+        r'''$.data.packages''',
+        true,
+      ) as List?;
+}
+
+class AboutUsDetail {
+  Future<ApiCallResponse> call({
+    String? authToken = '',
+  }) async {
+    final baseUrl = ClientHomePageGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'helpDetail',
+      apiUrl: '${baseUrl}/about-us',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
+        'Accept': 'application/json',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  dynamic serviceDetail(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
+
+  List? categoryList(dynamic response) => getJsonField(
+        response,
+        r'''$.data.categories''',
+        true,
+      ) as List?;
+
+  List? galleryList(dynamic response) => getJsonField(
+        response,
+        r'''$.data.gallery''',
+        true,
+      ) as List?;
+
+  List? portFolioList(dynamic response) => getJsonField(
+        response,
+        r'''$.data.portfolio''',
+        true,
+      ) as List?;
+
+  List? recommendedList(dynamic response) => getJsonField(
+        response,
+        r'''$.data.recommended''',
         true,
       ) as List?;
 
@@ -721,7 +908,7 @@ class CreateOrderCall {
     String? serviceId = '',
     String? packageId = '',
     String? description = '',
-    FFUploadedFile? attachments,
+    List<FFUploadedFile>? attachments,
     String? expressDelivery = '',
     String? authToken = '',
   }) async {
@@ -746,6 +933,42 @@ class CreateOrderCall {
         'express_delivery': expressDelivery,
       },
       bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class SubmitReviewCall {
+  Future<ApiCallResponse> call({
+    String? serviceId = '',
+    String? content = '',
+    String? rating = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = ClientHomePageGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'SubmitReview',
+      apiUrl: '${baseUrl}/user/reviews',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
+        'Accept': 'application/json',
+      },
+      params: {
+        'service_id': serviceId,
+        'rate': rating,
+        'comment': content,
+      },
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -957,7 +1180,7 @@ class UpdateOrderCall {
   Future<ApiCallResponse> call({
     String? orderId = '',
     String? description = '',
-    FFUploadedFile? attachments,
+    List<FFUploadedFile>? attachments,
     String? authToken = '',
   }) async {
     final baseUrl = ClientHomePageGroup.getBaseUrl(
@@ -1101,12 +1324,18 @@ class FreelancerRegistrationCall {
     String? countryId = '',
     String? jobTitle = '',
     String? authToken = '',
+    String? intentType = '',
   }) async {
     final baseUrl = FreelancerAuthorizationGroup.getBaseUrl(
       authToken: authToken,
     );
 
+    final apiUrl = FFAppState().userType == "0"
+        ? '${baseUrl}register/client'
+        : '${baseUrl}register';
+
     final ffApiRequestBody = '''
+    
 {
   "name": "${escapeStringForJson(name)}",
   "email": "${escapeStringForJson(email)}",
@@ -1116,9 +1345,13 @@ class FreelancerRegistrationCall {
   "country_id": "${escapeStringForJson(countryId)}",
   "job_title": "${escapeStringForJson(jobTitle)}"
 }''';
+
+    print('FreelancerRegistration Request URL: $apiUrl');
+    print('FreelancerRegistration Request Body: $ffApiRequestBody');
+
     return ApiManager.instance.makeApiCall(
       callName: 'FreelancerRegistration',
-      apiUrl: '${baseUrl}register',
+      apiUrl: apiUrl,
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authToken}',
@@ -1500,9 +1733,11 @@ class FreelancerHomePageGroup {
   };
   static OrderAPICall orderAPICall = OrderAPICall();
   static AddPortfolioCall addPortfolioCall = AddPortfolioCall();
+  static UpdateProfileCall updateProfileCall = UpdateProfileCall();
   static AddFAQCall addFAQCall = AddFAQCall();
   static AddPackagesCall addPackagesCall = AddPackagesCall();
   static AddServicesCall addServicesCall = AddServicesCall();
+  static EditServicesCall editServicesCall = EditServicesCall();
   static MyServicesCall myServicesCall = MyServicesCall();
   static PortfolioCall portfolioCall = PortfolioCall();
   static GetPlanCall getPlanCall = GetPlanCall();
@@ -1511,6 +1746,8 @@ class FreelancerHomePageGroup {
   static FreelancerOrderDetailCall freelancerOrderDetailCall =
       FreelancerOrderDetailCall();
   static DeletePortfolioCall deletePortfolioCall = DeletePortfolioCall();
+  static DeleteOccupationCall deleteOccupationCall = DeleteOccupationCall();
+  static DeleteSkillCall deleteSkillCall = DeleteSkillCall();
   static UpdatePortfolioCall updatePortfolioCall = UpdatePortfolioCall();
 }
 
@@ -1534,7 +1771,6 @@ class OrderAPICall {
         'Accept': 'application/json',
       },
       params: {
-        'paginate': paginate,
         'statuses[]': statuses,
       },
       returnBody: true,
@@ -1578,6 +1814,54 @@ class AddPortfolioCall {
         'gallery[]': gallery,
       },
       bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class UpdateProfileCall {
+  Future<ApiCallResponse> call({
+    required String authToken,
+    required String name,
+    required String nickname,
+    required int countryId,
+    required String jobTitle,
+    required String about,
+    required String language,
+    required List<Map<String, dynamic>> skills,
+    required List<Map<String, dynamic>> occupations,
+  }) async {
+    final baseUrl = 'https://digitalstation.ezxdemo.com/api/v1/';
+    final apiUrl = '${baseUrl}user-details-update';
+
+    final requestBody = json.encode({
+      "name": name,
+      "nickname": nickname,
+      "country_id": countryId,
+      "job_title": jobTitle,
+      "about": about,
+      "language": language,
+      "skills": skills,
+      "occupations": occupations,
+    });
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'UpdateProfile',
+      apiUrl: apiUrl,
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer $authToken',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: requestBody,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -1633,7 +1917,8 @@ class AddPackagesCall {
     String? expressDeliverEnable = '',
     String? expressDeliveryAmount = '',
     String? numberOfRevisions = '',
-    String? serviceId = '',
+    String? serviceId = "",
+    String? expressDeliveryTime = "",
     dynamic featuresJson,
     String? authToken = '',
   }) async {
@@ -1652,6 +1937,7 @@ class AddPackagesCall {
   "express_delivery_amount": "${escapeStringForJson(expressDeliveryAmount)}",
   "number_of_revisions": "${escapeStringForJson(numberOfRevisions)}",
   "service_id": "${escapeStringForJson(serviceId)}",
+  "express_delivery_time": "${escapeStringForJson(expressDeliveryTime)}",
   "features": ${features}
 }''';
     return ApiManager.instance.makeApiCall(
@@ -1666,6 +1952,56 @@ class AddPackagesCall {
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class EditServicesCall {
+  Future<ApiCallResponse> call({
+    String? title = '',
+    String? description = '',
+    List<FFUploadedFile>? galleryList,
+    String? categoryId = '',
+    String? subCategoryId = '',
+    String? serviceId = '',
+    String? authToken = '',
+    List<dynamic>? faqs,
+    List<dynamic>? packages,
+  }) async {
+    final baseUrl = FreelancerHomePageGroup.getBaseUrl(
+      authToken: authToken,
+    );
+    final gallery = galleryList ?? [];
+
+    //apiUrl:
+    //           '${baseUrl}freelancer/orders/change-status/${orderId}/${serviceId}',
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'EditServices',
+      apiUrl: '${baseUrl}services/${serviceId}',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
+        'Accept': 'application/json',
+      },
+      params: {
+        'title': title,
+        'description': description,
+        'gallery[]': gallery,
+        'category_id': categoryId,
+        'packages[]': packages,
+        'categories[0][category_id]': subCategoryId,
+        '_method': "PUT",
+        'faqs[]': faqs,
+      },
+      bodyType: BodyType.MULTIPART,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -1723,6 +2059,8 @@ class MyServicesCall {
     String? page = '',
     String? search = '',
     String? authToken = '',
+    String? priceSort = '',
+    String? reviewSort = '',
   }) async {
     final baseUrl = FreelancerHomePageGroup.getBaseUrl(
       authToken: authToken,
@@ -1738,9 +2076,9 @@ class MyServicesCall {
         'Accept': 'application/json',
       },
       params: {
-        'paginate': paginate,
-        'page': page,
         'search': search,
+        'price_sort': priceSort,
+        'review_sort': reviewSort,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -1959,27 +2297,23 @@ class DeletePortfolioCall {
   }
 }
 
-class UpdatePortfolioCall {
+class DeleteOccupationCall {
   Future<ApiCallResponse> call({
-    String? id = '',
-    String? title = '',
-    String? authToken = '',
+    required String id,
+    required String authToken,
   }) async {
-    final baseUrl = FreelancerHomePageGroup.getBaseUrl(
-      authToken: authToken,
-    );
-
+    final baseUrl =
+        FreelancerAuthorizationGroup.getBaseUrl(authToken: authToken);
     return ApiManager.instance.makeApiCall(
-      callName: 'updatePortfolio',
-      apiUrl: '${baseUrl}portfolio/${id}',
-      callType: ApiCallType.PUT,
+      callName: 'DeleteOccupation',
+      apiUrl: '${baseUrl}occupations/$id',
+      callType: ApiCallType.DELETE,
       headers: {
-        'Authorization': 'Bearer ${authToken}',
+        'Authorization': 'Bearer $authToken',
         'Accept-Language': 'en',
         'Accept': 'application/json',
       },
       params: {},
-      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -1987,6 +2321,73 @@ class UpdatePortfolioCall {
       isStreamingApi: false,
       alwaysAllowBody: false,
     );
+  }
+}
+
+class DeleteSkillCall {
+  Future<ApiCallResponse> call({
+    required String id,
+    required String authToken,
+  }) async {
+    final baseUrl =
+        FreelancerAuthorizationGroup.getBaseUrl(authToken: authToken);
+    return ApiManager.instance.makeApiCall(
+      callName: 'DeleteOccupation',
+      apiUrl: '${baseUrl}skills/$id',
+      callType: ApiCallType.DELETE,
+      headers: {
+        'Authorization': 'Bearer $authToken',
+        'Accept-Language': 'en',
+        'Accept': 'application/json',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class UpdatePortfolioCall {
+  Future<ApiCallResponse> call({
+    String? id = '',
+    String? title = '',
+    List<FFUploadedFile>? attachments,
+    String? authToken = '',
+  }) async {
+    final baseUrl = FreelancerHomePageGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    print(
+        'UpdatePortfolio Request: id=$id, title=$title, attachments=${attachments?.length}, authToken=$authToken');
+
+    final response = await ApiManager.instance.makeApiCall(
+      callName: 'updatePortfolio',
+      apiUrl: '${baseUrl}portfolio/${id}',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${authToken}',
+        'Accept-Language': 'en',
+        'Accept': 'application/json',
+      },
+      params: {
+        'title': title,
+        'gallery[]': attachments,
+        '_method': "PUT",
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+    return response;
   }
 }
 

@@ -20,7 +20,6 @@ class NotificationPageWidget extends StatefulWidget {
 
 class _NotificationPageWidgetState extends State<NotificationPageWidget> {
   late NotificationPageModel _model;
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -32,7 +31,6 @@ class _NotificationPageWidgetState extends State<NotificationPageWidget> {
   @override
   void dispose() {
     _model.dispose();
-
     super.dispose();
   }
 
@@ -51,11 +49,12 @@ class _NotificationPageWidgetState extends State<NotificationPageWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
             child: Stack(
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -66,7 +65,6 @@ class _NotificationPageWidgetState extends State<NotificationPageWidget> {
                             authToken: FFAppState().apitoken,
                           ),
                           builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
                               return Center(
                                 child: SizedBox(
@@ -81,215 +79,195 @@ class _NotificationPageWidgetState extends State<NotificationPageWidget> {
                               );
                             }
                             final listViewNotificationResponse = snapshot.data!;
+                            final notificationList = ClientHomePageGroup
+                                    .notificationCall
+                                    .notificationList(
+                                        listViewNotificationResponse.jsonBody)
+                                    ?.toList() ??
+                                [];
 
-                            return Builder(
-                              builder: (context) {
-                                final notificationList =
-                                    ClientHomePageGroup.notificationCall
-                                            .notificationList(
-                                              listViewNotificationResponse
-                                                  .jsonBody,
-                                            )
-                                            ?.toList() ??
-                                        [];
-                                if (notificationList.isEmpty) {
-                                  return Center(
-                                    child: Container(
-                                      height: 600.0,
-                                      child: NoDataFoundWidget(
-                                        title: 'No notifications to show',
-                                      ),
+                            if (notificationList.isEmpty) {
+                              return Center(
+                                child: Container(
+                                  height: 600.0,
+                                  child: NoDataFoundWidget(
+                                    title: 'No notifications to show',
+                                  ),
+                                ),
+                              );
+                            }
+
+                            return ListView.separated(
+                              padding: EdgeInsets.zero,
+                              primary: false,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemCount: notificationList.length,
+                              separatorBuilder: (_, __) =>
+                                  SizedBox(height: 14.0),
+                              itemBuilder: (context, notificationListIndex) {
+                                final notificationListItem =
+                                    notificationList[notificationListIndex];
+                                final avatarUrl = getJsonField(
+                                  notificationListItem,
+                                  r'''$.user.avatar''',
+                                )?.toString();
+                                final displayAvatar =
+                                    (avatarUrl == null || avatarUrl.isEmpty)
+                                        ? 'https://i.pravatar.cc/150?img=25'
+                                        : avatarUrl;
+
+                                final userName = getJsonField(
+                                      notificationListItem,
+                                      r'''$.user.name''',
+                                    )?.toString() ??
+                                    'Unknown';
+
+                                final bodyText = getJsonField(
+                                      notificationListItem,
+                                      r'''$.body''',
+                                    )?.toString() ??
+                                    '';
+
+                                return Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 16.0, 0.0),
+                                  child: Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      borderRadius: BorderRadius.circular(14.0),
                                     ),
-                                  );
-                                }
-
-                                return ListView.separated(
-                                  padding: EdgeInsets.zero,
-                                  primary: false,
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: notificationList.length,
-                                  separatorBuilder: (_, __) =>
-                                      SizedBox(height: 10.0),
-                                  itemBuilder:
-                                      (context, notificationListIndex) {
-                                    final notificationListItem =
-                                        notificationList[notificationListIndex];
-                                    return Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          20.0, 0.0, 20.0, 0.0),
-                                      child: Container(
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                        ),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  10.0, 12.0, 10.0, 12.0),
-                                          child: Row(
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              12.0, 16.0, 12.0, 16.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
                                             mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
+                                              Stack(
+                                                alignment: AlignmentDirectional(
+                                                    1.0, 1.0),
                                                 children: [
-                                                  Stack(
+                                                  CircleAvatar(
+                                                    radius: 28,
+                                                    backgroundImage:
+                                                        NetworkImage(
+                                                            displayAvatar),
+                                                    onBackgroundImageError:
+                                                        (_, __) {},
+                                                    backgroundColor:
+                                                        Colors.grey[200],
+                                                  ),
+                                                  Align(
                                                     alignment:
                                                         AlignmentDirectional(
-                                                            1.0, 1.0),
-                                                    children: [
-                                                      ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(0.0),
-                                                        child: Image.network(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            getJsonField(
-                                                              notificationListItem,
-                                                              r'''$.user.avatar''',
-                                                            )?.toString(),
-                                                            'https://i.pravatar.cc/150?img=25',
-                                                          ),
-                                                          width: 50.0,
-                                                          height: 50.0,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                      Align(
-                                                        alignment:
-                                                            AlignmentDirectional(
-                                                                1.0, 0.0),
-                                                        child: Icon(
-                                                          Icons
-                                                              .circle_notifications_sharp,
-                                                          color:
-                                                              Color(0xFF6E2A87),
-                                                          size: 14.0,
-                                                        ),
-                                                      ),
-                                                    ],
+                                                            1.0, 0.0),
+                                                    child: Icon(
+                                                      Icons
+                                                          .circle_notifications_sharp,
+                                                      color: Color(0xFF6E2A87),
+                                                      size: 16.0,
+                                                    ),
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(10.0, 0.0,
-                                                                0.0, 0.0),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          getJsonField(
-                                                            notificationListItem,
-                                                            r'''$.user.name''',
-                                                          ).toString(),
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                        14.0, 0.0, 0.0, 0.0),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    SizedBox(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.45,
+                                                      child: Text(
+                                                        userName,
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'primaryFont',
+                                                              fontSize: 15.0,
+                                                              letterSpacing:
+                                                                  0.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(0.0,
+                                                              5.0, 0.0, 0.0),
+                                                      child: SizedBox(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.45,
+                                                        child: Text(
+                                                          bodyText,
+                                                          maxLines: 2,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyMedium
                                                               .override(
                                                                 fontFamily:
                                                                     'primaryFont',
-                                                                fontSize: 10.0,
+                                                                color: Color(
+                                                                    0xFF898989),
+                                                                fontSize: 13.0,
                                                                 letterSpacing:
                                                                     0.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
                                                               ),
                                                         ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      3.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          child: Text(
-                                                            getJsonField(
-                                                              notificationListItem,
-                                                              r'''$.body''',
-                                                            )
-                                                                .toString()
-                                                                .maybeHandleOverflow(
-                                                                  maxChars: 30,
-                                                                  replacement:
-                                                                      '…',
-                                                                ),
-                                                            maxLines: 1,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'primaryFont',
-                                                                  color: Color(
-                                                                      0xFF898989),
-                                                                  fontSize: 8.0,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      7.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          child: Text(
-                                                            FFLocalizations.of(
-                                                                    context)
-                                                                .getText(
-                                                              '6w4vwfqz' /* 5 Min */,
-                                                            ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'primaryFont',
-                                                                  color: Color(
-                                                                      0xFF898989),
-                                                                  fontSize: 8.0,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                          ),
-                                                        ),
-                                                      ],
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 10.0, 0.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Container(
-                                                      width: 8.0,
-                                                      height: 8.0,
-                                                      decoration: BoxDecoration(
-                                                        color:
-                                                            Color(0xFF6E2A87),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(50.0),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(0.0,
+                                                              10.0, 0.0, 0.0),
+                                                      child: Text(
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                                '6w4vwfqz' /* 5 Min */),
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'primaryFont',
+                                                              color: Color(
+                                                                  0xFF898989),
+                                                              fontSize: 11.0,
+                                                              letterSpacing:
+                                                                  0.0,
+                                                            ),
                                                       ),
                                                     ),
                                                   ],
@@ -297,10 +275,29 @@ class _NotificationPageWidgetState extends State<NotificationPageWidget> {
                                               ),
                                             ],
                                           ),
-                                        ),
+                                          Padding(
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(0.0, 0.0, 10.0, 0.0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Container(
+                                                  width: 10.0,
+                                                  height: 10.0,
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0xFF6E2A87),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50.0),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    );
-                                  },
+                                    ),
+                                  ),
                                 );
                               },
                             );
@@ -311,7 +308,8 @@ class _NotificationPageWidgetState extends State<NotificationPageWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 0.0, 20.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -322,7 +320,7 @@ class _NotificationPageWidgetState extends State<NotificationPageWidget> {
                           borderRadius: 8.0,
                           buttonSize: 36.0,
                           fillColor: Colors.white,
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.arrow_back_ios_new,
                             color: Color(0xFF252525),
                             size: 18.0,
@@ -335,7 +333,7 @@ class _NotificationPageWidgetState extends State<NotificationPageWidget> {
                       Align(
                         alignment: AlignmentDirectional(0.0, -1.0),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 8.0, 20.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -344,15 +342,14 @@ class _NotificationPageWidgetState extends State<NotificationPageWidget> {
                               Align(
                                 alignment: AlignmentDirectional(-1.0, -1.0),
                                 child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    '868vzggp' /* Notifications */,
-                                  ),
+                                  FFLocalizations.of(context)
+                                      .getText('868vzggp' /* Notifications */),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'primaryFont',
                                         color: Color(0xFF252525),
-                                        fontSize: 16.0,
+                                        fontSize: 18.0,
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.bold,
                                       ),

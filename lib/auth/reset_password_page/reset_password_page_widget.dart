@@ -13,9 +13,11 @@ class ResetPasswordPageWidget extends StatefulWidget {
   const ResetPasswordPageWidget({
     super.key,
     required this.email,
+    this.otp,
   });
 
   final String? email;
+  final String? otp;
 
   static String routeName = 'ResetPasswordPage';
   static String routePath = '/resetPasswordPage';
@@ -589,27 +591,38 @@ class _ResetPasswordPageWidgetState extends State<ResetPasswordPageWidget> {
                             focusColor: Colors.transparent,
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
-                            onTap: () async {
+                           onTap: () async {
                               if (_model.formKey.currentState == null ||
                                   !_model.formKey.currentState!.validate()) {
                                 return;
                               }
+
+                              // Print request data
+                              print('Reset password request:');
+                              print('email: ${widget.email}');
+                              print('otp: ${_model.otpTextController.text}');
+                              print('password: ${_model.passwordTextController.text}');
+                              print('passwordConfirmation: ${_model.confirmTextController.text}');
+
                               _model.forgotPasswordResponse =
                                   await ClientAuthorizationGroup
-                                      .forgotPasswordCall
+                                      .resetPasswordCall
                                       .call(
-                                email: _model.emailTextController.text,
-                              );
+                                          email: widget.email,
+                                          otp: _model.otpTextController.text,
+                                          password: _model.passwordTextController.text,
+                                          passwordConfirmation: _model.confirmTextController.text);
 
-                              if ((_model.forgotPasswordResponse?.succeeded ??
-                                  true)) {
+                              // Print response
+                              print('Reset password response:');
+                              print(_model.forgotPasswordResponse);
+
+                              if ((_model.forgotPasswordResponse?.succeeded ?? true)) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
                                       getJsonField(
-                                        (_model.forgotPasswordResponse
-                                                ?.jsonBody ??
-                                            ''),
+                                        (_model.forgotPasswordResponse?.jsonBody ?? ''),
                                         r'''$.message''',
                                       ).toString(),
                                       style: TextStyle(
@@ -628,9 +641,7 @@ class _ResetPasswordPageWidgetState extends State<ResetPasswordPageWidget> {
                                   SnackBar(
                                     content: Text(
                                       getJsonField(
-                                        (_model.forgotPasswordResponse
-                                                ?.jsonBody ??
-                                            ''),
+                                        (_model.forgotPasswordResponse?.jsonBody ?? ''),
                                         r'''$.message''',
                                       ).toString(),
                                       style: TextStyle(

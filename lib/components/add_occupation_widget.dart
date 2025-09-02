@@ -7,12 +7,12 @@ import '/flutter_flow/form_field_controller.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'add_occupation_model.dart';
-export 'add_occupation_model.dart';
 
 class AddOccupationWidget extends StatefulWidget {
-  const AddOccupationWidget({super.key});
+  final Map<String, dynamic>? initialOccupation;
+
+  const AddOccupationWidget({super.key, this.initialOccupation});
 
   @override
   State<AddOccupationWidget> createState() => _AddOccupationWidgetState();
@@ -20,30 +20,24 @@ class AddOccupationWidget extends StatefulWidget {
 
 class _AddOccupationWidgetState extends State<AddOccupationWidget> {
   late AddOccupationModel _model;
-
-  @override
-  void setState(VoidCallback callback) {
-    super.setState(callback);
-    _model.onUpdate();
-  }
+  String? selectedCategoryName;
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => AddOccupationModel());
+    // Do NOT set dropdown value/controller here!
+    selectedCategoryName = widget.initialOccupation?['category_name'];
   }
 
   @override
   void dispose() {
     _model.maybeDispose();
-
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Align(
       alignment: AlignmentDirectional(0.0, 0.0),
       child: Padding(
@@ -51,19 +45,14 @@ class _AddOccupationWidgetState extends State<AddOccupationWidget> {
         child: Container(
           width: double.infinity,
           height: MediaQuery.sizeOf(context).height * 0.4,
-          constraints: BoxConstraints(
-            maxWidth: 700.0,
-          ),
+          constraints: BoxConstraints(maxWidth: 700.0),
           decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: [
               BoxShadow(
                 blurRadius: 12.0,
                 color: Color(0x33000000),
-                offset: Offset(
-                  0.0,
-                  5.0,
-                ),
+                offset: Offset(0.0, 5.0),
               )
             ],
             borderRadius: BorderRadius.circular(12.0),
@@ -80,25 +69,19 @@ class _AddOccupationWidgetState extends State<AddOccupationWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              FFLocalizations.of(context).getText(
-                                '3c86ffm9' /* Add Occupation */,
+                        child: Text(
+                          widget.initialOccupation == null
+                              ? 'Add Occupation'
+                              : 'Edit Occupation',
+                          style: FlutterFlowTheme.of(context)
+                              .headlineSmall
+                              .override(
+                                fontFamily: 'primaryFont',
+                                color: Color(0xFF252525),
+                                fontSize: 16.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.bold,
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .headlineSmall
-                                  .override(
-                                    fontFamily: 'primaryFont',
-                                    color: Color(0xFF252525),
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                          ],
                         ),
                       ),
                       FlutterFlowIconButton(
@@ -132,7 +115,6 @@ class _AddOccupationWidgetState extends State<AddOccupationWidget> {
                             authToken: FFAppState().apitoken,
                           ),
                           builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
                               return Center(
                                 child: SizedBox(
@@ -140,62 +122,67 @@ class _AddOccupationWidgetState extends State<AddOccupationWidget> {
                                   height: 50.0,
                                   child: CircularProgressIndicator(
                                     valueColor: AlwaysStoppedAnimation<Color>(
-                                      Color(0xFF6E2A87),
-                                    ),
+                                        Color(0xFF6E2A87)),
                                   ),
                                 ),
                               );
                             }
                             final dropDownCategoryResponse = snapshot.data!;
+                            final options = List<String>.from(
+                              ClientHomePageGroup.categoryCall
+                                  .categoryList(
+                                    dropDownCategoryResponse.jsonBody,
+                                  )!
+                                  .map((e) =>
+                                      getJsonField(e, r'''$.id''').toString()),
+                            );
+                            final optionLabels = ClientHomePageGroup
+                                .categoryCall
+                                .categoryList(
+                                  dropDownCategoryResponse.jsonBody,
+                                )!
+                                .map((e) =>
+                                    getJsonField(e, r'''$.name''').toString())
+                                .toList();
+
+                            // Set dropdown value/controller after options are loaded
+                            if (_model.dropDownValue == null &&
+                                widget.initialOccupation?['category_id'] !=
+                                    null) {
+                              final initialId = widget
+                                  .initialOccupation!['category_id']
+                                  .toString();
+                              if (options.contains(initialId)) {
+                                _model.dropDownValue = initialId;
+                                _model.dropDownValueController =
+                                    FormFieldController<String>(initialId);
+                                final idx = options.indexOf(initialId);
+                                selectedCategoryName =
+                                    idx >= 0 ? optionLabels[idx] : null;
+                              }
+                            }
 
                             return FlutterFlowDropDown<String>(
                               controller: _model.dropDownValueController ??=
                                   FormFieldController<String>(
-                                _model.dropDownValue ??= '',
-                              ),
-                              options: List<String>.from(
-                                  ClientHomePageGroup.categoryCall
-                                      .categoryList(
-                                        dropDownCategoryResponse.jsonBody,
-                                      )!
-                                      .map((e) => getJsonField(
-                                            e,
-                                            r'''$.id''',
-                                          ))
-                                      .toList()
-                                      .map((e) => e.toString())
-                                      .toList()),
-                              optionLabels: ClientHomePageGroup.categoryCall
-                                  .categoryList(
-                                    dropDownCategoryResponse.jsonBody,
-                                  )!
-                                  .map((e) => getJsonField(
-                                        e,
-                                        r'''$.name''',
-                                      ))
-                                  .toList()
-                                  .map((e) => e.toString())
-                                  .toList(),
-                              onChanged: (val) => safeSetState(
-                                  () => _model.dropDownValue = val),
+                                      _model.dropDownValue ?? ''),
+                              options: options,
+                              optionLabels: optionLabels,
+                              onChanged: (val) {
+                                setState(() {
+                                  _model.dropDownValue = val;
+                                  final idx = options.indexOf(val ?? '');
+                                  selectedCategoryName =
+                                      idx >= 0 ? optionLabels[idx] : null;
+                                });
+                              },
                               width: double.infinity,
                               height: 56.0,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'primaryFont',
-                                    color: Color(0xFF57636C),
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                  ),
-                              hintText: FFLocalizations.of(context).getText(
-                                'v9bpdw5w' /* Select category */,
-                              ),
-                              icon: Icon(
-                                Icons.keyboard_arrow_down_rounded,
-                                color: Color(0xFF898989),
-                                size: 24.0,
-                              ),
+                              textStyle:
+                                  FlutterFlowTheme.of(context).bodyMedium,
+                              hintText: 'Select category',
+                              icon: Icon(Icons.keyboard_arrow_down_rounded,
+                                  color: Color(0xFF898989), size: 24.0),
                               fillColor: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                               elevation: 2.0,
@@ -235,9 +222,7 @@ class _AddOccupationWidgetState extends State<AddOccupationWidget> {
                                     onPressed: () async {
                                       Navigator.pop(context);
                                     },
-                                    text: FFLocalizations.of(context).getText(
-                                      'ngck71yz' /* Cancel */,
-                                    ),
+                                    text: 'Cancel',
                                     options: FFButtonOptions(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16.0, 0.0, 16.0, 0.0),
@@ -248,26 +233,8 @@ class _AddOccupationWidgetState extends State<AddOccupationWidget> {
                                       textStyle: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
-                                            font: GoogleFonts.interTight(
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontStyle,
-                                            ),
+                                            font: GoogleFonts.interTight(),
                                             color: Color(0xFF6E2A87),
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .fontStyle,
                                           ),
                                       elevation: 0.0,
                                       borderRadius: BorderRadius.circular(8.0),
@@ -303,7 +270,6 @@ class _AddOccupationWidgetState extends State<AddOccupationWidget> {
                                           categoryId: _model.dropDownValue,
                                           authToken: FFAppState().apitoken,
                                         );
-
                                         if ((_model.apiResultros?.succeeded ??
                                             true)) {
                                           ScaffoldMessenger.of(context)
@@ -311,14 +277,13 @@ class _AddOccupationWidgetState extends State<AddOccupationWidget> {
                                             SnackBar(
                                               content: Text(
                                                 getJsonField(
-                                                  (_model.apiResultros
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                  r'''$.message''',
-                                                ).toString(),
+                                                        (_model.apiResultros
+                                                                ?.jsonBody ??
+                                                            ''),
+                                                        r'''$.message''')
+                                                    .toString(),
                                                 style: TextStyle(
-                                                  color: Colors.white,
-                                                ),
+                                                    color: Colors.white),
                                               ),
                                               duration:
                                                   Duration(milliseconds: 4000),
@@ -326,21 +291,26 @@ class _AddOccupationWidgetState extends State<AddOccupationWidget> {
                                                   Color(0xFF6E2A87),
                                             ),
                                           );
-                                          Navigator.pop(context);
+                                          Navigator.pop(context, {
+                                            'category_id': _model.dropDownValue,
+                                            // ID
+                                            'category_name':
+                                                selectedCategoryName,
+                                            // Display name
+                                          });
                                         } else {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
                                             SnackBar(
                                               content: Text(
                                                 getJsonField(
-                                                  (_model.apiResultros
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                  r'''$.message''',
-                                                ).toString(),
+                                                        (_model.apiResultros
+                                                                ?.jsonBody ??
+                                                            ''),
+                                                        r'''$.message''')
+                                                    .toString(),
                                                 style: TextStyle(
-                                                  color: Colors.white,
-                                                ),
+                                                    color: Colors.white),
                                               ),
                                               duration:
                                                   Duration(milliseconds: 4000),
@@ -356,8 +326,7 @@ class _AddOccupationWidgetState extends State<AddOccupationWidget> {
                                             content: Text(
                                               'Please select a category',
                                               style: TextStyle(
-                                                color: Colors.white,
-                                              ),
+                                                  color: Colors.white),
                                             ),
                                             duration:
                                                 Duration(milliseconds: 4000),
@@ -365,12 +334,11 @@ class _AddOccupationWidgetState extends State<AddOccupationWidget> {
                                           ),
                                         );
                                       }
-
-                                      safeSetState(() {});
+                                      setState(() {});
                                     },
-                                    text: FFLocalizations.of(context).getText(
-                                      '5055rw1m' /* Add */,
-                                    ),
+                                    text: widget.initialOccupation == null
+                                        ? 'Add'
+                                        : 'Update',
                                     options: FFButtonOptions(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16.0, 0.0, 16.0, 0.0),
@@ -381,26 +349,8 @@ class _AddOccupationWidgetState extends State<AddOccupationWidget> {
                                       textStyle: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
-                                            font: GoogleFonts.interTight(
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontStyle,
-                                            ),
+                                            font: GoogleFonts.interTight(),
                                             color: Colors.white,
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .fontStyle,
                                           ),
                                       elevation: 0.0,
                                       borderRadius: BorderRadius.circular(8.0),

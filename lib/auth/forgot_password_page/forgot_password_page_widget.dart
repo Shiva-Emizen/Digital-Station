@@ -239,11 +239,15 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                               shape: BoxShape.rectangle,
                             ),
                             child: FFButtonWidget(
-                              onPressed: () async {
+                             onPressed: () async {
                                 if (_model.formKey.currentState == null ||
                                     !_model.formKey.currentState!.validate()) {
                                   return;
                                 }
+
+                                // Print request
+                                print('Forgot password request: email=${_model.emailTextController.text}');
+
                                 _model.forgotPasswordResponse =
                                     await ClientAuthorizationGroup
                                         .forgotPasswordCall
@@ -251,15 +255,15 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                                   email: _model.emailTextController.text,
                                 );
 
-                                if ((_model.forgotPasswordResponse?.succeeded ??
-                                    true)) {
+                                // Print response
+                                print('Forgot password response: ${_model.forgotPasswordResponse?.jsonBody}');
+
+                                if ((_model.forgotPasswordResponse?.succeeded ?? true)) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
                                         getJsonField(
-                                          (_model.forgotPasswordResponse
-                                                  ?.jsonBody ??
-                                              ''),
+                                          (_model.forgotPasswordResponse?.jsonBody ?? ''),
                                           r'''$.message''',
                                         ).toString(),
                                         style: TextStyle(
@@ -285,9 +289,7 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                                     SnackBar(
                                       content: Text(
                                         getJsonField(
-                                          (_model.forgotPasswordResponse
-                                                  ?.jsonBody ??
-                                              ''),
+                                          (_model.forgotPasswordResponse?.jsonBody ?? ''),
                                           r'''$.message''',
                                         ).toString(),
                                         style: TextStyle(

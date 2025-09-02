@@ -30,12 +30,22 @@ class _UserSelectionPageWidgetState extends State<UserSelectionPageWidget> {
     _model = createModel(context, () => UserSelectionPageModel());
 
     _videoController = VideoPlayerController.asset('assets/videos/splash_video.mp4')
+      ..setLooping(true) // Enable looping
       ..initialize().then((_) {
-        setState(() {}); // Refresh to display video
-        _videoController.setLooping(true);
-        _videoController.setVolume(0); // Mute video if needed
+        setState(() {});
+        _videoController.setVolume(0);
         _videoController.play();
       });
+
+    _videoController.addListener(() {
+      if (_videoController.value.position >= _videoController.value.duration) {
+        // Video finished, stop playback
+        _videoController.pause();
+        // Optionally, seek to start if you want to show the first frame
+        //_videoController.seekTo(Duration.zero);
+        setState(() {});
+      }
+    });
   }
 
   @override
@@ -108,9 +118,14 @@ class _UserSelectionPageWidgetState extends State<UserSelectionPageWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    FFAppState().userType = "1";
+                                    safeSetState(() {});
                                     context.pushNamed(
-                                        CreateAccountPageFreelancerWidget
-                                            .routeName);
+                                      CreateAccountPageFreelancerWidget.routeName,
+                                      queryParameters: {
+                                        'intentType': 'freelancer', // Replace with your flag value
+                                      },
+                                    );
                                   },
                                   child: Container(
                                     width: 166.0,
@@ -165,9 +180,13 @@ class _UserSelectionPageWidgetState extends State<UserSelectionPageWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    FFAppState().userType = "0";
+                                    safeSetState(() {});
                                     context.pushNamed(
                                         CreateAccountPageFreelancerWidget
-                                            .routeName);
+                                            .routeName,queryParameters: {
+                                      'intentType': 'client', // Replace with your flag value
+                                    });
                                   },
                                   child: Container(
                                     width: 166.0,

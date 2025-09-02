@@ -12,10 +12,12 @@ import 'create_account_page_freelancer_model.dart';
 export 'create_account_page_freelancer_model.dart';
 
 class CreateAccountPageFreelancerWidget extends StatefulWidget {
-  const CreateAccountPageFreelancerWidget({super.key});
+  const CreateAccountPageFreelancerWidget({super.key, this.intentType});
 
   static String routeName = 'CreateAccountPageFreelancer';
   static String routePath = '/createAccountPageFreelancer';
+
+  final String? intentType;
 
   @override
   State<CreateAccountPageFreelancerWidget> createState() =>
@@ -500,17 +502,28 @@ class _CreateAccountPageFreelancerWidgetState
                                     );
                                   },
                                 ),
-                                TextFormField(
-                                  controller: _model.titleTextController,
-                                  focusNode: _model.titleFocusNode,
-                                  autofocus: false,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    isDense: true,
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .override(
-                                          font: GoogleFonts.inter(
+                                if (FFAppState().userType == "1") ...[
+                                  TextFormField(
+                                    controller: _model.titleTextController,
+                                    focusNode: _model.titleFocusNode,
+                                    autofocus: false,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      isDense: true,
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .fontStyle,
+                                            ),
+                                            letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
                                                     .labelMedium
@@ -520,81 +533,81 @@ class _CreateAccountPageFreelancerWidgetState
                                                     .labelMedium
                                                     .fontStyle,
                                           ),
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .fontStyle,
-                                        ),
-                                    hintText:
-                                        FFLocalizations.of(context).getText(
-                                      'fpeby77e' /* Job Title */,
-                                    ),
-                                    hintStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .override(
-                                          font: GoogleFonts.inter(
+                                      hintText: FFLocalizations.of(context)
+                                          .getText('fpeby77e' /* Job Title */),
+                                      hintStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight: FontWeight.normal,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .fontStyle,
+                                            ),
+                                            fontSize: 16.0,
+                                            letterSpacing: 0.0,
                                             fontWeight: FontWeight.normal,
                                             fontStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .labelMedium
                                                     .fontStyle,
                                           ),
-                                          fontSize: 16.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.normal,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .fontStyle,
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFFE2E8F0),
+                                          width: 1.0,
                                         ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0xFFE2E8F0),
-                                        width: 1.0,
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                       ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0x00000000),
-                                        width: 1.0,
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                       ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 1.0,
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                       ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 1.0,
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                       ),
-                                      borderRadius: BorderRadius.circular(8.0),
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      contentPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              16.0, 20.0, 16.0, 20.0),
+                                      suffixIcon: Icon(Icons.oil_barrel_sharp),
                                     ),
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    contentPadding:
-                                        EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 20.0, 16.0, 20.0),
-                                    suffixIcon: Icon(
-                                      Icons.oil_barrel_sharp,
-                                    ),
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        font: GoogleFonts.inter(
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.inter(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          letterSpacing: 0.0,
                                           fontWeight:
                                               FlutterFlowTheme.of(context)
                                                   .bodyMedium
@@ -604,20 +617,15 @@ class _CreateAccountPageFreelancerWidgetState
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                  textAlign: TextAlign.start,
-                                  cursorColor:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  validator: _model.titleTextControllerValidator
-                                      .asValidator(context),
-                                ),
+                                    textAlign: TextAlign.start,
+                                    cursorColor: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    validator: FFAppState().userType == "1"
+                                        ? _model.titleTextControllerValidator
+                                            .asValidator(context)
+                                        : (_) => null,
+                                  ),
+                                ],
                                 TextFormField(
                                   controller: _model.passwordTextController,
                                   focusNode: _model.passwordFocusNode,
@@ -897,53 +905,49 @@ class _CreateAccountPageFreelancerWidgetState
                                     ),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        if (_model.formKey.currentState ==
-                                                null ||
-                                            !_model.formKey.currentState!
-                                                .validate()) {
+                                        if (_model.formKey.currentState == null ||
+                                            !_model.formKey.currentState!.validate()) {
                                           return;
                                         }
-                                        if (_model
-                                                .passwordTextController.text ==
-                                            _model.confirmTextController.text) {
+
+                                        if (_model.passwordTextController.text == _model.confirmTextController.text) {
+                                          // Print request parameters
+                                          debugPrint('Request:');
+                                          debugPrint('name: ${_model.nameTextController.text}');
+                                          debugPrint('email: ${_model.emailTextController.text}');
+                                          debugPrint('password: ${_model.passwordTextController.text}');
+                                          debugPrint('passwordConfirmation: ${_model.confirmTextController.text}');
+                                          debugPrint('fcmToken: abc');
+                                          debugPrint('jobTitle: ${_model.titleTextController.text}');
+                                          debugPrint('countryId: ${_model.dropDownValue}');
+
                                           _model.apiResultoe5 =
-                                              await FreelancerAuthorizationGroup
-                                                  .freelancerRegistrationCall
-                                                  .call(
-                                            name:
-                                                _model.nameTextController.text,
-                                            email:
-                                                _model.emailTextController.text,
-                                            password: _model
-                                                .passwordTextController.text,
-                                            passwordConfirmation: _model
-                                                .confirmTextController.text,
+                                          await FreelancerAuthorizationGroup.freelancerRegistrationCall.call(
+                                            name: _model.nameTextController.text,
+                                            email: _model.emailTextController.text,
+                                            password: _model.passwordTextController.text,
+                                            passwordConfirmation: _model.confirmTextController.text,
                                             fcmToken: 'abc',
-                                            jobTitle:
-                                                _model.titleTextController.text,
+                                            jobTitle: _model.titleTextController.text,
                                             countryId: _model.dropDownValue,
+                                            intentType: widget.intentType,
                                           );
 
-                                          if ((_model.apiResultoe5?.succeeded ??
-                                              true)) {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
+                                          // Print full response and error if any
+                                          debugPrint('Response:');
+                                          debugPrint(_model.apiResultoe5?.jsonBody?.toString());
+                                          if (_model.apiResultoe5?.succeeded ?? true) {
+                                            ScaffoldMessenger.of(context).showSnackBar(
                                               SnackBar(
                                                 content: Text(
                                                   getJsonField(
-                                                    (_model.apiResultoe5
-                                                            ?.jsonBody ??
-                                                        ''),
+                                                    (_model.apiResultoe5?.jsonBody ?? ''),
                                                     r'''$.message''',
                                                   ).toString(),
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                  ),
+                                                  style: TextStyle(color: Colors.white),
                                                 ),
-                                                duration: Duration(
-                                                    milliseconds: 4000),
-                                                backgroundColor:
-                                                    Color(0xFF6E2A87),
+                                                duration: Duration(milliseconds: 4000),
+                                                backgroundColor: Color(0xFF6E2A87),
                                               ),
                                             );
 
@@ -952,60 +956,51 @@ class _CreateAccountPageFreelancerWidgetState
                                               queryParameters: {
                                                 'otp': serializeParam(
                                                   getJsonField(
-                                                    (_model.apiResultoe5
-                                                            ?.jsonBody ??
-                                                        ''),
+                                                    (_model.apiResultoe5?.jsonBody ?? ''),
                                                     r'''$.data.verification_code''',
                                                   ),
                                                   ParamType.int,
                                                 ),
                                                 'email': serializeParam(
-                                                  _model
-                                                      .emailTextController.text,
+                                                  _model.emailTextController.text,
                                                   ParamType.String,
                                                 ),
                                               }.withoutNulls,
                                             );
                                           } else {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
+                                            // Print error details if available
+                                            debugPrint('API Error: ${_model.apiResultoe5?.jsonBody}');
+                                            ScaffoldMessenger.of(context).showSnackBar(
                                               SnackBar(
                                                 content: Text(
                                                   getJsonField(
-                                                    (_model.apiResultoe5
-                                                            ?.jsonBody ??
-                                                        ''),
+                                                    (_model.apiResultoe5?.jsonBody ?? ''),
                                                     r'''$.message''',
-                                                  ).toString(),
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                  ),
+                                                  ).toString().isNotEmpty
+                                                      ? getJsonField(
+                                                    (_model.apiResultoe5?.jsonBody ?? ''),
+                                                    r'''$.message''',
+                                                  ).toString()
+                                                      : (_model.apiResultoe5?.jsonBody?.toString() ?? 'Unknown error'),
+                                                  style: TextStyle(color: Colors.white),
                                                 ),
-                                                duration: Duration(
-                                                    milliseconds: 4000),
-                                                backgroundColor:
-                                                    Color(0xFF6E2A87),
+                                                duration: Duration(milliseconds: 4000),
+                                                backgroundColor: Color(0xFF6E2A87),
                                               ),
                                             );
                                           }
                                         } else {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
+                                          ScaffoldMessenger.of(context).showSnackBar(
                                             SnackBar(
                                               content: Text(
                                                 'Please make sure both passwords are the same',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                ),
+                                                style: TextStyle(color: Colors.white),
                                               ),
-                                              duration:
-                                                  Duration(milliseconds: 4000),
-                                              backgroundColor:
-                                                  Color(0xFF6E2A87),
+                                              duration: Duration(milliseconds: 4000),
+                                              backgroundColor: Color(0xFF6E2A87),
                                             ),
                                           );
                                         }
-
                                         safeSetState(() {});
                                       },
                                       text: FFLocalizations.of(context).getText(
@@ -1052,7 +1047,7 @@ class _CreateAccountPageFreelancerWidgetState
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 60.0, 0.0, 0.0),
+                                      0.0, 60.0, 0.0, 10.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.center,

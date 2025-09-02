@@ -60,7 +60,7 @@ class _ServiceSuccessFullyPublishPageWidgetState
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      context.pushNamed(HomePageWidget.routeName);
+                      context.pushNamed(AllServiceWidget.routeName);
                     },
                     child: Container(
                       width: double.infinity,

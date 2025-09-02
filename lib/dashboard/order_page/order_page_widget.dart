@@ -664,414 +664,595 @@ class _OrderPageWidgetState extends State<OrderPageWidget> {
                                                               MainAxisAlignment
                                                                   .spaceBetween,
                                                           children: [
-                                                            FFButtonWidget(
-                                                              onPressed:
-                                                                  () async {
-                                                                _model.apiResultn5n =
-                                                                    await FreelancerHomePageGroup
-                                                                        .changeStatusCall
-                                                                        .call(
-                                                                  authToken:
-                                                                      FFAppState()
-                                                                          .apitoken,
-                                                                  orderId:
-                                                                      getJsonField(
-                                                                    freelancerOrderListItem,
-                                                                    r'''$.id''',
-                                                                  ).toString(),
-                                                                  serviceId:
-                                                                      '2',
-                                                                );
-
-                                                                if ((_model
-                                                                        .apiResultn5n
-                                                                        ?.succeeded ??
-                                                                    true)) {
-                                                                  ScaffoldMessenger.of(
-                                                                          context)
-                                                                      .showSnackBar(
-                                                                    SnackBar(
-                                                                      content:
-                                                                          Text(
-                                                                        getJsonField(
-                                                                          (_model.apiResultn5n?.jsonBody ??
-                                                                              ''),
-                                                                          r'''$.message''',
-                                                                        ).toString(),
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primaryText,
-                                                                        ),
-                                                                      ),
-                                                                      duration: Duration(
-                                                                          milliseconds:
-                                                                              4000),
-                                                                      backgroundColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .secondary,
-                                                                    ),
+                                                            Expanded(
+                                                              child:
+                                                                  FFButtonWidget(
+                                                                onPressed:
+                                                                    () async {
+                                                                  _model.apiResultn5n =
+                                                                      await FreelancerHomePageGroup
+                                                                          .changeStatusCall
+                                                                          .call(
+                                                                    authToken:
+                                                                        FFAppState()
+                                                                            .apitoken,
+                                                                    orderId: getJsonField(
+                                                                            freelancerOrderListItem,
+                                                                            r'''$.id''')
+                                                                        .toString(),
+                                                                    serviceId:
+                                                                        '2',
                                                                   );
 
-                                                                  var chatsRecordReference =
-                                                                      ChatsRecord
-                                                                          .collection
-                                                                          .doc(
-                                                                              '${getJsonField(
-                                                                    freelancerOrderListItem,
-                                                                    r'''$.service.user_id''',
-                                                                  ).toString()}_${getJsonField(
-                                                                    freelancerOrderListItem,
-                                                                    r'''$.user.id''',
-                                                                  ).toString()}');
-                                                                  await chatsRecordReference
-                                                                      .set({
-                                                                    ...createChatsRecordData(
-                                                                      chatId:
-                                                                          '${getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.service.user_id''',
-                                                                      ).toString()}_${getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.user.id''',
-                                                                      ).toString()}',
-                                                                      lastMessage:
-                                                                          'Hello',
-                                                                      clientName:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.user.name''',
-                                                                      ).toString(),
-                                                                      email:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.email''',
-                                                                      ).toString(),
-                                                                      freelancerId:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.service.user_id''',
-                                                                      ).toString(),
-                                                                      clientId:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.user.id''',
-                                                                      ).toString(),
-                                                                      clientProfile:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.user.avatar''',
-                                                                      ).toString(),
-                                                                      freelancerProfile:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.user_avatar.url''',
-                                                                      ).toString(),
-                                                                      lastUpdated:
-                                                                          getCurrentTimestamp,
-                                                                      freelancerName:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.service.username''',
-                                                                      ).toString(),
-                                                                      createdTime:
-                                                                          getCurrentTimestamp,
-                                                                    ),
-                                                                    ...mapToFirestore(
-                                                                      {
-                                                                        'timeStamp':
-                                                                            FieldValue.serverTimestamp(),
-                                                                      },
-                                                                    ),
-                                                                  });
-                                                                  _model.createdChatDoc =
-                                                                      ChatsRecord
-                                                                          .getDocumentFromData({
-                                                                    ...createChatsRecordData(
-                                                                      chatId:
-                                                                          '${getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.service.user_id''',
-                                                                      ).toString()}_${getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.user.id''',
-                                                                      ).toString()}',
-                                                                      lastMessage:
-                                                                          'Hello',
-                                                                      clientName:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.user.name''',
-                                                                      ).toString(),
-                                                                      email:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.email''',
-                                                                      ).toString(),
-                                                                      freelancerId:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.service.user_id''',
-                                                                      ).toString(),
-                                                                      clientId:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.user.id''',
-                                                                      ).toString(),
-                                                                      clientProfile:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.user.avatar''',
-                                                                      ).toString(),
-                                                                      freelancerProfile:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.user_avatar.url''',
-                                                                      ).toString(),
-                                                                      lastUpdated:
-                                                                          getCurrentTimestamp,
-                                                                      freelancerName:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.service.username''',
-                                                                      ).toString(),
-                                                                      createdTime:
-                                                                          getCurrentTimestamp,
-                                                                    ),
-                                                                    ...mapToFirestore(
-                                                                      {
-                                                                        'timeStamp':
-                                                                            DateTime.now(),
-                                                                      },
-                                                                    ),
-                                                                  }, chatsRecordReference);
-
-                                                                  await ChatMessagesRecord.createDoc(_model
-                                                                          .createdChatDoc!
-                                                                          .reference)
-                                                                      .set({
-                                                                    ...createChatMessagesRecordData(
-                                                                      message:
-                                                                          'Hello',
-                                                                      senderType:
-                                                                          'freelancer',
-                                                                      senderId:
-                                                                          getJsonField(
-                                                                        freelancerOrderListItem,
-                                                                        r'''$.service.user_id''',
-                                                                      ).toString(),
-                                                                    ),
-                                                                    ...mapToFirestore(
-                                                                      {
-                                                                        'timeStamp':
-                                                                            FieldValue.serverTimestamp(),
-                                                                      },
-                                                                    ),
-                                                                  });
-                                                                  safeSetState(() =>
-                                                                      _model.apiRequestCompleter1 =
-                                                                          null);
-                                                                } else {
-                                                                  ScaffoldMessenger.of(
-                                                                          context)
-                                                                      .showSnackBar(
-                                                                    SnackBar(
-                                                                      content:
-                                                                          Text(
-                                                                        getJsonField(
-                                                                          (_model.apiResultn5n?.jsonBody ??
-                                                                              ''),
-                                                                          r'''$.message''',
-                                                                        ).toString(),
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primaryText,
+                                                                  if ((_model
+                                                                          .apiResultn5n
+                                                                          ?.succeeded ??
+                                                                      true)) {
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          getJsonField((_model.apiResultn5n?.jsonBody ?? ''), r'''$.message''')
+                                                                              .toString(),
+                                                                          style:
+                                                                              TextStyle(color: FlutterFlowTheme.of(context).primaryText),
                                                                         ),
+                                                                        duration:
+                                                                            Duration(milliseconds: 4000),
+                                                                        backgroundColor:
+                                                                            FlutterFlowTheme.of(context).secondary,
                                                                       ),
-                                                                      duration: Duration(
-                                                                          milliseconds:
-                                                                              4000),
-                                                                      backgroundColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .secondary,
-                                                                    ),
-                                                                  );
-                                                                }
+                                                                    );
 
-                                                                safeSetState(
-                                                                    () {});
-                                                              },
-                                                              text: FFLocalizations
-                                                                      .of(context)
-                                                                  .getText(
-                                                                '15h32y6f' /* Accept */,
-                                                              ),
-                                                              options:
-                                                                  FFButtonOptions(
-                                                                padding: EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        51.0,
-                                                                        6.0,
-                                                                        51.0,
-                                                                        6.0),
-                                                                iconPadding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                color: Color(
-                                                                    0xFF63CE8A),
-                                                                textStyle: FlutterFlowTheme.of(
+                                                                    var chatsRecordReference =
+                                                                        ChatsRecord
+                                                                            .collection
+                                                                            .doc('${getJsonField(freelancerOrderListItem, r'''$.service.user_id''').toString()}_${getJsonField(freelancerOrderListItem, r'''$.user.id''').toString()}');
+
+                                                                    await chatsRecordReference
+                                                                        .set({
+                                                                      ...createChatsRecordData(
+                                                                        chatId:
+                                                                            '${getJsonField(freelancerOrderListItem, r'''$.service.user_id''').toString()}_${getJsonField(freelancerOrderListItem, r'''$.user.id''').toString()}',
+                                                                        lastMessage:
+                                                                            'Hello',
+                                                                        clientName:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.user.name''').toString(),
+                                                                        email: getJsonField(freelancerOrderListItem,
+                                                                                r'''$.email''')
+                                                                            .toString(),
+                                                                        freelancerId:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.service.user_id''').toString(),
+                                                                        clientId:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.user.id''').toString(),
+                                                                        clientProfile:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.user.avatar''').toString(),
+                                                                        freelancerProfile:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.user_avatar.url''').toString(),
+                                                                        lastUpdated:
+                                                                            getCurrentTimestamp,
+                                                                        freelancerName:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.service.username''').toString(),
+                                                                        createdTime:
+                                                                            getCurrentTimestamp,
+                                                                      ),
+                                                                      ...mapToFirestore({
+                                                                        'timeStamp':
+                                                                            FieldValue.serverTimestamp()
+                                                                      }),
+                                                                    });
+
+                                                                    _model.createdChatDoc =
+                                                                        ChatsRecord
+                                                                            .getDocumentFromData({
+                                                                      ...createChatsRecordData(
+                                                                        chatId:
+                                                                            '${getJsonField(freelancerOrderListItem, r'''$.service.user_id''').toString()}_${getJsonField(freelancerOrderListItem, r'''$.user.id''').toString()}',
+                                                                        lastMessage:
+                                                                            'Hello',
+                                                                        clientName:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.user.name''').toString(),
+                                                                        email: getJsonField(freelancerOrderListItem,
+                                                                                r'''$.email''')
+                                                                            .toString(),
+                                                                        freelancerId:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.service.user_id''').toString(),
+                                                                        clientId:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.user.id''').toString(),
+                                                                        clientProfile:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.user.avatar''').toString(),
+                                                                        freelancerProfile:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.user_avatar.url''').toString(),
+                                                                        lastUpdated:
+                                                                            getCurrentTimestamp,
+                                                                        freelancerName:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.service.username''').toString(),
+                                                                        createdTime:
+                                                                            getCurrentTimestamp,
+                                                                      ),
+                                                                      ...mapToFirestore({
+                                                                        'timeStamp':
+                                                                            DateTime.now()
+                                                                      }),
+                                                                    }, chatsRecordReference);
+
+                                                                    await ChatMessagesRecord.createDoc(_model
+                                                                            .createdChatDoc!
+                                                                            .reference)
+                                                                        .set({
+                                                                      ...createChatMessagesRecordData(
+                                                                        message:
+                                                                            'Hello',
+                                                                        senderType:
+                                                                            'freelancer',
+                                                                        senderId:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.service.user_id''').toString(),
+                                                                      ),
+                                                                      ...mapToFirestore({
+                                                                        'timeStamp':
+                                                                            FieldValue.serverTimestamp()
+                                                                      }),
+                                                                    });
+
+                                                                    safeSetState(() =>
+                                                                        _model.apiRequestCompleter1 =
+                                                                            null);
+                                                                  } else {
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          getJsonField((_model.apiResultn5n?.jsonBody ?? ''), r'''$.message''')
+                                                                              .toString(),
+                                                                          style:
+                                                                              TextStyle(color: FlutterFlowTheme.of(context).primaryText),
+                                                                        ),
+                                                                        duration:
+                                                                            Duration(milliseconds: 4000),
+                                                                        backgroundColor:
+                                                                            FlutterFlowTheme.of(context).secondary,
+                                                                      ),
+                                                                    );
+                                                                  }
+                                                                  safeSetState(
+                                                                      () {});
+                                                                },
+                                                                text: FFLocalizations.of(
                                                                         context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'primaryFont',
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          14.0,
-                                                                      letterSpacing:
+                                                                    .getText(
+                                                                        '15h32y6f' /* Accept */),
+                                                                options:
+                                                                    FFButtonOptions(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          16.0,
+                                                                          6.0,
+                                                                          16.0,
+                                                                          6.0),
+                                                                  iconPadding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
                                                                           0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                                elevation: 0.0,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                  color: Color(
+                                                                      0xFF63CE8A),
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'primaryFont',
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                      ),
+                                                                  elevation:
+                                                                      0.0,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                ),
                                                               ),
                                                             ),
-                                                            FFButtonWidget(
-                                                              onPressed:
-                                                                  () async {
-                                                                _model.apiResultmhn =
-                                                                    await FreelancerHomePageGroup
-                                                                        .changeStatusCall
-                                                                        .call(
-                                                                  orderId:
-                                                                      getJsonField(
-                                                                    freelancerOrderListItem,
-                                                                    r'''$.id''',
-                                                                  ).toString(),
-                                                                  authToken:
-                                                                      FFAppState()
-                                                                          .apitoken,
-                                                                  serviceId:
-                                                                      '6',
-                                                                );
+                                                            SizedBox(
+                                                                width: 8.0),
+                                                            Expanded(
+                                                              child:
+                                                                  FFButtonWidget(
+                                                                onPressed:
+                                                                    () async {
+                                                                  print(
+                                                                      '=== Chat Now Button Pressed ===');
+                                                                  print(
+                                                                      'Client ID: ${getJsonField(freelancerOrderListItem, r'''$.user.id''').toString()}');
+                                                                  print(
+                                                                      'Freelancer ID: ${getJsonField(freelancerOrderListItem, r'''$.service.user_id''').toString()}');
+                                                                  print(
+                                                                      'Client Name: ${getJsonField(freelancerOrderListItem, r'''$.user.name''').toString()}');
+                                                                  print(
+                                                                      'Freelancer Name: ${getJsonField(freelancerOrderListItem, r'''$.service.username''').toString()}');
 
-                                                                if ((_model
-                                                                        .apiResultmhn
-                                                                        ?.succeeded ??
-                                                                    true)) {
-                                                                  ScaffoldMessenger.of(
-                                                                          context)
-                                                                      .showSnackBar(
-                                                                    SnackBar(
-                                                                      content:
-                                                                          Text(
-                                                                        getJsonField(
-                                                                          (_model.apiResultn5n?.jsonBody ??
-                                                                              ''),
-                                                                          r'''$.message''',
-                                                                        ).toString(),
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primaryText,
-                                                                        ),
-                                                                      ),
-                                                                      duration: Duration(
-                                                                          milliseconds:
-                                                                              4000),
-                                                                      backgroundColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .secondary,
-                                                                    ),
-                                                                  );
-                                                                  safeSetState(() =>
-                                                                      _model.apiRequestCompleter1 =
-                                                                          null);
-                                                                } else {
-                                                                  ScaffoldMessenger.of(
-                                                                          context)
-                                                                      .showSnackBar(
-                                                                    SnackBar(
-                                                                      content:
-                                                                          Text(
-                                                                        getJsonField(
-                                                                          (_model.apiResultn5n?.jsonBody ??
-                                                                              ''),
-                                                                          r'''$.message''',
-                                                                        ).toString(),
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primaryText,
-                                                                        ),
-                                                                      ),
-                                                                      duration: Duration(
-                                                                          milliseconds:
-                                                                              4000),
-                                                                      backgroundColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .secondary,
-                                                                    ),
-                                                                  );
-                                                                }
+                                                                  try {
+                                                                    // Create chat ID
+                                                                    final chatId =
+                                                                        '${getJsonField(freelancerOrderListItem, r'''$.service.user_id''').toString()}_${getJsonField(freelancerOrderListItem, r'''$.user.id''').toString()}';
 
-                                                                safeSetState(
-                                                                    () {});
-                                                              },
-                                                              text: FFLocalizations
-                                                                      .of(context)
-                                                                  .getText(
-                                                                'iv9a4fzl' /* Decline */,
-                                                              ),
-                                                              options:
-                                                                  FFButtonOptions(
-                                                                padding: EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        34.0,
-                                                                        6.0,
-                                                                        46.0,
-                                                                        6.0),
-                                                                iconPadding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                color: Color(
-                                                                    0xFFFF2C20),
-                                                                textStyle: FlutterFlowTheme.of(
+                                                                    // Create chat document reference
+                                                                    var chatsRecordReference =
+                                                                        ChatsRecord
+                                                                            .collection
+                                                                            .doc(chatId);
+
+                                                                    print(
+                                                                        'Creating chat document with ID: $chatId');
+
+                                                                    // Create or update chat document
+                                                                    await chatsRecordReference
+                                                                        .set({
+                                                                      ...createChatsRecordData(
+                                                                        chatId:
+                                                                            chatId,
+                                                                        lastMessage:
+                                                                            'Hello shell we start? conversation regarding your order.',
+                                                                        clientName:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.user.name''').toString(),
+                                                                        email: getJsonField(freelancerOrderListItem,
+                                                                                r'''$.email''')
+                                                                            .toString(),
+                                                                        freelancerId:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.service.user_id''').toString(),
+                                                                        clientId:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.user.id''').toString(),
+                                                                        clientProfile:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.user.avatar''').toString(),
+                                                                        freelancerProfile:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.user_avatar.url''').toString(),
+                                                                        lastUpdated:
+                                                                            getCurrentTimestamp,
+                                                                        freelancerName:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.service.username''').toString(),
+                                                                        createdTime:
+                                                                            getCurrentTimestamp,
+                                                                      ),
+                                                                      ...mapToFirestore({
+                                                                        'timeStamp':
+                                                                            FieldValue.serverTimestamp()
+                                                                      }),
+                                                                    });
+
+                                                                    print(
+                                                                        'Chat document created successfully');
+
+                                                                    // Create chat document reference for messages
+                                                                    _model.createdChatDoc =
+                                                                        ChatsRecord
+                                                                            .getDocumentFromData({
+                                                                      ...createChatsRecordData(
+                                                                        chatId:
+                                                                            chatId,
+                                                                        lastMessage:
+                                                                            'Chat started',
+                                                                        clientName:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.user.name''').toString(),
+                                                                        email: getJsonField(freelancerOrderListItem,
+                                                                                r'''$.email''')
+                                                                            .toString(),
+                                                                        freelancerId:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.service.user_id''').toString(),
+                                                                        clientId:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.user.id''').toString(),
+                                                                        clientProfile:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.user.avatar''').toString(),
+                                                                        freelancerProfile:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.user_avatar.url''').toString(),
+                                                                        lastUpdated:
+                                                                            getCurrentTimestamp,
+                                                                        freelancerName:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.service.username''').toString(),
+                                                                        createdTime:
+                                                                            getCurrentTimestamp,
+                                                                      ),
+                                                                      ...mapToFirestore({
+                                                                        'timeStamp':
+                                                                            DateTime.now()
+                                                                      }),
+                                                                    }, chatsRecordReference);
+
+                                                                    // Create initial chat message
+                                                                    await ChatMessagesRecord.createDoc(_model
+                                                                            .createdChatDoc!
+                                                                            .reference)
+                                                                        .set({
+                                                                      ...createChatMessagesRecordData(
+                                                                        message:
+                                                                            'Chat started',
+                                                                        senderType:
+                                                                            'freelancer',
+                                                                        senderId:
+                                                                            getJsonField(freelancerOrderListItem, r'''$.service.user_id''').toString(),
+                                                                      ),
+                                                                      ...mapToFirestore({
+                                                                        'timeStamp':
+                                                                            FieldValue.serverTimestamp()
+                                                                      }),
+                                                                    });
+
+                                                                    print(
+                                                                        'Initial message created successfully');
+
+                                                                    // Show success message
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          'Chat created successfully!',
+                                                                          style:
+                                                                              TextStyle(color: Colors.white),
+                                                                        ),
+                                                                        duration:
+                                                                            Duration(milliseconds: 1500),
+                                                                        backgroundColor:
+                                                                            Color(0xFF6E2A87),
+                                                                      ),
+                                                                    );
+
+                                                                    // Navigate directly to the specific chat with proper parameters
+                                                                    print(
+                                                                        'Navigating to UserChatMessageWidget...');
+                                                                    context
+                                                                        .pushNamed(
+                                                                      UserChatMessageWidget
+                                                                          .routeName,
+                                                                      queryParameters:
+                                                                          {
+                                                                        'chatId':
+                                                                            serializeParam(
+                                                                          chatId,
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'name':
+                                                                            serializeParam(
+                                                                          getJsonField(freelancerOrderListItem, r'''$.user.name''')
+                                                                              .toString(),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'userId':
+                                                                            serializeParam(
+                                                                          getJsonField(freelancerOrderListItem, r'''$.service.user_id''')
+                                                                              .toString(),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'id':
+                                                                            serializeParam(
+                                                                          getJsonField(freelancerOrderListItem, r'''$.user.id''')
+                                                                              .toString(),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'profileURL':
+                                                                            serializeParam(
+                                                                          getJsonField(freelancerOrderListItem, r'''$.user.avatar''')
+                                                                              .toString(),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'lastMessage':
+                                                                            serializeParam(
+                                                                          getCurrentTimestamp,
+                                                                          ParamType
+                                                                              .DateTime,
+                                                                        ),
+                                                                        'userType':
+                                                                            serializeParam(
+                                                                          'freelancer',
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                      }.withoutNulls,
+                                                                    );
+                                                                  } catch (error) {
+                                                                    print(
+                                                                        'Error creating chat: $error');
+
+                                                                    // Show error message
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          'Failed to create chat. Please try again.',
+                                                                          style:
+                                                                              TextStyle(color: Colors.white),
+                                                                        ),
+                                                                        duration:
+                                                                            Duration(milliseconds: 3000),
+                                                                        backgroundColor:
+                                                                            Colors.red,
+                                                                      ),
+                                                                    );
+                                                                  }
+
+                                                                  safeSetState(
+                                                                      () {});
+                                                                },
+                                                                text: FFLocalizations.of(
                                                                         context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'primaryFont',
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          14.0,
-                                                                      letterSpacing:
+                                                                    .getText(
+                                                                        'm3z4x1y6' /* Chat Now */),
+                                                                icon: Icon(
+                                                                  Icons
+                                                                      .chat_bubble_outline,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  size: 18.0,
+                                                                ),
+                                                                options:
+                                                                    FFButtonOptions(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          12.0,
+                                                                          6.0,
+                                                                          16.0,
+                                                                          6.0),
+                                                                  iconPadding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
                                                                           0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                                elevation: 0.0,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
+                                                                          0.0,
+                                                                          4.0,
+                                                                          0.0),
+                                                                  color: Color(
+                                                                      0xFF6E2A87),
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'primaryFont',
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                      ),
+                                                                  elevation:
+                                                                      0.0,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                                width: 8.0),
+                                                            Expanded(
+                                                              child:
+                                                                  FFButtonWidget(
+                                                                onPressed:
+                                                                    () async {
+                                                                  _model.apiResultmhn =
+                                                                      await FreelancerHomePageGroup
+                                                                          .changeStatusCall
+                                                                          .call(
+                                                                    orderId: getJsonField(
+                                                                            freelancerOrderListItem,
+                                                                            r'''$.id''')
+                                                                        .toString(),
+                                                                    authToken:
+                                                                        FFAppState()
+                                                                            .apitoken,
+                                                                    serviceId:
+                                                                        '6',
+                                                                  );
+
+                                                                  if ((_model
+                                                                          .apiResultmhn
+                                                                          ?.succeeded ??
+                                                                      true)) {
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          getJsonField((_model.apiResultmhn?.jsonBody ?? ''), r'''$.message''')
+                                                                              .toString(),
+                                                                          style:
+                                                                              TextStyle(color: FlutterFlowTheme.of(context).primaryText),
+                                                                        ),
+                                                                        duration:
+                                                                            Duration(milliseconds: 4000),
+                                                                        backgroundColor:
+                                                                            FlutterFlowTheme.of(context).secondary,
+                                                                      ),
+                                                                    );
+                                                                    safeSetState(() =>
+                                                                        _model.apiRequestCompleter1 =
+                                                                            null);
+                                                                  } else {
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          getJsonField((_model.apiResultmhn?.jsonBody ?? ''), r'''$.message''')
+                                                                              .toString(),
+                                                                          style:
+                                                                              TextStyle(color: FlutterFlowTheme.of(context).primaryText),
+                                                                        ),
+                                                                        duration:
+                                                                            Duration(milliseconds: 4000),
+                                                                        backgroundColor:
+                                                                            FlutterFlowTheme.of(context).secondary,
+                                                                      ),
+                                                                    );
+                                                                  }
+                                                                  safeSetState(
+                                                                      () {});
+                                                                },
+                                                                text: FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                        'iv9a4fzl' /* Decline */),
+                                                                options:
+                                                                    FFButtonOptions(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          16.0,
+                                                                          6.0,
+                                                                          16.0,
+                                                                          6.0),
+                                                                  iconPadding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                  color: Color(
+                                                                      0xFFFF2C20),
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'primaryFont',
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                      ),
+                                                                  elevation:
+                                                                      0.0,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                ),
                                                               ),
                                                             ),
                                                           ],

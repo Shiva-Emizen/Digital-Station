@@ -22,6 +22,8 @@ class AllServiceModel extends FlutterFlowModel<AllServiceWidget> {
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
+  String? priceSort;
+  String? reviewSort;
 
   @override
   void initState(BuildContext context) {}

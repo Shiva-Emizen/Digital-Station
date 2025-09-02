@@ -56,7 +56,6 @@ class _OtpPageFreelancerWidgetState extends State<OtpPageFreelancerWidget> {
   @override
   void dispose() {
     _model.dispose();
-
     super.dispose();
   }
 
@@ -320,7 +319,7 @@ class _OtpPageFreelancerWidgetState extends State<OtpPageFreelancerWidget> {
                                     await ClientAuthorizationGroup.verifyOtpCall
                                         .call(
                                   email: widget.email,
-                                  otp: widget.otp?.toString(),
+                                  otp: _model.pinCodeController.text,
                                 );
 
                                 if ((_model.apiResultqdf?.succeeded ?? true)) {
@@ -470,7 +469,7 @@ class _OtpPageFreelancerWidgetState extends State<OtpPageFreelancerWidget> {
                                                 (_model.apiResultciw
                                                         ?.jsonBody ??
                                                     ''),
-                                                r'''$.data.verification_code''',
+                                                r'''$.message''',
                                               ).toString(),
                                               style: TextStyle(
                                                 color:

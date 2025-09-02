@@ -76,7 +76,7 @@ class _WorkInformationPageWidgetState extends State<WorkInformationPageWidget> {
                               focusColor: Colors.transparent,
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
-                              onDoubleTap: () async {
+                              onTap: () async {
                                 context.pop();
                               },
                               child: FlutterFlowIconButton(
@@ -552,7 +552,7 @@ class _WorkInformationPageWidgetState extends State<WorkInformationPageWidget> {
                     alignment: AlignmentDirectional(0.0, 1.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -614,7 +614,12 @@ class _WorkInformationPageWidgetState extends State<WorkInformationPageWidget> {
                               ),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  context.pushNamed(HomePageWidget.routeName);
+                                  context.goNamed(
+                                    HomePageWidget.routeName,
+                                    queryParameters: {
+                                      'fromWorkInfo': 'true',
+                                    },
+                                  );
                                 },
                                 text: FFLocalizations.of(context).getText(
                                   'vdylu3at' /* Next */,

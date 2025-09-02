@@ -206,11 +206,8 @@ class _LogoutWidgetState extends State<LogoutWidget> {
                           onPressed: () async {
                             FFAppState().deleteApitoken();
                             FFAppState().apitoken = '';
-
                             safeSetState(() {});
-
-                            context
-                                .pushNamed(UserSelectionPageWidget.routeName);
+                            context.goNamed(UserSelectionPageWidget.routeName);
                           },
                           text: FFLocalizations.of(context).getText(
                             'umqapd5e' /* Yes */,

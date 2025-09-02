@@ -19,7 +19,6 @@ class PublishServicePageWidget extends StatefulWidget {
   });
 
   final String? serviceId;
-
   static String routeName = 'PublishServicePage';
   static String routePath = '/publishServicePage';
 
@@ -43,7 +42,6 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
   @override
   void dispose() {
     _model.dispose();
-
     super.dispose();
   }
 
@@ -53,15 +51,7 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
 
     return WillPopScope(
       onWillPop: () async {
-        context.pushNamed(
-          AddNewServiceNextPageWidget.routeName,
-          queryParameters: {
-            'serviceId': serializeParam(
-              widget.serviceId,
-              ParamType.String,
-            ),
-          }.withoutNulls,
-        );
+        Navigator.pop(context);
         return false;
       },
       child: GestureDetector(
@@ -93,20 +83,12 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                           size: 18.0,
                         ),
                         onPressed: () async {
-                          context.pushNamed(
-                            AddNewServiceNextPageWidget.routeName,
-                            queryParameters: {
-                              'serviceId': serializeParam(
-                                widget.serviceId,
-                                ParamType.String,
-                              ),
-                            }.withoutNulls,
-                          );
+                          Navigator.pop(context);
                         },
                       ),
                       Padding(
                         padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 20.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 20.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -118,12 +100,12 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                fontFamily: 'primaryFont',
-                                color: Color(0xFF252525),
-                                fontSize: 16.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.bold,
-                              ),
+                                    fontFamily: 'primaryFont',
+                                    color: Color(0xFF252525),
+                                    fontSize: 16.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                             ),
                           ],
                         ),
@@ -131,7 +113,7 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                       Container(
                         decoration: BoxDecoration(
                           color:
-                          FlutterFlowTheme.of(context).secondaryBackground,
+                              FlutterFlowTheme.of(context).secondaryBackground,
                         ),
                       ),
                     ],
@@ -158,7 +140,7 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     ClipRRect(
@@ -182,11 +164,11 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
-                                            fontFamily: 'primaryFont',
-                                            fontSize: 12.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                                fontFamily: 'primaryFont',
+                                                fontSize: 12.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                         ),
                                       ),
                                     ),
@@ -195,15 +177,20 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                               ),
                               FFButtonWidget(
                                 onPressed: () async {
-                                  context.pushNamed(
-                                    AddFaqPageWidget.routeName,
-                                    queryParameters: {
-                                      'serviceId': serializeParam(
-                                        widget.serviceId,
-                                        ParamType.String,
-                                      ),
-                                    }.withoutNulls,
+                                  final result = await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => AddFaqPageWidget(
+                                          serviceId: widget.serviceId),
+                                    ),
                                   );
+                                  if (result != null &&
+                                      result['callApi'] == true) {
+                                    setState(() {
+                                      _model.apiRequestCompleter =
+                                          null; // Refresh API
+                                    });
+                                  }
                                 },
                                 text: FFLocalizations.of(context).getText(
                                   '3pgkkoml' /* Add  */,
@@ -218,21 +205,21 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
-                                    font: GoogleFonts.interTight(
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle:
-                                      FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontStyle,
-                                    ),
-                                    color: Colors.white,
-                                    fontSize: 14.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontStyle,
-                                  ),
+                                        font: GoogleFonts.interTight(
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontStyle,
+                                        ),
+                                        color: Colors.white,
+                                        fontSize: 14.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
+                                      ),
                                   elevation: 0.0,
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
@@ -242,15 +229,14 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                         ),
                         FutureBuilder<ApiCallResponse>(
                           future: (_model.apiRequestCompleter ??=
-                          Completer<ApiCallResponse>()
-                            ..complete(
-                                FreelancerHomePageGroup.getFAQCall.call(
-                                  serviceId: widget.serviceId,
-                                  authToken: FFAppState().apitoken,
-                                )))
+                                  Completer<ApiCallResponse>()
+                                    ..complete(
+                                        FreelancerHomePageGroup.getFAQCall.call(
+                                      serviceId: widget.serviceId,
+                                      authToken: FFAppState().apitoken,
+                                    )))
                               .future,
                           builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
                               return Center(
                                 child: SizedBox(
@@ -269,10 +255,10 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                             return Builder(
                               builder: (context) {
                                 _faqList = FreelancerHomePageGroup.getFAQCall
-                                    .faqList(
-                                  listViewGetFAQResponse.jsonBody,
-                                )
-                                    ?.toList() ??
+                                        .faqList(
+                                          listViewGetFAQResponse.jsonBody,
+                                        )
+                                        ?.toList() ??
                                     [];
 
                                 if (_faqList.isEmpty) {
@@ -290,7 +276,7 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                                   color: Color(0xFF6E2A87),
                                   onRefresh: () async {
                                     safeSetState(() =>
-                                    _model.apiRequestCompleter = null);
+                                        _model.apiRequestCompleter = null);
                                     await _model.waitForApiRequestCompleted();
                                   },
                                   child: ListView.separated(
@@ -311,23 +297,23 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
                                             borderRadius:
-                                            BorderRadius.circular(10.0),
+                                                BorderRadius.circular(10.0),
                                           ),
                                           child: Padding(
                                             padding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                15.0, 22.0, 15.0, 22.0),
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    15.0, 22.0, 15.0, 22.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
-                                              MainAxisAlignment
-                                                  .spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Column(
                                                   mainAxisSize:
-                                                  MainAxisSize.max,
+                                                      MainAxisSize.max,
                                                   crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
                                                       getJsonField(
@@ -335,33 +321,33 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                                                         r'''$.question''',
                                                       ).toString(),
                                                       style: FlutterFlowTheme
-                                                          .of(context)
+                                                              .of(context)
                                                           .bodyMedium
                                                           .override(
-                                                        fontFamily:
-                                                        'primaryFont',
-                                                        fontSize: 13.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                        FontWeight.bold,
-                                                      ),
+                                                            fontFamily:
+                                                                'primaryFont',
+                                                            fontSize: 13.0,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
                                                     ),
                                                     Padding(
                                                       padding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(
-                                                          0.0,
-                                                          4.0,
-                                                          0.0,
-                                                          0.0),
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  4.0,
+                                                                  0.0,
+                                                                  0.0),
                                                       child: Container(
                                                         width:
-                                                        MediaQuery.sizeOf(
-                                                            context)
-                                                            .width *
-                                                            0.7,
+                                                            MediaQuery.sizeOf(
+                                                                        context)
+                                                                    .width *
+                                                                0.7,
                                                         decoration:
-                                                        BoxDecoration(),
+                                                            BoxDecoration(),
                                                         child: Text(
                                                           getJsonField(
                                                             faqLstItem,
@@ -369,17 +355,17 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                                                           ).toString(),
                                                           maxLines: 2,
                                                           style: FlutterFlowTheme
-                                                              .of(context)
+                                                                  .of(context)
                                                               .bodyMedium
                                                               .override(
-                                                            fontFamily:
-                                                            'primaryFont',
-                                                            color: Color(
-                                                                0xFF898989),
-                                                            fontSize: 11.0,
-                                                            letterSpacing:
-                                                            0.0,
-                                                          ),
+                                                                fontFamily:
+                                                                    'primaryFont',
+                                                                color: Color(
+                                                                    0xFF898989),
+                                                                fontSize: 11.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
                                                         ),
                                                       ),
                                                     ),
@@ -410,7 +396,7 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                   alignment: AlignmentDirectional(0.0, 1.0),
                   child: Padding(
                     padding:
-                    EdgeInsetsDirectional.fromSTEB(20.0, 200.0, 20.0, 20.0),
+                        EdgeInsetsDirectional.fromSTEB(20.0, 200.0, 20.0, 20.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -423,15 +409,7 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              context.pushNamed(
-                                AddNewServiceNextPageWidget.routeName,
-                                queryParameters: {
-                                  'serviceId': serializeParam(
-                                    widget.serviceId,
-                                    ParamType.String,
-                                  ),
-                                }.withoutNulls,
-                              );
+                              Navigator.pop(context);
                             },
                             child: Container(
                               width: double.infinity,
@@ -450,12 +428,12 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                    fontFamily: 'primaryFont',
-                                    color: Color(0xFF6E2A87),
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                        fontFamily: 'primaryFont',
+                                        color: Color(0xFF6E2A87),
+                                        fontSize: 16.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                 ),
                               ),
                             ),
@@ -471,13 +449,14 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                               if (_faqList.isEmpty) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: Text('Please add FAQ',style: TextStyle(color:Color(0xFFFFFFFF) ),),
+                                    content: Text('Please add FAQ',
+                                        style: TextStyle(
+                                            color: Color(0xFFFFFFFF))),
                                     backgroundColor: Color(0xFF6E2A87),
                                   ),
                                 );
                                 return;
                               }
-
                               context.pushNamed(
                                 ServiceSuccessFullyPublishPageWidget.routeName,
                               );
@@ -507,12 +486,12 @@ class _PublishServicePageWidgetState extends State<PublishServicePageWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                    fontFamily: 'primaryFont',
-                                    color: Colors.white,
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                        fontFamily: 'primaryFont',
+                                        color: Colors.white,
+                                        fontSize: 16.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                 ),
                               ),
                             ),

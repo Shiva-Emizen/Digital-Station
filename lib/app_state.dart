@@ -28,17 +28,20 @@ class FFAppState extends ChangeNotifier {
       _userType = await secureStorage.getString('ff_userType') ?? _userType;
     });
     await _safeInitAsync(() async {
+      _userId = await secureStorage.getString('ff_userId') ?? _userId;
+    });
+    await _safeInitAsync(() async {
       _features = (await secureStorage.getStringList('ff_features'))
-              ?.map((x) {
-                try {
-                  return FeatureStruct.fromSerializableMap(jsonDecode(x));
-                } catch (e) {
-                  print("Can't decode persisted data type. Error: $e.");
-                  return null;
-                }
-              })
-              .withoutNulls
-              .toList() ??
+          ?.map((x) {
+        try {
+          return FeatureStruct.fromSerializableMap(jsonDecode(x));
+        } catch (e) {
+          print("Can't decode persisted data type. Error: $e.");
+          return null;
+        }
+      })
+          .withoutNulls
+          .toList() ??
           _features;
     });
     await _safeInitAsync(() async {
@@ -59,7 +62,18 @@ class FFAppState extends ChangeNotifier {
   }
 
   late FlutterSecureStorage secureStorage;
+  String _userId = '';
+  String get userId => _userId;
+  set userId(String value) {
+    _userId = value;
+    secureStorage.setString('ff_userId', value);
+    notifyListeners();
+  }
 
+  void deleteUserId() {
+    secureStorage.delete(key: 'ff_userId');
+    _userId = '';
+  }
   String _apitoken = '';
   String get apitoken => _apitoken;
   set apitoken(String value) {

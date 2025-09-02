@@ -127,7 +127,8 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget> {
                             Expanded(
                               child: Container(
                                 width: 200.0,
-                                child: TextFormField(
+                                child:
+                                TextFormField(
                                   controller: _model.textController,
                                   focusNode: _model.textFieldFocusNode,
                                   autofocus: false,
@@ -381,20 +382,44 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget> {
                                                                 0.18,
                                                         decoration:
                                                             BoxDecoration(),
-                                                        child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      0.0),
-                                                          child: Image.network(
-                                                            getJsonField(
-                                                              categoryListItem,
-                                                              r'''$.image.url''',
-                                                            ).toString(),
-                                                            width: 70.0,
-                                                            height: 70.0,
-                                                            fit: BoxFit.cover,
-                                                          ),
+                                                        child: ClipOval(
+                                                          child: (getJsonField(
+                                                                          categoryListItem,
+                                                                          r'''$.image.url''')
+                                                                      ?.toString()
+                                                                      .isNotEmpty ??
+                                                                  false)
+                                                              ? Image.network(
+                                                                  getJsonField(
+                                                                          categoryListItem,
+                                                                          r'''$.image.url''')
+                                                                      .toString(),
+                                                                  width: 70.0,
+                                                                  height: 70.0,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                  errorBuilder: (context,
+                                                                          error,
+                                                                          stackTrace) =>
+                                                                      Image
+                                                                          .asset(
+                                                                    'assets/images/placeholder.png',
+                                                                    // Use your placeholder asset path
+                                                                    width: 70.0,
+                                                                    height:
+                                                                        70.0,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                  ),
+                                                                )
+                                                              : Image.asset(
+                                                                  'assets/images/placeholder.png',
+                                                                  // Use your placeholder asset path
+                                                                  width: 70.0,
+                                                                  height: 70.0,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
                                                         ),
                                                       ),
                                                       Container(

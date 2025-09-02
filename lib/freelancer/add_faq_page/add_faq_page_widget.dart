@@ -86,7 +86,7 @@ class _AddFaqPageWidgetState extends State<AddFaqPageWidget> {
                             size: 18.0,
                           ),
                           onPressed: () async {
-                            context.safePop();
+                            Navigator.pop(context, {'callApi': true, 'id': widget.serviceId});
                           },
                         ),
                         Padding(
@@ -522,15 +522,7 @@ class _AddFaqPageWidgetState extends State<AddFaqPageWidget> {
                                   ),
                                 );
 
-                                context.pushNamed(
-                                  PublishServicePageWidget.routeName,
-                                  queryParameters: {
-                                    'serviceId': serializeParam(
-                                      widget.serviceId,
-                                      ParamType.String,
-                                    ),
-                                  }.withoutNulls,
-                                );
+                                Navigator.pop(context, {'callApi': true, 'id': widget.serviceId});
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(

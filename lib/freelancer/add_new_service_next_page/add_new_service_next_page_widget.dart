@@ -1,5 +1,4 @@
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
-
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -34,6 +33,7 @@ class _AddNewServiceNextPageWidgetState
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   List<dynamic> _planList = [];
+  bool _shouldRefreshApi = false;
 
   @override
   void initState() {
@@ -42,9 +42,20 @@ class _AddNewServiceNextPageWidgetState
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context)?.settings.arguments as Map?;
+    if (args != null && args['callApi'] == true) {
+      _shouldRefreshApi = true;
+      setState(() {
+        _model.apiRequestCompleter = null;
+      });
+    }
+  }
+
+  @override
   void dispose() {
     _model.dispose();
-
     super.dispose();
   }
 
@@ -54,9 +65,7 @@ class _AddNewServiceNextPageWidgetState
 
     return WillPopScope(
       onWillPop: () async {
-        context.pushNamed(
-          AddNewServiceWidget.routeName,
-        );
+        Navigator.pop(context);
         return false;
       },
       child: GestureDetector(
@@ -86,12 +95,12 @@ class _AddNewServiceNextPageWidgetState
                         size: 18.0,
                       ),
                       onPressed: () async {
-                        context.pushNamed(AddNewServiceWidget.routeName);
+                        Navigator.pop(context);
                       },
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 10, 20.0, 0.0),
+                      EdgeInsetsDirectional.fromSTEB(0.0, 10, 20.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -103,12 +112,12 @@ class _AddNewServiceNextPageWidgetState
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'primaryFont',
-                                  color: Color(0xFF252525),
-                                  fontSize: 16.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              fontFamily: 'primaryFont',
+                              color: Color(0xFF252525),
+                              fontSize: 16.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ],
                       ),
@@ -130,7 +139,7 @@ class _AddNewServiceNextPageWidgetState
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(20.0, 20, 20.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(20.0, 20, 20.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -142,7 +151,7 @@ class _AddNewServiceNextPageWidgetState
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ClipRRect(
@@ -164,11 +173,11 @@ class _AddNewServiceNextPageWidgetState
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'primaryFont',
-                                            fontSize: 12.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                        fontFamily: 'primaryFont',
+                                        fontSize: 12.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -178,18 +187,18 @@ class _AddNewServiceNextPageWidgetState
                               onPressed: () async {
                                 FFAppState().deleteFeatures();
                                 FFAppState().features = [];
-
                                 safeSetState(() {});
-
-                                context.pushNamed(
-                                  AddPakagePageWidget.routeName,
-                                  queryParameters: {
-                                    'id': serializeParam(
-                                      widget.serviceId,
-                                      ParamType.String,
-                                    ),
-                                  }.withoutNulls,
+                                final result = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AddPakagePageWidget(id: widget.serviceId),
+                                  ),
                                 );
+                                if (result != null && result['callApi'] == true) {
+                                  setState(() {
+                                    _model.apiRequestCompleter = null; // This will refresh the API
+                                  });
+                                }
                               },
                               text: FFLocalizations.of(context).getText(
                                 'swyjkk5a' /* Add  */,
@@ -204,20 +213,20 @@ class _AddNewServiceNextPageWidgetState
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
-                                      font: GoogleFonts.interTight(
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .fontStyle,
-                                      ),
-                                      color: Colors.white,
-                                      fontSize: 14.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontStyle,
-                                    ),
+                                  font: GoogleFonts.interTight(
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontStyle,
+                                  ),
+                                  color: Colors.white,
+                                  fontSize: 14.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.bold,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontStyle,
+                                ),
                                 elevation: 0.0,
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
@@ -227,24 +236,24 @@ class _AddNewServiceNextPageWidgetState
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                         child: FutureBuilder<ApiCallResponse>(
                           future: (_model.apiRequestCompleter ??=
-                                  Completer<ApiCallResponse>()
-                                    ..complete(FreelancerHomePageGroup
-                                        .getPlanCall
-                                        .call(
-                                            authToken: FFAppState().apitoken,
-                                            serviceId: widget.serviceId)
-                                        .then((response) {
-                                      print(
-                                          'API Request Auth Token: ${FFAppState().apitoken}');
-                                      print(
-                                          'API Response JSON: ${response.jsonBody}');
-                                      print(
-                                          'API Response JSON: ${response.statusCode}');
-                                      return response;
-                                    })))
+                          Completer<ApiCallResponse>()
+                            ..complete(FreelancerHomePageGroup
+                                .getPlanCall
+                                .call(
+                                authToken: FFAppState().apitoken,
+                                serviceId: widget.serviceId)
+                                .then((response) {
+                              print(
+                                  'API Request Auth Token: ${FFAppState().apitoken}');
+                              print(
+                                  'API Response JSON: ${response.jsonBody}');
+                              print(
+                                  'API Response JSON: ${response.statusCode}');
+                              return response;
+                            })))
                               .future,
                           builder: (context, snapshot) {
                             print(
@@ -269,11 +278,10 @@ class _AddNewServiceNextPageWidgetState
                             final listViewGetPlanResponse = snapshot.data!;
 
                             final planList = FreelancerHomePageGroup.getPlanCall
-                                    .planList(listViewGetPlanResponse.jsonBody)
-                                    ?.toList() ??
+                                .planList(listViewGetPlanResponse.jsonBody)
+                                ?.toList() ??
                                 [];
 
-                            // Store in state variable
                             _planList = planList;
 
                             return Builder(
@@ -282,7 +290,7 @@ class _AddNewServiceNextPageWidgetState
                                   color: Color(0xFF6E2A87),
                                   onRefresh: () async {
                                     safeSetState(() =>
-                                        _model.apiRequestCompleter = null);
+                                    _model.apiRequestCompleter = null);
                                     await _model.waitForApiRequestCompleted();
                                   },
                                   child: ListView.builder(
@@ -292,7 +300,7 @@ class _AddNewServiceNextPageWidgetState
                                     itemCount: _planList.length,
                                     itemBuilder: (context, planListIndex) {
                                       final planListItem =
-                                          _planList[planListIndex];
+                                      _planList[planListIndex];
                                       return Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             20.0, 20.0, 20.0, 0.0),
@@ -302,26 +310,26 @@ class _AddNewServiceNextPageWidgetState
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
                                             borderRadius:
-                                                BorderRadius.circular(10.0),
+                                            BorderRadius.circular(10.0),
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    15.0, 22.0, 15.0, 22.0),
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                15.0, 22.0, 15.0, 22.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                              MainAxisAlignment
+                                                  .spaceBetween,
                                               children: [
                                                 Row(
                                                   mainAxisSize:
-                                                      MainAxisSize.max,
+                                                  MainAxisSize.max,
                                                   children: [
                                                     ClipRRect(
                                                       borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
+                                                      BorderRadius.circular(
+                                                          8.0),
                                                       child: Image.asset(
                                                         'assets/images/package.png',
                                                         width: 35.0,
@@ -331,90 +339,90 @@ class _AddNewServiceNextPageWidgetState
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  15.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(
+                                                          15.0,
+                                                          0.0,
+                                                          0.0,
+                                                          0.0),
                                                       child: Text(
                                                         getJsonField(
                                                           planListItem,
                                                           r'''$.title''',
                                                         ).toString(),
                                                         style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'primaryFont',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
+                                                        FlutterFlowTheme.of(
+                                                            context)
+                                                            .bodyMedium
+                                                            .override(
+                                                          fontFamily:
+                                                          'primaryFont',
+                                                          letterSpacing:
+                                                          0.0,
+                                                        ),
                                                       ),
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  14.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(
+                                                          14.0,
+                                                          0.0,
+                                                          0.0,
+                                                          0.0),
                                                       child: Container(
                                                         decoration:
-                                                            BoxDecoration(
+                                                        BoxDecoration(
                                                           color:
-                                                              Color(0x45898989),
+                                                          Color(0x45898989),
                                                           borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      10.0),
+                                                          BorderRadius
+                                                              .circular(
+                                                              10.0),
                                                         ),
                                                         child: Align(
                                                           alignment:
-                                                              AlignmentDirectional(
-                                                                  0.0, 0.0),
+                                                          AlignmentDirectional(
+                                                              0.0, 0.0),
                                                           child: Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        14.0,
-                                                                        6.0,
-                                                                        14.0,
-                                                                        6.0),
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                14.0,
+                                                                6.0,
+                                                                14.0,
+                                                                6.0),
                                                             child: Text(
                                                               getJsonField(
                                                                 planListItem,
                                                                 r'''$.price''',
                                                               ).toString(),
                                                               style: FlutterFlowTheme
-                                                                      .of(context)
+                                                                  .of(context)
                                                                   .bodyMedium
                                                                   .override(
-                                                                    font: GoogleFonts
-                                                                        .inter(
-                                                                      fontWeight: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .fontWeight,
-                                                                      fontStyle: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .fontStyle,
-                                                                    ),
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    fontWeight: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .fontWeight,
-                                                                    fontStyle: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .fontStyle,
-                                                                  ),
+                                                                font: GoogleFonts
+                                                                    .inter(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                      context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                      context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                                letterSpacing:
+                                                                0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                    context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                    context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
@@ -425,7 +433,7 @@ class _AddNewServiceNextPageWidgetState
                                                 Icon(
                                                   Icons.arrow_forward_ios,
                                                   color: FlutterFlowTheme.of(
-                                                          context)
+                                                      context)
                                                       .primaryText,
                                                   size: 20.0,
                                                 ),
@@ -450,7 +458,7 @@ class _AddNewServiceNextPageWidgetState
                 alignment: AlignmentDirectional(0.0, 1.0),
                 child: Padding(
                   padding:
-                      EdgeInsetsDirectional.fromSTEB(20.0, 200.0, 20.0, 20.0),
+                  EdgeInsetsDirectional.fromSTEB(20.0, 200.0, 20.0, 20.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -482,12 +490,12 @@ class _AddNewServiceNextPageWidgetState
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'primaryFont',
-                                      color: Color(0xFF6E2A87),
-                                      fontSize: 16.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  fontFamily: 'primaryFont',
+                                  color: Color(0xFF6E2A87),
+                                  fontSize: 16.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ),
@@ -516,10 +524,7 @@ class _AddNewServiceNextPageWidgetState
                             context.pushNamed(
                               PublishServicePageWidget.routeName,
                               queryParameters: {
-                                'serviceId': serializeParam(
-                                  widget.serviceId,
-                                  ParamType.String,
-                                ),
+                                'serviceId': widget.serviceId,
                               }.withoutNulls,
                             );
                           },
@@ -545,12 +550,12 @@ class _AddNewServiceNextPageWidgetState
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'primaryFont',
-                                      color: Colors.white,
-                                      fontSize: 16.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  fontFamily: 'primaryFont',
+                                  color: Colors.white,
+                                  fontSize: 16.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ),

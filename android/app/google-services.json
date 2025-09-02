@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "622698835869-kuemc5tvugs3k7oq0c95slng6q9o6aip.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.digital.station",
+            "certificate_hash": "e1157f976ec69efc826946b1d53a61cfed470768"
+          }
+        },
+        {
           "client_id": "622698835869-lu7faq2ho1vtnm3nbolj2j28phhpgg92.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

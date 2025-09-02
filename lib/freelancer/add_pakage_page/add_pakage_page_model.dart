@@ -75,6 +75,25 @@ class AddPakagePageModel extends FlutterFlowModel<AddPakagePageWidget> {
     return null;
   }
 
+
+  FocusNode? deliveryFocusNode;
+  TextEditingController? deliveryTextController;
+  String? Function(BuildContext, String?)? deliveryTextControllerValidator;
+  String? _deliveryTextControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return FFLocalizations.of(context).getText(
+        'z4huyg7g' /* Price is required */,
+      );
+    }
+
+    return null;
+  }
+
+
+
+
+
+
   // State field(s) for revision widget.
   FocusNode? revisionFocusNode;
   TextEditingController? revisionTextController;
@@ -98,6 +117,7 @@ class AddPakagePageModel extends FlutterFlowModel<AddPakagePageWidget> {
     descriptionTextControllerValidator = _descriptionTextControllerValidator;
     priceTextControllerValidator = _priceTextControllerValidator;
     amountTextControllerValidator = _amountTextControllerValidator;
+    deliveryTextControllerValidator = _deliveryTextControllerValidator;
     revisionTextControllerValidator = _revisionTextControllerValidator;
   }
 

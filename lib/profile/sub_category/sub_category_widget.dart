@@ -69,8 +69,6 @@ class _SubCategoryWidgetState extends State<SubCategoryWidget> {
                       authToken: FFAppState().apitoken,
                       categoryId: widget.categoryId,
                       name: widget.categoryName,
-                      paginate: '10',
-                      page: '1',
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.

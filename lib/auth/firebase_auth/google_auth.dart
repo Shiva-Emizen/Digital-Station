@@ -6,18 +6,22 @@ final _googleSignIn = GoogleSignIn(scopes: ['profile', 'email']);
 
 Future<UserCredential?> googleSignInFunc() async {
   if (kIsWeb) {
-    // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithPopup(GoogleAuthProvider());
   }
 
   await signOutWithGoogle().catchError((_) => null);
-  final auth = await (await _googleSignIn.signIn())?.authentication;
+  final googleUser = await _googleSignIn.signIn();
+  if (googleUser == null) {
+    print('Google sign-in failed: user is null');
+    return null;
+  }
+  final auth = await googleUser.authentication;
   if (auth == null) {
+    print('Google sign-in failed: authentication is null');
     return null;
   }
   final credential = GoogleAuthProvider.credential(
       idToken: auth.idToken, accessToken: auth.accessToken);
   return FirebaseAuth.instance.signInWithCredential(credential);
 }
-
 Future signOutWithGoogle() => _googleSignIn.signOut();
