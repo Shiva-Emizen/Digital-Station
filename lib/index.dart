@@ -90,3 +90,4 @@ export '/freelancer_order_detail_page/freelancer_order_detail_page_widget.dart'
     show FreelancerOrderDetailPageWidget;
 export '/user_chat_message/user_chat_message_widget.dart'
     show UserChatMessageWidget;
+export '/edit_portfolio/edit_portfolio_widget.dart' show EditPortfolioWidget;

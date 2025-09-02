@@ -2352,6 +2352,37 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
   },
+  // EditPortfolio
+  {
+    'zrshf8iu': {
+      'en': 'My Portfolio',
+      'ar': '',
+    },
+    '881lns5v': {
+      'en': 'Save',
+      'ar': '',
+    },
+    '9pyaxff3': {
+      'en': 'Enter Title',
+      'ar': '',
+    },
+    'gdbcbiil': {
+      'en': 'Title is required',
+      'ar': '',
+    },
+    'ldpy8bs8': {
+      'en': '\nOnly alphabetic characters (A–Z, a–z) are allowed.',
+      'ar': '',
+    },
+    'jtn8w5rh': {
+      'en': 'Please choose an option from the dropdown',
+      'ar': '',
+    },
+    '7k3luuk1': {
+      'en': 'Home',
+      'ar': '',
+    },
+  },
   // Logout
   {
     '3zn7uzpj': {
